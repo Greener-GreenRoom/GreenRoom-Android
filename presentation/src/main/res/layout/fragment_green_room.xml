@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="myPlant"
+            type="com.greener.domain.model.ExampleModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view_top"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/sample_wall"
+            android:padding="0dp"
+            app:layout_constraintBottom_toTopOf="@id/view_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_bottom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/empty_floor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.4744"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_top" />
+
+        <ImageView
+            android:id="@+id/img_window"
+            setWindowImg="@{myPlant.window}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/view_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/view_top"
+            app:layout_constraintVertical_bias="0.7"
+            tools:src="@drawable/img_window_1" />
+
+        <ImageView
+            android:id="@+id/img_shelf"
+            setShelfImg="@{myPlant.shelf}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/view_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/view_top"
+            app:layout_constraintVertical_bias="0.45"
+            tools:src="@drawable/img_shelf_2" />
+
+        <!--
+        <ImageView
+            android:id="@+id/img_plant"
+            setPlantImg="@{myPlant.type}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/gd1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/img_plant_1_default_shadow" />
+            -->
+        <ImageView
+            android:id="@+id/plant_type"
+            setPlantType="@{myPlant.type}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/gd1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3680"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.5555"
+            tools:src="@drawable/img_plant_1_default_shadow" />
+
+        <ImageView
+            android:id="@+id/face"
+            setPlantFace="@{myPlant.status}"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="@id/plant_type"
+            app:layout_constraintEnd_toEndOf="@id/plant_type"
+            app:layout_constraintHorizontal_bias="0.53"
+            app:layout_constraintStart_toStartOf="@id/plant_type"
+            app:layout_constraintTop_toTopOf="@id/plant_type"
+            app:layout_constraintVertical_bias="0.305"
+            tools:src="@drawable/img_face_sad" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_slot_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="물이 필요해"
+            android:textAppearance="@style/body5"
+            android:textColor="@color/gray700"
+            app:layout_constraintBottom_toTopOf="@+id/face"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.81" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_slot_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="영양관리가 필요해"
+            android:textAppearance="@style/body5"
+            android:textColor="@color/gray700"
+            app:layout_constraintEnd_toStartOf="@+id/btn_slot_1"
+            app:layout_constraintHorizontal_bias="0.67"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_slot_1" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_slot_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="가지치기가 필요해"
+            android:textAppearance="@style/body5"
+            android:textColor="@color/gray700"
+            app:layout_constraintBottom_toTopOf="@id/btn_slot_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.08"
+            app:layout_constraintStart_toStartOf="@id/btn_slot_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_slot_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="분갈이가 필요해"
+            android:textAppearance="@style/body5"
+            android:textColor="@color/gray700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.37"
+            app:layout_constraintStart_toEndOf="@id/btn_slot_3"
+            app:layout_constraintTop_toTopOf="@id/btn_slot_3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_slot_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="환기가 필요해"
+            android:textAppearance="@style/body5"
+            android:textColor="@color/gray700"
+            app:layout_constraintBottom_toTopOf="@id/btn_slot_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_slot_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="8dp"
+            android:text="분무하기가 필요해"
+            android:textAppearance="@style/body5"
+            android:textColor="@color/gray700"
+            app:layout_constraintEnd_toStartOf="@id/btn_slot_5"
+            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_slot_5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gd1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

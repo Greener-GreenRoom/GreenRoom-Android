@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <View
+            android:id="@+id/view_top"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/sample_wall"
+            app:layout_constraintBottom_toTopOf="@id/view_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_bottom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/empty_floor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.4744"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_top" />
+
+        <include
+            android:id="@+id/homeAppBar"
+            layout="@layout/home_app_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_no_plant_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_plant_msg"
+            android:textAlignment="center"
+            android:textAppearance="@style/body1"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/btn_regist_plant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_regist_plant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/shape_radius_button"
+            android:padding="8dp"
+            android:text="@string/regist_plant_btn"
+            android:textAppearance="@style/body3"
+            app:layout_constraintBottom_toTopOf="@+id/view_bottom"
+            app:layout_constraintEnd_toEndOf="@id/tv_no_plant_msg"
+            app:layout_constraintStart_toStartOf="@+id/tv_no_plant_msg"
+            app:layout_constraintTop_toBottomOf="@+id/tv_no_plant_msg" />
+
+        <ImageView
+            android:id="@+id/img_empty_plant"
+            android:layout_width="177dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/img_plant_emptyplant_svg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.35465"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view_bottom" />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
