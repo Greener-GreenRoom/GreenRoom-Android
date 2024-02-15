@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.greener.presentation.ui.home.register.water.RegistrationWaterViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_plant_registration_water_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_plant_registration_water_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/grid_system_end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_plant_registration_water"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_system_tool_bar"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        
+        <include
+            android:id="@+id/include_plant_registration_water_indicator"
+            layout="@layout/view_plant_registration_indicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_water_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_water_end"
+            app:layout_constraintTop_toBottomOf="@+id/tb_plant_registration_water"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_plant_registration_water_cycle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/head3"
+            android:textColor="@color/gray700"
+            android:text="@string/plant_registration_water_cycle"
+            android:layout_marginTop="18dp"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_water_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_water_end"
+            app:layout_constraintTop_toBottomOf="@+id/include_plant_registration_water_indicator"
+            tools:text="초롱이에게\n물을 며칠에 한 번씩 줄까요?"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_plant_registration_water_cycle_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray300"
+            android:text="@string/plant_registration_water_cycle_detail"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_water_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_water_end"
+            app:layout_constraintTop_toBottomOf="@+id/tv_plant_registration_water_cycle"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/btn_plant_registration_water_cycle_standard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray700"
+            android:text="@string/plant_registration_cycle_today"
+            android:background="@drawable/round_all_99"
+            android:backgroundTint="@color/gray000"
+            android:layout_marginTop="28dp"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:drawablePadding="2dp"
+            android:drawableTint="@color/gray300"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_water_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_plant_registration_water_cycle_detail"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_plant_registration_water_cycle_standard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray700"
+            android:text="@string/plant_registration_water_cycle_standard"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/btn_plant_registration_water_cycle_standard"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_water_end"
+            app:layout_constraintTop_toTopOf="@id/btn_plant_registration_water_cycle_standard"
+            app:layout_constraintBottom_toBottomOf="@id/btn_plant_registration_water_cycle_standard"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tl_plant_registration_water_cycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:minWidth="90dp"
+            android:minHeight="40dp"
+            app:boxBackgroundColor="@color/gray000"
+            app:boxStrokeWidth="0dp"
+            app:boxCornerRadiusBottomEnd="4dp"
+            app:boxCornerRadiusBottomStart="4dp"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_water_start"
+            app:layout_constraintTop_toBottomOf="@id/btn_plant_registration_water_cycle_standard">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/te_plant_registration_water_cycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="@style/body2"
+                android:textColor="@color/gray300"
+                android:padding="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:inputType="number"
+                tools:text="13"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_plant_registration_water_cycle_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray700"
+            android:text="@string/plant_registration_water_cycle_input"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@+id/tl_plant_registration_water_cycle"
+            app:layout_constraintBottom_toBottomOf="@id/tl_plant_registration_water_cycle"
+            app:layout_constraintStart_toEndOf="@id/tl_plant_registration_water_cycle"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_water_end"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_plant_registration_water_cycle_tip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_all_20_tip_box"
+            android:layout_marginTop="54dp"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="@id/btn_plant_registration_water_cycle_standard"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_water_end"
+            app:layout_constraintTop_toBottomOf="@+id/tl_plant_registration_water_cycle">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_plant_registration_water_cycle_tip_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/body4"
+                android:textColor="@color/tip_stroke"
+                android:text="@string/plant_registration_water_cycle_tip"
+                android:drawableStart="@drawable/ic_check"
+                android:drawableTint="@color/tip_stroke"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_plant_registration_water_cycle_tip_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/body4"
+                android:textColor="@color/tip_stroke"
+                android:layout_marginTop="7dp"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_plant_registration_water_cycle_tip_title"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_plant_registration_water_go_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/white"
+            android:text="@string/util_next"
+            android:background="@drawable/round_all_8"
+            app:backgroundTint="@color/gray200"
+            android:layout_marginBottom="18dp"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_water_start"
+            app:layout_constraintTop_toBottomOf="@+id/ly_plant_registration_water_cycle_tip"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_water_end"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

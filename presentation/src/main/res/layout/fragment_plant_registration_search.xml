@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.greener.presentation.ui.home.register.search.RegistrationSearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_plant_registration_search_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_plant_registration_search_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/grid_system_end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_plant_registration_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_system_tool_bar"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_plant_registration_search_go_next"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/grid_system_tool_bar"
+                android:textAppearance="@style/body4"
+                android:textColor="@color/gray300"
+                android:text="@string/util_go_next"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"/>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_plant_registration_search_speech_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tb_plant_registration_search"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"/>
+
+        <include
+            android:id="@+id/include_plant_registration_search_indicator"
+            layout="@layout/view_plant_registration_indicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
+            app:layout_constraintTop_toBottomOf="@id/tb_plant_registration_search"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_plant_registration_search_what_kind"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/head3"
+            android:textColor="@color/gray700"
+            android:text="@string/plant_registration_what_kind"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
+            app:layout_constraintTop_toBottomOf="@+id/include_plant_registration_search_indicator"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_plant_registration_search_no_data_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-16dp"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
+            app:layout_constraintBottom_toBottomOf="@id/tb_plant_registration_search"
+            tools:ignore="NotSibling" >
+            
+            <View
+                android:id="@+id/view_plant_registration_search_no_data_comment"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/shape_triangle_rotate"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/caption2"
+                android:textColor="@color/white"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/plant_registration_no_data_comment"
+                android:background="@drawable/round_all_8"
+                android:backgroundTint="@color/primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_plant_registration_search_no_data_comment"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tl_plant_registration_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/plant_registration_search_hint"
+            android:textColorHint="@color/gray300"
+            app:hintTextAppearance="@style/body4"
+            app:boxBackgroundColor="@color/gray000"
+            app:boxStrokeWidth="0dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:endIconMode="clear_text"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
+            app:layout_constraintTop_toBottomOf="@id/tv_plant_registration_search_what_kind">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/te_plant_registration_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="8dp"
+                android:textAppearance="@style/body4"
+                android:textColor="@color/gray700"
+                android:text="@={viewModel.searchTerm}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--  todo 이미지 홀더로 바뀔 가능성 있음      -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_plant_registration_search_no_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
+            app:layout_constraintTop_toBottomOf="@+id/tl_plant_registration_search">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_plant_registration_no_data"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/body2"
+                android:textColor="@color/gray300"
+                android:text="@string/plant_registration_no_data"
+                android:layout_marginTop="80dp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_plant_registration_no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_temp_face_no_data"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="80dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_plant_registration_no_data"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--   todo visible 설정     -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_plant_registration_search_best_plant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray700"
+            android:text="@string/plant_registration_best_plant"
+            android:layout_marginTop="24dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
+            app:layout_constraintTop_toBottomOf="@+id/ly_plant_registration_search_no_data"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
+            app:layout_constraintTop_toBottomOf="@id/tv_plant_registration_search_best_plant"
+            tools:listitem="@layout/item_search_plant"
+            tools:itemCount="3"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

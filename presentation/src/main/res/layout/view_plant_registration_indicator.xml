@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="4dp">
+
+        <View
+            android:id="@+id/view_registration_indicator_first"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@color/primary"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/view_registration_indicator_second" />
+
+        <View
+            android:id="@+id/view_registration_indicator_second"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@color/primary"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view_registration_indicator_first"
+            app:layout_constraintEnd_toStartOf="@id/view_registration_indicator_third" />
+
+        <View
+            android:id="@+id/view_registration_indicator_third"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/primary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_registration_indicator_second"
+            app:layout_constraintEnd_toStartOf="@id/view_registration_indicator_fourth" />
+
+        <View
+            android:id="@+id/view_registration_indicator_fourth"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@color/primary"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_registration_indicator_third"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

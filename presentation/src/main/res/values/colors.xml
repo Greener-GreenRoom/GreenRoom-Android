@@ -3,6 +3,7 @@
     <color name="primary">#29BA6C</color>
 
     <!--  main  -->
+    <color name="green000">#E6F8EE</color>
     <color name="green100">#5ADB95</color>
     <color name="green200">#29BA6C</color>
     <color name="green300">#209B59</color>
@@ -20,5 +21,11 @@
     <color name="gray500">#464C52</color>
     <color name="gray600">#26282B</color>
     <color name="gray700">#1B1D1F</color>
-    <color name="black">#FF000000</color>
+
+    <!--  background  -->
+    <color name="registration_background">#B8DCCD</color>
+    <color name="tip_background">#0DE97306</color>
+
+    <!--  stroke  -->
+    <color name="tip_stroke">#E97306</color>
 </resources>

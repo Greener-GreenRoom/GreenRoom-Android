@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/registration_background">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_plant_registration_complete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/head1"
+            android:textColor="@color/gray700"
+            android:text="@string/plant_registration_complete"
+            android:gravity="center"
+            android:layout_marginBottom="67dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_plant_registration_complete_ment"
+            tools:text="초롱이를 그린룸에\n 추가했어요!"/>
+
+        <!--    todo body5 폰트 수정    -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_plant_registration_complete_ment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray700"
+            android:text="@string/plant_registration_complete_ment"
+            android:background="@drawable/round_all_99"
+            android:backgroundTint="@color/white"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/iv_plant_registration_complete"
+            />
+        
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/shape_triangle"
+            android:backgroundTint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_plant_registration_complete_ment"/>
+
+        <ImageView
+            android:id="@+id/iv_plant_registration_complete"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintDimensionRatio="5:6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.6"
+            app:layout_constraintWidth_percent="0.55"
+            tools:src="@drawable/image_test_character2"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
