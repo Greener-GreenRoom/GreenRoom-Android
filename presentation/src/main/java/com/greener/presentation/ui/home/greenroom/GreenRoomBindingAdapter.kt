@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home
+package com.greener.presentation.ui.home.greenroom
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

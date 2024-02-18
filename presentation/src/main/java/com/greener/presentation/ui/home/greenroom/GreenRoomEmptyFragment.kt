@@ -1,14 +1,13 @@
-package com.greener.presentation.ui.home
+package com.greener.presentation.ui.home.greenroom
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import com.greener.presentation.databinding.FragmentEmptyHomeBinding
+import com.greener.presentation.databinding.FragmentGreenRoomEmptyBinding
 import com.greener.presentation.ui.base.BaseFragment
 
 
-class EmptyHomeFragment : BaseFragment<FragmentEmptyHomeBinding>(
-    FragmentEmptyHomeBinding::inflate
+class GreenRoomEmptyFragment : BaseFragment<FragmentGreenRoomEmptyBinding>(
+    FragmentGreenRoomEmptyBinding::inflate
 ) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

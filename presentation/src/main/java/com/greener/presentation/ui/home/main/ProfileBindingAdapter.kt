@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home
+package com.greener.presentation.ui.home.main
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

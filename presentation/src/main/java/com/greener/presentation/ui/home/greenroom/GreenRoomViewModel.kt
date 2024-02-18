@@ -1,6 +1,5 @@
-package com.greener.presentation.ui.home
+package com.greener.presentation.ui.home.greenroom
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.greener.domain.model.ExampleModel

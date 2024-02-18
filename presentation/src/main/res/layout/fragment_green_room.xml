@@ -16,91 +16,84 @@
         android:layout_height="match_parent">
 
         <View
-            android:id="@+id/view_top"
+            android:id="@+id/view_green_room_top_area"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/sample_wall"
             android:padding="0dp"
-            app:layout_constraintBottom_toTopOf="@id/view_bottom"
+            app:layout_constraintBottom_toTopOf="@id/view_green_room_bottom_area"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/view_bottom"
+            android:id="@+id/view_green_room_bottom_area"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/empty_floor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.4744"
+            app:layout_constraintHeight_percent="@dimen/green_room_bottom_area_height_percent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_top" />
+            app:layout_constraintTop_toBottomOf="@id/view_green_room_top_area" />
 
         <ImageView
-            android:id="@+id/img_window"
+            android:id="@+id/iv_green_room_window"
             setWindowImg="@{myPlant.window}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/view_top"
+            app:layout_constraintBottom_toBottomOf="@+id/view_green_room_top_area"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/view_top"
-            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintTop_toTopOf="@id/view_green_room_top_area"
+            app:layout_constraintVertical_bias="@dimen/green_room_window_vertical_bias"
             tools:src="@drawable/img_window_1" />
 
         <ImageView
-            android:id="@+id/img_shelf"
+            android:id="@+id/iv_green_room_shelf"
             setShelfImg="@{myPlant.shelf}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/view_top"
+            app:layout_constraintBottom_toBottomOf="@id/view_green_room_top_area"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/view_top"
-            app:layout_constraintVertical_bias="0.45"
+            app:layout_constraintTop_toTopOf="@id/view_green_room_top_area"
+            app:layout_constraintVertical_bias="@dimen/green_room_shelf_vertical_bias"
             tools:src="@drawable/img_shelf_2" />
 
-        <!--
+
         <ImageView
-            android:id="@+id/img_plant"
-            setPlantImg="@{myPlant.type}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/gd1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:src="@drawable/img_plant_1_default_shadow" />
-            -->
-        <ImageView
-            android:id="@+id/plant_type"
+            android:id="@+id/iv_green_room_plant_type"
             setPlantType="@{myPlant.type}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/gd1"
+            app:layout_constraintBottom_toBottomOf="@id/gl_green_room_empty_start"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.3680"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHeight_percent="@dimen/green_room_plant_height_percent"
+            app:layout_constraintHorizontal_bias="@dimen/green_room_plant_horizontal_bias"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.5555"
+            app:layout_constraintWidth_percent="@dimen/green_room_plant_width_percent"
             tools:src="@drawable/img_plant_1_default_shadow" />
 
+
         <ImageView
-            android:id="@+id/face"
+            android:id="@+id/iv_green_room_plant_face"
             setPlantFace="@{myPlant.status}"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="@id/plant_type"
-            app:layout_constraintEnd_toEndOf="@id/plant_type"
-            app:layout_constraintHorizontal_bias="0.53"
-            app:layout_constraintStart_toStartOf="@id/plant_type"
-            app:layout_constraintTop_toTopOf="@id/plant_type"
-            app:layout_constraintVertical_bias="0.305"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_green_room_plant_type"
+            app:layout_constraintEnd_toEndOf="@id/iv_green_room_plant_type"
+            app:layout_constraintHeight_percent="@dimen/green_room_plant_face_height_percent"
+            app:layout_constraintHorizontal_bias="@dimen/plant_face_horizontal_bias"
+            app:layout_constraintStart_toStartOf="@id/iv_green_room_plant_type"
+            app:layout_constraintTop_toTopOf="@id/iv_green_room_plant_type"
+            app:layout_constraintVertical_bias="@dimen/plant_face_vertical_bias"
+            app:layout_constraintWidth_percent="@dimen/green_room_plant_face_width_percent"
             tools:src="@drawable/img_face_sad" />
 
+        <!--
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_slot_1"
+            android:id="@+id/btn_green_room_slot_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -111,15 +104,17 @@
             android:text="물이 필요해"
             android:textAppearance="@style/body5"
             android:textColor="@color/gray700"
-            app:layout_constraintBottom_toTopOf="@+id/face"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/iv_green_room_plant_face"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.81" />
+            app:layout_constraintVertical_bias="0.81"
+            tools:visibility="visible" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_slot_2"
+            android:id="@+id/btn_green_room_slot_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -130,14 +125,16 @@
             android:text="영양관리가 필요해"
             android:textAppearance="@style/body5"
             android:textColor="@color/gray700"
-            app:layout_constraintEnd_toStartOf="@+id/btn_slot_1"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/btn_green_room_slot_1"
             app:layout_constraintHorizontal_bias="0.67"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_slot_1" />
+            app:layout_constraintTop_toTopOf="@+id/btn_green_room_slot_1"
+            tools:visibility="visible" />
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_slot_3"
+            android:id="@+id/btn_green_room_slot_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -148,13 +145,15 @@
             android:text="가지치기가 필요해"
             android:textAppearance="@style/body5"
             android:textColor="@color/gray700"
-            app:layout_constraintBottom_toTopOf="@id/btn_slot_1"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/btn_green_room_slot_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.08"
-            app:layout_constraintStart_toStartOf="@id/btn_slot_2" />
+            app:layout_constraintStart_toStartOf="@id/btn_green_room_slot_2"
+            tools:visibility="visible" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_slot_4"
+            android:id="@+id/btn_green_room_slot_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -165,13 +164,15 @@
             android:text="분갈이가 필요해"
             android:textAppearance="@style/body5"
             android:textColor="@color/gray700"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.37"
-            app:layout_constraintStart_toEndOf="@id/btn_slot_3"
-            app:layout_constraintTop_toTopOf="@id/btn_slot_3" />
+            app:layout_constraintStart_toEndOf="@id/btn_green_room_slot_3"
+            app:layout_constraintTop_toTopOf="@id/btn_green_room_slot_3"
+            tools:visibility="visible" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_slot_5"
+            android:id="@+id/btn_green_room_slot_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -182,13 +183,15 @@
             android:text="환기가 필요해"
             android:textAppearance="@style/body5"
             android:textColor="@color/gray700"
-            app:layout_constraintBottom_toTopOf="@id/btn_slot_3"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/btn_green_room_slot_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_slot_6"
+            android:id="@+id/btn_green_room_slot_6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -199,18 +202,22 @@
             android:text="분무하기가 필요해"
             android:textAppearance="@style/body5"
             android:textColor="@color/gray700"
-            app:layout_constraintEnd_toStartOf="@id/btn_slot_5"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@id/btn_green_room_slot_5"
             app:layout_constraintHorizontal_bias="0.7"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btn_slot_5" />
+            app:layout_constraintTop_toTopOf="@id/btn_green_room_slot_5"
+            tools:visibility="visible" />
+
+            -->
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gd1"
+            android:id="@+id/gl_green_room_empty_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.65" />
+            app:layout_constraintGuide_percent="@dimen/green_room_guide_percent_for_plant_bottom" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

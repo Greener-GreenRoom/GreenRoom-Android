@@ -14,12 +14,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="12dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/img_profile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/iv_item_profile_profile"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:padding="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,33 +31,34 @@
             tools:src="@drawable/img_plant_1_profile" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_plant_name"
+            android:id="@+id/tv_item_profile_plant_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:layout_marginTop="8dp"
             android:maxLines="1"
             android:text="@{profile.name}"
             android:textAlignment="center"
             android:textAppearance="@style/caption2"
-            android:textColor="@color/black"
+            android:textColor="@color/gray700"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/img_profile"
-            app:layout_constraintStart_toStartOf="@+id/img_profile"
-            app:layout_constraintTop_toBottomOf="@+id/img_profile"
+            app:layout_constraintEnd_toEndOf="@id/iv_item_profile_profile"
+            app:layout_constraintStart_toStartOf="@+id/iv_item_profile_profile"
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_profile_profile"
             tools:text="초로롱" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_counts_todo"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:id="@+id/tv_item_profile_counts_todo"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:background="@drawable/shape_circle"
             android:gravity="center"
             android:text="0"
             android:textAlignment="center"
-            android:textAppearance="@style/caption2"
+            android:textAppearance="@style/caption4"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/img_profile"
-            app:layout_constraintTop_toTopOf="@+id/img_profile"
+            app:layout_constraintEnd_toEndOf="@+id/iv_item_profile_profile"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_profile_profile"
             app:shapeAppearance="@style/circle_image"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>

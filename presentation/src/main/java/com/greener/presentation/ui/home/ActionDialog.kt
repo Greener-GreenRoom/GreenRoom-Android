@@ -9,15 +9,15 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
-import com.greener.presentation.databinding.DialogActionBinding
+import com.greener.presentation.databinding.DialogCompleteTodoAllBinding
 
 class ActionDialog(context: Context) : Dialog(context) {
 
     private lateinit var clickListener: ClickListener
-    private lateinit var binding: DialogActionBinding
+    private lateinit var binding: DialogCompleteTodoAllBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogActionBinding.inflate(LayoutInflater.from(context))
+        binding = DialogCompleteTodoAllBinding.inflate(LayoutInflater.from(context))
         setContentView(binding.root)
 
         context.dialogResize(this@ActionDialog, 0.777f, 0.23f)
@@ -31,11 +31,11 @@ class ActionDialog(context: Context) : Dialog(context) {
         // 취소 가능 유무
         setCancelable(true)
 
-        binding.btnDoYet.setOnClickListener {
+        binding.btnDialogCompleteTodoAllNotYet.setOnClickListener {
             dismiss() // 다이얼로그 닫기 (Close the dialog)
         }
 
-        binding.btnConfirm.setOnClickListener {
+        binding.btnDialogCompleteTodoAllConfirm.setOnClickListener {
             //DoSomething
             dismiss()
         }

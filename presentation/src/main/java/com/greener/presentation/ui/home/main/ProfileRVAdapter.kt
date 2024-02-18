@@ -1,8 +1,8 @@
-package com.greener.presentation.ui.home
+package com.greener.presentation.ui.home.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.greener.domain.model.ExampleModel
@@ -40,7 +40,14 @@ class ProfileRVAdapter(
         }
         holder.bind(profiles[position])
         if (holder.binding.profile == currentProfile) {
-            holder.binding.imgProfile.strokeWidth = 5f
+            holder.binding.ivItemProfileProfile.strokeWidth = 5f
+
+            holder.binding.tvItemProfilePlantName.setTextColor(
+                ContextCompat.getColor(
+                    holder.binding.tvItemProfilePlantName.context,
+                    R.color.green300
+                )
+            )
         }
     }
 

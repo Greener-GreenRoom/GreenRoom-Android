@@ -1,6 +1,4 @@
-package com.greener.presentation.ui.home
-
-import android.util.Log
+package com.greener.presentation.ui.home.greenroom
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -19,7 +17,7 @@ class GreenRoomViewPagerAdapter(frag: Fragment,myPlants:List<ExampleModel>) :Fra
     override fun createFragment(position: Int): Fragment {
 
         if(items.isEmpty()) {
-            return EmptyHomeFragment()
+            return GreenRoomEmptyFragment()
         }
         return GreenRoomFragment(items[position])
     }

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.greener.presentation.ui.home.main.HomeViewModel" />
+        <variable
+            name="isAnyPlants"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="false"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <View
+            android:id="@+id/view_bottom_sheet_home_bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_bottom_sheet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_bottom_sheet_home_plant_inform"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="@{isAnyPlants ? View.VISIBLE :View.GONE }"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toStartOf="@+id/gl_bottom_sheet_home_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_bottom_sheet_home_start"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_bottom_sheet_home_real_plant_img"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/rounded_corner" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_bottom_sheet_home_plant_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{vm.currentPlant.name}"
+                    android:textAppearance="@style/body1"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_bottom_sheet_home_plant_memo"
+                    app:layout_constraintStart_toEndOf="@id/iv_bottom_sheet_home_real_plant_img"
+                    app:layout_constraintTop_toTopOf="@id/iv_bottom_sheet_home_real_plant_img"
+                    tools:text="초롱이" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_bottom_sheet_home_plant_species"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="몬스테라"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/green300"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_bottom_sheet_home_plant_name"
+                    app:layout_constraintStart_toEndOf="@id/tv_bottom_sheet_home_plant_name"
+                    app:layout_constraintTop_toTopOf="@id/tv_bottom_sheet_home_plant_name" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_bottom_sheet_home_plant_memo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="잎이 살짝 시듦."
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray500"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_bottom_sheet_home_real_plant_img"
+                    app:layout_constraintStart_toStartOf="@id/tv_bottom_sheet_home_plant_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_bottom_sheet_home_plant_name" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <View
+            android:id="@+id/view_bottom_sheet_home_divider_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:visibility="@{isAnyPlants ?View.VISIBLE :View.INVISIBLE}"
+            android:background="@color/gray100"
+            app:layout_constraintEnd_toEndOf="@id/gl_bottom_sheet_home_end"
+            app:layout_constraintStart_toStartOf="@id/gl_bottom_sheet_home_start"
+            app:layout_constraintTop_toBottomOf="@+id/cv_bottom_sheet_home_plant_inform" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_bottom_sheet_home_my_plant_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/home_my_plant_text"
+            android:textAppearance="@style/body3"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/gl_bottom_sheet_home_start"
+            app:layout_constraintTop_toBottomOf="@id/view_bottom_sheet_home_divider_line" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_bottom_sheet_home_plant_counts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{vm.getCountsToString()}"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/green300"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_sheet_home_my_plant_title"
+            app:layout_constraintStart_toEndOf="@+id/tv_bottom_sheet_home_my_plant_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_bottom_sheet_home_my_plant_title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_bottom_sheet_home_add_plant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/util_add"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray300"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bottom_sheet_home_my_plant_title"
+            app:layout_constraintEnd_toEndOf="@+id/gl_bottom_sheet_home_end"
+            app:layout_constraintTop_toTopOf="@+id/tv_bottom_sheet_home_my_plant_title" />
+
+        <ImageButton
+            android:id="@+id/btn_bottom_sheet_home_add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/transparent"
+            android:visibility="@{isAnyPlants ? View.GONE :View.VISIBLE}"
+            android:src="@drawable/img_btn_add"
+            app:layout_constraintStart_toStartOf="@+id/gl_bottom_sheet_home_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_bottom_sheet_home_my_plant_title" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_bottom_sheet_home_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="@+id/gl_bottom_sheet_home_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_bottom_sheet_home_my_plant_title"
+            tools:listitem="@layout/item_profile" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_bottom_sheet_home_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_bottom_sheet_home_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/grid_system_end" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
