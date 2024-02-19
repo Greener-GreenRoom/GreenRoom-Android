@@ -44,8 +44,8 @@
     <string name="plant_registration_character_detail">나중에 변경할 수 있어요</string>
     <string name="plant_registration_character_type">종류</string>
 
-    <string name="plant_registration_complete">%s를 그린룸에\n추가했어요!</string>
-    <string name="plant_registration_complete_ment">초대해줘서 고마워!</string>
+    <string name="plant_registration_complete">%s을(를) 그린룸에\n추가했어요!</string>
+    <string name="plant_registration_complete_mention">초대해줘서 고마워!</string>
 
 <!--  collection  -->
     <string name="collection">컬렉션</string>
