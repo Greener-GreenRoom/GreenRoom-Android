@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.register.complete
+package com.greener.presentation.ui.home.registraion.complete
 
 import android.os.Bundle
 import android.text.Spannable
@@ -7,7 +7,6 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentPlantRegistrationCompleteBinding
 import com.greener.presentation.ui.base.BaseFragment
@@ -18,12 +17,12 @@ class RegistrationCompleteFragment: BaseFragment<FragmentPlantRegistrationComple
     FragmentPlantRegistrationCompleteBinding::inflate
 ) {
     private val viewModel : RegistrationCompleteViewModel by viewModels()
-    private val args : RegistrationCompleteFragmentArgs by navArgs()
+//    private val args : RegistrationCompleteFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        highlightNickname(args.nickname)
+//        highlightNickname(args.nickname)
     }
 
     private fun highlightNickname(nickname: String) {

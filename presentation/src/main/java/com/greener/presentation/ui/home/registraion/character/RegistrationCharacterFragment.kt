@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.register.character
+package com.greener.presentation.ui.home.registraion.character
 
 import android.os.Bundle
 import android.text.Spannable
@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentPlantRegistrationCharacterBinding
 import com.greener.presentation.ui.base.BaseFragment
-import com.greener.presentation.ui.home.register.InitRegistrationIndicator
+import com.greener.presentation.ui.home.registraion.InitRegistrationIndicator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +31,7 @@ class RegistrationCharacterFragment: BaseFragment<FragmentPlantRegistrationChara
             CHARACTER_POSITION
         )
 
-        highlightNickname(args.nickname)
+//        highlightNickname(args.nickname)
     }
 
     override fun initListener() {
@@ -39,25 +39,21 @@ class RegistrationCharacterFragment: BaseFragment<FragmentPlantRegistrationChara
             findNavController().popBackStack()
         }
 
-        binding.btnPlantRegistrationCharacterLastGoNext.setOnClickListener {
-            val action = RegistrationCharacterFragmentDirections.actionRegistrationCharacterFragmentToRegistrationCompleteFragment(args.nickname)
-            findNavController().navigate(action)
-        }
     }
 
-    private fun highlightNickname(nickname: String) {
-        val mainText: String = requireContext().getString(R.string.plant_registration_character, nickname)
-        val spannableStringBuilder = SpannableStringBuilder(mainText)
-        spannableStringBuilder.apply {
-            setSpan(
-                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary)),
-                0,
-                nickname.length,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
-        binding.tvPlantRegistrationCharacter.text = spannableStringBuilder
-    }
+//    private fun highlightNickname(nickname: String) {
+//        val mainText: String = requireContext().getString(R.string.plant_registration_character, nickname)
+//        val spannableStringBuilder = SpannableStringBuilder(mainText)
+//        spannableStringBuilder.apply {
+//            setSpan(
+//                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary)),
+//                0,
+//                nickname.length,
+//                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//            )
+//        }
+//        binding.tvPlantRegistrationCharacter.text = spannableStringBuilder
+//    }
 
     companion object {
         private const val CHARACTER_POSITION = 5

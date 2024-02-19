@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.register.complete
+package com.greener.presentation.ui.home.registraion.complete
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

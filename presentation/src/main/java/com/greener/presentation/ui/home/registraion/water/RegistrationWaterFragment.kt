@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.register.water
+package com.greener.presentation.ui.home.registraion.water
 
 import android.os.Bundle
 import android.text.Spannable
@@ -8,11 +8,10 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentPlantRegistrationWaterBinding
 import com.greener.presentation.ui.base.BaseFragment
-import com.greener.presentation.ui.home.register.InitRegistrationIndicator
+import com.greener.presentation.ui.home.registraion.InitRegistrationIndicator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,19 +39,19 @@ class RegistrationWaterFragment: BaseFragment<FragmentPlantRegistrationWaterBind
         }
     }
 
-    private fun highlightNickname(nickname: String) {
-        val mainText: String = requireContext().getString(R.string.plant_registration_water_cycle, nickname)
-        val spannableStringBuilder = SpannableStringBuilder(mainText)
-        spannableStringBuilder.apply {
-            setSpan(
-                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary)),
-                0,
-                nickname.length,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
-        binding.tvPlantRegistrationWaterCycle.text = spannableStringBuilder
-    }
+//    private fun highlightNickname(nickname: String) {
+//        val mainText: String = requireContext().getString(R.string.plant_registration_water_cycle, nickname)
+//        val spannableStringBuilder = SpannableStringBuilder(mainText)
+//        spannableStringBuilder.apply {
+//            setSpan(
+//                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary)),
+//                0,
+//                nickname.length,
+//                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//            )
+//        }
+//        binding.tvPlantRegistrationWaterCycle.text = spannableStringBuilder
+//    }
 
     companion object {
         private const val WATERING_POSITION = 3

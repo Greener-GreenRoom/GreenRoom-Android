@@ -4,8 +4,9 @@
 <!--  util  -->
     <string name="util_go_next">건너뛰기</string>
     <string name="util_next">다음</string>
-    <string name="util_take_picture">사진 찍기</string>
-    <string name="util_my_album">내 앨범</string>
+    <string name="util_take_picture">사진 촬영</string>
+    <string name="util_my_album">내 앨범 선택</string>
+    <string name="util_choose_date">날짜 선택하기</string>
 
 <!--  Login  -->
 
@@ -15,34 +16,31 @@
     <!--  plant registration  -->
     <string name="plant_registration_what_kind">어떤 식물을 키우세요?</string>
     <string name="plant_registration_search_hint">식물 이름 또는 품종 검색</string>
-    <string name="plant_registration_best_plant">가장 많이 키우는 식물</string>
+    <string name="plant_registration_best_plant">가장 많이 키우는 식물 TOP10</string>
     <string name="plant_registration_no_data">앗, 아직 등록되지 않은 식물이에요</string>
     <string name="plant_registration_no_data_comment">키우는 식물이 여기 없다면?</string>
 
     <string name="plant_registration_curious_yours">당신의 식물이 궁금해요!</string>
     <string name="plant_registration_plant_nickname">별명*</string>
-    <string name="plant_registration_nickname_warning_too_many">10자 이내로 작성해 주세요!</string>
-    <string name="plant_registration_nickname_warning_have_specialchar">10자 이내로 작성해 주세요!</string>
+    <string name="plant_registration_nickname_warning">한글 또는 영문, 10자 이내로 가능해요.</string>
     <string name="plant_registration_nickname_hint">그린이</string>
     <string name="plant_registration_registration_picture">사진을 등록할까요?</string>
     <string name="plant_registration_post_representative">내 식물을 대표하는 사진을 올려주세요!(선택)</string>
+    <string name="plant_registration_regist">내 식물을 대표하는 사진을 올려주세요!(선택)</string>
+    <string name="plant_registration_count_picture_num">(0/1)</string>
+    <string name="plant_registration_cycle_today">오늘</string>
+    <string name="plant_registration_cycle_yesterday">어제</string>
 
-    <string name="plant_registration_water_cycle">%s에게\n물을 며칠 간격으로 줄까요?</string>
-    <string name="plant_registration_water_cycle_standard">을(를) 기준으로</string>
-    <string name="plant_registration_water_cycle_input">일 간격으로 물을 줄래요</string>
+    <string name="plant_registration_water_cycle">물을 며칠 간격으로 줄까요?</string>
+    <string name="plant_registration_water_cycle_standard">을 기준으로</string>
+    <string name="plant_registration_water_cycle_standard_datea">%d/%d/%d</string>
+    <string name="plant_registration_water_cycle_input">일 간격으로 물을 줄래요.</string>
     <string name="plant_registration_water_cycle_tip">그리너를 위한 Tips</string>
     <string name="plant_registration_water_cycle_detail">키우는 환경에 맞는 물 주기를 알려주세요.</string>
 
     <string name="plant_registration_water_last">%s에게\n언제 마지막으로 물을 줬나요?</string>
 
-    <string name="plant_registration_cycle_today">오늘</string>
-    <string name="plant_registration_cycle_yesterday">어제</string>
-    <string name="plant_registration_cycle_half_week">3~4일전</string>
-    <string name="plant_registration_cycle_one_week">약 1주 전</string>
-    <string name="plant_registration_cycle_two_week">약 2주 전</string>
-    <string name="plant_registration_cycle_dont_know">잘 모르겠어요 / 안줬어요</string>
-
-    <string name="plant_registration_character">%s은/는\n어떤 모습을 하고 있나요?</string>
+    <string name="plant_registration_character">식물이 어떤 모습을 하고 있나요?</string>
     <string name="plant_registration_character_detail">나중에 변경할 수 있어요</string>
     <string name="plant_registration_character_type">종류</string>
 

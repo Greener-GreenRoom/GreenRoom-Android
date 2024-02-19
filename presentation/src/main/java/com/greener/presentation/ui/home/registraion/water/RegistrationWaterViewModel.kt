@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.register.water
+package com.greener.presentation.ui.home.registraion.water
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

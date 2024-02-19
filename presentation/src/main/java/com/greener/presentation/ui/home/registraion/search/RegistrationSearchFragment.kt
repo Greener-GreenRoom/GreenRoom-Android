@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.register.search
+package com.greener.presentation.ui.home.registraion.search
 
 import android.os.Bundle
 import android.view.View
@@ -6,8 +6,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.greener.presentation.databinding.FragmentPlantRegistrationSearchBinding
 import com.greener.presentation.ui.base.BaseFragment
-import com.greener.presentation.ui.home.register.InitRegistrationIndicator
+import com.greener.presentation.ui.home.registraion.InitRegistrationIndicator
+import com.greener.presentation.util.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class RegistrationSearchFragment: BaseFragment<FragmentPlantRegistrationSearchBinding> (
@@ -30,11 +32,22 @@ class RegistrationSearchFragment: BaseFragment<FragmentPlantRegistrationSearchBi
         binding.tbPlantRegistrationSearch.setNavigationOnClickListener{
             findNavController().popBackStack()
         }
+    }
 
-        // 임시 이동 버튼
-        binding.btnPlantRegistrationSearchGoNext.setOnClickListener{
-            val action = RegistrationSearchFragmentDirections.actionRegistrationSearchFragmentToRegistrationNicknameImageFragment()
-            findNavController().navigate(action)
+    override fun initCollector() {
+        repeatOnStarted(viewLifecycleOwner) {
+            viewModel.event.collectLatest { event ->
+                handleEvent(event)
+            }
+        }
+    }
+
+    private fun handleEvent(event: RegistrationSearchViewModel.Event){
+        when(event) {
+            is RegistrationSearchViewModel.Event.GoToRegistrationNicknameImage -> {
+                val action = RegistrationSearchFragmentDirections.actionRegistrationSearchFragmentToRegistrationNicknameImageFragment(event.plantRegistrationInfo)
+                findNavController().navigate(action)
+            }
         }
     }
 
