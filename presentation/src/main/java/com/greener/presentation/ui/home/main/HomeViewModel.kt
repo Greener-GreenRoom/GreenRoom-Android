@@ -65,6 +65,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     fun getCountsToString(): String {
         return _myPlants.value.size.toString()
     }
+    fun isAnyPlants():Boolean {
+        return _myPlants.value.isNotEmpty()
+    }
 
     fun getCounts(): Int {
         return _myPlants.value.size
