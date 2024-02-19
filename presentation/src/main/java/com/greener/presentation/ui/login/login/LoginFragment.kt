@@ -17,12 +17,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel
+
     }
 
     override fun initListener() {
         binding.btnLoginTempGoMain.setOnClickListener {
             moveToMain()
+        }
+        binding.googleLoginBtn.setOnClickListener {
+
         }
     }
 
