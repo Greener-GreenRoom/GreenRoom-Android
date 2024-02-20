@@ -55,7 +55,7 @@
             android:id="@+id/btn_green_room_empty_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/shape_radius_button"
             android:paddingStart="@dimen/padding_button_default_horizontal"
             android:paddingTop="@dimen/padding_button_default_vertical"
