@@ -40,8 +40,7 @@ class ProfileRVAdapter(
         }
         holder.bind(profiles[position])
         if (holder.binding.profile == currentProfile) {
-            holder.binding.ivItemProfileProfile.strokeWidth = 5f
-
+            holder.binding.ivItemProfileBackground.setImageResource(R.drawable.img_profile_background_circle_selected)
             holder.binding.tvItemProfilePlantName.setTextColor(
                 ContextCompat.getColor(
                     holder.binding.tvItemProfilePlantName.context,

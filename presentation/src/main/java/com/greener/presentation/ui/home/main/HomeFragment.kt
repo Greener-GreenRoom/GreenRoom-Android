@@ -89,8 +89,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.findViewHolderForAdapterPosition(
                 position
             ) as ProfileRVAdapter.ProfileViewHolder
-
-        viewHolder.binding.ivItemProfileProfile.strokeWidth = 5f
+        viewHolder.binding.ivItemProfileBackground.setImageResource(R.drawable.img_profile_background_circle_selected)
         viewHolder.binding.tvItemProfilePlantName.setTextColor(
             ContextCompat.getColor(
                 requireActivity(),
@@ -105,7 +104,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 position
             ) as ProfileRVAdapter.ProfileViewHolder
 
-        viewHolder.binding.ivItemProfileProfile.strokeWidth = 0f
+        viewHolder.binding.ivItemProfileBackground.setImageResource(R.drawable.img_profile_background_circle_non_selected)
         viewHolder.binding.tvItemProfilePlantName.setTextColor(
             ContextCompat.getColor(
                 requireActivity(),
