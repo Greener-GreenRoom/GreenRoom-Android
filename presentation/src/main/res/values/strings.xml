@@ -3,7 +3,9 @@
 
 <!--  util  -->
     <string name="util_go_next">건너뛰기</string>
+    <string name="util_go_home">홈으로</string>
     <string name="util_next">다음</string>
+
     <string name="util_take_picture">사진 촬영</string>
     <string name="util_my_album">내 앨범 선택</string>
     <string name="util_choose_date">날짜 선택하기</string>
@@ -35,7 +37,7 @@
     <string name="plant_registration_water_cycle_standard">을 기준으로</string>
     <string name="plant_registration_water_cycle_standard_datea">%d/%d/%d</string>
     <string name="plant_registration_water_cycle_input">일 간격으로 물을 줄래요.</string>
-    <string name="plant_registration_water_cycle_tip">그리너를 위한 Tips</string>
+    <string name="plant_registration_water_cycle_tip">물주기 꿀팁!</string>
     <string name="plant_registration_water_cycle_detail">키우는 환경에 맞는 물 주기를 알려주세요.</string>
 
     <string name="plant_registration_water_last">%s에게\n언제 마지막으로 물을 줬나요?</string>

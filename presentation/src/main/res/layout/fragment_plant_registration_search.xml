@@ -50,24 +50,20 @@
                 android:textColor="@color/gray300"
                 android:text="@string/util_go_next"
                 android:backgroundTint="@android:color/transparent"
+                android:minHeight="0dp"
+                android:minWidth="0dp"
                 android:layout_gravity="end"
                 android:layout_marginEnd="20dp"
                 android:onClickListener="@{ () -> viewModel.goToRegistrationNicknameImage() }"/>
 
         </com.google.android.material.appbar.MaterialToolbar>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ly_plant_registration_search_speech_bubble"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tb_plant_registration_search"
-            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"/>
-
         <include
             android:id="@+id/include_plant_registration_search_indicator"
             layout="@layout/view_plant_registration_indicator"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
             app:layout_constraintTop_toBottomOf="@id/tb_plant_registration_search"/>
@@ -79,7 +75,7 @@
             android:textAppearance="@style/head3"
             android:textColor="@color/gray700"
             android:text="@string/plant_registration_what_kind"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="18dp"
             app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
             app:layout_constraintTop_toBottomOf="@+id/include_plant_registration_search_indicator"/>
@@ -89,10 +85,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="-16dp"
+            android:elevation="5dp"
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
             app:layout_constraintBottom_toBottomOf="@id/tb_plant_registration_search"
             tools:ignore="NotSibling" >
-            
+
             <View
                 android:id="@+id/view_plant_registration_search_no_data_comment"
                 android:layout_width="10dp"
@@ -118,7 +115,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view_plant_registration_search_no_data_comment"
                 />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -138,6 +134,7 @@
             app:boxCornerRadiusBottomStart="4dp"
             app:boxCornerRadiusTopEnd="4dp"
             app:boxCornerRadiusTopStart="4dp"
+            app:endIconMode="clear_text"
             app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
             app:layout_constraintTop_toBottomOf="@id/tv_plant_registration_search_what_kind">
@@ -148,14 +145,14 @@
                 android:layout_height="match_parent"
                 android:drawableStart="@drawable/ic_search"
                 android:drawableTint="@color/gray300"
-                android:drawablePadding="8dp"
+                android:drawablePadding="4dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:textAppearance="@style/body4"
                 android:textColor="@color/gray700"
                 android:text="@={viewModel.searchTerm}"
                 android:inputType="text"
-                android:imeOptions="actionDone"/>
+                android:imeOptions="actionDone" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--  todo 이미지 홀더로 바뀔 가능성 있음      -->
@@ -215,7 +212,7 @@
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
             app:layout_constraintTop_toBottomOf="@id/tv_plant_registration_search_best_plant"
             tools:listitem="@layout/item_search_plant"
-            tools:itemCount="10"/>
+            tools:itemCount="1"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
