@@ -2,11 +2,25 @@
     <string name="app_name">GreenRoom</string>
 
     <!--  util  -->
+    <string name="util_add">추가</string>
 
     <!--  Login  -->
 
     <!--  home  -->
     <string name="home">홈</string>
+    <string name="green_room_empty_no_plant_msg">키우는 식물이 없어요.\n나의 식물을 등록할까요?</string>
+    <string name="green_room_empty_register_plant">나의 식물 등록하기</string>
+    <string name="home_my_plant_text">나의 식물</string>
+
+    <string name ="home_action_decorate">꾸미기</string>
+    <string name ="home_action_all_complete">모두 완료</string>
+    <string name = "home_dialog_all_complete_title">모두 완료</string>
+    <string name = "home_dialog_ask_complete_all">모든 할 일을 완료했나요?</string>
+
+    <string name = "home_dialog_not_yet">아직이에요</string>
+    <string name = "home_dialog_complete_all">완료했어요</string>
+
+
 
     <!--  collection  -->
     <string name="collection">컬렉션</string>
