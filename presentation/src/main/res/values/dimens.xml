@@ -12,6 +12,7 @@
     <dimen name="body2">16sp</dimen>
     <dimen name="body3">14sp</dimen>
     <dimen name="body4">14sp</dimen>
+    <dimen name="body5">14sp</dimen>
 
     <dimen name="caption1">12sp</dimen>
     <dimen name="caption2">12sp</dimen>
@@ -23,5 +24,40 @@
     <dimen name="grid_system_end">20dp</dimen>
     <dimen name="grid_system_status_bar">24dp</dimen>
     <dimen name="grid_system_tool_bar">56dp</dimen>
+
+    <dimen name="padding_button_default_horizontal">24dp</dimen>
+    <dimen name="padding_button_default_vertical">12dp</dimen>
+
+
+    <!-- green room bias and percent -->
+    <dimen name="plant_face_horizontal_bias">0.53</dimen>
+    <dimen name="plant_face_vertical_bias">0.305</dimen>
+
+    <dimen name="green_room_bottom_area_height_percent">0.4939</dimen>
+
+    <dimen name="green_room_window_vertical_bias">0.6209</dimen>
+    <dimen name="green_room_shelf_vertical_bias">0.2682</dimen>
+
+    <dimen name="green_room_plant_height_percent">0.3681</dimen>
+    <dimen name="green_room_plant_width_percent">0.5555</dimen>
+
+    <dimen name="green_room_plant_horizontal_bias">0.4562</dimen>
+
+    <dimen name="green_room_plant_face_width_percent">0.1666</dimen>
+    <dimen name="green_room_plant_face_height_percent">0.0920</dimen>
+
+    <dimen name="green_room_guide_percent_for_plant_bottom">0.63</dimen>
+
+    <dimen name="empty_green_room_msg_vertical_bias">0.5248</dimen>
+    <dimen name="empty_green_room_pot_width_percent">0.6778</dimen>
+    <dimen name="empty_green_room_pot_height_percent">0.1534</dimen>
+
+    <dimen name="bottom_sheet_home_size_empty">160dp</dimen>
+    <dimen name="bottom_sheet_home_size_not_empty">224dp</dimen>
+
+
+
+
+
 
 </resources>

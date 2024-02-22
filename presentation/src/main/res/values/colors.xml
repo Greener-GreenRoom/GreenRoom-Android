@@ -22,8 +22,11 @@
     <color name="gray500">#464C52</color>
     <color name="gray600">#26282B</color>
     <color name="gray700">#1B1D1F</color>
+    <color name="black">#FF000000</color>
 
-    <!--  background  -->
+    <!-- BackgroundColor -->
+    <color name ="empty_floor">#D0DDD6</color>
+    <color name ="sample_wall">#E9FFF3</color>
     <color name="registration_background">#B8DCCD</color>
     <color name="tip_background">#0D3292F2</color>
 

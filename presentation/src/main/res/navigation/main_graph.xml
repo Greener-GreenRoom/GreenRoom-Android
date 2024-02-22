@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_diary"/>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.greener.presentation.ui.home.HomeFragment"
+        android:name="com.greener.presentation.ui.home.main.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
