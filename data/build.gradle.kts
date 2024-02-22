@@ -65,6 +65,11 @@ dependencies {
     // Tedpermission
     implementation("io.github.ParkSangGwon:tedpermission-coroutine:3.3.0")
 
+    // room
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+//    ksp("androidx.room:room-compiler:2.6.1")
+
     implementation("com.google.android.material:material:1.11.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

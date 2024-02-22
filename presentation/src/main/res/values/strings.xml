@@ -16,4 +16,14 @@
     
     <!--  diary  -->
     <string name="diary">다이어리</string>
+
+    <!--  species  -->
+    <string name="foliage">관엽식물</string>
+    <string name="succeulent_cactus">다육이,선인장</string>
+    <string name="annual">한해살이풀</string>
+    <string name="vine">덩굴식물</string>
+    <string name="bulb">구근식물</string>
+    <string name="herb">허브</string>
+    <string name="epiphyte">착색식물</string>
+    <string name="tuberous">괴근식물</string>
 </resources>
