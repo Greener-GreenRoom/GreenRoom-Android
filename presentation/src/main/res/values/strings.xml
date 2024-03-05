@@ -1,12 +1,20 @@
 <resources>
     <string name="app_name">GreenRoom</string>
 
-    <!--  util  -->
+<!--  util  -->
     <string name="util_add">추가</string>
 
-    <!--  Login  -->
+    <string name="util_go_next">건너뛰기</string>
+    <string name="util_go_home">홈으로</string>
+    <string name="util_next">다음</string>
 
-    <!--  home  -->
+    <string name="util_take_picture">사진 촬영</string>
+    <string name="util_my_album">내 앨범 선택</string>
+    <string name="util_choose_date">날짜 선택하기</string>
+
+<!--  Login  -->
+
+<!--  home  -->
     <string name="home">홈</string>
     <string name="green_room_empty_no_plant_msg">키우는 식물이 없어요.\n나의 식물을 등록할까요?</string>
     <string name="green_room_empty_register_plant">나의 식물 등록하기</string>
@@ -20,14 +28,46 @@
     <string name = "home_dialog_not_yet">아직이에요</string>
     <string name = "home_dialog_complete_all">완료했어요</string>
 
+    <!--  plant registration  -->
+    <string name="plant_registration_what_kind">어떤 식물을 키우세요?</string>
+    <string name="plant_registration_search_hint">식물 이름 또는 품종 검색</string>
+    <string name="plant_registration_best_plant">가장 많이 키우는 식물 TOP10</string>
+    <string name="plant_registration_no_data">앗, 아직 등록되지 않은 식물이에요</string>
+    <string name="plant_registration_no_data_comment">키우는 식물이 여기 없다면?</string>
 
+    <string name="plant_registration_curious_yours">당신의 식물이 궁금해요!</string>
+    <string name="plant_registration_plant_nickname">별명*</string>
+    <string name="plant_registration_nickname_warning">한글 또는 영문, 10자 이내로 가능해요.</string>
+    <string name="plant_registration_nickname_hint">그린이</string>
+    <string name="plant_registration_registration_picture">사진을 등록할까요?</string>
+    <string name="plant_registration_post_representative">내 식물을 대표하는 사진을 올려주세요!(선택)</string>
+    <string name="plant_registration_regist">내 식물을 대표하는 사진을 올려주세요!(선택)</string>
+    <string name="plant_registration_count_picture_num">(0/1)</string>
+    <string name="plant_registration_cycle_today">오늘</string>
+    <string name="plant_registration_cycle_yesterday">어제</string>
 
-    <!--  collection  -->
+    <string name="plant_registration_water_cycle">물을 며칠 간격으로 줄까요?</string>
+    <string name="plant_registration_water_cycle_standard">을 기준으로</string>
+    <string name="plant_registration_water_cycle_standard_datea">%d/%d/%d</string>
+    <string name="plant_registration_water_cycle_input">일 간격으로 물을 줄래요.</string>
+    <string name="plant_registration_water_cycle_tip">물주기 꿀팁!</string>
+    <string name="plant_registration_water_cycle_detail">키우는 환경에 맞는 물 주기를 알려주세요.</string>
+
+    <string name="plant_registration_water_last">%s에게\n언제 마지막으로 물을 줬나요?</string>
+
+    <string name="plant_registration_character">식물이 어떤 모습을 하고 있나요?</string>
+    <string name="plant_registration_character_detail">나중에 변경할 수 있어요</string>
+    <string name="plant_registration_character_type">종류</string>
+
+    <string name="plant_registration_complete">%s을(를) 그린룸에\n추가했어요!</string>
+    <string name="plant_registration_complete_mention">초대해줘서 고마워!</string>
+
+<!--  collection  -->
     <string name="collection">컬렉션</string>
 
-    <!--  community  -->
+<!--  community  -->
     <string name="community">커뮤니티</string>
     
-    <!--  diary  -->
+<!--  diary  -->
     <string name="diary">다이어리</string>
 </resources>

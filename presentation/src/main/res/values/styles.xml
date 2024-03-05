@@ -95,7 +95,6 @@
         <item name="android:lineSpacingMultiplier">1.5</item>
     </style>
 
-
     <!-- ImageView Style -->
     <style name="circle_image" parent="">
         <item name="cornerSize">50%</item>
@@ -115,4 +114,5 @@
         <item name="android:background">@drawable/shape_radius_button</item>
 
     </style>
+
 </resources>
