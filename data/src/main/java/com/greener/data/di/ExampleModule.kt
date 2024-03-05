@@ -6,5 +6,4 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-class ExampleModule {
-}
+class ExampleModule

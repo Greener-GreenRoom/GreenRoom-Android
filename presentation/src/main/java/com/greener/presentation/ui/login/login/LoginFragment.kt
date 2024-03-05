@@ -11,9 +11,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(
-    FragmentLoginBinding::inflate
+    FragmentLoginBinding::inflate,
 ) {
-    private val viewModel : LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,7 +26,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         }
     }
 
-    private fun moveToMain(){
+    private fun moveToMain() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
     }

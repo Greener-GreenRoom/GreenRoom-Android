@@ -11,8 +11,8 @@ import com.greener.presentation.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity: BaseActivity<ActivityMainBinding>(
-    ActivityMainBinding::inflate
+class MainActivity : BaseActivity<ActivityMainBinding>(
+    ActivityMainBinding::inflate,
 ) {
 
     private lateinit var navController: NavController
