@@ -7,5 +7,19 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.greener.presentation.ui.login.login.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_loginRegisterNicknameFragment"
+            app:destination="@id/loginRegisterNicknameFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/loginRegisterNicknameFragment"
+        android:name="com.greener.presentation.ui.login.login.LoginRegisterNicknameFragment"
+        android:label="LoginRegisterNicknameFragment" >
+
+        <argument
+            android:name="signInfo"
+            app:argType="string[]" />
+    </fragment>
 </navigation>
