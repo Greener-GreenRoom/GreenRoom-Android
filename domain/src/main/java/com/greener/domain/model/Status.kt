@@ -1,6 +1,6 @@
 package com.greener.domain.model
 
-enum class Status(val statusCode:Int) {
+enum class Status(val code:Int) {
     SUCCESS(0),
     FAIL(-1),
     DEFAULT(100),

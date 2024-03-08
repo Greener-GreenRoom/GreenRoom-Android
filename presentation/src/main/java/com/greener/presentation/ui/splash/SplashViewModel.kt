@@ -19,7 +19,7 @@ class SplashViewModel @Inject constructor(
     private val checkTokenUseCase: CheckTokenUseCase
 ) : ViewModel() {
 
-    private val _isLogin = MutableStateFlow(Status.DEFAULT.statusCode)
+    private val _isLogin = MutableStateFlow(Status.DEFAULT.code)
     val isLogin = _isLogin.asStateFlow()
 
     private val _accessToken = MutableStateFlow("")
@@ -28,14 +28,14 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             delay(1000)
             checkTokenUseCase().collect {
-                if (it.response.output == Status.FAIL.statusCode) {
-                    _isLogin.update { Status.FAIL.statusCode }
+                if (it.response.output == Status.FAIL.code) {
+                    _isLogin.update { Status.FAIL.code }
                 } else {
-                    _isLogin.update { Status.SUCCESS.statusCode }
+                    _isLogin.update { Status.SUCCESS.code }
                 }
             }
             delay(5000)
-            _isLogin.update { Status.FAIL.statusCode }
+            _isLogin.update { Status.FAIL.code }
         }
     }
 }

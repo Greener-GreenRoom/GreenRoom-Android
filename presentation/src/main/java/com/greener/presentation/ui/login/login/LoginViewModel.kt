@@ -3,7 +3,6 @@ package com.greener.presentation.ui.login.login
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.greener.domain.model.SignInfo
 import com.greener.domain.model.Status
 import com.greener.domain.usecase.datastore.SetLocalTokensUseCase
 import com.greener.domain.usecase.sign.GetTokenUseCase
@@ -38,7 +37,7 @@ class LoginViewModel @Inject constructor(
     private val _accessToken = MutableStateFlow<String>("")
     val accessToken = _accessToken.asStateFlow()
 
-    private val _isExistingUser = MutableStateFlow(Status.DEFAULT.statusCode)
+    private val _isExistingUser = MutableStateFlow(Status.DEFAULT.code)
     val isExistingUser = _isExistingUser.asStateFlow()
 
 
@@ -65,10 +64,10 @@ class LoginViewModel @Inject constructor(
                     _accessToken.value = it.data!!.accessToken
                     Log.d("확인", "accessToken: ${_accessToken.value}")
                     setTokens(it.data!!.accessToken, it.data!!.refreshToken)
-                    _isExistingUser.update { Status.SUCCESS.statusCode }
+                    _isExistingUser.update { Status.SUCCESS.code }
                 } else {
                     Log.d("확인", "response.result: ${it.response.result}")
-                    _isExistingUser.update { Status.FAIL.statusCode }
+                    _isExistingUser.update { Status.FAIL.code }
                 }
             }
         }

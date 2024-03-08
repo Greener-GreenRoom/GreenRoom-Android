@@ -49,7 +49,7 @@ class RegisterNicknameViewModel @Inject constructor(
         val signInfo = SignInfo(_email.value, _nickname.value, _provider.value, _photoUrl.value)
         viewModelScope.launch {
             signUpUseCase(signInfo).collect {
-                if (it.output == Status.SUCCESS.statusCode) {
+                if (it.output == Status.SUCCESS.code) {
                     getTokenFromServer(signInfo)
                 }
             }
@@ -59,7 +59,7 @@ class RegisterNicknameViewModel @Inject constructor(
     private fun getTokenFromServer(signInfo: SignInfo) {
         viewModelScope.launch {
             getTokenUseCase(signInfo.email).collect {
-                if (it.response.output == Status.SUCCESS.statusCode) {
+                if (it.response.output == Status.SUCCESS.code) {
                     setTokens(it.data!!.accessToken, it.data!!.refreshToken)
                     _completeRegister.update { true }
                     Log.d("확인", "${_completeRegister.value}")

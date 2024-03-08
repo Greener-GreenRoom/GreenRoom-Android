@@ -31,9 +31,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
 
     private suspend fun observeLocalToken() {
         viewModel.isLogin.collect {
-            if (it == Status.FAIL.statusCode) {
+            if (it == Status.FAIL.code) {
                 moveToLoginActivity()
-            } else if (it == Status.SUCCESS.statusCode) {
+            } else if (it == Status.SUCCESS.code) {
                 moveToMainActivity()
             }
         }
