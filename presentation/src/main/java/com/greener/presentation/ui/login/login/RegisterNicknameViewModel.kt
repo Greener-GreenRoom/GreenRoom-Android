@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.SignInfo
+import com.greener.domain.model.Status
 import com.greener.domain.usecase.datastore.SetLocalTokensUseCase
 import com.greener.domain.usecase.sign.GetTokenUseCase
 import com.greener.domain.usecase.sign.SignUpUseCase
@@ -48,7 +49,7 @@ class RegisterNicknameViewModel @Inject constructor(
         val signInfo = SignInfo(_email.value, _nickname.value, _provider.value, _photoUrl.value)
         viewModelScope.launch {
             signUpUseCase(signInfo).collect {
-                if (it.output == 0) {
+                if (it.output == Status.SUCCESS.statusCode) {
                     getTokenFromServer(signInfo)
                 }
             }
@@ -58,7 +59,7 @@ class RegisterNicknameViewModel @Inject constructor(
     private fun getTokenFromServer(signInfo: SignInfo) {
         viewModelScope.launch {
             getTokenUseCase(signInfo.email).collect {
-                if (it.response.output == 0) {
+                if (it.response.output == Status.SUCCESS.statusCode) {
                     setTokens(it.data!!.accessToken, it.data!!.refreshToken)
                     _completeRegister.update { true }
                     Log.d("확인", "${_completeRegister.value}")

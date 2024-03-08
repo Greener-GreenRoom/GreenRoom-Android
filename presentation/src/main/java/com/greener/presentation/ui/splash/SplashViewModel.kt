@@ -19,7 +19,7 @@ class SplashViewModel @Inject constructor(
     private val checkTokenUseCase: CheckTokenUseCase
 ) : ViewModel() {
 
-    private val _isLogin = MutableStateFlow(0)
+    private val _isLogin = MutableStateFlow(Status.DEFAULT.statusCode)
     val isLogin = _isLogin.asStateFlow()
 
     private val _accessToken = MutableStateFlow("")

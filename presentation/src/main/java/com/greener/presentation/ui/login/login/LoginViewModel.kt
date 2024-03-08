@@ -38,7 +38,7 @@ class LoginViewModel @Inject constructor(
     private val _accessToken = MutableStateFlow<String>("")
     val accessToken = _accessToken.asStateFlow()
 
-    private val _isExistingUser = MutableStateFlow(0)
+    private val _isExistingUser = MutableStateFlow(Status.DEFAULT.statusCode)
     val isExistingUser = _isExistingUser.asStateFlow()
 
 
