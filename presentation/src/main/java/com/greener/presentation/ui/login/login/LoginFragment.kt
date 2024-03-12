@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.Navigation
@@ -13,7 +14,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.greener.domain.model.SignInfo
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentLoginBinding
 import com.greener.presentation.ui.base.BaseFragment
@@ -67,11 +67,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
     private fun checkExistUser() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isExistingUser.collect {
-                if (it == EXIST) {
-                    moveToMain()
-                } else if (it == NOT_EXIST) {
-                    moveToRegisterNickName()
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isExistingUser.collect {
+                    Log.d("확인", "isExistUser: $it")
+                    if (it == EXIST) {
+                        moveToMain()
+                    } else if (it == NOT_EXIST) {
+                        moveToRegisterNickName()
+                    }
                 }
             }
         }
@@ -110,7 +113,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     }
 
     companion object {
-        const val EXIST = 1
+        const val EXIST = 0
         const val NOT_EXIST = -1
         const val GOOGLE = "google"
         const val KAKAO = "kakao"

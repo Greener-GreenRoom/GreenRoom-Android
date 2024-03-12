@@ -60,7 +60,7 @@ class LoginViewModel @Inject constructor(
     fun getToken() {
         viewModelScope.launch {
             getTokenUseCase(_email.value).collect {
-                if (it.response.output == 0) {
+                if (it.response.output == Status.SUCCESS.code) {
                     _accessToken.value = it.data!!.accessToken
                     Log.d("확인", "accessToken: ${_accessToken.value}")
                     setTokens(it.data!!.accessToken, it.data!!.refreshToken)
