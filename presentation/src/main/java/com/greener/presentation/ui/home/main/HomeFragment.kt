@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentHomeBinding
@@ -49,6 +51,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             showActionDialog()
         }
         viewModel.initFab()
+
+        binding.includeHomeBottomSheet.tvBottomSheetHomeAddPlant.setOnClickListener {
+            moveToRegisterSearchFragment()
+        }
+        binding.includeHomeBottomSheet.btnBottomSheetHomeAddButton.setOnClickListener {
+            moveToRegisterSearchFragment()
+        }
+    }
+
+    private fun moveToRegisterSearchFragment() {
+        findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
     }
 
 

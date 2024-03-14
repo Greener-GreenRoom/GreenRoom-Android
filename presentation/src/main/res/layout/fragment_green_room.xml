@@ -99,6 +99,75 @@
             android:layout_marginTop="40dp"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="@dimen/green_room_guide_percent_for_plant_bottom" />
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gl_green_room_start"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gl_green_room_end"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/grid_system_end"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gl_green_room_center"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+        <include
+            android:id="@+id/include_green_room_balloon_1"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_green_room_window"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_center"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_start"
+            app:layout_constraintTop_toTopOf="@+id/iv_green_room_window" />
+
+        <include
+            android:id="@+id/include_green_room_balloon_2"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/include_green_room_balloon_1"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_center"
+            app:layout_constraintTop_toTopOf="@+id/include_green_room_balloon_1" />
+
+        <include
+            android:id="@+id/include_green_room_balloon_3"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/include_green_room_balloon_1"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_center"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_center"
+             />
+
+        <include
+            android:id="@+id/include_green_room_balloon_4"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/include_green_room_balloon_3"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_center"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_start"
+             />
+
+        <include
+            android:id="@+id/include_green_room_balloon_5"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/include_green_room_balloon_4"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_center"
+            app:layout_constraintTop_toTopOf="@+id/include_green_room_balloon_4" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
