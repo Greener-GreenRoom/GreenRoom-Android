@@ -2,8 +2,8 @@ package com.greener.domain.repository
 
 import com.greener.domain.model.response.ResponseData
 import com.greener.domain.model.response.ResponseResult
-import com.greener.domain.model.SignInfo
-import com.greener.domain.model.TokenData
+import com.greener.domain.model.sign.SignInfo
+import com.greener.domain.model.auth.TokenData
 import kotlinx.coroutines.flow.Flow
 
 interface SignRepository {
@@ -12,5 +12,7 @@ interface SignRepository {
 
     suspend fun getToken(email:String): Flow<ResponseData<TokenData>>
 
-    suspend fun checkToken():Flow<ResponseData<String>>
+    suspend fun getToken(): Flow<ResponseData<TokenData>>
+
+    suspend fun updateToken():Flow<ResponseData<TokenData>>
 }

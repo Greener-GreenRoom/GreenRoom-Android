@@ -1,7 +1,7 @@
 package com.greener.domain.usecase.sign
 
 import com.greener.domain.model.response.ResponseData
-import com.greener.domain.model.TokenData
+import com.greener.domain.model.auth.TokenData
 import com.greener.domain.repository.SignRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -11,5 +11,9 @@ class GetTokenUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(email: String): Flow<ResponseData<TokenData>> {
         return repository.getToken(email)
+    }
+
+    suspend operator fun invoke(): Flow<ResponseData<TokenData>> {
+        return repository.getToken()
     }
 }

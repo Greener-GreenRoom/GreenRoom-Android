@@ -1,7 +1,7 @@
 package com.greener.domain.usecase.sign
 
 import com.greener.domain.model.response.ResponseResult
-import com.greener.domain.model.SignInfo
+import com.greener.domain.model.sign.SignInfo
 import com.greener.domain.repository.SignRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

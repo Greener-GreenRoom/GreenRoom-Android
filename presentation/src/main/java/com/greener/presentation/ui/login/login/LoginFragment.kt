@@ -19,6 +19,8 @@ import com.greener.presentation.databinding.FragmentLoginBinding
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -26,7 +28,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ) {
     private val viewModel: LoginViewModel by viewModels()
-
 
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher =
@@ -40,7 +41,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 viewModel.setPhotoUrl(account.photoUrl.toString())
                 viewModel.setName(userName)
                 viewModel.setProvider(GOOGLE)
-
                 getToken()
 
             } catch (e: ApiException) {
@@ -66,13 +66,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     }
 
     private fun checkExistUser() {
+
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.isExistingUser.collect {
-                    Log.d("확인", "isExistUser: $it")
-                    if (it == EXIST) {
+            Log.d("확인","launch 동작")
+            viewModel.isExistingUser.collect {
+                Log.d("확인", "isExistUser: $it")
+                when(it) {
+                    EXIST -> {
                         moveToMain()
-                    } else if (it == NOT_EXIST) {
+                    }
+                    NOT_EXIST -> {
                         moveToRegisterNickName()
                     }
                 }
@@ -99,6 +102,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     private fun moveToMain() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
+        activity?.finish()
     }
 
     private fun getToken() {
@@ -110,6 +114,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
             arrayOf(viewModel.email.value, viewModel.photoUrl.value, viewModel.provider.value)
         )
         Navigation.findNavController(binding.root).navigate(action)
+
     }
 
     companion object {

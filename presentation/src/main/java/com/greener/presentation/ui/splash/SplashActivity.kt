@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.greener.domain.model.Status
+import com.greener.presentation.model.Status
 import com.greener.presentation.databinding.ActivitySplashBinding
 import com.greener.presentation.ui.base.BaseActivity
 import com.greener.presentation.ui.login.login.LoginActivity
@@ -25,7 +25,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
     }
 
     override fun initListener() {
-        viewModel.checkMyTokens()
+        viewModel.updateMyTokens()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 observeLocalToken()

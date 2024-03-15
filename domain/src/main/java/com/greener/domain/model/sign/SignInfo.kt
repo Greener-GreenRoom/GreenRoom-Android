@@ -1,4 +1,4 @@
-package com.greener.domain.model
+package com.greener.domain.model.sign
 
 data class SignInfo(
     val email: String,

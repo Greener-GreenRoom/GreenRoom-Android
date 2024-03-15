@@ -3,9 +3,9 @@ package com.greener.presentation.ui.login.login
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.greener.domain.model.SignInfo
-import com.greener.domain.model.Status
-import com.greener.domain.usecase.datastore.SetLocalTokensUseCase
+import com.greener.domain.model.sign.SignInfo
+import com.greener.presentation.model.Status
+import com.greener.domain.usecase.datastore.SetUserInfoUseCase
 import com.greener.domain.usecase.sign.GetTokenUseCase
 import com.greener.domain.usecase.sign.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class RegisterNicknameViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val getTokenUseCase: GetTokenUseCase,
-    private val setLocalTokensUseCase: SetLocalTokensUseCase
+    private val setUserInfoUseCase: SetUserInfoUseCase
 ) : ViewModel() {
 
     private val _email = MutableStateFlow("")
@@ -52,6 +52,9 @@ class RegisterNicknameViewModel @Inject constructor(
                 if (it.output == Status.SUCCESS.code) {
                     getTokenFromServer(signInfo)
                 }
+                else {
+                    //토스트 예외 처리
+                }
             }
         }
     }
@@ -60,7 +63,7 @@ class RegisterNicknameViewModel @Inject constructor(
         viewModelScope.launch {
             getTokenUseCase(signInfo.email).collect {
                 if (it.response.output == Status.SUCCESS.code) {
-                    setTokens(it.data!!.accessToken, it.data!!.refreshToken)
+                    setUserInfoAtLocal(it.data!!.accessToken, it.data!!.refreshToken)
                     _completeRegister.update { true }
                     Log.d("확인", "${_completeRegister.value}")
                 } else {
@@ -72,11 +75,12 @@ class RegisterNicknameViewModel @Inject constructor(
 
     }
 
-    private fun setTokens(accessToken: String, refreshToken: String) {
+    private fun setUserInfoAtLocal(
+        accessToken: String,
+        refreshToken: String
+    ) {
         viewModelScope.launch {
-            setLocalTokensUseCase(accessToken, refreshToken)
+            setUserInfoUseCase(_email.value, _provider.value, accessToken, refreshToken)
         }
     }
-
-
 }

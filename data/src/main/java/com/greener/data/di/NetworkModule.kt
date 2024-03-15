@@ -2,14 +2,13 @@ package com.greener.data.di
 
 import com.greener.data.interceptor.AuthInterceptor
 import com.greener.data.service.SignService
-import com.greener.data.source.local.DataStoreDataSource
+import com.greener.data.source.local.AuthDataSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -46,7 +45,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideAuthInterceptor(dataStore: DataStoreDataSource): AuthInterceptor {
+    fun provideAuthInterceptor(dataStore: AuthDataSource): AuthInterceptor {
         return AuthInterceptor(dataStore)
     }
 

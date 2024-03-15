@@ -1,4 +1,4 @@
-package com.greener.domain.model
+package com.greener.domain.model.auth
 
 data class TokenData(
     val refreshToken: String,

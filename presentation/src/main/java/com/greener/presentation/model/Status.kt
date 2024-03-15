@@ -1,4 +1,4 @@
-package com.greener.domain.model
+package com.greener.presentation.model
 
 enum class Status(val code:Int) {
     SUCCESS(0),
