@@ -2,6 +2,7 @@ package com.greener.presentation.ui.home.registraion.nickname_image
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.greener.domain.usecase.image.GetImageUseCase
 import com.greener.presentation.model.registration.PlantRegistrationInfo
 import com.greener.presentation.util.MutableEventFlow
 import com.greener.presentation.util.asEventFlow
@@ -12,12 +13,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegistrationNicknameImageViewModel @Inject constructor() : ViewModel() {
+class RegistrationNicknameImageViewModel @Inject constructor(
+    private val getImageUseCase: GetImageUseCase
+) : ViewModel() {
 
     val inputNickname = MutableStateFlow("")
 
     private val _plantRegistrationInfo = MutableStateFlow<PlantRegistrationInfo?>(null)
     val plantRegistrationInfo: StateFlow<PlantRegistrationInfo?> get() = _plantRegistrationInfo
+
+    private val _images = MutableStateFlow<List<String>>(emptyList())
+    val images : StateFlow<List<String>> get() = _images
 
     private val _event = MutableEventFlow<Event>()
     val event = _event.asEventFlow()
@@ -44,9 +50,19 @@ class RegistrationNicknameImageViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun inputPlantImage() {
+//    fun inputPlantImage() {
+//        viewModelScope.launch {
+//            // todo
+//        }
+//    }
+
+    fun getImages() {
         viewModelScope.launch {
-            // todo
+            val result = getImageUseCase()
+            if (result.isSuccess) {
+                _images.emit(result.getOrThrow())
+            }
+
         }
     }
 

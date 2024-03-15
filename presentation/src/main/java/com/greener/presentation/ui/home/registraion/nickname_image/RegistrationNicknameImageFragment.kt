@@ -55,6 +55,9 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
             findNavController().popBackStack()
         }
 
+        binding.btnPlantRegistrationNicknameImagePlant.setOnClickListener {
+            viewModel.getImages()
+        }
         binding.tePlantRegistrationNicknameImage.setOnEditorActionListener { _, action, _ ->
             var handled = false
             if (action == EditorInfo.IME_ACTION_DONE) {
