@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="actionTodo"
+            type="com.greener.domain.model.ActionTodo" />
+    </data>
     <LinearLayout
         android:id="@+id/ly_text_balloon"
         android:layout_width="wrap_content"
@@ -30,9 +35,10 @@
                 android:paddingTop="8dp"
                 android:paddingEnd="15dp"
                 android:paddingBottom="8dp"
-                android:text="영양관리가 필요해"
+                setTextBalloon="@{actionTodo}"
                 android:textAppearance="@style/body5"
-                android:textColor="@color/gray700" />
+                android:textColor="@color/gray700"
+                tools:text="믈이 필요해"/>
         </com.google.android.material.card.MaterialCardView>
 
         <View

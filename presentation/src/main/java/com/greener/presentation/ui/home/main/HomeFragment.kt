@@ -9,13 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.greener.domain.model.ActionTodo
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentHomeBinding
 import com.greener.presentation.ui.base.BaseFragment
-import com.greener.presentation.ui.home.ActionDialog
+import com.greener.presentation.ui.home.dialog.ActionDialog
 import com.greener.presentation.ui.home.greenroom.GreenRoomViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -127,7 +127,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     }
 
     private fun showActionDialog() {
-        val dialog = ActionDialog(requireActivity())
+        val dialog = ActionDialog(requireActivity(),ActionTodo.COMPLETE_ALL)
 
         dialog.setItemClickListener(object : ActionDialog.ClickListener {
             override fun onClick() {

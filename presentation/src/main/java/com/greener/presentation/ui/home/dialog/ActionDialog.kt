@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home
+package com.greener.presentation.ui.home.dialog
 
 import android.app.Dialog
 import android.content.Context
@@ -9,15 +9,19 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
-import com.greener.presentation.databinding.DialogCompleteTodoAllBinding
+import com.greener.domain.model.ActionTodo
+import com.greener.presentation.databinding.DialogActionTodoBinding
 
-class ActionDialog(context: Context) : Dialog(context) {
+
+class ActionDialog(context: Context, val actionTodo: ActionTodo) : Dialog(context) {
 
     private lateinit var clickListener: ClickListener
-    private lateinit var binding: DialogCompleteTodoAllBinding
+    private lateinit var binding: DialogActionTodoBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogCompleteTodoAllBinding.inflate(LayoutInflater.from(context))
+        binding = DialogActionTodoBinding.inflate(LayoutInflater.from(context))
+
+        binding.actionTodo = actionTodo
         setContentView(binding.root)
 
         context.dialogResize(this@ActionDialog, 0.777f, 0.23f)
@@ -75,5 +79,6 @@ class ActionDialog(context: Context) : Dialog(context) {
     fun setItemClickListener(clickListener: ClickListener) {
         this.clickListener = clickListener
     }
+
 
 }

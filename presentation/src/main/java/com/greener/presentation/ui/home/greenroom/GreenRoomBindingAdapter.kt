@@ -1,7 +1,10 @@
 package com.greener.presentation.ui.home.greenroom
 
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
+import com.greener.domain.model.ActionTodo
 import com.greener.presentation.R
 
 
@@ -99,8 +102,20 @@ fun setShelfImg(view: ImageView, id: Int) {
         5 -> {
             view.setImageResource(R.drawable.img_shelf_5)
         }
-
     }
+}
+
+@BindingAdapter("setTextBalloon")
+fun setTextBalloon(view: TextView, actionTodo: ActionTodo) {
+    val context = view.context
+    val textResId = context.resources.getIdentifier(
+        "${actionTodo.stringName}_text_balloon",
+        "string",
+        context.packageName
+    )
+    val colorResId = context.resources.getIdentifier(actionTodo.color, "color", context.packageName)
+    view.setText(textResId)
+    view.setTextColor(colorResId)
 }
 
 
