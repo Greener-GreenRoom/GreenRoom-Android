@@ -27,17 +27,23 @@ class SignRepositoryImpl @Inject constructor(
         return when (responseFormDTO) {
 
             is ApiState.Success -> {
-                ApiState.Success(ResponseResult(
-                    responseFormDTO.result.responseDTO.output,
-                    responseFormDTO.result.responseDTO.result
-                ))
+                ApiState.Success(
+                    ResponseResult(
+                        responseFormDTO.result.responseDTO.output,
+                        responseFormDTO.result.responseDTO.result
+                    )
+                )
             }
+
             is ApiState.Fail -> {
-                ApiState.Fail(ResponseResult(
-                    responseFormDTO.result.responseDTO.output,
-                    responseFormDTO.result.responseDTO.result
-                ))
+                ApiState.Fail(
+                    ResponseResult(
+                        responseFormDTO.result.responseDTO.output,
+                        responseFormDTO.result.responseDTO.result
+                    )
+                )
             }
+
             is ApiState.Exception -> {
                 responseFormDTO
             }
@@ -47,13 +53,15 @@ class SignRepositoryImpl @Inject constructor(
     override suspend fun getToken(email: String): ApiState<ResponseData<TokenData>> {
 
         val responseFormDTO = signDataSource.getToken(email)
-        return when(responseFormDTO) {
+        return when (responseFormDTO) {
             is ApiState.Success -> {
-                ApiState.Success(mapperTokenDataToDomain( responseFormDTO.result))
+                ApiState.Success(mapperTokenDataToDomain(responseFormDTO.result))
             }
+
             is ApiState.Fail -> {
-                ApiState.Fail(mapperTokenDataToDomain( responseFormDTO.result))
+                ApiState.Fail(mapperTokenDataToDomain(responseFormDTO.result))
             }
+
             is ApiState.Exception -> {
                 responseFormDTO
             }
@@ -65,13 +73,15 @@ class SignRepositoryImpl @Inject constructor(
 
         val responseFormDTO = signDataSource.getToken(email)
 
-        return when(responseFormDTO) {
+        return when (responseFormDTO) {
             is ApiState.Success -> {
                 ApiState.Success(mapperTokenDataToDomain(responseFormDTO.result))
             }
+
             is ApiState.Fail -> {
                 ApiState.Fail(mapperTokenDataToDomain(responseFormDTO.result))
             }
+
             is ApiState.Exception -> {
                 responseFormDTO
             }
@@ -84,13 +94,15 @@ class SignRepositoryImpl @Inject constructor(
         Log.d("확인", "authenticateInfo: $authenticateInfo")
         val responseFormDTO = signDataSource.updateToken(authenticateInfo)
 
-        return when(responseFormDTO) {
+        return when (responseFormDTO) {
             is ApiState.Success -> {
-                ApiState.Success(mapperTokenDataToDomain( responseFormDTO.result))
+                ApiState.Success(mapperTokenDataToDomain(responseFormDTO.result))
             }
+
             is ApiState.Fail -> {
-                ApiState.Fail(mapperTokenDataToDomain( responseFormDTO.result))
+                ApiState.Fail(mapperTokenDataToDomain(responseFormDTO.result))
             }
+
             is ApiState.Exception -> {
                 responseFormDTO
             }

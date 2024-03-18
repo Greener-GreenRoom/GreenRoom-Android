@@ -58,13 +58,15 @@ class RegisterNicknameViewModel @Inject constructor(
                     getTokenFromServer(signInfo)
                     _uiState.update { UiState.Success }
                 }
+
                 is ApiState.Fail -> {
                     Log.d("확인", "fail")
                     _uiState.update { UiState.Fail }
                 }
+
                 is ApiState.Exception -> {
                     val errorMessage = responseResult.checkException()
-                    _uiState.update { UiState.Error(errorMessage ) }
+                    _uiState.update { UiState.Error(errorMessage) }
                 }
 
             }

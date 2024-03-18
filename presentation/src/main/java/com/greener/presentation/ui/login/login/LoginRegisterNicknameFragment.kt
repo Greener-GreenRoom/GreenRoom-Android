@@ -52,19 +52,23 @@ class LoginRegisterNicknameFragment : BaseFragment<FragmentLoginRegisterNickname
     private fun observeRegisterComplete() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collect {
-                when(it) {
+                when (it) {
                     is UiState.Success -> {
                         moveToMain()
                     }
+
                     is UiState.Fail -> {
-                        Toast.makeText(activity,"다시 시도해주세요", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "다시 시도해주세요", Toast.LENGTH_SHORT).show()
                     }
+
                     is UiState.Error -> {
-                        Toast.makeText(activity,it.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()
                     }
-                    is UiState.Loading ->{
+
+                    is UiState.Loading -> {
 
                     }
+
                     is UiState.Empty -> {
 
                     }

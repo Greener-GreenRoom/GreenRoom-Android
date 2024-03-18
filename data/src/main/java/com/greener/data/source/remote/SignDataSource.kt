@@ -26,7 +26,7 @@ class SignDataSource @Inject constructor(
         )
         return try {
             val response = service.signUp(signUpRequestDTO)
-            if (response.responseDTO.output == 0) {
+            if (response.responseDTO.output == SUCCESS) {
                 ApiState.Success(response)
             } else {
                 ApiState.Fail(response)
@@ -41,7 +41,7 @@ class SignDataSource @Inject constructor(
         return try {
             val response = service.getToken(email)
 
-            if (response.responseDTO.output == 0) {
+            if (response.responseDTO.output == SUCCESS) {
                 ApiState.Success(response)
             } else {
                 ApiState.Fail(response)
@@ -56,7 +56,7 @@ class SignDataSource @Inject constructor(
     suspend fun updateToken(authenticateInfo: AuthenticateRequestDTO): ApiState<ResponseFormDTO<TokenDTO?>> {
         return try {
             val response = service.updateToken(authenticateInfo)
-            if (response.responseDTO.output == 0) {
+            if (response.responseDTO.output == SUCCESS) {
                 ApiState.Success(response)
             } else {
                 ApiState.Fail(response)
@@ -66,6 +66,10 @@ class SignDataSource @Inject constructor(
         }
 
 
+    }
+
+    companion object {
+        const val SUCCESS = 0
     }
 
 }

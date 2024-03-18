@@ -71,19 +71,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     private fun checkExistUser() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collect {
-                when(it) {
+                when (it) {
                     is UiState.Success -> {
                         moveToMain()
                     }
+
                     is UiState.Fail -> {
                         moveToRegisterNickName()
                     }
+
                     is UiState.Error -> {
-                        Toast.makeText(activity,it.message,Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()
                     }
-                    is UiState.Loading ->{
+
+                    is UiState.Loading -> {
 
                     }
+
                     is UiState.Empty -> {
 
                     }

@@ -37,19 +37,23 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
 
     private suspend fun observeLocalToken() {
         viewModel.uiState.collect {
-            when(it) {
+            when (it) {
                 is UiState.Success -> {
                     moveToMainActivity()
                 }
+
                 is UiState.Fail -> {
                     moveToLoginActivity()
                 }
+
                 is UiState.Error -> {
-                    Toast.makeText(applicationContext,it.message,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
                 }
-                is UiState.Loading ->{
+
+                is UiState.Loading -> {
 
                 }
+
                 is UiState.Empty -> {
 
                 }

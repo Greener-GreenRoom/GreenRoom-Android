@@ -5,5 +5,5 @@ import com.greener.domain.model.sign.SignInfo
 
 
 inline fun mapperSignUpInfoToData(signInfo: SignInfo): SignUpRequestDTO {
-    return SignUpRequestDTO(signInfo.name, signInfo.email,signInfo.photoUrl,signInfo.provider)
+    return SignUpRequestDTO(signInfo.name, signInfo.email, signInfo.photoUrl, signInfo.provider)
 }
