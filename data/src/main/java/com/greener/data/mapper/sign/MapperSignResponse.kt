@@ -1,4 +1,4 @@
-package com.greener.data.mapper
+package com.greener.data.mapper.sign
 
 import com.greener.data.model.auth.TokenDTO
 import com.greener.data.model.response.ResponseFormDTO

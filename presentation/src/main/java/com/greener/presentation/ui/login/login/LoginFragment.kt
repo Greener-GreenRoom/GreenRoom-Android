@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -16,10 +17,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentLoginBinding
+import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -66,17 +69,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     }
 
     private fun checkExistUser() {
-
         viewLifecycleOwner.lifecycleScope.launch {
-            Log.d("확인","launch 동작")
-            viewModel.isExistingUser.collect {
-                Log.d("확인", "isExistUser: $it")
+            viewModel.uiState.collect {
                 when(it) {
-                    EXIST -> {
+                    is UiState.Success -> {
                         moveToMain()
                     }
-                    NOT_EXIST -> {
+                    is UiState.Fail -> {
                         moveToRegisterNickName()
+                    }
+                    is UiState.Error -> {
+                        Toast.makeText(activity,it.message,Toast.LENGTH_SHORT).show()
+                    }
+                    is UiState.Loading ->{
+
+                    }
+                    is UiState.Empty -> {
+
                     }
                 }
             }
@@ -118,8 +127,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     }
 
     companion object {
-        const val EXIST = 0
-        const val NOT_EXIST = -1
         const val GOOGLE = "google"
         const val KAKAO = "kakao"
     }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -12,9 +13,11 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentLoginRegisterNicknameBinding
+import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -48,9 +51,23 @@ class LoginRegisterNicknameFragment : BaseFragment<FragmentLoginRegisterNickname
 
     private fun observeRegisterComplete() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.completeRegister.collect { isComplete ->
-                if (isComplete) {
-                    moveToMain()
+            viewModel.uiState.collect {
+                when(it) {
+                    is UiState.Success -> {
+                        moveToMain()
+                    }
+                    is UiState.Fail -> {
+                        Toast.makeText(activity,"다시 시도해주세요", Toast.LENGTH_SHORT).show()
+                    }
+                    is UiState.Error -> {
+                        Toast.makeText(activity,it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    is UiState.Loading ->{
+
+                    }
+                    is UiState.Empty -> {
+
+                    }
                 }
             }
         }

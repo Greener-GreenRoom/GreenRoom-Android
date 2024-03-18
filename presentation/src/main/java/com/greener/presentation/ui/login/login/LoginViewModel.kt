@@ -3,10 +3,10 @@ package com.greener.presentation.ui.login.login
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.greener.presentation.model.Status
-import com.greener.domain.usecase.datastore.SetLocalTokensUseCase
+import com.greener.domain.model.ApiState
 import com.greener.domain.usecase.datastore.SetUserInfoUseCase
 import com.greener.domain.usecase.sign.GetTokenUseCase
+import com.greener.presentation.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +17,6 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val getTokenUseCase: GetTokenUseCase,
-    private val setLocalTokensUseCase: SetLocalTokensUseCase,
     private val setUserInfoUseCase: SetUserInfoUseCase
 ) : ViewModel() {
 
@@ -40,9 +39,8 @@ class LoginViewModel @Inject constructor(
     private val _refreshToken = MutableStateFlow("")
     val refreshToken = _refreshToken.asStateFlow()
 
-    private val _isExistingUser = MutableStateFlow(Status.DEFAULT.code)
-    val isExistingUser = _isExistingUser.asStateFlow()
-
+    private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
+    val uiState = _uiState.asStateFlow()
 
     fun setEmail(email: String) {
         _email.update { email }
@@ -62,27 +60,30 @@ class LoginViewModel @Inject constructor(
 
     fun getToken() {
         viewModelScope.launch {
-            getTokenUseCase(_email.value)
-                .collect {
-                    if (it.response.output == Status.SUCCESS.code) {
-                        _accessToken.value = it.data!!.accessToken
-                        _refreshToken.value = it.data!!.refreshToken
-                        Log.d("확인", "accessToken: ${_accessToken.value}")
-                        Log.d("확인", "refreshToken: ${_refreshToken.value}")
-                        setUserInfoAtLocal()
-                        _isExistingUser.update { Status.SUCCESS.code }
-                    } else {
-                        Log.d("확인", "response.result: ${it.response.result}")
-                        _isExistingUser.update { Status.FAIL.code }
-                    }
+            _uiState.update { UiState.Loading }
+            Log.d("확인","getToken Email: ${_email.value.toString()}")
+            val responseData = getTokenUseCase(_email.value)
+            when (responseData) {
+                is ApiState.Success -> {
+                    Log.d("확인","success")
+                    _accessToken.value = responseData.result.data!!.accessToken
+                    _refreshToken.value = responseData.result.data!!.refreshToken
+                    setUserInfoAtLocal()
+                    _uiState.update { UiState.Success }
                 }
-        }
 
-    }
+                is ApiState.Fail -> {
+                    //TODO Fail 예외 처리
+                    Log.d("확인","fail")
+                    _uiState.update { UiState.Fail }
+                }
 
-    private fun setTokensAtLocal(accessToken: String, refreshToken: String) {
-        viewModelScope.launch {
-            setLocalTokensUseCase(accessToken, refreshToken)
+                is ApiState.Exception -> {
+                    Log.d("확인","exception")
+                    val errorMessage = responseData.checkException()
+                    _uiState.update { UiState.Error(errorMessage) }
+                }
+            }
         }
     }
 

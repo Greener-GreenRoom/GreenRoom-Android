@@ -1,4 +1,4 @@
-package com.greener.data.mapper
+package com.greener.data.mapper.sign
 
 import com.greener.data.model.sign.request.SignUpRequestDTO
 import com.greener.domain.model.sign.SignInfo

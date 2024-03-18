@@ -3,10 +3,10 @@ package com.greener.presentation.ui.splash
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.greener.presentation.model.Status
+import com.greener.domain.model.ApiState
 import com.greener.domain.usecase.datastore.SetLocalTokensUseCase
-import com.greener.domain.usecase.sign.GetTokenUseCase
 import com.greener.domain.usecase.sign.UpdateTokenUseCase
+import com.greener.presentation.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,47 +18,41 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val updateTokenUseCase: UpdateTokenUseCase,
-    private val setLocalTokensUseCase: SetLocalTokensUseCase,
-    private val getTokenUseCase: GetTokenUseCase
+    private val setLocalTokensUseCase: SetLocalTokensUseCase
 ) : ViewModel() {
-
-    private val _isLogin = MutableStateFlow(Status.DEFAULT.code)
-    val isLogin = _isLogin.asStateFlow()
 
     private val _accessToken = MutableStateFlow("")
     val accessToken = _accessToken.asStateFlow()
 
+    private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
+    val uiState = _uiState.asStateFlow()
+
     fun updateMyTokens() {
         viewModelScope.launch {
+            _uiState.update { UiState.Loading }
             delay(1000)
-            updateTokenUseCase().collect {
-                if (it.response.output < Status.SUCCESS.code) {
-                    Log.d("확인","토큰 그냥 실패")
-                    _isLogin.update { Status.FAIL.code }
-                } else {
-                    Log.d("확인","토큰 성공")
-                    setTokensAtLocal(it.data!!.accessToken, it.data!!.refreshToken)
-                    _isLogin.update { Status.SUCCESS.code }
+            val responseData = updateTokenUseCase()
+
+            when(responseData) {
+                is ApiState.Success -> {
+                    setTokensAtLocal(responseData.result.data!!.accessToken,responseData.result.data!!.refreshToken)
+                    _uiState.update { UiState.Success }
+                }
+                is ApiState.Fail -> {
+                    _uiState.update { UiState.Fail }
+                }
+                is ApiState.Exception -> {
+                    val errorMessage = responseData.checkException()
+                    _uiState.update { UiState.Error(errorMessage) }
                 }
             }
             delay(5000)
-            _isLogin.update { Status.FAIL.code }
-        }
-    }
 
+            _uiState.update { UiState.Fail }
+        }
+
+    }
     private suspend fun setTokensAtLocal(accessToken: String, refreshToken: String) {
         setLocalTokensUseCase(accessToken, refreshToken)
-    }
-
-    private suspend fun getToken() {
-        getTokenUseCase().collect {
-            if (it.response.output == Status.SUCCESS.code) {
-                setTokensAtLocal(it.data!!.accessToken, it.data!!.refreshToken)
-                _isLogin.update { Status.SUCCESS.code }
-            }
-            else {
-                _isLogin.update { Status.FAIL.code }
-            }
-        }
     }
 }
