@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DiaryFragment : BaseFragment<FragmentDiaryBinding> (
-    FragmentDiaryBinding::inflate
-){
+    FragmentDiaryBinding::inflate,
+) {
     private val viewModel: DiaryViewModel by viewModels()
 }

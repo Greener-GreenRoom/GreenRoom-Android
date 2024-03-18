@@ -5,7 +5,6 @@ import com.greener.presentation.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity: BaseActivity<ActivityLoginBinding>(
-    ActivityLoginBinding::inflate
-) {
-}
+class LoginActivity : BaseActivity<ActivityLoginBinding>(
+    ActivityLoginBinding::inflate,
+)

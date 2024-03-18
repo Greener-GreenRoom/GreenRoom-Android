@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<VB: ViewBinding>(
-    private val bindingFactory: (LayoutInflater) -> VB
-): AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding>(
+    private val bindingFactory: (LayoutInflater) -> VB,
+) : AppCompatActivity() {
 
     protected lateinit var binding: VB
 
