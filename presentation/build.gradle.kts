@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id ("kotlin-parcelize")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
 }
@@ -65,6 +66,8 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:2.49")
 
     implementation("com.orhanobut:logger:2.2.0")
+
+    implementation("com.github.bumptech.glide:glide:4.15.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

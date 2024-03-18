@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <View
+            android:id="@+id/view_green_room_empty_top_area"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/sample_wall"
+            app:layout_constraintBottom_toTopOf="@id/view_green_room_empty_bottom_area"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_green_room_empty_bottom_area"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/empty_floor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="@dimen/green_room_bottom_area_height_percent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_green_room_empty_top_area" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_green_room_empty_no_plant_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/green_room_empty_no_plant_msg"
+            android:textAlignment="center"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray700"
+            app:layout_constraintBottom_toBottomOf="@+id/view_green_room_empty_top_area"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="@dimen/empty_green_room_msg_vertical_bias" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_green_room_empty_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_radius_button"
+            android:paddingStart="@dimen/padding_button_default_horizontal"
+            android:paddingTop="@dimen/padding_button_default_vertical"
+            android:paddingEnd="@dimen/padding_button_default_horizontal"
+            android:paddingBottom="@dimen/padding_button_default_vertical"
+            android:text="@string/green_room_empty_register_plant"
+            android:textAppearance="@style/body4"
+            app:layout_constraintEnd_toEndOf="@id/tv_green_room_empty_no_plant_msg"
+            app:layout_constraintStart_toStartOf="@+id/tv_green_room_empty_no_plant_msg"
+            app:layout_constraintTop_toBottomOf="@+id/tv_green_room_empty_no_plant_msg" />
+
+        <ImageView
+            android:id="@+id/iv_green_room_empty_pot"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/img_plant_empty_pot"
+            app:layout_constraintWidth_percent="@dimen/empty_green_room_pot_width_percent"
+            app:layout_constraintHeight_percent="@dimen/empty_green_room_pot_height_percent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view_green_room_empty_bottom_area" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_green_room_empty_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

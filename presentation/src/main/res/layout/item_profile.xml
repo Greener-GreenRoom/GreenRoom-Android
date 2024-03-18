@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="profile"
+            type="com.greener.domain.model.ExampleModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp">
+        <!--
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_item_profile_profile"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setProfile="@{profile.type}"
+            app:shapeAppearance="@style/circle_image"
+            app:strokeColor="@color/green300"
+            app:strokeWidth="0dp"
+            tools:src="@drawable/img_plant_1_profile" />
+            -->
+        <ImageView
+            android:id="@+id/iv_item_profile_background"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:src="@drawable/img_profile_background_circle_non_selected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_item_profile_plant_type"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_item_profile_background"
+            app:layout_constraintEnd_toEndOf="@+id/iv_item_profile_background"
+            app:layout_constraintStart_toStartOf="@+id/iv_item_profile_background"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_profile_background"
+            app:setProfilePlantType="@{profile.type}"
+            tools:src="@drawable/img_plant_1_empty" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_item_profile_plant_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{profile.name}"
+            android:textAlignment="center"
+            android:textAppearance="@style/caption2"
+            android:textColor="@color/gray700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/iv_item_profile_background"
+            app:layout_constraintStart_toStartOf="@+id/iv_item_profile_background"
+            app:layout_constraintTop_toBottomOf="@+id/iv_item_profile_background"
+            tools:text="초로롱" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_item_profile_counts_todo"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/shape_circle"
+            android:gravity="center"
+            android:text="0"
+            android:textAlignment="center"
+            android:textAppearance="@style/caption4"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/iv_item_profile_background"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_profile_background"
+            app:shapeAppearance="@style/circle_image"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
