@@ -2,8 +2,9 @@ package com.greener.data.repository
 
 
 import android.util.Log
-import com.greener.data.mapper.sign.mapperSignUpInfoToData
-import com.greener.data.mapper.sign.mapperTokenDataToDomain
+import com.greener.data.model.auth.TokenDTO
+import com.greener.data.model.response.ResponseFormDTO
+import com.greener.data.model.sign.request.SignUpRequestDTO
 import com.greener.data.source.local.AuthDataSource
 import com.greener.data.source.remote.SignDataSource
 import com.greener.domain.model.ApiState
@@ -108,4 +109,24 @@ class SignRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    private fun mapperTokenDataToDomain(responseFormDTO: ResponseFormDTO<TokenDTO?>): ResponseData<TokenData> {
+
+        val responseResult =
+            ResponseResult(responseFormDTO.responseDTO.output, responseFormDTO.responseDTO.result)
+
+        val tokenData = responseFormDTO.data?.refreshToken?.let { refreshToken ->
+            responseFormDTO.data.accessToken.let { accessToken ->
+                TokenData(
+                    refreshToken,
+                    accessToken
+                )
+            }
+        }
+        return ResponseData(responseResult, tokenData)
+    }
+    private fun mapperSignUpInfoToData(signInfo: SignInfo): SignUpRequestDTO {
+        return SignUpRequestDTO(signInfo.name, signInfo.email, signInfo.photoUrl, signInfo.provider)
+    }
+
 }

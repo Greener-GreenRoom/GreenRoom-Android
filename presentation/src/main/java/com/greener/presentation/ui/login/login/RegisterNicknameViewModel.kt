@@ -75,9 +75,7 @@ class RegisterNicknameViewModel @Inject constructor(
 
     private fun getTokenFromServer(signInfo: SignInfo) {
         viewModelScope.launch {
-
             val responseData = getTokenUseCase(signInfo.email)
-
             when (responseData) {
                 is ApiState.Success -> {
                     setUserInfoAtLocal(
@@ -96,9 +94,7 @@ class RegisterNicknameViewModel @Inject constructor(
                     _uiState.update { UiState.Error(responseData.checkException()) }
                 }
             }
-
         }
-
     }
 
     private fun setUserInfoAtLocal(

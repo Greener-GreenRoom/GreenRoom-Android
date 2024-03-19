@@ -32,7 +32,6 @@ class LoginViewModel @Inject constructor(
     private val _provider = MutableStateFlow("")
     val provider = _provider.asStateFlow()
 
-
     private val _accessToken = MutableStateFlow<String>("")
     val accessToken = _accessToken.asStateFlow()
 

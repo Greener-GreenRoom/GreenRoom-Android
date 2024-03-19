@@ -5,6 +5,10 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.greener.data.repository.AuthRepositoryImpl
+import com.greener.data.source.local.AuthDataSource
+import com.greener.domain.repository.AuthRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +32,13 @@ object DataStoreModule {
     @Provides
     fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return context.dataStore
-
     }
+
+    @Singleton
+    @Provides
+    fun provideAuthRepository(
+        dataSource: AuthDataSource,
+    ): AuthRepository =
+        AuthRepositoryImpl(dataSource)
+
 }

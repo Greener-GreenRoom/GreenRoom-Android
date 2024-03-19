@@ -1,13 +1,13 @@
 package com.greener.data.repository
 
 import com.greener.data.source.local.AuthDataSource
-import com.greener.domain.repository.DataStoreRepository
+import com.greener.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class DataStoreRepositoryImpl @Inject constructor(
+class AuthRepositoryImpl @Inject constructor(
     private val dataSource: AuthDataSource
-) : DataStoreRepository {
+) : AuthRepository {
     override suspend fun setToken(accessToken: String) {
         dataSource.setToken(accessToken)
     }

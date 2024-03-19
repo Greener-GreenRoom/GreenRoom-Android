@@ -2,7 +2,7 @@ package com.greener.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 
-interface DataStoreRepository {
+interface AuthRepository {
 
     suspend fun setToken(accessToken: String)
 
