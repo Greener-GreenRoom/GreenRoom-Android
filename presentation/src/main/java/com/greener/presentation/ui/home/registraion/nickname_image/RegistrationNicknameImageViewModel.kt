@@ -2,7 +2,7 @@ package com.greener.presentation.ui.home.registraion.nickname_image
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.greener.domain.usecase.image.GetImageUseCase
+import com.greener.domain.usecase.image.PickImageUseCase
 import com.greener.presentation.model.registration.PlantRegistrationInfo
 import com.greener.presentation.util.MutableEventFlow
 import com.greener.presentation.util.asEventFlow
@@ -14,7 +14,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationNicknameImageViewModel @Inject constructor(
-    private val getImageUseCase: GetImageUseCase
 ) : ViewModel() {
 
     val inputNickname = MutableStateFlow("")
@@ -22,8 +21,8 @@ class RegistrationNicknameImageViewModel @Inject constructor(
     private val _plantRegistrationInfo = MutableStateFlow<PlantRegistrationInfo?>(null)
     val plantRegistrationInfo: StateFlow<PlantRegistrationInfo?> get() = _plantRegistrationInfo
 
-    private val _images = MutableStateFlow<List<String>>(emptyList())
-    val images : StateFlow<List<String>> get() = _images
+    private val _plantImage = MutableStateFlow("")
+    val plantImage : StateFlow<String> get() = _plantImage
 
     private val _event = MutableEventFlow<Event>()
     val event = _event.asEventFlow()
@@ -50,19 +49,15 @@ class RegistrationNicknameImageViewModel @Inject constructor(
         }
     }
 
-//    fun inputPlantImage() {
-//        viewModelScope.launch {
-//            // todo
-//        }
-//    }
-
-    fun getImages() {
+    fun getImage(pickImageUseCase: PickImageUseCase) {
         viewModelScope.launch {
-            val result = getImageUseCase()
+            val result = pickImageUseCase()
             if (result.isSuccess) {
-                _images.emit(result.getOrThrow())
+                val image = result.getOrThrow()
+                _plantImage.emit(image)
+            } else {
+                // todo 에러 처리
             }
-
         }
     }
 

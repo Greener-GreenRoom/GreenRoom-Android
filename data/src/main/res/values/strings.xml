@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="read_permission_denied">사진을 가져오기 위해서는 권한이 필요합니다.</string>
+    <string name="camera_permission_denied">사진을 찍기 위해서는 권한이 필요합니다.</string>
+    <string name="onPermissionGranted">권한이 허용됨</string>
+    <string name="onPermissionDenied">권한이 거부됨</string>
 </resources>

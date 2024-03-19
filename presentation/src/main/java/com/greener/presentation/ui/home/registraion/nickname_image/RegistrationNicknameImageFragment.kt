@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.greener.domain.usecase.image.PickImageUseCase
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentPlantRegistrationNicknameImageBinding
 import com.greener.presentation.ui.base.BaseFragment
@@ -20,6 +21,7 @@ import com.greener.presentation.ui.home.registraion.InitRegistrationIndicator
 import com.greener.presentation.util.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationNicknameImageBinding> (
@@ -27,6 +29,9 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
 ) {
     private val viewModel : RegistrationNicknameImageViewModel by viewModels()
     private val args: RegistrationNicknameImageFragmentArgs by navArgs()
+
+    @Inject
+    lateinit var pickImageUseCase: PickImageUseCase
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,12 +46,6 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
         )
 
         softInputAdjustResize()
-
-        // todo 사진 불러오기
-//        Glide.with(this)
-//            .load(R.drawable.img_temp_holder_face)
-//            .into(binding.ivPlantRegistrationNicknameImagePlant)
-
         highlightNicknameStarColor()
     }
 
@@ -56,7 +55,7 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
         }
 
         binding.btnPlantRegistrationNicknameImagePlant.setOnClickListener {
-            viewModel.getImages()
+            viewModel.getImage(pickImageUseCase)
         }
         binding.tePlantRegistrationNicknameImage.setOnEditorActionListener { _, action, _ ->
             var handled = false
@@ -79,6 +78,11 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
                 } else {
                     binding.btnPlantRegistrationGoNext.setBackgroundColor(requireContext().getColor(R.color.gray200))
                 }
+            }
+        }
+
+        repeatOnStarted(viewLifecycleOwner) {
+            viewModel.plantImage.collectLatest {
             }
         }
 
@@ -127,6 +131,8 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
                 )
                 findNavController().navigate(action)
             }
+
+            else -> {}
         }
     }
 
