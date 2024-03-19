@@ -21,4 +21,7 @@
     <color name="gray600">#26282B</color>
     <color name="gray700">#1B1D1F</color>
     <color name="black">#FF000000</color>
+
+    <!-- google font guideline -->
+    <color name="google_font_color">#8A000000</color>
 </resources>

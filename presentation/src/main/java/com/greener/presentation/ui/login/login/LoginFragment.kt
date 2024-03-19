@@ -59,7 +59,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     }
 
     override fun initListener() {
-        binding.googleLoginBtn.setOnClickListener {
+        binding.btnLoginGoogle.setOnClickListener {
             requestGoogleLogin()
         }
         binding.btnLoginTempGoNext.setOnClickListener {

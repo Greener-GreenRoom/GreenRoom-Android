@@ -27,25 +27,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            app:dampingRatio="0.5"
             app:dotsColor="@color/primary"
             app:dotsCornerRadius="8dp"
             app:dotsSize="6dp"
-            app:dampingRatio="0.5"
             app:dotsSpacing="6dp"
             app:dotsStrokeColor="@color/gray200"
             app:dotsStrokeWidth="1dp"
-            app:stiffness="500"
             app:layout_constraintEnd_toEndOf="@+id/vp_login_onboarding"
             app:layout_constraintStart_toStartOf="@+id/vp_login_onboarding"
-            app:layout_constraintTop_toBottomOf="@id/vp_login_onboarding" />
+            app:layout_constraintTop_toBottomOf="@id/vp_login_onboarding"
+            app:stiffness="500" />
 
-        <Button
-            android:id="@+id/googleLoginBtn"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login_google"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginBottom="12dp"
-            android:elevation="0dp"
+            android:background="@drawable/shape_all_round_8"
+            android:drawableStart="@drawable/ic_google"
+            android:paddingStart="8dp"
+            android:stateListAnimator="@null"
             android:text="구글로 시작하기"
+            android:textAppearance="@style/google_guideline_font"
+            android:textColor="@color/google_font_color"
             app:layout_constraintBottom_toTopOf="@+id/btn_login_temp_go_next"
             app:layout_constraintEnd_toStartOf="@+id/gl_login_end"
             app:layout_constraintStart_toStartOf="@+id/gl_login_start" />

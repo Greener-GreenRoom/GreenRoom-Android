@@ -47,15 +47,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
                 }
 
                 is UiState.Error -> {
-                    Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
                 }
 
                 is UiState.Loading -> {
-
                 }
 
                 is UiState.Empty -> {
-
                 }
             }
         }
