@@ -13,7 +13,7 @@ class ProfileRVAdapter(
     private val profiles: List<ExampleModel>,
     private var currentProfile: ExampleModel?,
     val onItemClick: (Int) -> Unit,
-    val unSelect: (Int) -> Unit
+    val unSelect: (Int) -> Unit,
 ) : RecyclerView.Adapter<ProfileRVAdapter.ProfileViewHolder>() {
 
     private var currentPosition = profiles.indexOf(currentProfile)
@@ -23,7 +23,7 @@ class ProfileRVAdapter(
             LayoutInflater.from(parent.context),
             R.layout.item_profile,
             parent,
-            false
+            false,
         )
         return ProfileViewHolder(binding)
     }
@@ -44,8 +44,8 @@ class ProfileRVAdapter(
             holder.binding.tvItemProfilePlantName.setTextColor(
                 ContextCompat.getColor(
                     holder.binding.tvItemProfilePlantName.context,
-                    R.color.green300
-                )
+                    R.color.green300,
+                ),
             )
         }
     }

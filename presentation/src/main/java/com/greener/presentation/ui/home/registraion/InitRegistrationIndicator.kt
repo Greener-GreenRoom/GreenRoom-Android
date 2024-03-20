@@ -5,9 +5,9 @@ import com.greener.presentation.R
 
 object InitRegistrationIndicator {
     fun initRegistrationIndicator(
-        indicator : com.greener.presentation.databinding.ViewPlantRegistrationIndicatorBinding,
+        indicator: com.greener.presentation.databinding.ViewPlantRegistrationIndicatorBinding,
         context: Context,
-        position: Int
+        position: Int,
     ) {
         when (position) {
             1 -> {

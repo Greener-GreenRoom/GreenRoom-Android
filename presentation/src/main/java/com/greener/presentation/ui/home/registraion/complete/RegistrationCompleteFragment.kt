@@ -13,10 +13,10 @@ import com.greener.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegistrationCompleteFragment: BaseFragment<FragmentPlantRegistrationCompleteBinding>(
-    FragmentPlantRegistrationCompleteBinding::inflate
+class RegistrationCompleteFragment : BaseFragment<FragmentPlantRegistrationCompleteBinding>(
+    FragmentPlantRegistrationCompleteBinding::inflate,
 ) {
-    private val viewModel : RegistrationCompleteViewModel by viewModels()
+    private val viewModel: RegistrationCompleteViewModel by viewModels()
 //    private val args : RegistrationCompleteFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +33,7 @@ class RegistrationCompleteFragment: BaseFragment<FragmentPlantRegistrationComple
                 ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.primary)),
                 0,
                 nickname.length,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
             )
         }
         binding.tvPlantRegistrationComplete.text = spannableStringBuilder

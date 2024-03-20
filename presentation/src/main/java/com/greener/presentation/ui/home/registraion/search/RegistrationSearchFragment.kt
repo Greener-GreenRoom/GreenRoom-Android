@@ -12,8 +12,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class RegistrationSearchFragment: BaseFragment<FragmentPlantRegistrationSearchBinding> (
-    FragmentPlantRegistrationSearchBinding::inflate
+class RegistrationSearchFragment : BaseFragment<FragmentPlantRegistrationSearchBinding> (
+    FragmentPlantRegistrationSearchBinding::inflate,
 ) {
     private val viewModel: RegistrationSearchViewModel by viewModels()
 
@@ -24,12 +24,12 @@ class RegistrationSearchFragment: BaseFragment<FragmentPlantRegistrationSearchBi
         InitRegistrationIndicator.initRegistrationIndicator(
             binding.includePlantRegistrationSearchIndicator,
             requireContext(),
-            SEARCH_POSITION
+            SEARCH_POSITION,
         )
     }
 
     override fun initListener() {
-        binding.tbPlantRegistrationSearch.setNavigationOnClickListener{
+        binding.tbPlantRegistrationSearch.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -42,8 +42,8 @@ class RegistrationSearchFragment: BaseFragment<FragmentPlantRegistrationSearchBi
         }
     }
 
-    private fun handleEvent(event: RegistrationSearchViewModel.Event){
-        when(event) {
+    private fun handleEvent(event: RegistrationSearchViewModel.Event) {
+        when (event) {
             is RegistrationSearchViewModel.Event.GoToRegistrationNicknameImage -> {
                 val action = RegistrationSearchFragmentDirections.actionRegistrationSearchFragmentToRegistrationNicknameImageFragment(event.plantRegistrationInfo)
                 findNavController().navigate(action)

@@ -38,8 +38,8 @@ class RegistrationNicknameImageViewModel @Inject constructor() : ViewModel() {
                     nickname = nickname,
                     lastWatering = newPlantRegistrationInfo?.lastWatering,
                     waterDuration = newPlantRegistrationInfo?.waterDuration,
-                    shape = newPlantRegistrationInfo?.shape
-                )
+                    shape = newPlantRegistrationInfo?.shape,
+                ),
             )
         }
     }
@@ -59,7 +59,7 @@ class RegistrationNicknameImageViewModel @Inject constructor() : ViewModel() {
 
     sealed class Event() {
         data class MoveToWatering(
-            val plantRegistrationInfo: PlantRegistrationInfo
-        ): Event()
+            val plantRegistrationInfo: PlantRegistrationInfo,
+        ) : Event()
     }
 }

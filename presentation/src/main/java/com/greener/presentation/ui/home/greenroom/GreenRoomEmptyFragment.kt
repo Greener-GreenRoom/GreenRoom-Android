@@ -5,14 +5,10 @@ import android.view.View
 import com.greener.presentation.databinding.FragmentGreenRoomEmptyBinding
 import com.greener.presentation.ui.base.BaseFragment
 
-
 class GreenRoomEmptyFragment : BaseFragment<FragmentGreenRoomEmptyBinding>(
-    FragmentGreenRoomEmptyBinding::inflate
+    FragmentGreenRoomEmptyBinding::inflate,
 ) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
-
-
 }
