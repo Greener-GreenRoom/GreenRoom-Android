@@ -9,5 +9,5 @@ data class PlantRegistrationInfo(
     val nickname: String?,
     val lastWatering: Int?,
     val waterDuration: Int?,
-    val shape: String?
-): Parcelable
+    val shape: String?,
+) : Parcelable
