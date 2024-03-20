@@ -5,7 +5,7 @@ import com.greener.presentation.databinding.FragmentCommunityBinding
 import com.greener.presentation.ui.base.BaseFragment
 
 class CommunityFragment : BaseFragment<FragmentCommunityBinding> (
-    FragmentCommunityBinding::inflate
+    FragmentCommunityBinding::inflate,
 ) {
     private val viewModel: CommunityViewModel by viewModels()
 }

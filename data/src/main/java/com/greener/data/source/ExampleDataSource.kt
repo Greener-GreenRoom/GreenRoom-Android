@@ -1,4 +1,3 @@
 package com.greener.data.source
 
-class ExampleDataSource {
-}
+class ExampleDataSource

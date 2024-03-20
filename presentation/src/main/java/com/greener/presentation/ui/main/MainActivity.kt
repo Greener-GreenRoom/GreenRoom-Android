@@ -1,6 +1,7 @@
 package com.greener.presentation.ui.main
 
 import android.os.Bundle
+import androidx.core.view.isGone
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -11,8 +12,8 @@ import com.greener.presentation.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity: BaseActivity<ActivityMainBinding>(
-    ActivityMainBinding::inflate
+class MainActivity : BaseActivity<ActivityMainBinding>(
+    ActivityMainBinding::inflate,
 ) {
 
     private lateinit var navController: NavController
@@ -20,6 +21,16 @@ class MainActivity: BaseActivity<ActivityMainBinding>(
         NavController.OnDestinationChangedListener { _, destination, _ ->
             setBottomNavigationVisibility(destination)
         }
+
+    // bottom navigation이 표시되지 않는 fragment들 모음
+    // todo 함수화 하기
+    private val exceptBottomNavigationSet = listOf(
+        R.id.registrationSearchFragment,
+        R.id.registrationNicknameImageFragment,
+        R.id.registrationWaterFragment,
+        R.id.registrationCharacterFragment,
+        R.id.registrationCompleteFragment,
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +50,6 @@ class MainActivity: BaseActivity<ActivityMainBinding>(
     }
 
     private fun setBottomNavigationVisibility(destination: NavDestination) {
-//        binding.bottomNavigationView.isVisible = exceptBottomNavigationSet.contains(destination.id).not()
+        binding.bottomNavigationViewMain.isGone = exceptBottomNavigationSet.contains(destination.id)
     }
 }

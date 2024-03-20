@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_item_search_plant"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/round_all_8"
+            android:backgroundTint="@color/gray200"
+            android:clipToOutline="true"
+            android:src="@drawable/image_test_plant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_item_search_plant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray700"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_item_search_plant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_item_search_plant"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_search_plant"
+            tools:text="몬스테라 델리시오사 혹시 식물 이름이 길수도 있는거자나요 핸드폰이 작거나" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
