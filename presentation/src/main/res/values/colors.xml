@@ -30,4 +30,7 @@
     <color name="registration_background">#B8DCCD</color>
     <color name="tip_background">#0D3292F2</color>
 
+    <color name="asset_choice_gradient_start">#1B1D1F</color>
+    <color name="asset_choice_gradient_end">#2B6347</color>
+
 </resources>
