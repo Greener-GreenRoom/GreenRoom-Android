@@ -60,7 +60,7 @@ class LoginViewModel @Inject constructor(
     fun getToken() {
         viewModelScope.launch {
             _uiState.update { UiState.Loading }
-            Log.d("확인", "getToken Email: ${_email.value.toString()}")
+            Log.d("확인", "getToken Email: ${_email.value}")
             val responseData = getTokenUseCase(_email.value)
             when (responseData) {
                 is ApiState.Success -> {

@@ -8,7 +8,8 @@
     <string name="confirm">확인</string>
 
     <!--  Login  -->
-    <string name="google_web_client_id">391375534343-ninas11bdj01qonv145mailaj75ae8g8.apps.googleusercontent.com</string>
+    <string name="google_web_client_id">712990012729-kc9m2p6a9oltejsul1dvseh0mj8d8b66.apps.googleusercontent.com</string>
+    <string name="google_android_client_id">712990012729-smbduqfeoqvphohd0gcphdi27f7b10p1.apps.googleusercontent.com</string>
     <string name="register_nickname_welcome_title">그린룸에 오신 걸 환영해요!\n닉네임을 설정해 주세요</string>
     <string name="login_onboarding2_title">나만의 식물을 커스텀해요\n내 식물과 닮은 캐릭터를 만들어 보세요</string>
     <string name="login_onboarding2_subtitle">소품과 악세사리로 그린룸을 꾸며주세요.</string>

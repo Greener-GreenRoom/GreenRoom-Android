@@ -47,6 +47,7 @@ class SignDataSource @Inject constructor(
                 ApiState.Fail(response)
             }
         } catch (e: Exception) {
+            Log.d("확인",e.message.toString())
             ApiState.Exception(e)
         }
 
