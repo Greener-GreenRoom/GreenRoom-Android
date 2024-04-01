@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_register_nickname_partypopper"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="28dp"
+            android:src="@drawable/img_welcome_partypopper"
+            app:layout_constraintStart_toStartOf="@id/gl_register_nickname_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_register_nickname_welcome_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/register_nickname_welcome_title"
+            android:textAppearance="@style/head3"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@+id/gl_register_nickname_start"
+            app:layout_constraintTop_toBottomOf="@id/iv_register_nickname_partypopper" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_register_nickname_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/nickname"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/gl_register_nickname_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_register_nickname_welcome_title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_register_nickname_rule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/user_nickname_rule"
+            android:textAppearance="@style/caption2"
+            android:textColor="@color/red100"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_register_nickname_nickname"
+            app:layout_constraintStart_toEndOf="@+id/tv_register_nickname_nickname"
+            app:layout_constraintTop_toTopOf="@+id/tv_register_nickname_nickname" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tl_register_nickname"
+            style="@style/TextInputLayoutStyleNormal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:boxBackgroundColor="@color/gray000"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@id/gl_register_nickname_end"
+            app:layout_constraintStart_toStartOf="@id/gl_register_nickname_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_register_nickname_nickname">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_register_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/user_nickname_rule"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textAppearance="@style/body4" />
+        </com.google.android.material.textfield.TextInputLayout>
+        
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_register_nickname_confirm"
+            app:layout_constraintStart_toStartOf="@+id/gl_register_nickname_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_register_nickname_end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/confirm"
+            android:enabled="false"
+            android:layout_marginBottom="20dp"/>
+
+
+
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_register_nickname_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_register_nickname_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
