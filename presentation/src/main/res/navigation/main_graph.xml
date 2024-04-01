@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/registrationSearchFragment">
+    app:startDestination="@id/decorationFragment">
 
     <fragment
         android:id="@+id/collectionFragment"
@@ -99,4 +99,8 @@
             android:id="@+id/action_registrationCycleBottomSheet_to_registrationNicknameImageFragment"
             app:destination="@id/registrationNicknameImageFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/decorationFragment"
+        android:name="com.greener.presentation.ui.home.decoration.main.DecorationFragment"
+        android:label="DecorationFragment" />
 </navigation>

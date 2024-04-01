@@ -12,7 +12,7 @@ import java.util.concurrent.Executors
 @Database(
     entities = [BackgroundAccessoryEntity::class],
     version = 1,
-    exportSchema = false
+    exportSchema = false,
 )
 abstract class BackgroundAccessoryDatabase : RoomDatabase() {
     abstract fun backgroundAccessoryDao(): BackgroundAccessoryDao
@@ -36,8 +36,8 @@ abstract class BackgroundAccessoryDatabase : RoomDatabase() {
                                             id = token[0].toInt(),
                                             itemType = token[1],
                                             itemName = token[2],
-                                            limitLevel = token[3].toInt()
-                                        )
+                                            limitLevel = token[3].toInt(),
+                                        ),
                                     )
                                 }
                             }

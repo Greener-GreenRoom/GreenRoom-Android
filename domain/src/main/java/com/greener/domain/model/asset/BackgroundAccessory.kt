@@ -1,6 +1,6 @@
 package com.greener.domain.model.asset
 
-enum class BackgroundAccessoryName(itemName: String) {
+enum class BackgroundAccessory(itemName: String) {
     Fruit_Potted_Plant("Fruit_Potted_Plant"),
     Frame("Frame"),
     Fleshy_Plant_Pot("Fleshy_Plant_Pot"),
@@ -18,5 +18,5 @@ enum class BackgroundAccessoryName(itemName: String) {
     Pencil_Holder("Pencil_Holder"),
     Teacup("Teacup"),
     Lily_Of_The_Valley_Vase("Lily_Of_The_Valley_Vase"),
-    EmptyPot("EmptyPot")
+    EmptyPot("EmptyPot"),
 }

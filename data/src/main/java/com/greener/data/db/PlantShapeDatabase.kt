@@ -12,7 +12,7 @@ import java.util.concurrent.Executors
 @Database(
     entities = [PlantShapeEntity::class],
     version = 1,
-    exportSchema = false
+    exportSchema = false,
 )
 abstract class PlantShapeDatabase : RoomDatabase() {
     abstract fun plantShapeDao(): PlantShapeDao
@@ -35,8 +35,8 @@ abstract class PlantShapeDatabase : RoomDatabase() {
                                         PlantShapeEntity(
                                             id = token[0].toInt(),
                                             plantType = token[1],
-                                            plantName = token[2]
-                                        )
+                                            plantName = token[2],
+                                        ),
                                     )
                                 }
                             }

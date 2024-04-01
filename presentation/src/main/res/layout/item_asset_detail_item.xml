@@ -10,9 +10,9 @@
     >
 
     <ImageView
+        android:id="@+id/iv_item_asset_detail"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/asset_plant_main_character"
         android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

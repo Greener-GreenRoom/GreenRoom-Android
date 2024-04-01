@@ -1,6 +1,6 @@
 package com.greener.domain.model.asset
 
-enum class PlantAccessoryName(itemName: String) {
+enum class PlantAccessory(itemName: String) {
     default("default"),
     bad("bad"),
     sad("sad"),
