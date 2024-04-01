@@ -9,7 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.greener.presentation.databinding.ActivitySplashBinding
 import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseActivity
-import com.greener.presentation.ui.login.login.LoginActivity
+import com.greener.presentation.ui.login.LoginActivity
 import com.greener.presentation.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
