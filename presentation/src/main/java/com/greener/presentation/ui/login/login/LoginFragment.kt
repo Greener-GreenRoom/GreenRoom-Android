@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(
-    FragmentLoginBinding::inflate
+    FragmentLoginBinding::inflate,
 ) {
     private val viewModel: LoginViewModel by viewModels()
 

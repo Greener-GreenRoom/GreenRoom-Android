@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CollectionFragment : BaseFragment<FragmentCollectionBinding> (
-    FragmentCollectionBinding::inflate
+    FragmentCollectionBinding::inflate,
 ) {
-    private val viewModel : CollectionViewModel by viewModels()
+    private val viewModel: CollectionViewModel by viewModels()
 }

@@ -5,7 +5,6 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
-
 android {
     namespace = "com.greener.greenroom"
     compileSdk = 34
@@ -25,7 +24,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -52,6 +51,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
 
     implementation("com.google.dagger:hilt-android:2.49")
+    testImplementation("junit:junit:4.12")
     kapt("com.google.dagger:hilt-android-compiler:2.49")
 
     implementation("com.orhanobut:logger:2.2.0")

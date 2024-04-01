@@ -8,8 +8,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
 abstract class BaseFragment<VB : ViewDataBinding>(
-    private val bindingFactory: (LayoutInflater, ViewGroup?, Boolean) -> VB
-): Fragment() {
+    private val bindingFactory: (LayoutInflater, ViewGroup?, Boolean) -> VB,
+) : Fragment() {
 
     private var _binding: VB? = null
     protected val binding get() = _binding!!
@@ -17,7 +17,7 @@ abstract class BaseFragment<VB : ViewDataBinding>(
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = bindingFactory(inflater, container, false)
         return binding.run {
@@ -32,10 +32,10 @@ abstract class BaseFragment<VB : ViewDataBinding>(
         initCollector()
     }
 
-    protected open fun initListener(){
+    protected open fun initListener() {
     }
 
-    protected open fun initCollector(){
+    protected open fun initCollector() {
     }
 
     override fun onDestroyView() {

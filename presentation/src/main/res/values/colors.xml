@@ -3,12 +3,14 @@
     <color name="primary">#29BA6C</color>
 
     <!--  main  -->
+    <color name="green000">#E6F8EE</color>
     <color name="green100">#5ADB95</color>
     <color name="green200">#29BA6C</color>
     <color name="green300">#209B59</color>
 
     <!--  system  -->
     <color name="red100">#FF7373</color>
+    <color name="blue100">#3292F2</color>
 
     <!--  gray  -->
     <color name="white">#FFFFFF</color>
@@ -24,4 +26,11 @@
 
     <!-- google font guideline -->
     <color name="google_font_color">#8A000000</color>
+
+    <!-- BackgroundColor -->
+    <color name ="empty_floor">#D0DDD6</color>
+    <color name ="sample_wall">#E9FFF3</color>
+    <color name="registration_background">#B8DCCD</color>
+    <color name="tip_background">#0D3292F2</color>
+
 </resources>
