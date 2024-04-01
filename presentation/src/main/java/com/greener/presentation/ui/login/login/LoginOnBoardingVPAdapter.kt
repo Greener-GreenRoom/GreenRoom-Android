@@ -16,7 +16,7 @@ class LoginOnBoardingVPAdapter(frag: FragmentActivity) : FragmentStateAdapter(fr
 
     override fun createFragment(position: Int): Fragment {
 
-        return when (position) { // 페이지 포지션에 따라 그에 맞는 프래그먼트를 보여줌
+        return when (position) {
             0 -> LoginOnboardingFirstFragment()
             1 -> LoginOnboardingSecondFragment()
             2 -> LoginOnboardingThirdFragment()

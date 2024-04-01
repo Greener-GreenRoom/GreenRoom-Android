@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.splash
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.ApiState

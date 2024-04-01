@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.login.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.ApiState
@@ -60,11 +59,9 @@ class LoginViewModel @Inject constructor(
     fun getToken() {
         viewModelScope.launch {
             _uiState.update { UiState.Loading }
-            Log.d("확인", "getToken Email: ${_email.value}")
             val responseData = getTokenUseCase(_email.value)
             when (responseData) {
                 is ApiState.Success -> {
-                    Log.d("확인", "success")
                     _accessToken.value = responseData.result.data!!.accessToken
                     _refreshToken.value = responseData.result.data!!.refreshToken
                     setUserInfoAtLocal()
@@ -72,13 +69,10 @@ class LoginViewModel @Inject constructor(
                 }
 
                 is ApiState.Fail -> {
-                    //TODO Fail 예외 처리
-                    Log.d("확인", "fail")
                     _uiState.update { UiState.Fail }
                 }
 
                 is ApiState.Exception -> {
-                    Log.d("확인", "exception")
                     val errorMessage = responseData.checkException()
                     _uiState.update { UiState.Error(errorMessage) }
                 }

@@ -3,21 +3,17 @@ package com.greener.presentation.ui.login.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.textfield.TextInputLayout
-import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentLoginRegisterNicknameBinding
 import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -29,7 +25,6 @@ class LoginRegisterNicknameFragment : BaseFragment<FragmentLoginRegisterNickname
     private val args: LoginRegisterNicknameFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("확인", "${args.signInfo[0]}\n${args.signInfo[1]}")
         viewModel.setEmail(args.signInfo[0])
         viewModel.setPhotoUrl(args.signInfo[1])
         viewModel.setProvider(args.signInfo[2])

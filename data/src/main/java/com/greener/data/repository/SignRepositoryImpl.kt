@@ -1,7 +1,5 @@
 package com.greener.data.repository
 
-
-import android.util.Log
 import com.greener.data.model.auth.TokenDTO
 import com.greener.data.model.response.ResponseFormDTO
 import com.greener.data.model.sign.request.SignUpRequestDTO
@@ -90,9 +88,7 @@ class SignRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateToken(): ApiState<ResponseData<TokenData>> {
-        Log.d("확인", "signRepository의 update 토큰 진입")
         val authenticateInfo = authDataSource.getAuthenticateInfo().first()
-        Log.d("확인", "authenticateInfo: $authenticateInfo")
         val responseFormDTO = signDataSource.updateToken(authenticateInfo)
 
         return when (responseFormDTO) {

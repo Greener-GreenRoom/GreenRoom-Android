@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.login.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.ApiState
@@ -60,7 +59,6 @@ class RegisterNicknameViewModel @Inject constructor(
                 }
 
                 is ApiState.Fail -> {
-                    Log.d("확인", "fail")
                     _uiState.update { UiState.Fail }
                 }
 
@@ -86,7 +84,6 @@ class RegisterNicknameViewModel @Inject constructor(
                 }
 
                 is ApiState.Fail -> {
-                    Log.d("확인", "다시 시도")
                     _uiState.update { UiState.Fail }
                 }
 
