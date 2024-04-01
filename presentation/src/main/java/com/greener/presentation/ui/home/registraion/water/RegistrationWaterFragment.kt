@@ -1,22 +1,17 @@
 package com.greener.presentation.ui.home.registraion.water
 
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentPlantRegistrationWaterBinding
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.home.registraion.InitRegistrationIndicator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegistrationWaterFragment: BaseFragment<FragmentPlantRegistrationWaterBinding>(
-    FragmentPlantRegistrationWaterBinding::inflate
+class RegistrationWaterFragment : BaseFragment<FragmentPlantRegistrationWaterBinding>(
+    FragmentPlantRegistrationWaterBinding::inflate,
 ) {
 
     private val viewModel: RegistrationWaterViewModel by viewModels()
@@ -27,7 +22,7 @@ class RegistrationWaterFragment: BaseFragment<FragmentPlantRegistrationWaterBind
         InitRegistrationIndicator.initRegistrationIndicator(
             binding.includePlantRegistrationWaterIndicator,
             requireContext(),
-            WATERING_POSITION
+            WATERING_POSITION,
         )
 
 //        highlightNickname(args.nickname)

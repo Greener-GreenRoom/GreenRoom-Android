@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.greener.domain.model.ExampleModel
 
-class GreenRoomViewPagerAdapter(frag: Fragment,myPlants:List<ExampleModel>) :FragmentStateAdapter(frag) {
+class GreenRoomViewPagerAdapter(frag: Fragment, myPlants: List<ExampleModel>) : FragmentStateAdapter(frag) {
     private val items = myPlants
 
     override fun getItemCount(): Int {
@@ -15,11 +15,9 @@ class GreenRoomViewPagerAdapter(frag: Fragment,myPlants:List<ExampleModel>) :Fra
         }
     }
     override fun createFragment(position: Int): Fragment {
-
-        if(items.isEmpty()) {
+        if (items.isEmpty()) {
             return GreenRoomEmptyFragment()
         }
         return GreenRoomFragment(items[position])
     }
 }
-

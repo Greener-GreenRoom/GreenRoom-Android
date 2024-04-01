@@ -21,7 +21,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -54,6 +54,7 @@ dependencies {
     // Moshi
     implementation("com.squareup.moshi:moshi:1.15.0")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
 
     // Logger
     implementation("com.orhanobut:logger:2.2.0")
@@ -65,8 +66,18 @@ dependencies {
     // Tedpermission
     implementation("io.github.ParkSangGwon:tedpermission-coroutine:3.3.0")
 
+    // room
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    ksp("androidx.room:room-compiler:2.6.1")
+
     implementation("com.google.android.material:material:1.11.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //DataStore
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
 }

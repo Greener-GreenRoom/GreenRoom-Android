@@ -1,4 +1,3 @@
 package com.greener.domain.repository
 
-interface ExampleRepository {
-}
+interface ExampleRepository

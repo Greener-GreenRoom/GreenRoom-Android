@@ -5,14 +5,13 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.greener.domain.model.ExampleModel
 import com.greener.presentation.databinding.FragmentGreenRoomBinding
-
 import com.greener.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class GreenRoomFragment constructor(val myPlant:ExampleModel) : BaseFragment<FragmentGreenRoomBinding>(
-    FragmentGreenRoomBinding::inflate
+class GreenRoomFragment constructor(val myPlant: ExampleModel) : BaseFragment<FragmentGreenRoomBinding>(
+    FragmentGreenRoomBinding::inflate,
 ) {
 
     @Inject
@@ -21,7 +20,7 @@ class GreenRoomFragment constructor(val myPlant:ExampleModel) : BaseFragment<Fra
     private val viewModel: GreenRoomViewModel by viewModels {
         GreenRoomViewModel.providesFactory(
             assistedFactory = greenRoomViewModelFactory,
-            plant = myPlant
+            plant = myPlant,
         )
     }
 

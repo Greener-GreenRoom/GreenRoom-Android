@@ -40,7 +40,7 @@ class ActionDialog(context: Context, val actionTodo: ActionTodo) : Dialog(contex
         }
 
         binding.btnDialogCompleteTodoAllConfirm.setOnClickListener {
-            //DoSomething
+            // DoSomething
             dismiss()
         }
     }
@@ -60,7 +60,6 @@ class ActionDialog(context: Context, val actionTodo: ActionTodo) : Dialog(contex
             val y = (size.y * height).toInt()
 
             window?.setLayout(x, y)
-
         } else {
             val rect = windowManager.currentWindowMetrics.bounds
 
@@ -79,6 +78,4 @@ class ActionDialog(context: Context, val actionTodo: ActionTodo) : Dialog(contex
     fun setItemClickListener(clickListener: ClickListener) {
         this.clickListener = clickListener
     }
-
-
 }

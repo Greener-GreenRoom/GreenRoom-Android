@@ -12,18 +12,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegistrationSearchViewModel @Inject constructor(): ViewModel() {
+class RegistrationSearchViewModel @Inject constructor() : ViewModel() {
     val searchTerm = MutableStateFlow("")
 
     private val _plantRegistrationInfo = MutableStateFlow<PlantRegistrationInfo?>(null)
-    val plantRegistrationInfo : StateFlow<PlantRegistrationInfo?> get() = _plantRegistrationInfo
+    val plantRegistrationInfo: StateFlow<PlantRegistrationInfo?> get() = _plantRegistrationInfo
 
     private val _event = MutableEventFlow<Event>()
     val event = _event.asEventFlow()
 
     init {
         // 임시 식물등록하기 info
-        viewModelScope.launch{
+        viewModelScope.launch {
             _plantRegistrationInfo.emit(PlantRegistrationInfo(plantId = null, lastWatering = null, nickname = null, waterDuration = null, shape = null))
         }
     }
@@ -39,7 +39,7 @@ class RegistrationSearchViewModel @Inject constructor(): ViewModel() {
 
     sealed class Event() {
         data class GoToRegistrationNicknameImage(
-            val plantRegistrationInfo: PlantRegistrationInfo
+            val plantRegistrationInfo: PlantRegistrationInfo,
         ) : Event()
     }
 }
