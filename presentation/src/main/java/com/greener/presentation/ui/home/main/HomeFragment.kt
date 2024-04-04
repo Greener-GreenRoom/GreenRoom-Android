@@ -50,17 +50,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             showActionDialog()
         }
         viewModel.initFab()
-
-        binding.includeHomeBottomSheet.tvBottomSheetHomeAddPlant.setOnClickListener {
-            moveToRegisterSearchFragment()
-        }
         binding.includeHomeBottomSheet.btnBottomSheetHomeAddButton.setOnClickListener {
-            moveToRegisterSearchFragment()
+            moveToRegistration()
         }
-    }
-
-    private fun moveToRegisterSearchFragment() {
-        findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
+        binding.includeHomeBottomSheet.tvBottomSheetHomeAddPlant.setOnClickListener {
+            moveToRegistration()
+        }
     }
 
     private fun setGreenRoomViewPager() {
@@ -93,6 +88,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         binding.vpHomeGreenRoom.currentItem = position
         viewModel.currentPlant.value = viewModel.myPlants.value[position]
         select(position)
+    }
+
+    private fun moveToRegistration() {
+        findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
     }
 
     private fun select(position: Int) {
