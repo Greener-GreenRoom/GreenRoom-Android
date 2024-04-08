@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.greener.domain.usecase.image.PickImageUseCase
+import com.greener.domain.usecase.image.TakePictureUseCase
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentPlantRegistrationNicknameImageBinding
 import com.greener.presentation.ui.base.BaseFragment
@@ -32,6 +33,9 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
 
     @Inject
     lateinit var pickImageUseCase: PickImageUseCase
+
+    @Inject
+    lateinit var takePictureUseCase: TakePictureUseCase
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,6 +60,7 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
 
         binding.btnPlantRegistrationNicknameImagePlant.setOnClickListener {
             viewModel.getImage(pickImageUseCase)
+//            viewModel.takePicture(takePictureUseCase)
         }
         binding.tePlantRegistrationNicknameImage.setOnEditorActionListener { _, action, _ ->
             var handled = false

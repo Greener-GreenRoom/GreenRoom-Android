@@ -6,7 +6,6 @@ import javax.inject.Inject
 class TakePictureUseCase @Inject constructor(
     private val repository: ImageRepository
 ) {
-    suspend operator fun invoke(): Unit =
+    suspend operator fun invoke(): Result<String> =
         repository.takePicture()
-
 }

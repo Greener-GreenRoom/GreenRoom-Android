@@ -3,6 +3,7 @@ package com.greener.presentation.ui.home.registraion.nickname_image
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.usecase.image.PickImageUseCase
+import com.greener.domain.usecase.image.TakePictureUseCase
 import com.greener.presentation.model.registration.PlantRegistrationInfo
 import com.greener.presentation.util.MutableEventFlow
 import com.greener.presentation.util.asEventFlow
@@ -57,6 +58,18 @@ class RegistrationNicknameImageViewModel @Inject constructor(
                 _plantImage.emit(image)
             } else {
                 // todo 에러 처리
+            }
+        }
+    }
+
+    fun takePicture(takePictureUseCase: TakePictureUseCase) {
+        viewModelScope.launch {
+            val result = takePictureUseCase()
+            if (result.isSuccess) {
+                val image = result.getOrThrow()
+                _plantImage.emit(image)
+            } else {
+                // todo 에러처리
             }
         }
     }

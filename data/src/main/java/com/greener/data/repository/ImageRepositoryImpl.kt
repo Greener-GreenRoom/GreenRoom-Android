@@ -29,6 +29,12 @@ class ImageRepositoryImpl @Inject constructor(
         }
     }
 
+    private val getTakePicturePreview = (context as AppCompatActivity).registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
+        CoroutineScope(Dispatchers.Default).launch {
+            imageEvent.emit(it.toString())
+        }
+    }
+
     override suspend fun pickImage(): Result<String> {
         val result = getReadPermissionResult()
 
@@ -40,8 +46,15 @@ class ImageRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun takePicture(): Unit  {
+    override suspend fun takePicture(): Result<String>  {
+        val result = getCameraPermissionResult()
 
+        return if (result.isGranted) {
+            getTakePicturePreview.launch(null)
+            Result.success(imageEvent.first())
+        } else {
+            Result.failure(RequestDeniedException(result.deniedPermissions.first()))
+        }
     }
 
 
@@ -60,10 +73,6 @@ class ImageRepositoryImpl @Inject constructor(
     private suspend fun getCameraPermissionResult(): TedPermissionResult =
         TedPermission.create()
             .setDeniedMessage(R.string.camera_permission_denied)
-            .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+            .setPermissions(Manifest.permission.CAMERA)
             .check()
-
-    companion object {
-        const val REQ_IMAGE_CAPTURE = 300
-    }
 }
