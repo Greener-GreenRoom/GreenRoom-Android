@@ -1,19 +1,20 @@
-101	glass	empty_glass	0
-102	glass	Fruit_Potted_Plant	3
-103	glass	Frame	9
-104	glass	Fleshy_Plant_Pot	14
-105	glass	Watering_Can	18
-106	glass	Trowel	22
-107	glass	Stuckyi_Pot	25
-108	glass	Tea_Pot	29
-201	shelf	empty_shelf	0
-202	shelf	Flowering_Plant_Vase	4
-203	shelf	FourLeaf_Flower_Vase	10
-204	shelf	Fishbowl	15
-205	shelf	Lamp	19
-206	shelf	Aquatic_Plant_Pot	23
-207	shelf	Round_Flower_Vase	27
-208	shelf	Pile_Of_Books	30
-209	shelf	Pencil_Holder	33
-210	shelf	Teacup	34
-211	shelf	Lily_Of_The_Valley_Vase	35
+101	ANNUAL	Sunflower
+102	ANNUAL	Viola_Tricolor
+201	BULB	Lilium
+202	BULB	Narcissus
+301	EPIPHYTE	Tillandsia_Xerographica
+401	FOLIAGE	Chamaedorea_Elegans
+402	FOLIAGE	Monstera_Deliciosa
+403	FOLIAGE	Portulaca_Grandiflora
+501	HERB	Salvia_Rosmarinus
+502	HERB	Vicks_Plant
+601	OTHER	Main_Character
+701	SUCCEULENT_CACTUS	Echeveria_Ice_Green
+702	SUCCEULENT_CACTUS	Echinocactus_Grusonii
+703	SUCCEULENT_CACTUS	Epiphyllum_Auguliger
+704	SUCCEULENT_CACTUS	Sansevieria
+705	SUCCEULENT_CACTUS	Sansevieria_Stuckyi
+801	TUBEROUS	Stephania_Kaweesaki
+901	VINE	Hoya_Kerrii
+902	VINE	Ipomoea_Nil
+903	VINE	Scindapsus_Treubii

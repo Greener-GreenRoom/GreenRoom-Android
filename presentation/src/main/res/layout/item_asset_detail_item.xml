@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="92dp"
-    android:layout_height="92dp"
-    android:background="@drawable/selector_asset_choice"
-    android:clipToPadding="true"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_item_asset_detail"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    <data>
+        <variable
+            name="plantShape"
+            type="com.greener.domain.model.asset.PlantShapeInfo" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:textAppearance="@style/body4"
-        android:textColor="@color/white"
-        android:text="@string/util_nothing"
-        android:gravity="center"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <variable
+            name="plantAccessroy"
+            type="com.greener.domain.model.asset.PlantAccessoryInfo" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:background="@drawable/selector_asset_choice"
+        android:checked="true"
+        android:clipToPadding="true">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_item_asset_detail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/white"
+            android:text="@string/util_nothing"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

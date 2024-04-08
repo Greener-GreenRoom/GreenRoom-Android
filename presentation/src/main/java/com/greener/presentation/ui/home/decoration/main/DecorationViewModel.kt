@@ -1,21 +1,17 @@
 package com.greener.presentation.ui.home.decoration.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.asset.AssetDetailTypeInfo
-import com.greener.domain.model.asset.BackgroundAccessoryInfo
+import com.greener.domain.model.asset.AssetType
 import com.greener.domain.model.asset.BackgroundAccessoryType
-import com.greener.domain.model.asset.PlantAccessoryInfo
 import com.greener.domain.model.asset.PlantAccessoryType
-import com.greener.domain.model.asset.PlantShapeInfo
 import com.greener.domain.model.asset.PlantShapeType
+import com.greener.domain.usecase.asset.GetAssetDetailTypeListUseCase
 import com.greener.domain.usecase.asset.GetBackgroundAccessoryListUseCase
 import com.greener.domain.usecase.asset.GetPlantAccessoryListUseCase
 import com.greener.domain.usecase.asset.GetPlantShapeListUseCase
 import com.greener.presentation.R
-import com.greener.domain.model.asset.AssetType
-import com.greener.domain.usecase.asset.GetAssetDetailTypeListUseCase
 import com.greener.presentation.model.decoration.AllAssetViewItem
 import com.greener.presentation.model.decoration.AllAssetViewObject
 import com.greener.presentation.model.decoration.AssetViewItem
@@ -24,7 +20,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,12 +39,10 @@ class DecorationViewModel @Inject constructor(
     private val _choiceViewAssets = MutableStateFlow<List<AssetViewItem>>(emptyList())
     val choiceViewAssets: StateFlow<List<AssetViewItem>> get() = _choiceViewAssets
 
-    init {
-        setAssetDetailType(AssetType.PLANT_SHAPE)
-        setAllAssetView(AssetType.PLANT_SHAPE)
+    init {onChangeAssetType(AssetType.PLANT_SHAPE)
     }
 
-    fun onChangeAsseType(assetType: AssetType) {
+    fun onChangeAssetType(assetType: AssetType) {
         setAssetDetailType(assetType)
         setAllAssetView(assetType)
     }
@@ -212,9 +205,12 @@ class DecorationViewModel @Inject constructor(
                 _choiceViewAssets.emit(emptyList())
                 setAllAssetView(targetDetailType!!.assetType)
             }
-
-
             _assetDetailTypes.emit(assetDetailTypeList)
+        }
+    }
+
+    fun changePlantShapeAsset(targetPlantShapeId: Int) {
+        viewModelScope.launch {
         }
     }
 

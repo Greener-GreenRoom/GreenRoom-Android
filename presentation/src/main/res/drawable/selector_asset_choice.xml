@@ -2,5 +2,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true" android:drawable="@drawable/shape_asset_on"/>
     <item android:state_checked="false" android:drawable="@drawable/shape_asset_off"/>
-
 </selector>

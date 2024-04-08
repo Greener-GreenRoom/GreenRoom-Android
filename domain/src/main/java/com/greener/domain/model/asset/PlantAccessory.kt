@@ -11,6 +11,7 @@ enum class PlantAccessory(itemName: String) {
     Glasses("Glasses"),
     Sunglasses("Sunglasses"),
     Heart_Sunglasses("Heart_Sunglasses"),
+    Hip_Sunglasses("Hip_Sunglasses"),
     Fried_Egg("Fried_Egg"),
     Ribbon("Ribbon"),
     Flower_Hairpin("Flower_Hairpin"),
