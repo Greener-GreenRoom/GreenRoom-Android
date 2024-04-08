@@ -1,0 +1,15 @@
+package com.greener.domain.usecase.greenroom
+
+import com.greener.domain.model.ApiState
+import com.greener.domain.model.greenroom.GreenRoomTotalInfo
+import com.greener.domain.model.greenroom.UserGreenRoomsInfo
+import com.greener.domain.repository.HomeGreenRoomRepository
+import javax.inject.Inject
+
+class GetUserGreenRoomListUseCase @Inject constructor(
+    private val repository: HomeGreenRoomRepository
+) {
+    suspend operator fun invoke(): ApiState<UserGreenRoomsInfo> {
+        return repository.getUserGreenRoomList()
+    }
+}

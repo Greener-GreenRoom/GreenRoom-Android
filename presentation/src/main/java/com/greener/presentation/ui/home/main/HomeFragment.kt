@@ -36,7 +36,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         setBottomProfileAdapter()
         setFABClickEvent()
         observeFAB()
-
         initListener()
     }
 
@@ -44,18 +43,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         binding.viewHomeWallpaper.setOnClickListener {
             viewModel.setIsFabOpen()
         }
-
         binding.tvHomeActionComplete.setOnClickListener {
             viewModel.setIsFabOpen()
             showActionDialog()
         }
-        viewModel.initFab()
         binding.includeHomeBottomSheet.btnBottomSheetHomeAddButton.setOnClickListener {
             moveToRegistration()
         }
         binding.includeHomeBottomSheet.tvBottomSheetHomeAddPlant.setOnClickListener {
             moveToRegistration()
         }
+        viewModel.initFab()
     }
 
     private fun setGreenRoomViewPager() {
@@ -64,12 +62,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             viewModel.myPlants.value,
         )
         binding.vpHomeGreenRoom.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
-        /**
-         * 하단 코드는 옵션
-         * 적용할지 말지는 선택입니다.
-         */
-
         binding.vpHomeGreenRoom.isUserInputEnabled = false
         binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
     }
@@ -124,7 +116,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     }
 
     private fun showActionDialog() {
-        val dialog = ActionDialog(requireActivity(),ActionTodo.COMPLETE_ALL)
+        val dialog = ActionDialog(requireActivity(), ActionTodo.COMPLETE_ALL)
 
         dialog.setItemClickListener(object : ActionDialog.ClickListener {
             override fun onClick() {
@@ -214,9 +206,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
                         // Fade the page relative to its size.
                         alpha = (
-                            MIN_ALPHA +
-                                (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA))
-                            )
+                                MIN_ALPHA +
+                                        (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA))
+                                )
                     }
 
                     else -> { // (1,+Infinity]

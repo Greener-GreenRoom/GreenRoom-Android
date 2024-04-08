@@ -35,8 +35,8 @@ class SplashViewModel @Inject constructor(
             when (responseData) {
                 is ApiState.Success -> {
                     setTokensAtLocal(
-                        responseData.result.data!!.accessToken,
-                        responseData.result.data!!.refreshToken
+                        responseData.result!!.data!!.accessToken,
+                        responseData.result!!.data!!.refreshToken
                     )
                     _uiState.update { UiState.Success }
                 }

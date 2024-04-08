@@ -62,14 +62,15 @@ class LoginViewModel @Inject constructor(
             val responseData = getTokenUseCase(_email.value)
             when (responseData) {
                 is ApiState.Success -> {
-                    _accessToken.value = responseData.result.data!!.accessToken
-                    _refreshToken.value = responseData.result.data!!.refreshToken
+                    _accessToken.value = responseData.result!!.data!!.accessToken
+                    _refreshToken.value = responseData.result!!.data!!.refreshToken
                     setUserInfoAtLocal()
                     _uiState.update { UiState.Success }
                 }
 
                 is ApiState.Fail -> {
                     _uiState.update { UiState.Fail }
+                    _uiState.update { UiState.Empty }
                 }
 
                 is ApiState.Exception -> {

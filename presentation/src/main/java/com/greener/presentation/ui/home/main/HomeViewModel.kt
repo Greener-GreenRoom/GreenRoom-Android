@@ -1,19 +1,38 @@
 package com.greener.presentation.ui.home.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.greener.domain.model.ApiState
 import com.greener.domain.model.ExampleModel
+import com.greener.domain.model.greenroom.GreenRoomTotalInfo
+import com.greener.domain.usecase.greenroom.GetUserGreenRoomListUseCase
+import com.greener.presentation.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val getUserGreenRoomListUseCase: GetUserGreenRoomListUseCase
+) : ViewModel() {
 
     private val _myPlants = MutableStateFlow<List<ExampleModel>>(listOf())
     val myPlants: MutableStateFlow<List<ExampleModel>> get() = _myPlants
 
+    private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+
+
+    private val _myGreenRooms = MutableStateFlow<List<GreenRoomTotalInfo>>(listOf())
+    val myGreenRooms: MutableStateFlow<List<GreenRoomTotalInfo>> get() = _myGreenRooms
+
     init {
-        getMyPlants()
+        getUserGreenRoomsInfo()
     }
 
     private val _currentPlant = MutableStateFlow(
@@ -24,45 +43,34 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     private val _isFabOpen = MutableStateFlow(false)
     val isFabOpen: MutableStateFlow<Boolean> get() = _isFabOpen
 
-    private fun getMyPlants() {
-        val plant1 = ExampleModel(
-            1,
-            "초롱이",
-            1,
-            "#000000",
-            "#000000",
-            1,
-            1,
-            2,
-        )
-        val plant2 = ExampleModel(
-            1,
-            "아롱이",
-            2,
-            "#000000",
-            "#000000",
-            2,
-            3,
-            3,
-        )
-        val plant3 = ExampleModel(
-            1,
-            "로롱이",
-            3,
-            "#000000",
-            "#000000",
-            3,
-            4,
-            4,
-        )
-        val plants = listOf(plant1, plant2, plant3)
-        // val plants = listOf<ExampleModel>()
-        _myPlants.value = plants
+    private fun getUserGreenRoomsInfo() {
+        viewModelScope.launch {
+            val result = getUserGreenRoomListUseCase()
+            when (result) {
+                is ApiState.Success -> {
+                    _uiState.update { UiState.Success }
+                    _myGreenRooms
+                    Log.d("확인", result.result?.userInfo.toString())
+                }
+
+                is ApiState.Fail -> {
+                    _uiState.update { UiState.Fail }
+                    Log.d("확인", result.result.toString())
+                }
+
+                is ApiState.Exception -> {
+                    _uiState.update { UiState.Error(result.checkException()) }
+                    Log.d("확인", "init에서 " + result.checkException())
+                }
+            }
+        }
     }
+
 
     fun getCountsToString(): String {
         return _myPlants.value.size.toString()
     }
+
     fun isAnyPlants(): Boolean {
         return _myPlants.value.isNotEmpty()
     }

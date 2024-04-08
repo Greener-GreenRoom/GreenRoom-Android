@@ -76,9 +76,10 @@ class RegisterNicknameViewModel @Inject constructor(
             val responseData = getTokenUseCase(signInfo.email)
             when (responseData) {
                 is ApiState.Success -> {
+
                     setUserInfoAtLocal(
-                        responseData.result.data!!.accessToken,
-                        responseData.result.data!!.refreshToken
+                        responseData.result!!.data!!.accessToken,
+                        responseData.result!!.data!!.refreshToken
                     )
                     _uiState.update { UiState.Success }
                 }

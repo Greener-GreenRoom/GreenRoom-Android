@@ -18,7 +18,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_dialog_complete_todo_all_title"
-            setDialogTitle="@{actionTodo.stringName}"
+            setDialogTitle="@{actionTodo.activity}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -32,7 +32,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_dialog_complete_todo_all_advice_msg"
-            setDialogAsk="@{actionTodo.stringName}"
+            setDialogAsk="@{actionTodo.activity}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -70,7 +70,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_dialog_complete_todo_all_confirm"
             style="@style/rounded_corner_8_green200_button"
-            setDialogConfirm="@{actionTodo.stringName}"
+            setDialogConfirm="@{actionTodo.activity}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"

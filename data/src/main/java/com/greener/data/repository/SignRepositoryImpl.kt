@@ -28,8 +28,8 @@ class SignRepositoryImpl @Inject constructor(
             is ApiState.Success -> {
                 ApiState.Success(
                     ResponseResult(
-                        responseFormDTO.result.responseDTO.output,
-                        responseFormDTO.result.responseDTO.result
+                        responseFormDTO.result!!.responseDTO.output,
+                        responseFormDTO.result!!.responseDTO.result
                     )
                 )
             }
@@ -37,8 +37,8 @@ class SignRepositoryImpl @Inject constructor(
             is ApiState.Fail -> {
                 ApiState.Fail(
                     ResponseResult(
-                        responseFormDTO.result.responseDTO.output,
-                        responseFormDTO.result.responseDTO.result
+                        responseFormDTO.result!!.responseDTO.output,
+                        responseFormDTO.result!!.responseDTO.result
                     )
                 )
             }
@@ -54,11 +54,11 @@ class SignRepositoryImpl @Inject constructor(
         val responseFormDTO = signDataSource.getToken(email)
         return when (responseFormDTO) {
             is ApiState.Success -> {
-                ApiState.Success(mapperTokenDataToDomain(responseFormDTO.result))
+                ApiState.Success(mapperTokenDataToDomain(responseFormDTO.result!!))
             }
 
             is ApiState.Fail -> {
-                ApiState.Fail(mapperTokenDataToDomain(responseFormDTO.result))
+                ApiState.Fail(mapperTokenDataToDomain(responseFormDTO.result!!))
             }
 
             is ApiState.Exception -> {
@@ -74,11 +74,11 @@ class SignRepositoryImpl @Inject constructor(
 
         return when (responseFormDTO) {
             is ApiState.Success -> {
-                ApiState.Success(mapperTokenDataToDomain(responseFormDTO.result))
+                ApiState.Success(mapperTokenDataToDomain(responseFormDTO.result!!))
             }
 
             is ApiState.Fail -> {
-                ApiState.Fail(mapperTokenDataToDomain(responseFormDTO.result))
+                ApiState.Fail(mapperTokenDataToDomain(responseFormDTO.result!!))
             }
 
             is ApiState.Exception -> {
@@ -93,11 +93,11 @@ class SignRepositoryImpl @Inject constructor(
 
         return when (responseFormDTO) {
             is ApiState.Success -> {
-                ApiState.Success(mapperTokenDataToDomain(responseFormDTO.result))
+                ApiState.Success(mapperTokenDataToDomain(responseFormDTO.result!!))
             }
 
             is ApiState.Fail -> {
-                ApiState.Fail(mapperTokenDataToDomain(responseFormDTO.result))
+                ApiState.Fail(mapperTokenDataToDomain(responseFormDTO.result!!))
             }
 
             is ApiState.Exception -> {

@@ -94,6 +94,7 @@ fun setShelfImg(view: ImageView, id: Int) {
     }
 }
 
+/*
 @BindingAdapter("setTextBalloon")
 fun setTextBalloon(view: TextView, actionTodo: ActionTodo) {
     val context = view.context
@@ -106,5 +107,8 @@ fun setTextBalloon(view: TextView, actionTodo: ActionTodo) {
     view.setText(textResId)
     view.setTextColor(colorResId)
 }
+ */
+
+
 
 

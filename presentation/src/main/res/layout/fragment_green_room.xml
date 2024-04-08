@@ -73,7 +73,6 @@
             app:layout_constraintWidth_percent="@dimen/green_room_plant_width_percent"
             tools:src="@drawable/img_plant_1_default_shadow" />
 
-
         <ImageView
             android:id="@+id/iv_green_room_plant_face"
             setPlantFace="@{myPlant.status}"
@@ -88,7 +87,6 @@
             app:layout_constraintVertical_bias="@dimen/plant_face_vertical_bias"
             app:layout_constraintWidth_percent="@dimen/green_room_plant_face_width_percent"
             tools:src="@drawable/img_face_sad" />
-
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_green_room_empty_start"
@@ -122,11 +120,12 @@
             layout="@layout/view_text_balloon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:actioinTodo= "@{}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_green_room_window"
             app:layout_constraintEnd_toEndOf="@+id/gl_green_room_center"
+            app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="@+id/gl_green_room_start"
-            app:layout_constraintTop_toTopOf="@+id/iv_green_room_window" />
+            app:layout_constraintTop_toTopOf="@+id/iv_green_room_window"
+            app:layout_constraintVertical_bias="0.503" />
 
         <include
             android:id="@+id/include_green_room_balloon_2"

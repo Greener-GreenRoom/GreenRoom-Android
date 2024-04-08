@@ -9,10 +9,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentLoginBinding
 import com.greener.presentation.model.UiState
@@ -27,7 +34,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 ) {
     private val viewModel: LoginViewModel by viewModels()
 
+
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
+
+
     private val googleAuthLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -63,6 +73,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         checkExistUser()
     }
 
+
     private fun checkExistUser() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collect {
@@ -91,6 +102,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         }
     }
 
+
     private fun requestGoogleLogin() {
         googleSignInClient.signOut()
         val signInIntent = googleSignInClient.signInIntent
@@ -106,6 +118,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
         return GoogleSignIn.getClient(requireActivity(), googleSignInOption)
     }
+
 
     private fun moveToMain() {
         val intent = Intent(requireContext(), MainActivity::class.java)
