@@ -82,8 +82,4 @@ dependencies {
 
     // Splash
     implementation ("androidx.core:core-splashscreen:1.0.1")
-
-    // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation ("com.firebaseui:firebase-ui-auth:7.2.0")
 }
