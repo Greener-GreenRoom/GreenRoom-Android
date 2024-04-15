@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.registraion.complete
+package com.greener.presentation.ui.home.registration.complete
 
 import android.os.Bundle
 import android.text.Spannable

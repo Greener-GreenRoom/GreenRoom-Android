@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.registraion.nickname_image
+package com.greener.presentation.ui.home.registration.nickname_image
 
 import android.os.Build
 import android.os.Bundle
@@ -16,7 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentPlantRegistrationNicknameImageBinding
 import com.greener.presentation.ui.base.BaseFragment
-import com.greener.presentation.ui.home.registraion.InitRegistrationIndicator
+import com.greener.presentation.ui.home.registration.InitRegistrationIndicator
 import com.greener.presentation.util.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

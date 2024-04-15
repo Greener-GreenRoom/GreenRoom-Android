@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.greener.presentation.ui.home.registraion.nickname_image.RegistrationNicknameImageViewModel" />
+            type="com.greener.presentation.ui.home.registration.nickname_image.RegistrationNicknameImageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

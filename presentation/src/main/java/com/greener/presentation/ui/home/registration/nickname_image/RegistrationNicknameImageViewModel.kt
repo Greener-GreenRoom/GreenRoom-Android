@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.registraion.nickname_image
+package com.greener.presentation.ui.home.registration.nickname_image
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

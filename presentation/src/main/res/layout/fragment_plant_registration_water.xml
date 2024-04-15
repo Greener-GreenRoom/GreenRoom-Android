@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.greener.presentation.ui.home.registraion.water.RegistrationWaterViewModel" />
+            type="com.greener.presentation.ui.home.registration.water.RegistrationWaterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
