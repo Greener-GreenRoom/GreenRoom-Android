@@ -1,7 +1,10 @@
 package com.greener.presentation.ui.home.registraion.search
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.greener.domain.usecase.plant_register.GetPlantInformationUseCase
+import com.greener.domain.usecase.plant_register.GetPlantWateringTipUseCase
 import com.greener.presentation.model.registration.PlantRegistrationInfo
 import com.greener.presentation.util.MutableEventFlow
 import com.greener.presentation.util.asEventFlow
@@ -12,7 +15,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegistrationSearchViewModel @Inject constructor() : ViewModel() {
+class RegistrationSearchViewModel @Inject constructor(
+    val getPlantInformationUseCase: GetPlantInformationUseCase,
+) : ViewModel() {
     val searchTerm = MutableStateFlow("")
 
     private val _plantRegistrationInfo = MutableStateFlow<PlantRegistrationInfo?>(null)

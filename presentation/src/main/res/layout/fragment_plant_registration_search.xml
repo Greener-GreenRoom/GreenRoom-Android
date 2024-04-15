@@ -144,15 +144,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableStart="@drawable/ic_search"
-                android:drawableTint="@color/gray300"
                 android:drawablePadding="4dp"
+                android:drawableTint="@color/gray300"
+                android:imeOptions="actionDone"
+                android:inputType="text"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:textAppearance="@style/body4"
-                android:textColor="@color/gray700"
                 android:text="@={viewModel.searchTerm}"
-                android:inputType="text"
-                android:imeOptions="actionDone" />
+                android:textAppearance="@style/body4"
+                android:textColor="@color/gray700" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--  todo 이미지 홀더로 바뀔 가능성 있음      -->

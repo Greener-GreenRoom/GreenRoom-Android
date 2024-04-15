@@ -50,7 +50,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         super.onViewCreated(view, savedInstanceState)
         binding.vpLoginOnboarding.adapter = LoginOnBoardingVPAdapter(requireActivity())
         binding.indicatorLoginVp.attachTo(binding.vpLoginOnboarding)
-
     }
 
     override fun initListener() {
