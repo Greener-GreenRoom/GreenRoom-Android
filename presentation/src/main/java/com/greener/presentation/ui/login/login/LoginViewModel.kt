@@ -80,15 +80,14 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun setUserInfoAtLocal() {
-        viewModelScope.launch {
-            setUserInfoUseCase(
-                _email.value,
-                _provider.value,
-                _accessToken.value,
-                _refreshToken.value
-            )
-        }
+    private suspend fun setUserInfoAtLocal() {
+        setUserInfoUseCase(
+            _email.value,
+            _provider.value,
+            _accessToken.value,
+            _refreshToken.value
+        )
+
     }
 
 }

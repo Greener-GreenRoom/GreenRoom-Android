@@ -172,6 +172,7 @@
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_nickname_image_end"
             app:layout_constraintTop_toBottomOf="@+id/tv_plant_registration_nickname_image_post_picture" />
 
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_plant_registration_go_next"
             android:layout_width="0dp"

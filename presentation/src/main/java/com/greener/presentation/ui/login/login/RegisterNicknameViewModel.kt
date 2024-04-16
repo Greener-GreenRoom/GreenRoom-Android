@@ -55,7 +55,6 @@ class RegisterNicknameViewModel @Inject constructor(
             when (responseResult) {
                 is ApiState.Success -> {
                     getTokenFromServer(signInfo)
-                    _uiState.update { UiState.Success }
                 }
 
                 is ApiState.Fail -> {
@@ -71,35 +70,33 @@ class RegisterNicknameViewModel @Inject constructor(
         }
     }
 
-    private fun getTokenFromServer(signInfo: SignInfo) {
-        viewModelScope.launch {
-            val responseData = getTokenUseCase(signInfo.email)
-            when (responseData) {
-                is ApiState.Success -> {
-                    setUserInfoAtLocal(
-                        responseData.result.data!!.accessToken,
-                        responseData.result.data!!.refreshToken
-                    )
-                    _uiState.update { UiState.Success }
-                }
+    private suspend fun getTokenFromServer(signInfo: SignInfo) {
+        val responseData = getTokenUseCase(signInfo.email)
+        when (responseData) {
+            is ApiState.Success -> {
+                setUserInfoAtLocal(
+                    responseData.result.data!!.accessToken,
+                    responseData.result.data!!.refreshToken
+                )
+                _uiState.update { UiState.Success }
+            }
 
-                is ApiState.Fail -> {
-                    _uiState.update { UiState.Fail }
-                }
+            is ApiState.Fail -> {
+                _uiState.update { UiState.Fail }
+            }
 
-                is ApiState.Exception -> {
-                    _uiState.update { UiState.Error(responseData.checkException()) }
-                }
+            is ApiState.Exception -> {
+                _uiState.update { UiState.Error(responseData.checkException()) }
             }
         }
+
     }
 
-    private fun setUserInfoAtLocal(
+    private suspend fun setUserInfoAtLocal(
         accessToken: String,
         refreshToken: String
     ) {
-        viewModelScope.launch {
-            setUserInfoUseCase(_email.value, _provider.value, accessToken, refreshToken)
-        }
+        setUserInfoUseCase(_email.value, _provider.value, accessToken, refreshToken)
+
     }
 }
