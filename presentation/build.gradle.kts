@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
-    id ("kotlin-parcelize")
+    id("kotlin-parcelize")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
 }
@@ -23,7 +23,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -63,6 +63,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     implementation("com.google.dagger:hilt-android:2.49")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
     kapt("com.google.dagger:hilt-compiler:2.49")
 
     implementation("com.orhanobut:logger:2.2.0")
@@ -72,4 +73,13 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //Google Oauth
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+
+    //Indicator
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
+    // Splash
+    implementation ("androidx.core:core-splashscreen:1.0.1")
 }

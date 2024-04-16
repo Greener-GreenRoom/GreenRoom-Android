@@ -12,7 +12,21 @@
     <string name="util_my_album">내 앨범 선택</string>
     <string name="util_choose_date">날짜 선택하기</string>
 
+    <string name="nickname">닉네임</string>
+    <string name="user_nickname_rule">한글 또는 영문, 10자 이내로 가능해요</string>
+    <string name="confirm">확인</string>
+
 <!--  Login  -->
+    <string name="google_web_client_id">712990012729-kc9m2p6a9oltejsul1dvseh0mj8d8b66.apps.googleusercontent.com</string>
+    <string name="google_android_client_id">712990012729-smbduqfeoqvphohd0gcphdi27f7b10p1.apps.googleusercontent.com</string>
+    <string name="register_nickname_welcome_title">그린룸에 오신 걸 환영해요!\n닉네임을 설정해 주세요</string>
+    <string name="login_onboarding2_title">나만의 식물을 커스텀해요\n내 식물과 닮은 캐릭터를 만들어 보세요</string>
+    <string name="login_onboarding2_subtitle">소품과 악세사리로 그린룸을 꾸며주세요.</string>
+    <string name="login_onboarding3_title">이젠 까먹지 않아요.\n캐릭터가 알려주는 관리 주기</string>
+    <string name="login_onboarding3_subtitle">미션처럼 식물을 관리하면서 쉽고 재미있게 식물을 키워요.</string>
+    <string name="login_onboarding4_title">식물 집사 생활을 한 눈에 살펴요\n할 일을 모아보고, 상태를 기록해요</string>
+    <string name="login_onboarding4_subtitle">다이어리에서 식물을 관리하고 일기를 써보세요.</string>
+
 
 <!--  home  -->
     <string name="home">홈</string>
@@ -70,4 +84,14 @@
     
 <!--  diary  -->
     <string name="diary">다이어리</string>
+
+    <!--  species  -->
+    <string name="foliage">관엽식물</string>
+    <string name="succeulent_cactus">다육이,선인장</string>
+    <string name="annual">한해살이풀</string>
+    <string name="vine">덩굴식물</string>
+    <string name="bulb">구근식물</string>
+    <string name="herb">허브</string>
+    <string name="epiphyte">착색식물</string>
+    <string name="tuberous">괴근식물</string>
 </resources>

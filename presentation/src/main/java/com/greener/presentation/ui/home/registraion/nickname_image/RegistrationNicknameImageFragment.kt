@@ -25,10 +25,10 @@ import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationNicknameImageBinding> (
-    FragmentPlantRegistrationNicknameImageBinding::inflate
+class RegistrationNicknameImageFragment : BaseFragment<FragmentPlantRegistrationNicknameImageBinding> (
+    FragmentPlantRegistrationNicknameImageBinding::inflate,
 ) {
-    private val viewModel : RegistrationNicknameImageViewModel by viewModels()
+    private val viewModel: RegistrationNicknameImageViewModel by viewModels()
     private val args: RegistrationNicknameImageFragmentArgs by navArgs()
 
     @Inject
@@ -46,7 +46,7 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
         InitRegistrationIndicator.initRegistrationIndicator(
             binding.includePlantRegistrationNicknameImageIndicator,
             requireContext(),
-            NICKNAME_IMAGE_POSITION
+            NICKNAME_IMAGE_POSITION,
         )
 
         softInputAdjustResize()
@@ -104,9 +104,9 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
         spannableStringBuilder.apply {
             setSpan(
                 ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.red100)),
-                    mainText.length.minus(1),
-                    mainText.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                mainText.length.minus(1),
+                mainText.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
             )
         }
         binding.tvPlantRegistrationNicknameImagePlantNickname.text = spannableStringBuilder
@@ -132,7 +132,7 @@ class RegistrationNicknameImageFragment: BaseFragment<FragmentPlantRegistrationN
         when (event) {
             is RegistrationNicknameImageViewModel.Event.MoveToWatering -> {
                 val action = RegistrationNicknameImageFragmentDirections.actionRegistrationNicknameImageFragmentToRegistrationWaterFragment(
-                    event.plantRegistrationInfo
+                    event.plantRegistrationInfo,
                 )
                 findNavController().navigate(action)
             }

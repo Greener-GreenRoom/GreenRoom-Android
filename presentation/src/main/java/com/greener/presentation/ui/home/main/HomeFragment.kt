@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentHomeBinding
@@ -18,13 +19,12 @@ import com.greener.presentation.ui.home.greenroom.GreenRoomViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 private const val MIN_SCALE = 0.85f
 private const val MIN_ALPHA = 0.5f
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
-    FragmentHomeBinding::inflate
+    FragmentHomeBinding::inflate,
 ) {
     private val viewModel: HomeViewModel by viewModels()
 
@@ -49,13 +49,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             showActionDialog()
         }
         viewModel.initFab()
+        binding.includeHomeBottomSheet.btnBottomSheetHomeAddButton.setOnClickListener {
+            moveToRegistration()
+        }
+        binding.includeHomeBottomSheet.tvBottomSheetHomeAddPlant.setOnClickListener {
+            moveToRegistration()
+        }
     }
-
 
     private fun setGreenRoomViewPager() {
         binding.vpHomeGreenRoom.adapter = GreenRoomViewPagerAdapter(
             this,
-            viewModel.myPlants.value
+            viewModel.myPlants.value,
         )
         binding.vpHomeGreenRoom.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
@@ -66,7 +71,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
         binding.vpHomeGreenRoom.isUserInputEnabled = false
         binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
-
     }
 
     private fun setBottomProfileAdapter() {
@@ -75,7 +79,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 viewModel.myPlants.value,
                 viewModel.currentPlant.value,
                 { onClickProfile(it) },
-                { unSelect(it) })
+                { unSelect(it) },
+            )
     }
 
     private fun onClickProfile(position: Int) {
@@ -84,32 +89,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         select(position)
     }
 
+    private fun moveToRegistration() {
+        findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
+    }
+
     private fun select(position: Int) {
         val viewHolder =
             binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.findViewHolderForAdapterPosition(
-                position
+                position,
             ) as ProfileRVAdapter.ProfileViewHolder
         viewHolder.binding.ivItemProfileBackground.setImageResource(R.drawable.img_profile_background_circle_selected)
         viewHolder.binding.tvItemProfilePlantName.setTextColor(
             ContextCompat.getColor(
                 requireActivity(),
-                R.color.green300
-            )
+                R.color.green300,
+            ),
         )
     }
 
     private fun unSelect(position: Int) {
         val viewHolder =
             binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.findViewHolderForAdapterPosition(
-                position
+                position,
             ) as ProfileRVAdapter.ProfileViewHolder
 
         viewHolder.binding.ivItemProfileBackground.setImageResource(R.drawable.img_profile_background_circle_non_selected)
         viewHolder.binding.tvItemProfilePlantName.setTextColor(
             ContextCompat.getColor(
                 requireActivity(),
-                R.color.gray700
-            )
+                R.color.gray700,
+            ),
         )
     }
 
@@ -118,7 +127,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
         dialog.setItemClickListener(object : ActionDialog.ClickListener {
             override fun onClick() {
-
             }
         })
         dialog.show()
@@ -153,7 +161,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private fun shutActionMenu() {
         ObjectAnimator.ofFloat(binding.fabHomeActions, View.ROTATION, 45f, 0f).apply { start() }
         binding.lyHomeActionList.visibility = View.GONE
-        //binding.layoutActionDialog.fadeOut(50)
+        // binding.layoutActionDialog.fadeOut(50)
         binding.viewHomeWallpaper.visibility = View.GONE
     }
 
@@ -171,7 +179,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             .withEndAction { visibility = View.GONE }
             .setDuration(duration)
     }
-
 
     /**
      * 식물 전환 시 애니메이션 적용을 위한 코드
@@ -205,8 +212,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                         scaleY = scaleFactor
 
                         // Fade the page relative to its size.
-                        alpha = (MIN_ALPHA +
-                                (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA)))
+                        alpha = (
+                            MIN_ALPHA +
+                                (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA))
+                            )
                     }
 
                     else -> { // (1,+Infinity]

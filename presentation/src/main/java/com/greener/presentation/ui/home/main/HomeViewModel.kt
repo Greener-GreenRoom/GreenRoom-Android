@@ -4,12 +4,10 @@ import androidx.lifecycle.ViewModel
 import com.greener.domain.model.ExampleModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
-
 
     private val _myPlants = MutableStateFlow<List<ExampleModel>>(listOf())
     val myPlants: MutableStateFlow<List<ExampleModel>> get() = _myPlants
@@ -19,7 +17,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     }
 
     private val _currentPlant = MutableStateFlow(
-        if (_myPlants.value.isNotEmpty()) _myPlants.value[0] else null
+        if (_myPlants.value.isNotEmpty()) _myPlants.value[0] else null,
     )
     val currentPlant: MutableStateFlow<ExampleModel?> get() = _currentPlant
 
@@ -35,7 +33,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             "#000000",
             1,
             1,
-            2
+            2,
         )
         val plant2 = ExampleModel(
             1,
@@ -45,7 +43,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             "#000000",
             2,
             3,
-            3
+            3,
         )
         val plant3 = ExampleModel(
             1,
@@ -55,17 +53,17 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             "#000000",
             3,
             4,
-            4
+            4,
         )
         val plants = listOf(plant1, plant2, plant3)
-        //val plants = listOf<ExampleModel>()
+        // val plants = listOf<ExampleModel>()
         _myPlants.value = plants
     }
 
     fun getCountsToString(): String {
         return _myPlants.value.size.toString()
     }
-    fun isAnyPlants():Boolean {
+    fun isAnyPlants(): Boolean {
         return _myPlants.value.isNotEmpty()
     }
 
