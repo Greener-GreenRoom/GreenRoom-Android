@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.home.registration.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.plant_register.PlantInformationData
@@ -21,7 +20,7 @@ class RegistrationSearchViewModel @Inject constructor(
     val searchTerm = MutableStateFlow("")
 
     private val _searchPlantInfo = MutableStateFlow<List<PlantInformationData>>(emptyList())
-    val searchPlantInfo : StateFlow<List<PlantInformationData>> get() = _searchPlantInfo
+    val searchPlantInfo: StateFlow<List<PlantInformationData>> get() = _searchPlantInfo
 
     private val _allPlantInfo = MutableStateFlow<List<PlantInformationData>>(emptyList())
 
@@ -32,7 +31,7 @@ class RegistrationSearchViewModel @Inject constructor(
         initAllPlantInformation()
     }
 
-    fun searchPlantInfo(){
+    fun searchPlantInfo() {
         viewModelScope.launch {
             val search = searchTerm.value
             val allInfo = _allPlantInfo.value
@@ -50,10 +49,10 @@ class RegistrationSearchViewModel @Inject constructor(
         }
     }
 
-    private fun initAllPlantInformation(){
+    private fun initAllPlantInformation() {
         getPopularPlantInfo()
         viewModelScope.launch {
-            val result = getPlantInformationUseCase(null,null)
+            val result = getPlantInformationUseCase(null, null)
             if (result.isSuccess) {
                 _allPlantInfo.emit(result.getOrThrow())
             } else {
@@ -62,13 +61,12 @@ class RegistrationSearchViewModel @Inject constructor(
         }
     }
 
-    fun goToRegistrationNicknameImage(plantId : Long?) {
+    fun goToRegistrationNicknameImage(plantId: Long?) {
         viewModelScope.launch {
             val plantRegistrationInfo = PlantRegistrationInfo(plantId, null, null, null, null)
             _event.emit(Event.GoToRegistrationNicknameImage(plantRegistrationInfo))
         }
     }
-
 
     sealed class Event() {
         data class GoToRegistrationNicknameImage(

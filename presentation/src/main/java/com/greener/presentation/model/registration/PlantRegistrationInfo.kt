@@ -10,4 +10,5 @@ data class PlantRegistrationInfo(
     val lastWatering: Int?,
     val waterDuration: Int?,
     val shape: String?,
+    val plantImage: String? = null,
 ) : Parcelable

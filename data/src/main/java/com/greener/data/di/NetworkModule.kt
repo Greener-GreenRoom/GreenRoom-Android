@@ -1,12 +1,9 @@
 package com.greener.data.di
 
 import com.greener.data.interceptor.AuthInterceptor
-import com.greener.data.repository.PlantRegisterRepositoryImpl
 import com.greener.data.service.PlantRegisterService
 import com.greener.data.service.SignService
 import com.greener.data.source.local.AuthDataSource
-import com.greener.data.source.remote.PlantRegisterDataSource
-import com.greener.domain.repository.PlantRegisterRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -53,7 +50,6 @@ object NetworkModule {
     fun provideAuthInterceptor(dataStore: AuthDataSource): AuthInterceptor {
         return AuthInterceptor(dataStore)
     }
-
 
     @Singleton
     @Provides

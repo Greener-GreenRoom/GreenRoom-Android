@@ -5,7 +5,7 @@ import com.greener.domain.repository.AssetRepository
 import javax.inject.Inject
 
 class GetPlantShapeListUseCase @Inject constructor(
-    private val repository: AssetRepository
+    private val repository: AssetRepository,
 ) {
     suspend operator fun invoke(): List<PlantShapeInfo> =
         repository.getAllPlantShapeAsset()

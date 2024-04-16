@@ -8,7 +8,7 @@ import okhttp3.Response
 import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(
-    private val dataStore: AuthDataSource
+    private val dataStore: AuthDataSource,
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val token: String? = runBlocking {

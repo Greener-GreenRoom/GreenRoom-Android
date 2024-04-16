@@ -17,7 +17,7 @@ class RegistrationSearchFragment : BaseFragment<FragmentPlantRegistrationSearchB
 ) {
     private val viewModel: RegistrationSearchViewModel by viewModels()
 
-    private val plantInfoAdapter = PlantInfoAdapter{viewModel.goToRegistrationNicknameImage(it)}
+    private val plantInfoAdapter = PlantInfoAdapter { viewModel.goToRegistrationNicknameImage(it) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +30,6 @@ class RegistrationSearchFragment : BaseFragment<FragmentPlantRegistrationSearchB
             requireContext(),
             SEARCH_POSITION,
         )
-
     }
 
     override fun initListener() {

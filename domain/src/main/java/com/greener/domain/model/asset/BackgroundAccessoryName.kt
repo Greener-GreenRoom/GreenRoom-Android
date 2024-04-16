@@ -18,5 +18,5 @@ enum class BackgroundAccessoryName(itemName: String) {
     Pencil_Holder("Pencil_Holder"),
     Teacup("Teacup"),
     Lily_Of_The_Valley_Vase("Lily_Of_The_Valley_Vase"),
-    EmptyPot("EmptyPot")
+    EmptyPot("EmptyPot"),
 }

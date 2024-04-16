@@ -2,7 +2,6 @@ package com.greener.data.service
 
 import com.greener.data.model.plant_register.PlantInformationDTO
 import com.greener.data.model.plant_register.PlantRegisterDataDTO
-import com.greener.data.model.plant_register.PlantRegisterRequestDTO
 import com.greener.data.model.response.ResponseFormDTO
 import com.greener.data.model.response.ResponseListFormDTO
 import okhttp3.MultipartBody
@@ -18,7 +17,7 @@ interface PlantRegisterService {
     @POST("greenrooms")
     suspend fun registerGreenRoom(
         @Part plantRegisterRequest: MultipartBody.Part,
-        @Part plantImage: MultipartBody.Part
+        @Part plantImage: MultipartBody.Part,
     ): ResponseFormDTO<PlantRegisterDataDTO>
 
     @GET("plants")
@@ -29,6 +28,11 @@ interface PlantRegisterService {
 
     @GET("plants/{plantId}/watering-tip")
     suspend fun getPlantWateringTip(
-        @Path("plantId") plantId: Long
+        @Path("plantId") plantId: Long,
     ): ResponseFormDTO<String>
+
+    @GET("greenrooms/duplicate?name=가롱이")
+    suspend fun isDuplicateGreenRoomNickname(
+        @Query("name") nickname: String,
+    ): ResponseFormDTO<Boolean>
 }

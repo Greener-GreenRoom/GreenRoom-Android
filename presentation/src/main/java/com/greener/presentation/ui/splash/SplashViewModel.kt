@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val updateTokenUseCase: UpdateTokenUseCase,
-    private val setLocalTokensUseCase: SetLocalTokensUseCase
+    private val setLocalTokensUseCase: SetLocalTokensUseCase,
 ) : ViewModel() {
 
     private val _accessToken = MutableStateFlow("")
@@ -36,7 +36,7 @@ class SplashViewModel @Inject constructor(
                 is ApiState.Success -> {
                     setTokensAtLocal(
                         responseData.result.data!!.accessToken,
-                        responseData.result.data!!.refreshToken
+                        responseData.result.data!!.refreshToken,
                     )
                     _uiState.update { UiState.Success }
                 }
@@ -54,7 +54,6 @@ class SplashViewModel @Inject constructor(
 
             _uiState.update { UiState.Fail }
         }
-
     }
 
     private suspend fun setTokensAtLocal(accessToken: String, refreshToken: String) {

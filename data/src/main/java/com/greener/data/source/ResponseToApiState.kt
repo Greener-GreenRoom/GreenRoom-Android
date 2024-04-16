@@ -2,14 +2,12 @@ package com.greener.data.source
 
 import com.greener.data.model.response.ResponseFormDTO
 import com.greener.data.model.response.ResponseListFormDTO
-import com.greener.data.source.remote.PlantRegisterDataSource
 import com.greener.domain.model.ApiState
 
-object ResponseToApiState{
+object ResponseToApiState {
     private const val SUCCESS = 0
 
-    fun <T>ResponseFormDTO<T>.toApiState(
-    ): ApiState<ResponseFormDTO<T>> =
+    fun <T>ResponseFormDTO<T>.toApiState(): ApiState<ResponseFormDTO<T>> =
         try {
             if (responseDTO.output == SUCCESS) {
                 ApiState.Success(ResponseFormDTO(responseDTO, data))

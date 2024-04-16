@@ -1,4 +1,3 @@
 package com.greener.domain.model.exception
 
-class UnknownException: Exception() {
-}
+class UnknownException : Exception()

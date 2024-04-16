@@ -74,12 +74,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    //Google Oauth
+    // Google Oauth
     implementation("com.google.android.gms:play-services-auth:21.0.0")
 
-    //Indicator
+    // Indicator
     implementation("com.tbuonomo:dotsindicator:5.0")
 
     // Splash
-    implementation ("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

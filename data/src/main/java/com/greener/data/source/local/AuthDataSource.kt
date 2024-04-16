@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class AuthDataSource @Inject constructor(
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
 ) {
 
     suspend fun setToken(accessToken: String) {
@@ -43,7 +43,7 @@ class AuthDataSource @Inject constructor(
         userEmail: String,
         provider: String,
         accessToken: String,
-        refreshToken: String
+        refreshToken: String,
     ) {
         setUserEmail(userEmail)
         setProvider(provider)
@@ -77,7 +77,7 @@ class AuthDataSource @Inject constructor(
             it[USER_EMAIL] ?: "",
             it[PROVIDER] ?: "",
             it[REFRESH_TOKEN] ?: "",
-            it[ACCESS_TOKEN] ?: ""
+            it[ACCESS_TOKEN] ?: "",
         )
     }
 
@@ -87,7 +87,7 @@ class AuthDataSource @Inject constructor(
                 getUserEmail().last(),
                 getProvider().last(),
                 getRefreshToken().last(),
-                getAccessToken().last()
+                getAccessToken().last(),
             )
         }
         return a.last()
@@ -99,6 +99,4 @@ class AuthDataSource @Inject constructor(
         val USER_EMAIL = stringPreferencesKey("userEmail")
         val PROVIDER = stringPreferencesKey("provider")
     }
-
-
 }

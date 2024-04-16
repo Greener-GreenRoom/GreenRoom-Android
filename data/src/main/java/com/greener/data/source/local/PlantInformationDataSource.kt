@@ -7,10 +7,9 @@ import androidx.datastore.preferences.preferencesDataStore
 import javax.inject.Inject
 
 class PlantInformationDataSource @Inject constructor(
-    private val context: Context
+    private val context: Context,
 ) {
     val Context.plantInformationDataStore: DataStore<Preferences> by preferencesDataStore(
-        name = "com.greener.greenRoom.plantInfo"
+        name = "com.greener.greenRoom.plantInfo",
     )
-
 }

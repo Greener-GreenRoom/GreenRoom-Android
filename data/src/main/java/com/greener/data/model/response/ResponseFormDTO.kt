@@ -6,5 +6,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ResponseFormDTO<T>(
     @Json(name = "response") val responseDTO: ResponseDTO,
-    @Json(name = "data") val data: T?
+    @Json(name = "data") val data: T?,
 )

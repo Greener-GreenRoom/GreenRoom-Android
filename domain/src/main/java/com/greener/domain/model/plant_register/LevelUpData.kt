@@ -4,5 +4,5 @@ data class LevelUpData(
     val level: Int,
     val isLevelUpdate: Boolean,
     val increasePoint: Int,
-    val increaseCause: String?
+    val increaseCause: String?,
 )

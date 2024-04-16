@@ -21,6 +21,7 @@
             android:backgroundTint="@color/gray200"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
+            app:image_url="@{data.plantPictureUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic"/>

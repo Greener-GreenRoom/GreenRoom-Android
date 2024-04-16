@@ -11,18 +11,18 @@ import com.greener.domain.repository.PlantRegisterRepository
 import javax.inject.Inject
 
 class PlantRegisterRepositoryImpl @Inject constructor(
-    private val dataSource: PlantRegisterDataSource
+    private val dataSource: PlantRegisterDataSource,
 ) : PlantRegisterRepository {
     override suspend fun registerGreenRoom(
         plantRegisterRequestData: PlantRegisterRequestData,
-        image: String?
+        image: String?,
     ): Result<PlantRegisterResponseData> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getPlantInformation(
         sort: String?,
-        offset: Int?
+        offset: Int?,
     ): Result<List<PlantInformationData>> =
         when (val apiState = dataSource.getPlantInformation(sort, offset)) {
             is ApiState.Success -> {
@@ -35,16 +35,16 @@ class PlantRegisterRepositoryImpl @Inject constructor(
                             plantAlias = it.plantAlias,
                             plantPictureUrl = it.plantPictureUrl,
                             plantExplanation = it.plantExplanation,
-                            plantCategory = it.plantCategory
+                            plantCategory = it.plantCategory,
                         )
-                    }
+                    },
                 )
             }
 
             is ApiState.Fail -> {
                 Log.d(
                     "ApiState",
-                    "getPlantInformation Fail : ${apiState.result.responseDTO.result}"
+                    "getPlantInformation Fail : ${apiState.result.responseDTO.result}",
                 )
                 Result.failure(handlePlantRegisterFail(apiState.result.responseDTO.output))
             }
@@ -52,7 +52,6 @@ class PlantRegisterRepositoryImpl @Inject constructor(
             is ApiState.Exception -> {
                 Result.failure(handlePlantRegisterException())
             }
-
         }
 
     override suspend fun getPlantWateringTip(plantId: Long): Result<String> =
@@ -63,7 +62,24 @@ class PlantRegisterRepositoryImpl @Inject constructor(
             is ApiState.Fail -> {
                 Log.d(
                     "ApiState",
-                    "getPlantWateringTip Fail : ${apiState.result.responseDTO.result}"
+                    "getPlantWateringTip Fail : ${apiState.result.responseDTO.result}",
+                )
+                Result.failure(handlePlantRegisterFail(apiState.result.responseDTO.output))
+            }
+            is ApiState.Exception -> {
+                Result.failure(handlePlantRegisterException())
+            }
+        }
+
+    override suspend fun isDuplicateGreenRoomNickname(nickname: String): Result<Boolean> =
+        when (val apiState = dataSource.isDuplicateGreenRoomNickname(nickname)) {
+            is ApiState.Success -> {
+                Result.success(apiState.result.data!!)
+            }
+            is ApiState.Fail -> {
+                Log.d(
+                    "ApiState",
+                    "isDuplicateGreenRoomNickname Fail : ${apiState.result.responseDTO.result}",
                 )
                 Result.failure(handlePlantRegisterFail(apiState.result.responseDTO.output))
             }
@@ -78,5 +94,4 @@ class PlantRegisterRepositoryImpl @Inject constructor(
 
     private fun handlePlantRegisterException(): Exception =
         UnknownException()
-
 }

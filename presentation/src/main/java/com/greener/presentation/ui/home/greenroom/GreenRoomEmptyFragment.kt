@@ -15,7 +15,7 @@ class GreenRoomEmptyFragment : BaseFragment<FragmentGreenRoomEmptyBinding>(
     }
 
     override fun initListener() {
-        binding.btnGreenRoomEmptyRegister.setOnClickListener{
+        binding.btnGreenRoomEmptyRegister.setOnClickListener {
             moveToRegistration()
         }
     }
