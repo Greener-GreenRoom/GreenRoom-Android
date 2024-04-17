@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationSearchFragment"
-        android:name="com.greener.presentation.ui.home.registraion.search.RegistrationSearchFragment"
+        android:name="com.greener.presentation.ui.home.registration.search.RegistrationSearchFragment"
         android:label="RegistrationSearchFragment"
         tools:layout="@layout/fragment_plant_registration_search">
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationNicknameImageFragment"
-        android:name="com.greener.presentation.ui.home.registraion.nickname_image.RegistrationNicknameImageFragment"
+        android:name="com.greener.presentation.ui.home.registration.nickname_image.RegistrationNicknameImageFragment"
         android:label="RegistrationNicknameImageFragment"
         tools:layout="@layout/fragment_plant_registration_nickname_image">
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationWaterFragment"
-        android:name="com.greener.presentation.ui.home.registraion.water.RegistrationWaterFragment"
+        android:name="com.greener.presentation.ui.home.registration.water.RegistrationWaterFragment"
         android:label="registrationWaterFragment"
         tools:layout="@layout/fragment_plant_registration_water">
         <action
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationCharacterFragment"
-        android:name="com.greener.presentation.ui.home.registraion.character.RegistrationCharacterFragment"
+        android:name="com.greener.presentation.ui.home.registration.character.RegistrationCharacterFragment"
         android:label="registrationCharacterFragment"
         tools:layout="@layout/fragment_plant_registration_character">
         <action
@@ -86,13 +86,13 @@
     </fragment>
     <fragment
         android:id="@+id/registrationCompleteFragment"
-        android:name="com.greener.presentation.ui.home.registraion.complete.RegistrationCompleteFragment"
+        android:name="com.greener.presentation.ui.home.registration.complete.RegistrationCompleteFragment"
         android:label="RegistrationCompleteFragment"
         tools:layout="@layout/fragment_plant_registration_complete">
     </fragment>
     <dialog
         android:id="@+id/registrationCycleBottomSheet"
-        android:name="com.greener.presentation.ui.home.registraion.cycle.RegistrationCycleBottomSheet"
+        android:name="com.greener.presentation.ui.home.registration.cycle.RegistrationCycleBottomSheet"
         android:label="RegistrationCycleBottomSheet"
         tools:layout="@layout/bottom_sheet_plant_registration_image">
         <action

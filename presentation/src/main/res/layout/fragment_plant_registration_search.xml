@@ -6,7 +6,8 @@
     <data>
         <variable
             name="viewModel"
-            type="com.greener.presentation.ui.home.registraion.search.RegistrationSearchViewModel" />
+            type="com.greener.presentation.ui.home.registration.search.RegistrationSearchViewModel" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,8 +54,7 @@
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:layout_gravity="end"
-                android:layout_marginEnd="20dp"
-                android:onClickListener="@{ () -> viewModel.goToRegistrationNicknameImage() }"/>
+                android:layout_marginEnd="20dp" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -86,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="-16dp"
             android:elevation="5dp"
+            android:visibility="@{viewModel.searchPlantInfo.empty ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
             app:layout_constraintBottom_toBottomOf="@id/tb_plant_registration_search"
             tools:ignore="NotSibling" >
@@ -144,22 +145,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableStart="@drawable/ic_search"
-                android:drawableTint="@color/gray300"
                 android:drawablePadding="4dp"
+                android:drawableTint="@color/gray300"
+                android:imeOptions="actionDone"
+                android:inputType="text"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:textAppearance="@style/body4"
-                android:textColor="@color/gray700"
                 android:text="@={viewModel.searchTerm}"
-                android:inputType="text"
-                android:imeOptions="actionDone" />
+                android:textAppearance="@style/body4"
+                android:textColor="@color/gray700" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--  todo 이미지 홀더로 바뀔 가능성 있음      -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ly_plant_registration_search_no_data"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="@{viewModel.searchPlantInfo.empty ? View.VISIBLE : View.GONE, default=gone }"
             app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
             app:layout_constraintTop_toBottomOf="@+id/tl_plant_registration_search">
@@ -199,11 +200,13 @@
             android:textColor="@color/gray700"
             android:text="@string/plant_registration_best_plant"
             android:layout_marginTop="24dp"
+            android:visibility="@{viewModel.searchTerm.blank ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
             app:layout_constraintTop_toBottomOf="@+id/ly_plant_registration_search_no_data"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_plant_registration_plant_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

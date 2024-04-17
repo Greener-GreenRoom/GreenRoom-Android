@@ -16,12 +16,11 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(
-    ActivitySplashBinding::inflate
+    ActivitySplashBinding::inflate,
 ) {
     private val viewModel: SplashViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun initListener() {
@@ -30,7 +29,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 observeLocalToken()
             }
-
         }
     }
 

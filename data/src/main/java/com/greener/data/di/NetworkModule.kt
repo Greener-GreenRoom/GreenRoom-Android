@@ -1,6 +1,7 @@
 package com.greener.data.di
 
 import com.greener.data.interceptor.AuthInterceptor
+import com.greener.data.service.PlantRegisterService
 import com.greener.data.service.SignService
 import com.greener.data.source.local.AuthDataSource
 import com.squareup.moshi.Moshi
@@ -12,6 +13,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 private const val BASE_URL = "http://dev.greener-greenroom.r-e.kr/"
@@ -49,10 +51,14 @@ object NetworkModule {
         return AuthInterceptor(dataStore)
     }
 
+    @Singleton
+    @Provides
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
-@Singleton
-@Provides
-fun provideMoshi(): Moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
+    @Provides
+    @Singleton
+    fun providePlantRegisterService(retrofit: Retrofit): PlantRegisterService =
+        retrofit.create(PlantRegisterService::class.java)
 }

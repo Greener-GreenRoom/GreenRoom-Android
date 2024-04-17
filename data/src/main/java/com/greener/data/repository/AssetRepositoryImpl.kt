@@ -18,7 +18,7 @@ import javax.inject.Inject
 class
 AssetRepositoryImpl @Inject constructor(
     private val dataSource: AssetDataSource,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
 ) : AssetRepository {
     override suspend fun getAllPlantShapeAsset(): List<PlantShapeInfo> {
         val list = dataSource.getAllPlantShapes()
@@ -28,7 +28,7 @@ AssetRepositoryImpl @Inject constructor(
                 id = it.id,
                 plantType = initPlantShapeType(it.plantType),
                 plantShapeName = initPlantShapeName(it.plantName),
-                drawableID = getDrawableId(0, it.plantName)
+                drawableID = getDrawableId(0, it.plantName),
             )
         }
     }
@@ -53,7 +53,7 @@ AssetRepositoryImpl @Inject constructor(
                     PlantAccessoryType.HEAD -> {
                         getDrawableId(PLANT_ACCESSORY_HEAD, it.itemName)
                     }
-                }
+                },
             )
         }
     }
@@ -67,7 +67,7 @@ AssetRepositoryImpl @Inject constructor(
                 itemType = initBackgroundAccessoryType(it.itemType.uppercase()),
                 backgroundAccessoryName = initBackgroundAccessoryName(it.itemName),
                 limitLevel = it.limitLevel,
-                drawableID = when(initBackgroundAccessoryType(it.itemType.uppercase())) {
+                drawableID = when (initBackgroundAccessoryType(it.itemType.uppercase())) {
                     BackgroundAccessoryType.OTHER -> {
                         getDrawableId(BACKGROUND_ACCESSORY_OTHER, it.itemName)
                     }
@@ -77,7 +77,7 @@ AssetRepositoryImpl @Inject constructor(
                     BackgroundAccessoryType.SHELF -> {
                         getDrawableId(BACKGROUND_ACCESSORY_SHELF, it.itemName)
                     }
-                }
+                },
             )
         }
     }
@@ -107,7 +107,7 @@ AssetRepositoryImpl @Inject constructor(
     private fun initBackgroundAccessoryType(backgroundAccessoryType: String): BackgroundAccessoryType =
         BackgroundAccessoryType.valueOf(backgroundAccessoryType)
 
-    private fun initBackgroundAccessoryName(backgroundAccessoryName: String) : BackgroundAccessoryName =
+    private fun initBackgroundAccessoryName(backgroundAccessoryName: String): BackgroundAccessoryName =
         BackgroundAccessoryName.valueOf(backgroundAccessoryName)
 
     private fun getDrawableId(itemType: Int, itemName: String): Int {
@@ -118,7 +118,7 @@ AssetRepositoryImpl @Inject constructor(
                 context.resources.getIdentifier(
                     ASSET + PLANT + lowerName,
                     DRAWABLE,
-                    context.packageName
+                    context.packageName,
                 )
             }
 
@@ -126,7 +126,7 @@ AssetRepositoryImpl @Inject constructor(
                 context.resources.getIdentifier(
                     ASSET + FACE + lowerName,
                     DRAWABLE,
-                    context.packageName
+                    context.packageName,
                 )
             }
 
@@ -134,7 +134,7 @@ AssetRepositoryImpl @Inject constructor(
                 context.resources.getIdentifier(
                     ASSET + HEAD + lowerName,
                     DRAWABLE,
-                    context.packageName
+                    context.packageName,
                 )
             }
 
@@ -142,7 +142,7 @@ AssetRepositoryImpl @Inject constructor(
                 context.resources.getIdentifier(
                     ASSET + EYE + lowerName,
                     DRAWABLE,
-                    context.packageName
+                    context.packageName,
                 )
             }
 
@@ -150,7 +150,7 @@ AssetRepositoryImpl @Inject constructor(
                 context.resources.getIdentifier(
                     ASSET + GLASS + lowerName,
                     DRAWABLE,
-                    context.packageName
+                    context.packageName,
                 )
             }
 
@@ -158,7 +158,7 @@ AssetRepositoryImpl @Inject constructor(
                 context.resources.getIdentifier(
                     ASSET + SHELF + lowerName,
                     DRAWABLE,
-                    context.packageName
+                    context.packageName,
                 )
             }
 
@@ -166,7 +166,7 @@ AssetRepositoryImpl @Inject constructor(
                 context.resources.getIdentifier(
                     ASSET + OTHER + lowerName,
                     DRAWABLE,
-                    context.packageName
+                    context.packageName,
                 )
             }
             else -> {

@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class PlantShapeEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val plantType: String,
-    val plantName: String
+    val plantName: String,
 )

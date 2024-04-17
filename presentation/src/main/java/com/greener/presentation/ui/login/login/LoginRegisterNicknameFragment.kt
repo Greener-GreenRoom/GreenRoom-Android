@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.login.login
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginRegisterNicknameFragment : BaseFragment<FragmentLoginRegisterNicknameBinding>(
-    FragmentLoginRegisterNicknameBinding::inflate
+    FragmentLoginRegisterNicknameBinding::inflate,
 ) {
     private val viewModel: RegisterNicknameViewModel by viewModels()
 
@@ -61,11 +60,9 @@ class LoginRegisterNicknameFragment : BaseFragment<FragmentLoginRegisterNickname
                     }
 
                     is UiState.Loading -> {
-
                     }
 
                     is UiState.Empty -> {
-
                     }
                 }
             }

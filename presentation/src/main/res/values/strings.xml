@@ -10,6 +10,7 @@
 
     <string name="util_take_picture">사진 촬영</string>
     <string name="util_my_album">내 앨범 선택</string>
+    <string name="util_delete">삭제</string>
     <string name="util_choose_date">날짜 선택하기</string>
 
     <string name="nickname">닉네임</string>
@@ -52,6 +53,7 @@
     <string name="plant_registration_curious_yours">당신의 식물이 궁금해요!</string>
     <string name="plant_registration_plant_nickname">별명*</string>
     <string name="plant_registration_nickname_warning">한글 또는 영문, 10자 이내로 가능해요.</string>
+    <string name="plant_registration_nickname_duplicate">이미 같은 별명의 식물을 키워요</string>
     <string name="plant_registration_nickname_hint">그린이</string>
     <string name="plant_registration_registration_picture">사진을 등록할까요?</string>
     <string name="plant_registration_post_representative">내 식물을 대표하는 사진을 올려주세요!(선택)</string>

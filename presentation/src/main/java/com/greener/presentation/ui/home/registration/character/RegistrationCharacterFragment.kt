@@ -1,41 +1,42 @@
-package com.greener.presentation.ui.home.registraion.water
+package com.greener.presentation.ui.home.registration.character
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.greener.presentation.databinding.FragmentPlantRegistrationWaterBinding
+import androidx.navigation.fragment.navArgs
+import com.greener.presentation.databinding.FragmentPlantRegistrationCharacterBinding
 import com.greener.presentation.ui.base.BaseFragment
-import com.greener.presentation.ui.home.registraion.InitRegistrationIndicator
+import com.greener.presentation.ui.home.registration.InitRegistrationIndicator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegistrationWaterFragment : BaseFragment<FragmentPlantRegistrationWaterBinding>(
-    FragmentPlantRegistrationWaterBinding::inflate,
+class RegistrationCharacterFragment : BaseFragment<FragmentPlantRegistrationCharacterBinding>(
+    FragmentPlantRegistrationCharacterBinding::inflate,
 ) {
 
-    private val viewModel: RegistrationWaterViewModel by viewModels()
+    private val viewModel: RegistrationCharacterViewModel by viewModels()
+    private val args: RegistrationCharacterFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewModel
 
         InitRegistrationIndicator.initRegistrationIndicator(
-            binding.includePlantRegistrationWaterIndicator,
+            binding.includePlantRegistrationCharacterLastIndicator,
             requireContext(),
-            WATERING_POSITION,
+            CHARACTER_POSITION,
         )
 
 //        highlightNickname(args.nickname)
     }
 
     override fun initListener() {
-        binding.tbPlantRegistrationWater.setNavigationOnClickListener {
+        binding.tbPlantRegistrationCharacterLast.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
     }
 
 //    private fun highlightNickname(nickname: String) {
-//        val mainText: String = requireContext().getString(R.string.plant_registration_water_cycle, nickname)
+//        val mainText: String = requireContext().getString(R.string.plant_registration_character, nickname)
 //        val spannableStringBuilder = SpannableStringBuilder(mainText)
 //        spannableStringBuilder.apply {
 //            setSpan(
@@ -45,10 +46,10 @@ class RegistrationWaterFragment : BaseFragment<FragmentPlantRegistrationWaterBin
 //                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
 //            )
 //        }
-//        binding.tvPlantRegistrationWaterCycle.text = spannableStringBuilder
+//        binding.tvPlantRegistrationCharacter.text = spannableStringBuilder
 //    }
 
     companion object {
-        private const val WATERING_POSITION = 3
+        private const val CHARACTER_POSITION = 5
     }
 }

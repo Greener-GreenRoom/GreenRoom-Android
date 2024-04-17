@@ -15,12 +15,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class RegisterNicknameViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val getTokenUseCase: GetTokenUseCase,
-    private val setUserInfoUseCase: SetUserInfoUseCase
+    private val setUserInfoUseCase: SetUserInfoUseCase,
 ) : ViewModel() {
 
     private val _email = MutableStateFlow("")
@@ -65,7 +64,6 @@ class RegisterNicknameViewModel @Inject constructor(
                     val errorMessage = responseResult.checkException()
                     _uiState.update { UiState.Error(errorMessage) }
                 }
-
             }
         }
     }
@@ -76,7 +74,7 @@ class RegisterNicknameViewModel @Inject constructor(
             is ApiState.Success -> {
                 setUserInfoAtLocal(
                     responseData.result.data!!.accessToken,
-                    responseData.result.data!!.refreshToken
+                    responseData.result.data!!.refreshToken,
                 )
                 _uiState.update { UiState.Success }
             }
@@ -89,14 +87,12 @@ class RegisterNicknameViewModel @Inject constructor(
                 _uiState.update { UiState.Error(responseData.checkException()) }
             }
         }
-
     }
 
     private suspend fun setUserInfoAtLocal(
         accessToken: String,
-        refreshToken: String
+        refreshToken: String,
     ) {
         setUserInfoUseCase(_email.value, _provider.value, accessToken, refreshToken)
-
     }
 }

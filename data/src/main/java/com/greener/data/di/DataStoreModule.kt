@@ -8,7 +8,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.greener.data.repository.AuthRepositoryImpl
 import com.greener.data.source.local.AuthDataSource
 import com.greener.domain.repository.AuthRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,5 +39,4 @@ object DataStoreModule {
         dataSource: AuthDataSource,
     ): AuthRepository =
         AuthRepositoryImpl(dataSource)
-
 }

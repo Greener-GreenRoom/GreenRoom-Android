@@ -15,7 +15,6 @@ class LoginOnBoardingVPAdapter(frag: FragmentActivity) : FragmentStateAdapter(fr
     }
 
     override fun createFragment(position: Int): Fragment {
-
         return when (position) {
             0 -> LoginOnboardingFirstFragment()
             1 -> LoginOnboardingSecondFragment()
