@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="myPlant"
-            type="com.greener.domain.model.ExampleModel" />
+            name="greenRoom"
+            type="com.greener.domain.model.greenroom.GreenRoomTotalInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +39,6 @@
 
         <ImageView
             android:id="@+id/iv_green_room_window"
-            setWindowImg="@{myPlant.window}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/view_green_room_top_area"
@@ -50,7 +49,7 @@
 
         <ImageView
             android:id="@+id/iv_green_room_shelf"
-            setShelfImg="@{myPlant.shelf}"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/view_green_room_top_area"
@@ -62,7 +61,7 @@
 
         <ImageView
             android:id="@+id/iv_green_room_plant_type"
-            setPlantType="@{myPlant.type}"
+            setPlantType="@{greenRoom.greenRoomItems.get(`shape`)}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@id/gl_green_room_empty_start"
@@ -75,7 +74,7 @@
 
         <ImageView
             android:id="@+id/iv_green_room_plant_face"
-            setPlantFace="@{myPlant.status}"
+            setPlantFace="@{greenRoom.greenRoomTodos.size()}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@id/iv_green_room_plant_type"

@@ -1,6 +1,7 @@
 package com.greener.data.model.greenroom
 
 import com.greener.data.model.UserInfoDTO
+import com.greener.domain.model.greenroom.GreenRoomItems
 import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -12,11 +13,16 @@ data class GreenRoomTotalInfoDTO(
     @Json(name = "greenroomTodo") val greenRoomTodos: List<GreenRoomTodoDTO>
 
 ) {
-    fun toDomain(): GreenRoomTotalInfo{
+    fun toDomain(): GreenRoomTotalInfo {
+        val greenRoomItemMap = HashMap<String, String>()
+
+        greenRoomItems.forEach {
+            greenRoomItemMap[it.itemType] = it.itemName
+        }
         return GreenRoomTotalInfo(
             greenRoomInfo.toDomain(),
-            greenRoomItems.map{it.toDomain()},
-            greenRoomTodos.map{it.toDomain()}
+            greenRoomItemMap,
+            greenRoomTodos.map { it.toDomain() }
         )
     }
 }

@@ -11,30 +11,29 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class GreenRoomViewModel @AssistedInject constructor(
-    @Assisted private val plant: ExampleModel,
+    @Assisted private val greenRoom: GreenRoomTotalInfo,
 ) : ViewModel() {
-    private val _myPlant = MutableStateFlow<ExampleModel?>(null)
-    val myPlant: MutableStateFlow<ExampleModel?> get() = _myPlant
+
 
     private val _myGreenRoom  = MutableStateFlow<GreenRoomTotalInfo?>(null)
     val myGreenRoom: StateFlow<GreenRoomTotalInfo?> get() = _myGreenRoom
 
     init {
-        _myPlant.value = plant
+        _myGreenRoom.value = greenRoom
     }
 
     @AssistedFactory
     interface GreenRoomViewModelFactory {
-        fun create(plant: ExampleModel): GreenRoomViewModel
+        fun create(greenRoom: GreenRoomTotalInfo): GreenRoomViewModel
     }
 
     companion object {
         fun providesFactory(
             assistedFactory: GreenRoomViewModelFactory,
-            plant: ExampleModel,
+            greenRoom: GreenRoomTotalInfo,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return assistedFactory.create(plant) as T
+                return assistedFactory.create(greenRoom) as T
             }
         }
     }

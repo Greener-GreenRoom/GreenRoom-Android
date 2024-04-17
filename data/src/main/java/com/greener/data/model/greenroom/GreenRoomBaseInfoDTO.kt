@@ -18,8 +18,8 @@ data class GreenRoomBaseInfoDTO(
             greenRoomId,
             name,
             period,
-            memo,
-            imgUrl,
+            memo?:"",
+            imgUrl?:"",
             status
         )
     }

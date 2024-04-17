@@ -1,18 +1,24 @@
 package com.greener.presentation.ui.home.greenroom
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.greener.domain.model.ExampleModel
+import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 import com.greener.presentation.databinding.FragmentGreenRoomBinding
 import com.greener.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class GreenRoomFragment constructor(val myPlant: ExampleModel) : BaseFragment<FragmentGreenRoomBinding>(
+class GreenRoomFragment constructor(val myGreenRoom: GreenRoomTotalInfo) : BaseFragment<FragmentGreenRoomBinding>(
     FragmentGreenRoomBinding::inflate,
 ) {
+    init{
+        Log.d("확인","GreenRoomFragemt: ${myGreenRoom}")
+    }
+
 
     @Inject
     lateinit var greenRoomViewModelFactory: GreenRoomViewModel.GreenRoomViewModelFactory
@@ -20,14 +26,14 @@ class GreenRoomFragment constructor(val myPlant: ExampleModel) : BaseFragment<Fr
     private val viewModel: GreenRoomViewModel by viewModels {
         GreenRoomViewModel.providesFactory(
             assistedFactory = greenRoomViewModelFactory,
-            plant = myPlant,
+            greenRoom = myGreenRoom,
         )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.myPlant = viewModel.myPlant.value
+        binding.greenRoom = viewModel.myGreenRoom.value
         binding.lifecycleOwner = this
     }
 }

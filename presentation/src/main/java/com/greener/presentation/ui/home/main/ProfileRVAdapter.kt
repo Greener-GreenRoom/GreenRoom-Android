@@ -1,20 +1,25 @@
 package com.greener.presentation.ui.home.main
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.greener.domain.model.ExampleModel
+import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 import com.greener.presentation.R
 import com.greener.presentation.databinding.ItemProfileBinding
 
 class ProfileRVAdapter(
-    private val profiles: List<ExampleModel>,
-    private var currentProfile: ExampleModel?,
+    private val profiles: List<GreenRoomTotalInfo>,
+    private var currentProfile: GreenRoomTotalInfo?,
     val onItemClick: (Int) -> Unit,
     val unSelect: (Int) -> Unit,
 ) : RecyclerView.Adapter<ProfileRVAdapter.ProfileViewHolder>() {
+    init {
+        Log.d("확인","RVAdapter: $profiles")
+    }
 
     private var currentPosition = profiles.indexOf(currentProfile)
 
@@ -52,7 +57,7 @@ class ProfileRVAdapter(
 
     inner class ProfileViewHolder(val binding: ItemProfileBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ExampleModel) {
+        fun bind(item: GreenRoomTotalInfo) {
             binding.profile = item
         }
     }

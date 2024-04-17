@@ -1,9 +1,8 @@
 package com.greener.domain.model.greenroom
 
-import com.greener.domain.model.user.UserInfo
 
 data class GreenRoomTotalInfo(
     val greenRoomInfo: GreenRoomInfo,
-    val greenRoomItems: List<GreenRoomItem>,
+    val greenRoomItems: HashMap<String,String>,
     val greenRoomTodos: List<GreenRoomTodo>
 )

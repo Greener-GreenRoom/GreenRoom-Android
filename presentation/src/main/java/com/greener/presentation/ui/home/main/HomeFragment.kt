@@ -2,6 +2,7 @@ package com.greener.presentation.ui.home.main
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewPropertyAnimator
 import androidx.core.content.ContextCompat
@@ -14,10 +15,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.greener.domain.model.ActionTodo
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentHomeBinding
+import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.home.dialog.ActionDialog
 import com.greener.presentation.ui.home.greenroom.GreenRoomViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.ViewModelLifecycle
 import kotlinx.coroutines.launch
 
 private const val MIN_SCALE = 0.85f
@@ -31,12 +34,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = viewModel
-        setGreenRoomViewPager()
-        setBottomProfileAdapter()
-        setFABClickEvent()
-        observeFAB()
-        initListener()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.myGreenRooms.collect {
+                Log.d("확인", "collect: ${viewModel.myGreenRooms.value}")
+                binding.vm = viewModel
+                setFABClickEvent()
+                observeFAB()
+                setGreenRoomViewPager()
+                setBottomProfileAdapter()
+            }
+        }
+
     }
 
     override fun initListener() {
@@ -54,23 +63,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             moveToRegistration()
         }
         viewModel.initFab()
+
     }
 
     private fun setGreenRoomViewPager() {
         binding.vpHomeGreenRoom.adapter = GreenRoomViewPagerAdapter(
-            this,
-            viewModel.myPlants.value,
+            this@HomeFragment,
+            viewModel.myGreenRooms.value,
         )
-        binding.vpHomeGreenRoom.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.vpHomeGreenRoom.isUserInputEnabled = false
-        binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
+        //binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
+
     }
 
     private fun setBottomProfileAdapter() {
+        Log.d(
+            "확인",
+            "setBottomProfileAdapter: ${viewModel.myGreenRooms.value}/ ${viewModel.currentGreenRoom.value}"
+        )
         binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.adapter =
             ProfileRVAdapter(
-                viewModel.myPlants.value,
-                viewModel.currentPlant.value,
+                viewModel.myGreenRooms.value,
+                viewModel.currentGreenRoom.value,
                 { onClickProfile(it) },
                 { unSelect(it) },
             )
@@ -78,7 +92,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     private fun onClickProfile(position: Int) {
         binding.vpHomeGreenRoom.currentItem = position
-        viewModel.currentPlant.value = viewModel.myPlants.value[position]
+        //viewModel.currentPlant.value = viewModel.myGreenRooms.value[position]
+        viewModel.updateCurrentGreenRoom(position)
         select(position)
     }
 
