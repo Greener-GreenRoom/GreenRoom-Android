@@ -6,25 +6,23 @@ import android.util.Log
 import android.view.View
 import android.view.ViewPropertyAnimator
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.greener.domain.model.ActionTodo
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentHomeBinding
-import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
-import com.greener.presentation.ui.home.dialog.ActionDialog
+import com.greener.presentation.ui.home.greenroom.GreenRoomFragment
 import com.greener.presentation.ui.home.greenroom.GreenRoomViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.ViewModelLifecycle
 import kotlinx.coroutines.launch
-
-private const val MIN_SCALE = 0.85f
-private const val MIN_ALPHA = 0.5f
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
@@ -34,10 +32,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.getUserGreenRoomsInfo()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.myGreenRooms.collect {
-                Log.d("확인", "collect: ${viewModel.myGreenRooms.value}")
                 binding.vm = viewModel
                 setFABClickEvent()
                 observeFAB()
@@ -54,7 +51,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         }
         binding.tvHomeActionComplete.setOnClickListener {
             viewModel.setIsFabOpen()
-            showActionDialog()
+
+            completeAllTodoAtGreenRoom()
         }
         binding.includeHomeBottomSheet.btnBottomSheetHomeAddButton.setOnClickListener {
             moveToRegistration()
@@ -63,6 +61,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             moveToRegistration()
         }
         viewModel.initFab()
+    }
+
+    private fun onChangedTodo(position: Int, actionTodo: ActionTodo) {
+        viewModel.changeTodo(position, actionTodo)
+        binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.adapter!!.notifyItemChanged(position)
 
     }
 
@@ -70,10 +73,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         binding.vpHomeGreenRoom.adapter = GreenRoomViewPagerAdapter(
             this@HomeFragment,
             viewModel.myGreenRooms.value,
-        )
+
+            ) { position, actionTodo ->
+            onChangedTodo(position, actionTodo)
+        }
+        //binding.vpHomeGreenRoom.offscreenPageLimit = 100
         binding.vpHomeGreenRoom.isUserInputEnabled = false
         //binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
-
     }
 
     private fun setBottomProfileAdapter() {
@@ -85,20 +91,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             ProfileRVAdapter(
                 viewModel.myGreenRooms.value,
                 viewModel.currentGreenRoom.value,
-                { onClickProfile(it) },
-                { unSelect(it) },
-            )
+            ) { onClickProfile(it) }
     }
 
     private fun onClickProfile(position: Int) {
         binding.vpHomeGreenRoom.currentItem = position
-        //viewModel.currentPlant.value = viewModel.myGreenRooms.value[position]
         viewModel.updateCurrentGreenRoom(position)
         select(position)
-    }
-
-    private fun moveToRegistration() {
-        findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
     }
 
     private fun select(position: Int) {
@@ -113,31 +112,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 R.color.green300,
             ),
         )
-    }
-
-    private fun unSelect(position: Int) {
-        val viewHolder =
-            binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.findViewHolderForAdapterPosition(
-                position,
-            ) as ProfileRVAdapter.ProfileViewHolder
-
-        viewHolder.binding.ivItemProfileBackground.setImageResource(R.drawable.img_profile_background_circle_non_selected)
-        viewHolder.binding.tvItemProfilePlantName.setTextColor(
-            ContextCompat.getColor(
-                requireActivity(),
-                R.color.gray700,
-            ),
-        )
-    }
-
-    private fun showActionDialog() {
-        val dialog = ActionDialog(requireActivity(), ActionTodo.COMPLETE_ALL)
-
-        dialog.setItemClickListener(object : ActionDialog.ClickListener {
-            override fun onClick() {
-            }
-        })
-        dialog.show()
     }
 
     private fun observeFAB() {
@@ -169,8 +143,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private fun shutActionMenu() {
         ObjectAnimator.ofFloat(binding.fabHomeActions, View.ROTATION, 45f, 0f).apply { start() }
         binding.lyHomeActionList.visibility = View.GONE
-        // binding.layoutActionDialog.fadeOut(50)
         binding.viewHomeWallpaper.visibility = View.GONE
+    }
+
+    private fun moveToRegistration() {
+        findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
+    }
+
+    private fun completeAllTodoAtGreenRoom() {
+        val currentItem = binding.vpHomeGreenRoom.currentItem
+        val myFragment =
+            childFragmentManager.findFragmentByTag("f$currentItem") as GreenRoomFragment
+        myFragment.completeAllTodo()
     }
 
     private fun View.fadeIn(duration: Long = 500): ViewPropertyAnimator {
@@ -233,5 +217,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 }
             }
         }
+    }
+
+    companion object {
+        private const val MIN_SCALE = 0.85f
+        private const val MIN_ALPHA = 0.5f
     }
 }

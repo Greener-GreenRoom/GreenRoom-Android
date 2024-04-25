@@ -6,6 +6,7 @@
     <data>
 
         <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.greener.presentation.ui.home.main.HomeViewModel" />
@@ -47,10 +48,11 @@
                     android:layout_width="46dp"
                     android:layout_height="46dp"
                     android:layout_marginTop="16dp"
-                    android:src="@drawable/img_default_real_profile"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/rounded_corner" />
+                    app:setRealPlantImg="@{vm.currentGreenRoom.greenRoomInfo.greenRoomBaseInfo.imgUrl}"
+                    app:shapeAppearanceOverlay="@style/rounded_corner"
+                    tools:src="@drawable/img_default_real_profile" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_bottom_sheet_home_plant_name"
@@ -70,26 +72,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    tools:text="몬스테라"
                     android:text="@{vm.currentGreenRoom.greenRoomInfo.plantInfo.distributionName}"
                     android:textAppearance="@style/caption2"
                     android:textColor="@color/green300"
                     app:layout_constraintBottom_toBottomOf="@id/tv_bottom_sheet_home_plant_name"
                     app:layout_constraintStart_toEndOf="@id/tv_bottom_sheet_home_plant_name"
-                    app:layout_constraintTop_toTopOf="@id/tv_bottom_sheet_home_plant_name" />
+                    app:layout_constraintTop_toTopOf="@id/tv_bottom_sheet_home_plant_name"
+                    tools:text="몬스테라" />
 
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_bottom_sheet_home_plant_memo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="잎이 살짝 시듦."
-                    android:text="@{vm.currentGreenRoom.greenRoomInfo.greenRoomBaseInfo.memo}"
                     android:textAppearance="@style/caption2"
                     android:textColor="@color/gray500"
                     app:layout_constraintBottom_toBottomOf="@id/iv_bottom_sheet_home_real_plant_img"
                     app:layout_constraintStart_toStartOf="@id/tv_bottom_sheet_home_plant_name"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_bottom_sheet_home_plant_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_bottom_sheet_home_plant_name"
+                    app:setMemo="@{vm.currentGreenRoom.greenRoomInfo.greenRoomBaseInfo.memo}"
+                    tools:text="잎이 살짝 시듦." />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -101,8 +103,8 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="14dp"
-            android:visibility="@{vm.isAnyGreenRooms() ?View.VISIBLE :View.INVISIBLE}"
             android:background="@color/gray100"
+            android:visibility="@{vm.isAnyGreenRooms() ?View.VISIBLE :View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="@id/gl_bottom_sheet_home_end"
             app:layout_constraintStart_toStartOf="@id/gl_bottom_sheet_home_start"
             app:layout_constraintTop_toBottomOf="@+id/cv_bottom_sheet_home_plant_inform" />
@@ -148,8 +150,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="@android:color/transparent"
-            android:visibility="@{vm.isAnyGreenRooms() ? View.GONE :View.VISIBLE}"
             android:src="@drawable/img_btn_add"
+            android:visibility="@{vm.isAnyGreenRooms() ? View.GONE :View.VISIBLE}"
             app:layout_constraintStart_toStartOf="@+id/gl_bottom_sheet_home_start"
             app:layout_constraintTop_toBottomOf="@+id/tv_bottom_sheet_home_my_plant_title" />
 

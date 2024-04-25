@@ -2,11 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="actionTodo"
             type="com.greener.domain.model.ActionTodo" />
     </data>
+
     <LinearLayout
         android:id="@+id/ly_text_balloon"
         android:layout_width="wrap_content"
@@ -27,11 +30,9 @@
             app:cardElevation="5dp"
             app:strokeColor="@color/white">
 
-            <!--
-             setTextBalloon="@{actionTodo}" 추가 합시다
-            -->
             <TextView
                 android:id="@+id/tv_balloon_todo"
+                setTextBalloon="@{actionTodo}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
@@ -40,7 +41,7 @@
                 android:paddingBottom="8dp"
                 android:textAppearance="@style/body5"
                 android:textColor="@color/gray700"
-                tools:text="믈이 필요해"/>
+                tools:text="믈이 필요해" />
         </com.google.android.material.card.MaterialCardView>
 
         <View

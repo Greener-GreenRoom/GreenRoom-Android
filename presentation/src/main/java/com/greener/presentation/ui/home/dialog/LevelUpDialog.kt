@@ -7,40 +7,29 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.WindowManager
 import com.greener.domain.model.ActionTodo
 import com.greener.presentation.databinding.DialogActionTodoBinding
+import com.greener.presentation.databinding.DialogLevelUpBinding
 
+class LevelUpDialog(context: Context, val level: Int) : Dialog(context) {
 
-class ActionDialog(context: Context, val actionTodo: ActionTodo) : Dialog(context) {
-
-    private lateinit var clickListener: ClickListener
-    private lateinit var binding: DialogActionTodoBinding
+    private lateinit var binding: DialogLevelUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogActionTodoBinding.inflate(LayoutInflater.from(context))
-        binding.actionTodo = actionTodo
+        binding = DialogLevelUpBinding.inflate(LayoutInflater.from(context))
+        binding.level = level.toString()
         setContentView(binding.root)
 
-        context.dialogResize(this@ActionDialog, 0.777f, 0.23f)
+        context.dialogResize(this@LevelUpDialog, 0.777f, 0.23f)
 
-        // 배경을 투명하게
-        // 다이얼로그를 둥글게 표현하기 위해 필요
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        // 다이얼로그 바깥쪽 클릭시 종료
         setCanceledOnTouchOutside(true)
-        // 취소 가능 유무
         setCancelable(true)
 
-        binding.btnDialogCompleteTodoNotYet.setOnClickListener {
-            dismiss() // 다이얼로그 닫기 (Close the dialog)
-        }
-
-        binding.btnDialogCompleteTodoConfirm.setOnClickListener {
-            clickListener.onClick()
+        binding.btnDialogLevelUpConfirm.setOnClickListener {
             dismiss()
         }
     }
@@ -69,13 +58,5 @@ class ActionDialog(context: Context, val actionTodo: ActionTodo) : Dialog(contex
 
             window?.setLayout(x, y)
         }
-    }
-
-    interface ClickListener {
-        fun onClick()
-    }
-
-    fun setItemClickListener(clickListener: ClickListener) {
-        this.clickListener = clickListener
     }
 }

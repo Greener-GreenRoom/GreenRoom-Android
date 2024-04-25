@@ -6,7 +6,9 @@ import com.greener.data.model.sign.request.AuthenticateRequestDTO
 import com.greener.data.model.response.ResponseFormDTO
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface SignService {
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="level"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rounded_corner_white_16">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_dialog_level_up_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/home_level_up_title"
+            android:textAlignment="center"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/green300"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_dialog_level_up_all_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{`씨앗을 모아 레벨 `+level+`이 되었어요!`}"
+            android:textAlignment="center"
+            android:textAppearance="@style/body1"
+            android:textColor="@color/gray700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_level_up_title"
+            tools:text="씨앗을 모아 레벨 1 이 되었어요!" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_dialog_level_up_confirm"
+            style="@style/rounded_corner_8_green200_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/effect_ripple_btn"
+            android:paddingStart="@dimen/padding_button_default_horizontal"
+            android:paddingTop="@dimen/padding_button_default_vertical"
+            android:paddingEnd="@dimen/padding_button_default_horizontal"
+            android:paddingBottom="@dimen/padding_button_default_vertical"
+            android:text="@string/confirm_long"
+            android:textAppearance="@style/body4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_level_up_all_msg" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

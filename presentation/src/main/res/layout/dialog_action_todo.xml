@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="actionTodo"
             type="com.greener.domain.model.ActionTodo" />
@@ -17,21 +16,20 @@
         android:background="@drawable/shape_rounded_corner_white_16">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_dialog_complete_todo_all_title"
-            setDialogTitle="@{actionTodo.activity}"
+            android:id="@+id/tv_dialog_complete_todo_title"
+            setDialogTitle="@{actionTodo}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:textAlignment="center"
             android:textAppearance="@style/body4"
-            android:textColor="@color/gray400"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="물주기" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_dialog_complete_todo_all_advice_msg"
+            android:id="@+id/tv_dialog_complete_todo_msg"
             setDialogAsk="@{actionTodo.activity}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,11 +39,11 @@
             android:textColor="@color/gray700"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_complete_todo_all_title"
-            tools:text="물을 줬나요?"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_complete_todo_title"
+            tools:text="물을 줬나요?" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_dialog_complete_todo_all_not_yet"
+            android:id="@+id/btn_dialog_complete_todo_not_yet"
             style="@style/rounded_corner_8_gray100_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -62,13 +60,13 @@
             android:textAppearance="@style/body4"
             android:textColor="@color/gray400"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_dialog_complete_todo_all_confirm"
+            app:layout_constraintEnd_toStartOf="@+id/btn_dialog_complete_todo_confirm"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_complete_todo_all_advice_msg"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_complete_todo_msg"
             app:layout_constraintWidth_default="wrap" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_dialog_complete_todo_all_confirm"
+            android:id="@+id/btn_dialog_complete_todo_confirm"
             style="@style/rounded_corner_8_green200_button"
             setDialogConfirm="@{actionTodo.activity}"
             android:layout_width="0dp"
@@ -80,10 +78,10 @@
             android:paddingEnd="@dimen/padding_button_default_horizontal"
             android:paddingBottom="@dimen/padding_button_default_vertical"
             android:textAppearance="@style/body4"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_dialog_complete_todo_all_not_yet"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_dialog_complete_todo_not_yet"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_dialog_complete_todo_all_not_yet"
-            app:layout_constraintTop_toTopOf="@id/btn_dialog_complete_todo_all_not_yet"
+            app:layout_constraintStart_toEndOf="@id/btn_dialog_complete_todo_not_yet"
+            app:layout_constraintTop_toTopOf="@id/btn_dialog_complete_todo_not_yet"
             app:layout_constraintWidth_default="wrap"
             tools:text="물을 줬어요" />
 
