@@ -56,25 +56,24 @@ fun setWindowImg(view: ImageView, window: String) {
     } else {
         view.setImageResource(resId)
     }
-
 }
 
 @BindingAdapter("setShelfImg")
 fun setShelfImg(view: ImageView, shelf: String) {
-    try {
-        val shelfLowerCase = shelf.lowercase()
-        val context = view.context
-        val resId =
-            context.resources.getIdentifier(
-                "asset_shelf_${shelfLowerCase}",
-                "drawable",
-                context.packageName
-            )
-        view.setImageResource(resId)
-    } catch (e: Exception) {
-        view.setImageResource(R.drawable.asset_shelf_pile_of_books)
+    val shelfLowerCase = shelf.lowercase()
+    val context = view.context
+    val resId =
+        context.resources.getIdentifier(
+            "asset_shelf_${shelfLowerCase}",
+            "drawable",
+            context.packageName
+        )
+    if(resId == 0) {
+        view.setImageResource(R.drawable.img_shelf_1)
     }
-    view.setImageResource(R.drawable.img_shelf_1)
+    else {
+        view.setImageResource(resId)
+    }
 }
 
 @BindingAdapter("setHairAccessory")
@@ -112,7 +111,6 @@ fun setGlasses(view: ImageView, glasses: String) {
         view.setImageResource(resId)
     }
 }
-
 
 @BindingAdapter("setTextBalloon")
 fun setTextBalloon(view: TextView, actionTodo: ActionTodo?) {

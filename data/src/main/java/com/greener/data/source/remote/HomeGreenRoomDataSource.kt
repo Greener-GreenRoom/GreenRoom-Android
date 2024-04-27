@@ -1,7 +1,6 @@
 package com.greener.data.source.remote
 
 import android.util.Log
-import com.greener.data.model.greenroom.GreenRoomTotalInfoDTO
 import com.greener.data.model.greenroom.TodoCompleteDTO
 import com.greener.data.model.greenroom.UserGreenRoomsInfoDTO
 import com.greener.data.model.greenroom.request.CompleteTodoList

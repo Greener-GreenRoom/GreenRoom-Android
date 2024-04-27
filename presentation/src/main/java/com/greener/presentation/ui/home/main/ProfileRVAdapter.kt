@@ -16,9 +16,6 @@ class ProfileRVAdapter(
     private var currentProfile: GreenRoomTotalInfo?,
     val onItemClick: (Int) -> Unit,
 ) : RecyclerView.Adapter<ProfileRVAdapter.ProfileViewHolder>() {
-    init {
-        Log.d("확인","RVAdapter: $profiles")
-    }
 
     private var currentPosition = profiles.indexOf(currentProfile)
 
@@ -60,12 +57,11 @@ class ProfileRVAdapter(
         }
         holder.itemView.setOnClickListener {
             onItemClick(position)
-
             val previouslySelectedItemPosition = currentPosition
             currentPosition = holder.bindingAdapterPosition
-
             notifyItemChanged(previouslySelectedItemPosition)
             notifyItemChanged(currentPosition)
+
         }
     }
 

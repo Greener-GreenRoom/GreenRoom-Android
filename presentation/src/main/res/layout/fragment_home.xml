@@ -101,6 +101,7 @@
                     android:drawableStart="@drawable/ic_check_circle"
                     android:drawablePadding="4dp"
                     android:padding="3dp"
+                    android:clickable="@{vm.currentGreenRoom.greenRoomTodos.size > 0}"
                     android:text="@string/home_action_all_complete"
                     android:textAppearance="@style/body4"
                     android:textColor="@color/gray700" />

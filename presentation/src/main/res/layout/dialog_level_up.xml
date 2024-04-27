@@ -50,6 +50,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/effect_ripple_btn"
             android:paddingStart="@dimen/padding_button_default_horizontal"
             android:paddingTop="@dimen/padding_button_default_vertical"
@@ -57,6 +58,7 @@
             android:paddingBottom="@dimen/padding_button_default_vertical"
             android:text="@string/confirm_long"
             android:textAppearance="@style/body4"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_dialog_level_up_all_msg" />

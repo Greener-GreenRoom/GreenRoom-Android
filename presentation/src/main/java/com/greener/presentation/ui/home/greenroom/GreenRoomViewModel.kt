@@ -33,19 +33,18 @@ class GreenRoomViewModel @AssistedInject constructor(
     init {
         _myGreenRoom.value = greenRoom
     }
+
     fun completeTodo(actionTodo: ActionTodo) {
         val todoList = mutableListOf<Int>()
         if (actionTodo == ActionTodo.COMPLETE_ALL) {
             _myGreenRoom.value!!.greenRoomTodos.forEach {
-                Log.d("확인", "actionTodo.actionId: ${it.actionTodo.actionId}")
                 todoList.add(it.actionTodo.actionId)
             }
-            Log.d("확인", "todoList: $todoList")
 
         } else {
             todoList.add(actionTodo.actionId)
         }
-        Log.d("확인", "todoList: $todoList")
+
         viewModelScope.launch {
             val response = completeTodoUseCase(
                 _myGreenRoom.value!!.greenRoomInfo.greenRoomBaseInfo.greenroomId,
@@ -59,7 +58,7 @@ class GreenRoomViewModel @AssistedInject constructor(
                         _level.emit(response.result!!.level)
                     }
                 }
-
+                //TODO 에러 처리
                 is ApiState.Fail -> {
                     Log.d("확인", "Fail: ${response.result}")
                 }
@@ -70,8 +69,13 @@ class GreenRoomViewModel @AssistedInject constructor(
             }
         }
     }
+
     fun resetIncreasingPoint() {
         _increasingPoint.value = 0
+    }
+
+    fun resetIsLevelUp() {
+        _level.value = 0
     }
 
     @AssistedFactory

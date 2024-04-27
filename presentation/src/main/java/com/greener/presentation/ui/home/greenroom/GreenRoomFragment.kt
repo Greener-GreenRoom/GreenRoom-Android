@@ -13,6 +13,7 @@ import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.home.dialog.ActionDialog
 import com.greener.presentation.ui.home.dialog.LevelUpDialog
 import com.greener.presentation.ui.home.toast.CompleteTodoSnackBar
+import com.greener.presentation.ui.home.toast.CompleteTodoToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -77,7 +78,8 @@ class GreenRoomFragment constructor(
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.increasingPoint.collect {
                     if (it > 0) {
-                        CompleteTodoSnackBar.make(view, it).show()
+                        //CompleteTodoSnackBar.make(view, it).show()
+                        CompleteTodoToast.createToast(requireActivity(), it)!!.show()
                         viewModel.resetIncreasingPoint()
                     }
                 }
@@ -123,8 +125,11 @@ class GreenRoomFragment constructor(
             view.visibility = View.INVISIBLE
         }
     }
+
     private fun showLevelUpDialog(level: Int) {
-        val dialog = LevelUpDialog(requireActivity(), level)
+        val dialog = LevelUpDialog(requireActivity(), level) {
+            viewModel.resetIsLevelUp()
+        }
         dialog.show()
     }
 }

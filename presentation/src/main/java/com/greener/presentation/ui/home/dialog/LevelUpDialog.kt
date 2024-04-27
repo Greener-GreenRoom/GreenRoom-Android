@@ -13,7 +13,8 @@ import com.greener.domain.model.ActionTodo
 import com.greener.presentation.databinding.DialogActionTodoBinding
 import com.greener.presentation.databinding.DialogLevelUpBinding
 
-class LevelUpDialog(context: Context, val level: Int) : Dialog(context) {
+class LevelUpDialog(context: Context, val level: Int, val onClickConfirm: () -> Unit) :
+    Dialog(context) {
 
     private lateinit var binding: DialogLevelUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +31,7 @@ class LevelUpDialog(context: Context, val level: Int) : Dialog(context) {
         setCancelable(true)
 
         binding.btnDialogLevelUpConfirm.setOnClickListener {
+            onClickConfirm()
             dismiss()
         }
     }

@@ -2,18 +2,15 @@ package com.greener.presentation.ui.home.main
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewPropertyAnimator
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.greener.domain.model.ActionTodo
 import com.greener.presentation.R
@@ -51,7 +48,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         }
         binding.tvHomeActionComplete.setOnClickListener {
             viewModel.setIsFabOpen()
-
             completeAllTodoAtGreenRoom()
         }
         binding.includeHomeBottomSheet.btnBottomSheetHomeAddButton.setOnClickListener {
@@ -77,16 +73,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             ) { position, actionTodo ->
             onChangedTodo(position, actionTodo)
         }
-        //binding.vpHomeGreenRoom.offscreenPageLimit = 100
         binding.vpHomeGreenRoom.isUserInputEnabled = false
+        //binding.vpHomeGreenRoom.offscreenPageLimit = 100
         //binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
     }
 
     private fun setBottomProfileAdapter() {
-        Log.d(
-            "확인",
-            "setBottomProfileAdapter: ${viewModel.myGreenRooms.value}/ ${viewModel.currentGreenRoom.value}"
-        )
         binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.adapter =
             ProfileRVAdapter(
                 viewModel.myGreenRooms.value,
@@ -98,6 +90,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         binding.vpHomeGreenRoom.currentItem = position
         viewModel.updateCurrentGreenRoom(position)
         select(position)
+        scrollToCenter(position)
+    }
+
+    private fun scrollToCenter(position: Int) {
+        val recyclerView = binding.includeHomeBottomSheet.rvBottomSheetHomeProfile
+        val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+        layoutManager.scrollToPositionWithOffset(position, recyclerView.width / 2)
     }
 
     private fun select(position: Int) {

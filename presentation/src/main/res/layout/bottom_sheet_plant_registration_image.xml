@@ -17,28 +17,28 @@
             android:id="@+id/btn_plant_registration_image_take_picture"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:gravity="center_vertical"
+            android:padding="0dp"
+            android:text="@string/util_take_picture"
             android:textAppearance="@style/body4"
             android:textColor="@color/gray700"
-            android:text="@string/util_take_picture"
-            android:gravity="center_vertical"
-            android:backgroundTint="@color/white"
-            android:padding="0dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_plant_registration_image_choose_picture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:gravity="center_vertical"
+            android:padding="0dp"
+            android:text="@string/util_my_album"
             android:textAppearance="@style/body4"
             android:textColor="@color/gray700"
-            android:text="@string/util_my_album"
-            android:gravity="center_vertical"
-            android:backgroundTint="@color/white"
-            android:padding="0dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_plant_registration_image_take_picture" />
 
 

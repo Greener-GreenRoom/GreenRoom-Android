@@ -5,17 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.ActionTodo
 import com.greener.domain.model.ApiState
-import com.greener.domain.model.ExampleModel
 import com.greener.domain.model.greenroom.GreenRoomTotalInfo
-import com.greener.domain.usecase.greenroom.CompleteTodoUseCase
 import com.greener.domain.usecase.greenroom.GetUserGreenRoomListUseCase
 import com.greener.presentation.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,7 +25,6 @@ class HomeViewModel @Inject constructor(
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
     private val _myGreenRooms = MutableStateFlow<List<GreenRoomTotalInfo>>(listOf())
     val myGreenRooms: MutableStateFlow<List<GreenRoomTotalInfo>> get() = _myGreenRooms
-
 
     private val _currentGreenRoom = MutableStateFlow<GreenRoomTotalInfo?>(null)
     val currentGreenRoom: StateFlow<GreenRoomTotalInfo?> get() = _currentGreenRoom
@@ -57,6 +52,7 @@ class HomeViewModel @Inject constructor(
                     _myGreenRooms.value = result.result?.greenRoomsTotalInfo ?: emptyList()
                     Log.d("확인", result.result.toString())
                 }
+                //TODO 예외 처리
 
                 is ApiState.Fail -> {
                     _uiState.update { UiState.Fail }

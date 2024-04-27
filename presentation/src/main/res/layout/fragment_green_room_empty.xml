@@ -73,11 +73,11 @@
             android:layout_height="0dp"
             android:layout_marginTop="14dp"
             android:src="@drawable/img_plant_empty_pot"
-            app:layout_constraintWidth_percent="@dimen/empty_green_room_pot_width_percent"
-            app:layout_constraintHeight_percent="@dimen/empty_green_room_pot_height_percent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="@dimen/empty_green_room_pot_height_percent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view_green_room_empty_bottom_area" />
+            app:layout_constraintTop_toTopOf="@+id/view_green_room_empty_bottom_area"
+            app:layout_constraintWidth_percent="@dimen/empty_green_room_pot_width_percent" />
 
 
         <androidx.constraintlayout.widget.Guideline

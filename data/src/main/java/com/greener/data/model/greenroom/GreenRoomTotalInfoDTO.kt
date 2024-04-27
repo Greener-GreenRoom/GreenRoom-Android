@@ -1,7 +1,5 @@
 package com.greener.data.model.greenroom
 
-import com.greener.data.model.UserInfoDTO
-import com.greener.domain.model.greenroom.GreenRoomItems
 import com.greener.domain.model.greenroom.GreenRoomTodo
 import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 import com.squareup.moshi.Json
