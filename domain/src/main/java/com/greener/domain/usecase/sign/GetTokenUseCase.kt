@@ -10,11 +10,11 @@ import javax.inject.Inject
 class GetTokenUseCase @Inject constructor(
     private val repository: SignRepository
 ) {
-    suspend operator fun invoke(email: String): ApiState<ResponseData<TokenData>> {
+    suspend operator fun invoke(email: String): Result<ResponseData<TokenData>> {
         return repository.getToken(email)
     }
 
-    suspend operator fun invoke(): ApiState<ResponseData<TokenData>> {
+    suspend operator fun invoke(): Result<ResponseData<TokenData>> {
         return repository.getToken()
     }
 }

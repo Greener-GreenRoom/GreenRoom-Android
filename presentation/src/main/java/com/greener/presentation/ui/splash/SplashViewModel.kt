@@ -32,31 +32,26 @@ class SplashViewModel @Inject constructor(
             delay(1000)
             val responseData = updateTokenUseCase()
 
-            when (responseData) {
-                is ApiState.Success -> {
-                    setTokensAtLocal(
-                        responseData.result!!.data!!.accessToken,
-                        responseData.result!!.data!!.refreshToken
-                    )
-                    _uiState.update { UiState.Success }
-                }
+            if (responseData.isSuccess) {
 
-                is ApiState.Fail -> {
-                    _uiState.update { UiState.Fail }
-                }
-
-                is ApiState.Exception -> {
-                    val errorMessage = responseData.checkException()
-                    _uiState.update { UiState.Error(errorMessage) }
-                }
+                setTokensAtLocal(
+                    responseData.getOrNull()!!.data!!.accessToken,
+                    responseData.getOrNull()!!.data!!.refreshToken
+                )
+                _uiState.update { UiState.Success }
+            } else {
+                _uiState.update { UiState.Fail }
             }
-            delay(5000)
 
+
+
+
+
+            delay(5000)
             _uiState.update { UiState.Fail }
         }
 
     }
-
     private suspend fun setTokensAtLocal(accessToken: String, refreshToken: String) {
         setLocalTokensUseCase(accessToken, refreshToken)
     }

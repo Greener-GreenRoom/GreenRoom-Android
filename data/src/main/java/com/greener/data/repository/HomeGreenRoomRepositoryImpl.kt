@@ -10,39 +10,42 @@ import javax.inject.Inject
 class HomeGreenRoomRepositoryImpl @Inject constructor(
     private val dataSource: HomeGreenRoomDataSource
 ) : HomeGreenRoomRepository {
-    override suspend fun getUserGreenRoomList(): ApiState<UserGreenRoomsInfo> {
+    override suspend fun getUserGreenRoomList(): Result<UserGreenRoomsInfo?> {
         val response = dataSource.getUserGreenRoomList()
 
         return when (response) {
             is ApiState.Success -> {
-                ApiState.Success(response.result?.toDomain())
+                Result.success(response.result?.data?.toDomain())
             }
 
             is ApiState.Fail -> {
-                ApiState.Fail(response.result?.toDomain())
+                Result.failure(handleGreenRoomFailure(response.result?.responseDTO!!.output))
             }
 
             is ApiState.Exception -> {
-                ApiState.Exception(response.t)
+                Result.failure(response.t!!)
             }
         }
     }
 
-    override suspend fun completeTodo(id: Int, todoList: List<Int>): ApiState<TodoCompleteInfo> {
+    override suspend fun completeTodo(id: Int, todoList: List<Int>): Result<TodoCompleteInfo> {
         val response = dataSource.completeTodo(id, todoList)
 
         return when (response) {
             is ApiState.Success -> {
-                ApiState.Success(response.result?.toDomain())
+                Result.success(response.result?.data!!.toDomain())
             }
 
             is ApiState.Fail -> {
-                ApiState.Fail(response.result?.toDomain())
+                Result.failure(handleGreenRoomFailure(response.result?.responseDTO!!.output))
             }
 
             is ApiState.Exception -> {
-                ApiState.Exception(response.t)
+                Result.failure(response.t!!)
             }
         }
     }
+
+    private fun handleGreenRoomFailure(errorCode: Int): Exception =
+        Exception()
 }

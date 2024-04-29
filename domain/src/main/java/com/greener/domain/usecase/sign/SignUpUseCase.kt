@@ -10,7 +10,7 @@ import javax.inject.Inject
 class SignUpUseCase @Inject constructor(
     private val repository: SignRepository
 ) {
-    suspend operator fun invoke(signInfo: SignInfo): ApiState<ResponseResult> {
+    suspend operator fun invoke(signInfo: SignInfo): Result<ResponseResult> {
 
         return repository.signUp(signInfo)
     }

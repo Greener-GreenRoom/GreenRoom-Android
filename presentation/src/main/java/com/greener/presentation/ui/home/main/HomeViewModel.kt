@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
     val isFabOpen: MutableStateFlow<Boolean> get() = _isFabOpen
 
     fun changeTodo(position: Int, actionTodo: ActionTodo) {
-        if(actionTodo == ActionTodo.COMPLETE_ALL) {
+        if (actionTodo == ActionTodo.COMPLETE_ALL) {
             _myGreenRooms.value[position].greenRoomTodos.clear()
             return
         }
@@ -42,27 +42,19 @@ class HomeViewModel @Inject constructor(
             it.actionTodo == actionTodo
         }
     }
+
     fun getUserGreenRoomsInfo() {
         viewModelScope.launch {
             val result = getUserGreenRoomListUseCase()
-            when (result) {
-                is ApiState.Success -> {
-                    _uiState.update { UiState.Success }
-                    _currentGreenRoom.update { result.result?.greenRoomsTotalInfo?.get(0) }
-                    _myGreenRooms.value = result.result?.greenRoomsTotalInfo ?: emptyList()
-                    Log.d("확인", result.result.toString())
-                }
+            if (result.isSuccess) {
+                _uiState.update { UiState.Success }
+                _currentGreenRoom.update { result.getOrNull()?.greenRoomsTotalInfo?.get(0) }
+                _myGreenRooms.value = result.getOrNull()?.greenRoomsTotalInfo ?: emptyList()
+                Log.d("확인", result.getOrNull().toString())
+            } else {
                 //TODO 예외 처리
+                Log.d("확인", "result.isFailure: ${result.getOrThrow()}")
 
-                is ApiState.Fail -> {
-                    _uiState.update { UiState.Fail }
-                    Log.d("확인", result.result.toString())
-                }
-
-                is ApiState.Exception -> {
-                    _uiState.update { UiState.Error(result.checkException()) }
-                    Log.d("확인", "init에서 " + result.checkException())
-                }
             }
         }
     }

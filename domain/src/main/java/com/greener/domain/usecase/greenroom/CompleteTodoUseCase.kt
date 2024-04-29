@@ -8,7 +8,7 @@ import javax.inject.Inject
 class CompleteTodoUseCase @Inject constructor(
     private val repository: HomeGreenRoomRepository
 ) {
-    suspend operator fun invoke(id:Int, todoList:List<Int>): ApiState<TodoCompleteInfo> {
+    suspend operator fun invoke(id:Int, todoList:List<Int>): Result<TodoCompleteInfo> {
         return repository.completeTodo(id,todoList)
     }
 }

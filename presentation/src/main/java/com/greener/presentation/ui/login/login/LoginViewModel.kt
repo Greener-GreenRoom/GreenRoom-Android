@@ -60,36 +60,25 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { UiState.Loading }
             val responseData = getTokenUseCase(_email.value)
-            when (responseData) {
-                is ApiState.Success -> {
-                    _accessToken.value = responseData.result!!.data!!.accessToken
-                    _refreshToken.value = responseData.result!!.data!!.refreshToken
-                    setUserInfoAtLocal()
-                    _uiState.update { UiState.Success }
-                }
+            if (responseData.isSuccess) {
 
-                is ApiState.Fail -> {
-                    _uiState.update { UiState.Fail }
-                    _uiState.update { UiState.Empty }
-                }
-
-                is ApiState.Exception -> {
-                    val errorMessage = responseData.checkException()
-                    _uiState.update { UiState.Error(errorMessage) }
-                }
+                _accessToken.value = responseData.getOrNull()!!.data!!.accessToken
+                _refreshToken.value = responseData.getOrNull()!!.data!!.refreshToken
+                setUserInfoAtLocal()
+                _uiState.update { UiState.Success }
+            } else {
+                _uiState.update { UiState.Fail }
+                _uiState.update { UiState.Empty }
             }
         }
     }
 
     private suspend fun setUserInfoAtLocal() {
-
         setUserInfoUseCase(
             _email.value,
             _provider.value,
             _accessToken.value,
             _refreshToken.value
         )
-
-
     }
 }

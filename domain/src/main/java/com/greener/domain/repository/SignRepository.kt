@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface SignRepository {
 
-    suspend fun signUp(signInfo: SignInfo): ApiState<ResponseResult>
+    suspend fun signUp(signInfo: SignInfo): Result<ResponseResult>
 
-    suspend fun getToken(email:String): ApiState<ResponseData<TokenData>>
+    suspend fun getToken(email:String): Result<ResponseData<TokenData>>
 
-    suspend fun getToken(): ApiState<ResponseData<TokenData>>
+    suspend fun getToken(): Result<ResponseData<TokenData>>
 
-    suspend fun updateToken():ApiState<ResponseData<TokenData>>
+    suspend fun updateToken():Result<ResponseData<TokenData>>
 }

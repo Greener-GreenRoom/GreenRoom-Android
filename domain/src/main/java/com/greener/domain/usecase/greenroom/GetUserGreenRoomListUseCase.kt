@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetUserGreenRoomListUseCase @Inject constructor(
     private val repository: HomeGreenRoomRepository
 ) {
-    suspend operator fun invoke(): ApiState<UserGreenRoomsInfo> {
+    suspend operator fun invoke(): Result<UserGreenRoomsInfo?> {
         return repository.getUserGreenRoomList()
     }
 }

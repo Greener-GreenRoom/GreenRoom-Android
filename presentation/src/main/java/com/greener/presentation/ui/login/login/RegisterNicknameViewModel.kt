@@ -52,21 +52,12 @@ class RegisterNicknameViewModel @Inject constructor(
             _uiState.update { UiState.Loading }
             val responseResult = signUpUseCase(signInfo)
 
-            when (responseResult) {
-                is ApiState.Success -> {
-                    getTokenFromServer(signInfo)
-                    _uiState.update { UiState.Success }
-                }
+            if (responseResult.isSuccess) {
+                getTokenFromServer(signInfo)
+                _uiState.update { UiState.Success }
 
-                is ApiState.Fail -> {
-                    _uiState.update { UiState.Fail }
-                }
-
-                is ApiState.Exception -> {
-                    val errorMessage = responseResult.checkException()
-                    _uiState.update { UiState.Error(errorMessage) }
-                }
-
+            } else {
+                _uiState.update { UiState.Fail }
             }
         }
     }
@@ -74,22 +65,15 @@ class RegisterNicknameViewModel @Inject constructor(
     private fun getTokenFromServer(signInfo: SignInfo) {
         viewModelScope.launch {
             val responseData = getTokenUseCase(signInfo.email)
-            when (responseData) {
-                is ApiState.Success -> {
-                    setUserInfoAtLocal(
-                        responseData.result!!.data!!.accessToken,
-                        responseData.result!!.data!!.refreshToken
-                    )
-                    _uiState.update { UiState.Success }
-                }
+            if (responseData.isSuccess) {
+                setUserInfoAtLocal(
+                    responseData.getOrNull()!!.data!!.accessToken,
+                    responseData.getOrNull()!!.data!!.refreshToken
+                )
+                _uiState.update { UiState.Success }
+            } else {
 
-                is ApiState.Fail -> {
-                    _uiState.update { UiState.Fail }
-                }
-
-                is ApiState.Exception -> {
-                    _uiState.update { UiState.Error(responseData.checkException()) }
-                }
+                _uiState.update { UiState.Fail }
             }
         }
     }

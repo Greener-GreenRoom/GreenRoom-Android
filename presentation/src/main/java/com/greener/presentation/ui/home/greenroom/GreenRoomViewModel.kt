@@ -50,47 +50,41 @@ class GreenRoomViewModel @AssistedInject constructor(
                 _myGreenRoom.value!!.greenRoomInfo.greenRoomBaseInfo.greenroomId,
                 todoList
             )
-            when (response) {
-                is ApiState.Success -> {
-                    Log.d("확인", "Success: ${response.result}")
-                    _increasingPoint.emit(response.result!!.increasingPoint)
-                    if (response.result!!.isLevelUpdated) {
-                        _level.emit(response.result!!.level)
-                    }
+            if (response.isSuccess) {
+                Log.d("확인", "Success: ${response.getOrNull()}")
+                _increasingPoint.emit(response.getOrNull()!!.increasingPoint)
+                if (response.getOrNull()!!.isLevelUpdated) {
+                    _level.emit(response.getOrNull()!!.level)
                 }
+            } else {
                 //TODO 에러 처리
-                is ApiState.Fail -> {
-                    Log.d("확인", "Fail: ${response.result}")
-                }
+                Log.d("확인","${response.getOrThrow()}")
 
-                is ApiState.Exception -> {
-                    Log.d("확인", "Exception: ${response.t}")
+                }
+            }
+        }
+
+        fun resetIncreasingPoint() {
+            _increasingPoint.value = 0
+        }
+
+        fun resetIsLevelUp() {
+            _level.value = 0
+        }
+
+        @AssistedFactory
+        interface GreenRoomViewModelFactory {
+            fun create(greenRoom: GreenRoomTotalInfo): GreenRoomViewModel
+        }
+
+        companion object {
+            fun providesFactory(
+                assistedFactory: GreenRoomViewModelFactory,
+                greenRoom: GreenRoomTotalInfo,
+            ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return assistedFactory.create(greenRoom) as T
                 }
             }
         }
     }
-
-    fun resetIncreasingPoint() {
-        _increasingPoint.value = 0
-    }
-
-    fun resetIsLevelUp() {
-        _level.value = 0
-    }
-
-    @AssistedFactory
-    interface GreenRoomViewModelFactory {
-        fun create(greenRoom: GreenRoomTotalInfo): GreenRoomViewModel
-    }
-
-    companion object {
-        fun providesFactory(
-            assistedFactory: GreenRoomViewModelFactory,
-            greenRoom: GreenRoomTotalInfo,
-        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return assistedFactory.create(greenRoom) as T
-            }
-        }
-    }
-}

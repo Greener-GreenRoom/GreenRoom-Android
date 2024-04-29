@@ -7,7 +7,7 @@ import com.greener.domain.model.greenroom.UserGreenRoomsInfo
 
 interface HomeGreenRoomRepository {
 
-    suspend fun getUserGreenRoomList(): ApiState<UserGreenRoomsInfo>
+    suspend fun getUserGreenRoomList(): Result<UserGreenRoomsInfo?>
 
-    suspend fun completeTodo(id: Int, todoList: List<Int>): ApiState<TodoCompleteInfo>
+    suspend fun completeTodo(id: Int, todoList: List<Int>): Result<TodoCompleteInfo>
 }

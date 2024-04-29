@@ -10,7 +10,7 @@ import javax.inject.Inject
 class UpdateTokenUseCase @Inject constructor(
     private val repository: SignRepository
 ) {
-    suspend operator fun invoke(): ApiState<ResponseData<TokenData>> {
+    suspend operator fun invoke(): Result<ResponseData<TokenData>> {
         return repository.updateToken()
     }
 }
