@@ -15,6 +15,9 @@
     <string name="nickname">닉네임</string>
     <string name="user_nickname_rule">한글 또는 영문, 10자 이내로 가능해요</string>
     <string name="confirm">확인</string>
+    <string name="util_dismiss">닫기</string>
+
+    <string name="util_detail">자세히</string>
 
 <!--  Login  -->
     <string name="google_web_client_id">712990012729-kc9m2p6a9oltejsul1dvseh0mj8d8b66.apps.googleusercontent.com</string>
@@ -94,4 +97,36 @@
     <string name="herb">허브</string>
     <string name="epiphyte">착색식물</string>
     <string name="tuberous">괴근식물</string>
+
+
+<!-- MyPage -->
+    <string name="my_page_title">마이 페이지</string>
+    <string name="my_page_until_next_level">다음 레벨까지 </string>
+    <string name="my_page_usage_days">그린룸과 함께한지</string>
+    <string name="my_page_setting">설정</string>
+    <string name="my_page_setting_push">푸시 알림 설정</string>
+    <string name="my_page_terms_of_use">이용약관</string>
+    <string name="my_page_terms_of_service">서비스 이용약관</string>
+    <string name="my_page_etc">기타</string>
+    <string name="my_page_suggest_to_developer">개발팀에 건의하기</string>
+    <string name="my_page_app_version">앱 버전</string>
+    <string name="my_page_logout">로그아웃</string>
+    <string name="my_page_withdraw"><u>회원탈퇴</u></string>
+
+    <string name="my_page_rank_list">등급표</string>
+    <string name="my_page_save_change">변경 사항 저장</string>
+    <string name="my_page_push">푸시 알림</string>
+    <string name="my_page_push_cycle_title">식물 주기 알림</string>
+    <string name="my_page_push_cycle_detail">식물 주기에 대한 알림을 받아요.</string>
+
+    <string name="my_page_push_notice_title">공지사항 알림</string>
+    <string name="my_page_push_notice_detail">새로운 공지사항에 대한 알림을 받아요.</string>
+
+    <string name="my_page_logout_msg">정말 로그아웃 할까요?</string>
+    
+    <string name="withdraw_reason_title">탈퇴하려는 이유를 알려주세요</string>
+    <string name="withdraw_select_guide">*중복 선택 가능해요</string>
+
+    
+    
 </resources>

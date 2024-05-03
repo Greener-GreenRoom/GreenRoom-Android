@@ -152,4 +152,16 @@
         <item name="cornerSize">30dp</item>
     </style>
 
+    <style name="ShapeAppearance.Circle" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="MySwitchStyle" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <!-- On 상태일 때 track의 색상을 지정합니다. -->
+        <item name="colorSurface">@color/primary</item>
+        <!-- Off 상태일 때 track의 색상을 지정합니다. -->
+        <item name="android:colorSurface">@color/gray200</item>
+    </style>
+
 </resources>

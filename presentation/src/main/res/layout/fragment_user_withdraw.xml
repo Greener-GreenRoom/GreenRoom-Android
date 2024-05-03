@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_user_with_draw_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/iv_edit_user_withdraw_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/ic_arrow_back" />
+        </com.google.android.material.appbar.MaterialToolbar>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@drawable/round_all_99"
+            android:id="@+id/view_user_withdraw_indicator1"
+            android:layout_marginEnd="2dp"
+            app:layout_constraintTop_toBottomOf="@+id/tb_user_with_draw_toolbar"
+            app:layout_constraintStart_toStartOf="@+id/gl_user_withdraw_start"
+            app:layout_constraintEnd_toStartOf="@id/view_user_withdraw_indicator2"
+            android:backgroundTint="@color/red100"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:background="@drawable/round_all_99"
+            android:id="@+id/view_user_withdraw_indicator2"
+            android:backgroundTint="@color/gray100"
+            android:layout_marginStart="2dp"
+            app:layout_constraintStart_toEndOf="@id/view_user_withdraw_indicator1"
+            app:layout_constraintEnd_toEndOf="@id/gl_user_withdraw_end"
+            app:layout_constraintTop_toTopOf="@id/view_user_withdraw_indicator1"
+            app:layout_constraintBottom_toBottomOf="@+id/view_user_withdraw_indicator1"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/head3"
+            android:textColor="@color/gray700"
+            android:id="@+id/tv_user_withdraw_reason_title"
+            android:text="@string/withdraw_reason_title"
+            android:layout_marginTop="18dp"
+            app:layout_constraintStart_toStartOf="@id/gl_user_withdraw_start"
+            app:layout_constraintTop_toBottomOf="@id/view_user_withdraw_indicator1"/>
+
+        <TextView
+            android:id="@+id/tv_user_withdraw_select_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/withdraw_select_guide"
+            android:textAppearance="@style/body4"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/gray300"
+            app:layout_constraintStart_toStartOf="@+id/gl_user_withdraw_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_withdraw_reason_title"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gl_user_withdraw_start"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gl_user_withdraw_end"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/grid_system_end"/>
+
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_my_page_level_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_my_page_level_back_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/ic_arrow_back" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_my_page_level_current_badge"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/img_default_real_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tb_my_page_level_toolbar"
+            app:shapeAppearance="@style/ShapeAppearance.Circle" />
+
+        <TextView
+            android:id="@+id/tv_my_page_level_current_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="뿌리집사"
+            android:textAppearance="@style/body1"
+            android:textColor="@color/gray700"
+            app:layout_constraintEnd_toEndOf="@id/iv_my_page_level_current_badge"
+            app:layout_constraintStart_toStartOf="@id/iv_my_page_level_current_badge"
+            app:layout_constraintTop_toBottomOf="@id/iv_my_page_level_current_badge" />
+
+        <ProgressBar
+            android:id="@+id/pb_my_page_level_progressbar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="60dp"
+            android:progressDrawable="@drawable/progressbar_level_custom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_level_current_rank"
+            tools:progress="10" />
+
+        <TextView
+            android:id="@+id/tv_my_page_level_current_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_all_99"
+            android:paddingStart="10dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="2dp"
+            android:text="Lv.4"
+            android:textAppearance="@style/caption2"
+            android:textColor="@color/gray400"
+            app:layout_constraintStart_toStartOf="@+id/pb_my_page_level_progressbar"
+            app:layout_constraintTop_toBottomOf="@+id/pb_my_page_level_progressbar" />
+
+        <ImageView
+            android:id="@+id/iv_my_page_level_seed"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/img_default_real_profile"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_page_level_current_level"
+            app:layout_constraintEnd_toStartOf="@id/tv_my_page_level_current_point"
+            app:layout_constraintTop_toTopOf="@id/tv_my_page_level_current_level" />
+
+        <TextView
+            android:id="@+id/tv_my_page_level_current_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1/40"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray400"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_page_level_current_level"
+            app:layout_constraintEnd_toEndOf="@+id/pb_my_page_level_progressbar"
+            app:layout_constraintTop_toTopOf="@id/tv_my_page_level_current_level"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:id="@+id/view_my_page_level_divider1"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_level_current_level"
+            android:background="@color/gray100"
+            android:layout_marginTop="28dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_my_page_level_guide_next_reward"
+            android:text="다음레벨, Lv.13의 보상"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray700"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@id/gl_my_page_level_start"
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_level_divider1"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_my_page_level_next_reward_item"
+            app:layout_constraintStart_toStartOf="@id/gl_my_page_level_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_my_page_level_end"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_page_level_guide_next_reward"
+            android:layout_marginTop="19dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:id="@+id/view_my_page_main_divider2"
+            app:layout_constraintTop_toBottomOf="@id/rv_my_page_level_next_reward_item"
+            android:background="@color/gray100"
+            android:layout_marginTop="18dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_my_page_level_rank_list"
+            android:text="@string/my_page_rank_list"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/gl_my_page_level_start"
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_main_divider2"
+            android:layout_marginTop="8dp"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/gl_my_page_level_start"
+            app:layout_constraintGuide_begin="20dp"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/gl_my_page_level_end"
+            app:layout_constraintGuide_end="20dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
