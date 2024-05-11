@@ -8,6 +8,7 @@ enum class PlantAccessory(itemName: String) {
     wink("wink"),
     happy("happy"),
     angry("angry"),
+    empty("empty"),
     Glasses("Glasses"),
     Sunglasses("Sunglasses"),
     Heart_Sunglasses("Heart_Sunglasses"),

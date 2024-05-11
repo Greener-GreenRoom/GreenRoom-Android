@@ -1,12 +1,18 @@
 package com.greener.presentation.ui.home.decoration.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.asset.AssetDetailTypeInfo
 import com.greener.domain.model.asset.AssetType
+import com.greener.domain.model.asset.BackgroundAccessory
 import com.greener.domain.model.asset.BackgroundAccessoryType
+import com.greener.domain.model.asset.PlantAccessory
+import com.greener.domain.model.asset.PlantAccessoryInfo
 import com.greener.domain.model.asset.PlantAccessoryType
+import com.greener.domain.model.asset.PlantShapeInfo
 import com.greener.domain.model.asset.PlantShapeType
+import com.greener.domain.model.home.PlantDecorationInfo
 import com.greener.domain.usecase.asset.GetAssetDetailTypeListUseCase
 import com.greener.domain.usecase.asset.GetBackgroundAccessoryListUseCase
 import com.greener.domain.usecase.asset.GetPlantAccessoryListUseCase
@@ -16,6 +22,11 @@ import com.greener.presentation.model.decoration.AllAssetViewItem
 import com.greener.presentation.model.decoration.AllAssetViewObject
 import com.greener.presentation.model.decoration.AssetViewItem
 import com.greener.presentation.model.decoration.AssetViewObject
+import com.greener.presentation.model.decoration.PlantDecorationIdInfo
+import com.greener.presentation.ui.home.decoration.main.adapter.DecorationMappingObject.toAllPlantShapeAssetViewItem
+import com.greener.presentation.ui.home.decoration.main.adapter.DecorationMappingObject.toPlantShapeAsserViewItem
+import com.greener.presentation.util.MutableEventFlow
+import com.greener.presentation.util.asEventFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -39,7 +50,14 @@ class DecorationViewModel @Inject constructor(
     private val _choiceViewAssets = MutableStateFlow<List<AssetViewItem>>(emptyList())
     val choiceViewAssets: StateFlow<List<AssetViewItem>> get() = _choiceViewAssets
 
-    init {onChangeAssetType(AssetType.PLANT_SHAPE)
+    private val _plantDecorationIdInfo = MutableStateFlow<PlantDecorationIdInfo>(PlantDecorationIdInfo())
+    val plantDecorationIdInfo : StateFlow<PlantDecorationIdInfo> get() = _plantDecorationIdInfo
+
+    private val _event = MutableEventFlow<Event>()
+    val event = _event.asEventFlow()
+
+    init {
+        onChangeAssetType(AssetType.PLANT_SHAPE)
     }
 
     fun onChangeAssetType(assetType: AssetType) {
@@ -85,6 +103,116 @@ class DecorationViewModel @Inject constructor(
             _choiceViewAssets.emit(emptyList())
             _assetDetailTypes.emit(typeList)
         }
+    }
+
+    fun changeAssetDetailTypeCheck(targetId: Int) {
+        viewModelScope.launch {
+            val assetDetailTypeList = assetDetailTypes.value
+            val targetDetailType = assetDetailTypeList.find { it.id == targetId }
+            assetDetailTypeList.forEach {
+                it.isChecked = it.id == targetId
+            }
+
+            if (assetDetailTypeList.find { it.id == targetId }?.type != ALL) {
+                _choiceAllViewAssets.emit(emptyList())
+                setAssetItem(targetDetailType)
+            } else {
+                _choiceViewAssets.emit(emptyList())
+                setAllAssetView(targetDetailType!!.assetType)
+            }
+            _assetDetailTypes.emit(assetDetailTypeList)
+        }
+    }
+
+    fun updatePlantShapeAsset(targetPlantShape: PlantShapeInfo, isAll: Boolean) {
+        viewModelScope.launch {
+            val itemAllList = emptyList<AllAssetViewItem>().toMutableList()
+
+            val plantShapeList = getPlantShapeListUseCase()
+            getAssetDetailTypeListUseCase(AssetType.PLANT_SHAPE).forEach { type ->
+                itemAllList.add(
+                    type.toAllPlantShapeAssetViewItem(targetPlantShape, plantShapeList)
+                )
+            }
+
+            val itemList = emptyList<AssetViewItem>().toMutableList()
+
+            val plantShapeType = plantShapeList.find { it == targetPlantShape }?.plantShapeType ?: PlantShapeType.ANNUAL
+            plantShapeList.filter { it.plantShapeType.name == plantShapeType.name }.forEach { info ->
+                itemList.add(
+                    info.toPlantShapeAsserViewItem(targetPlantShape)
+                )
+            }
+
+            val plantDecoration = plantDecorationIdInfo.value
+            val newPlantDecoration = PlantDecorationIdInfo(
+                shape = targetPlantShape.drawableID,
+                glasses = plantDecoration.glasses,
+                hairAccessory = plantDecoration.hairAccessory,
+                backgroundWindow = plantDecoration.backgroundWindow,
+                backgroundShelf = plantDecoration.backgroundShelf
+            )
+            _plantDecorationIdInfo.emit(newPlantDecoration)
+            if (isAll) _choiceAllViewAssets.emit(itemAllList) else _choiceViewAssets.emit(itemList)
+        }
+    }
+
+//    fun updatePlantAccessoryAsset(targetEyeId: Int?, targetHeadId: Int?) {
+//        viewModelScope.launch {
+//            if (targetEyeId.toString().first() == targetHeadId.toString().first()) {
+//                if ((targetEyeId == null && targetHeadId == null).not()) {
+//                    _event.emit(Event.TwoAccessoryInSameType)
+//                    return@launch
+//                }
+//            }
+//
+//            val itemAllList = emptyList<AllAssetViewItem>().toMutableList()
+//
+//            val plantAccessoryList = getPlantAccessoryListUseCase()
+//            getAssetDetailTypeListUseCase(AssetType.PLANT_ACCESSORY).forEach { type ->
+//                if (type.type == PlantAccessoryType.FACE.name) {
+//                    return@forEach
+//                }
+//                itemAllList.add(
+//                    AllAssetViewItem(
+//                        AssetType.PLANT_ACCESSORY,
+//                        AllAssetViewObject.AllPlantAccessoriesObject(
+//                            plantAccessoryType = PlantAccessoryType.valueOf(type.type),
+//                            plantAccessoryTypeCode = type.typeCode,
+//                            infoList = plantAccessoryList.filter { it.itemType.name == type.type }
+//                                .map { info ->
+//                                    PlantAccessoryInfo(
+//                                        id = info.id,
+//                                        itemType = info.itemType,
+//                                        plantAccessory = info.plantAccessory,
+//                                        limitLevel = info.limitLevel,
+//                                        drawableID = info.drawableID,
+//                                        (targetEyeId == info.id) || (targetHeadId == info.id)
+//                                    )
+//                                }
+//                        )
+//                    )
+//                )
+//            }
+//
+//
+//            val itemList = emptyList<AssetViewItem>().toMutableList()
+//
+//            val plantAccessory = getPlantAccessoryListUseCase()
+//            plantAccessory.filter { it.itemType.name == detailType.type }.forEach { info ->
+//                itemList.add(
+//                    AssetViewItem(
+//                        assetType = AssetType.PLANT_ACCESSORY,
+//                        viewObject = AssetViewObject.PlantAccessoriesObject(info)
+//                    )
+//                )
+//            }
+//
+//        }
+//    }
+
+    fun changeBackgroundAccessoryAsset(targetShelfId: Int?, targetWindowId: Int?) {
+        viewModelScope.launch { }
     }
 
     private fun setAllAssetView(assetType: AssetType) {
@@ -154,15 +282,17 @@ class DecorationViewModel @Inject constructor(
             when (detailType!!.assetType) {
                 AssetType.PLANT_SHAPE -> {
                     val plantShape = getPlantShapeListUseCase()
-                    plantShape.filter { it.plantShapeType.name == detailType.type }.forEach { info ->
-                        itemList.add(
-                            AssetViewItem(
-                                assetType = AssetType.PLANT_SHAPE,
-                                viewObject = AssetViewObject.PlantShapeObject(info)
+                    plantShape.filter { it.plantShapeType.name == detailType.type }
+                        .forEach { info ->
+                            itemList.add(
+                                AssetViewItem(
+                                    assetType = AssetType.PLANT_SHAPE,
+                                    viewObject = AssetViewObject.PlantShapeObject(info)
+                                )
                             )
-                        )
-                    }
+                        }
                 }
+
                 AssetType.PLANT_ACCESSORY -> {
                     val plantAccessory = getPlantAccessoryListUseCase()
                     plantAccessory.filter { it.itemType.name == detailType.type }.forEach { info ->
@@ -174,50 +304,34 @@ class DecorationViewModel @Inject constructor(
                         )
                     }
                 }
+
                 AssetType.BACKGROUND_ACCESSORY -> {
                     val backgroundAccessory = getBackgroundAccessoryListUseCase()
-                    backgroundAccessory.filter { it.itemType.name == detailType.type }.forEach { info ->
-                        itemList.add(
-                            AssetViewItem(
-                                assetType = AssetType.BACKGROUND_ACCESSORY,
-                                viewObject = AssetViewObject.BackgroundAccessoriesObject(info)
+                    backgroundAccessory.filter { it.itemType.name == detailType.type }
+                        .forEach { info ->
+                            itemList.add(
+                                AssetViewItem(
+                                    assetType = AssetType.BACKGROUND_ACCESSORY,
+                                    viewObject = AssetViewObject.BackgroundAccessoriesObject(info)
+                                )
                             )
-                        )
-                    }
+                        }
                 }
             }
             _choiceViewAssets.emit(itemList)
         }
     }
 
-    fun changeAssetDetailTypeCheck(targetId: Int) {
+    fun updatePlantDecoration(newPlantDecorationIdInfo: PlantDecorationIdInfo) {
         viewModelScope.launch {
-            val assetDetailTypeList = assetDetailTypes.value
-            val targetDetailType = assetDetailTypeList.find { it.id == targetId }
-            assetDetailTypeList.forEach {
-                it.isChecked = it.id == targetId
-            }
-
-            if (assetDetailTypeList.find { it.id == targetId }?.type != ALL) {
-                _choiceAllViewAssets.emit(emptyList())
-                setAssetItem(targetDetailType)
-            } else {
-                _choiceViewAssets.emit(emptyList())
-                setAllAssetView(targetDetailType!!.assetType)
-            }
-            _assetDetailTypes.emit(assetDetailTypeList)
+            // todo preview 전환
+            _plantDecorationIdInfo.emit(newPlantDecorationIdInfo)
         }
     }
 
-    fun changePlantShapeAsset(targetPlantShapeId: Int) {
-        viewModelScope.launch {
-        }
+    sealed class Event() {
+        object TwoAccessoryInSameType : Event()
     }
-
-    data class CurrentAssetInfo(
-        var isAll: Boolean,
-        var assetType: AssetType
-    )
 
     companion object {
         private const val ALL = "all"

@@ -9,7 +9,7 @@
             type="com.greener.domain.model.asset.PlantShapeInfo" />
 
         <variable
-            name="plantAccessroy"
+            name="plantAccessory"
             type="com.greener.domain.model.asset.PlantAccessoryInfo" />
     </data>
 
@@ -31,6 +31,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_item_asset_detail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textAppearance="@style/body4"

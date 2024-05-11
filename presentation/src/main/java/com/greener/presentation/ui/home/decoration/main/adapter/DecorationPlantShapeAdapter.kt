@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.decoration.main
+package com.greener.presentation.ui.home.decoration.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

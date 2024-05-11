@@ -1,17 +1,12 @@
-package com.greener.presentation.ui.home.decoration.main
+package com.greener.presentation.ui.home.decoration.main.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greener.domain.model.asset.AssetDetailTypeInfo
-import com.greener.presentation.R
 import com.greener.presentation.databinding.ItemAssetDetailTypeDarkBinding
-import java.util.UUID
 
 class DecorationAssetDetailTypeAdapter(
     private val changeCheck : (Int) -> Unit

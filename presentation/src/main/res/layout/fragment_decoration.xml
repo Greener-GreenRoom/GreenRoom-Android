@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.greener.presentation.ui.home.decoration.main.DecorationViewModel" />
@@ -50,8 +49,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_decoration_preview"
+        <FrameLayout
+            android:id="@+id/fl_decoration_preview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="1:1"
@@ -66,7 +65,7 @@
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="@id/gl_decoration_end"
             app:layout_constraintStart_toStartOf="@id/gl_decoration_start"
-            app:layout_constraintTop_toBottomOf="@+id/vp_decoration_preview"
+            app:layout_constraintTop_toBottomOf="@+id/fl_decoration_preview"
             app:tabIndicatorHeight="0dp"
             app:tabSelectedTextColor="@color/green100"
             app:tabTextAppearance="@style/body3"

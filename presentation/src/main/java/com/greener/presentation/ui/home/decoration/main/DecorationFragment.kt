@@ -1,17 +1,23 @@
 package com.greener.presentation.ui.home.decoration.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
+import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.greener.domain.model.asset.AssetType
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentDecorationBinding
+import com.greener.presentation.model.decoration.PlantDecorationIdInfo
 import com.greener.presentation.ui.base.BaseFragment
+import com.greener.presentation.ui.home.decoration.background.DecorationBackgroundPreviewFragment
+import com.greener.presentation.ui.home.decoration.main.adapter.DecorationAssetAllViewAdapter
+import com.greener.presentation.ui.home.decoration.main.adapter.DecorationAssetDetailTypeAdapter
+import com.greener.presentation.ui.home.decoration.main.adapter.DecorationAssetViewAdapter
+import com.greener.presentation.ui.home.decoration.plant.DecorationPlantPreviewFragment
 import com.greener.presentation.util.SpaceDecoration
 import com.greener.presentation.util.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,13 +32,14 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
     private val decorationAssetDetailTypeAdapter = DecorationAssetDetailTypeAdapter{
         viewModel.changeAssetDetailTypeCheck(it)
     }
-    private val decorationAllViewAdapter = DecorationAssetAllViewAdapter()
-    private val decorationViewAdapter = DecorationAssetViewAdapter()
+    private val decorationAllViewAdapter = DecorationAssetAllViewAdapter{ viewModel.updatePlantShapeAsset(it, true)}
+    private val decorationViewAdapter = DecorationAssetViewAdapter{ viewModel.updatePlantShapeAsset(it, false) }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initDecorationPreviewViewPager()
         initRecyclerView()
+        initTabLayout()
     }
 
     override fun initCollector() {
@@ -52,6 +59,12 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
                 decorationViewAdapter.submitList(it)
             }
         }
+
+        repeatOnStarted(viewLifecycleOwner) {
+            viewModel.plantDecorationIdInfo.collectLatest { info ->
+                updatePreview(DecorationPlantPreviewFragment(info))
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -62,8 +75,9 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
     }
 
     private fun initRecyclerView() {
-        val flexboxLayout = FlexboxLayoutManager(requireContext())
-        flexboxLayout.justifyContent = JustifyContent.CENTER
+        val flexboxLayout = FlexboxLayoutManager(requireContext()).apply {
+            flexWrap = FlexWrap.WRAP
+        }
 
         binding.rvDecorationAssetDetailType.run {
             adapter = decorationAssetDetailTypeAdapter
@@ -82,28 +96,11 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private fun initDecorationPreviewViewPager() {
-        val viewPager = binding.vpDecorationPreview
+    private fun initTabLayout() {
         val tabLayout = binding.tblDecorationAssetType
-
-        viewPager.apply {
-            adapter = DecorationPreviewAdapter(childFragmentManager, lifecycle)
-            isUserInputEnabled = false
-        }
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            when (position) {
-                AssetType.PLANT_SHAPE.ordinal -> { tab.text = getString(R.string.decoration_plant_shape) }
-                AssetType.PLANT_ACCESSORY.ordinal -> { tab.text = getString(R.string.decoration_plant_accessory) }
-                AssetType.BACKGROUND_ACCESSORY.ordinal -> { tab.text = getString(R.string.decoration_background_accessory) }
-            }
-        }.attach()
-
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-
-                when (tab?.position) {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                when (tab.position) {
                     AssetType.PLANT_SHAPE.ordinal -> {
                         binding.tbDecoration.apply {
                             setTitleTextColor(requireContext().getColor(R.color.white))
@@ -132,5 +129,13 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
+    }
+
+    private fun updatePreview(fragment: Fragment) {
+        val transaction = childFragmentManager.beginTransaction()
+        transaction.apply {
+            replace(binding.flDecorationPreview.id, fragment)
+            commit()
+        }
     }
 }

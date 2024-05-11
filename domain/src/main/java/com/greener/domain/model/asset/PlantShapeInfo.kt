@@ -5,5 +5,5 @@ data class PlantShapeInfo(
     val plantShapeType: PlantShapeType,
     val plantShape: PlantShape,
     val drawableID: Int,
-    val isChecked: Boolean = true
+    val isChecked: Boolean = false
 )
