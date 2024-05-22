@@ -2,7 +2,9 @@ package com.greener.presentation.ui.home.main
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewPropertyAnimator
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -55,6 +57,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         binding.includeHomeBottomSheet.tvBottomSheetHomeAddPlant.setOnClickListener {
             moveToRegistration()
         }
+
+        binding.tbHomeToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.item_home_toolbar_my_info -> {
+                    moveToMyPage()
+                    true
+                }
+
+                else -> {
+                    true
+                }
+
+            }
+
+        }
     }
 
     private fun setGreenRoomViewPager() {
@@ -91,6 +108,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     private fun moveToRegistration() {
         findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
+    }
+
+    private fun moveToMyPage() {
+        findNavController().navigate(R.id.action_homeFragment_to_myPageMainFragment)
+
     }
 
     private fun select(position: Int) {
@@ -213,9 +235,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
                         // Fade the page relative to its size.
                         alpha = (
-                            MIN_ALPHA +
-                                (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA))
-                            )
+                                MIN_ALPHA +
+                                        (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA))
+                                )
                     }
 
                     else -> { // (1,+Infinity]

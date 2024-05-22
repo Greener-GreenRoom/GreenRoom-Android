@@ -34,6 +34,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_dialog_logout_title" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dialog_logout_confirm"
+            style="@style/rounded_corner_8_green200_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/effect_ripple_btn"
+            android:backgroundTint="@color/red100"
+            android:paddingStart="@dimen/padding_button_default_horizontal"
+            android:paddingTop="@dimen/padding_button_default_vertical"
+            android:paddingEnd="@dimen/padding_button_default_horizontal"
+            android:paddingBottom="@dimen/padding_button_default_vertical"
+            android:text="@string/my_page_logout"
+            android:textAppearance="@style/body4"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_dialog_logout_dismiss"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_dialog_logout_dismiss"
+            app:layout_constraintTop_toTopOf="@id/btn_dialog_logout_dismiss" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_dialog_logout_dismiss"
             style="@style/rounded_corner_8_gray100_button"
@@ -41,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:focusable="true"
@@ -54,28 +75,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_dialog_logout_confirm"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_logout_msg"
-            app:layout_constraintWidth_default="wrap" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_logout_msg" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_dialog_logout_confirm"
-            style="@style/rounded_corner_8_green200_button"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_dialog_logout_center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/effect_ripple_btn"
-            android:backgroundTint="@color/red100"
-            android:paddingStart="@dimen/padding_button_default_horizontal"
-            android:paddingTop="@dimen/padding_button_default_vertical"
-            android:paddingEnd="@dimen/padding_button_default_horizontal"
-            android:paddingBottom="@dimen/padding_button_default_vertical"
-            android:text="@string/my_page_logout"
-            android:textAppearance="@style/body4"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_dialog_logout_dismiss"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_dialog_logout_dismiss"
-            app:layout_constraintTop_toTopOf="@id/btn_dialog_logout_dismiss"
-            app:layout_constraintWidth_default="wrap" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

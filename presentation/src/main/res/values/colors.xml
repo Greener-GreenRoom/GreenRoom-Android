@@ -32,5 +32,6 @@
     <color name ="sample_wall">#E9FFF3</color>
     <color name="registration_background">#B8DCCD</color>
     <color name="tip_background">#0D3292F2</color>
+    <color name ="withdraw_reason_selected_background">#0DFF7373</color>
 
 </resources>

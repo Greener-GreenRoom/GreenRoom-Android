@@ -1,6 +1,7 @@
 package com.greener.data.di
 
 import com.greener.data.interceptor.AuthInterceptor
+import com.greener.data.service.MyPageService
 import com.greener.data.service.SignService
 import com.greener.data.source.local.AuthDataSource
 import com.squareup.moshi.Moshi
@@ -33,6 +34,12 @@ object NetworkModule {
     @Singleton
     fun provideSignService(retrofit: Retrofit): SignService {
         return retrofit.create(SignService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMyPageService(retrofit: Retrofit): MyPageService {
+        return retrofit.create(MyPageService::class.java)
     }
 
     @Singleton

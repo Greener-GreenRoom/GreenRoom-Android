@@ -113,11 +113,13 @@
     <string name="my_page_logout">로그아웃</string>
     <string name="my_page_withdraw"><u>회원탈퇴</u></string>
 
+    <string name="my_page_next_reward_guide">다음 레벨, Lv.%1$d의 보상</string>
     <string name="my_page_rank_list">등급표</string>
     <string name="my_page_save_change">변경 사항 저장</string>
     <string name="my_page_push">푸시 알림</string>
     <string name="my_page_push_cycle_title">식물 주기 알림</string>
     <string name="my_page_push_cycle_detail">식물 주기에 대한 알림을 받아요.</string>
+    <string name="my_page_my_grade">%1$s · Lv.%2$d</string>
 
     <string name="my_page_push_notice_title">공지사항 알림</string>
     <string name="my_page_push_notice_detail">새로운 공지사항에 대한 알림을 받아요.</string>

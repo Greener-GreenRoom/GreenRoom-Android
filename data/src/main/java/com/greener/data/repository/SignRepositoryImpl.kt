@@ -2,13 +2,13 @@ package com.greener.data.repository
 
 import com.greener.data.model.auth.TokenDTO
 import com.greener.data.model.response.ResponseFormDTO
-import com.greener.data.model.sign.request.SignUpRequestDTO
+import com.greener.data.model.sign.request.UserAccountDTO
 import com.greener.data.source.local.AuthDataSource
 import com.greener.data.source.remote.SignDataSource
 import com.greener.domain.model.ApiState
 import com.greener.domain.model.response.ResponseData
 import com.greener.domain.model.response.ResponseResult
-import com.greener.domain.model.sign.SignInfo
+import com.greener.domain.model.sign.UserAccountInfo
 import com.greener.domain.model.auth.TokenData
 import com.greener.domain.repository.SignRepository
 import kotlinx.coroutines.flow.first
@@ -19,8 +19,8 @@ class SignRepositoryImpl @Inject constructor(
     private val signDataSource: SignDataSource,
     private val authDataSource: AuthDataSource
 ) : SignRepository {
-    override suspend fun signUp(signInfo: SignInfo): ApiState<ResponseResult> {
-        val signUpRequestInfo = mapperSignUpInfoToData(signInfo)
+    override suspend fun signUp(userAccountInfo: UserAccountInfo): ApiState<ResponseResult> {
+        val signUpRequestInfo = mapperSignUpInfoToData(userAccountInfo)
 
         val responseFormDTO = signDataSource.signUp(signUpRequestInfo)
         return when (responseFormDTO) {
@@ -121,8 +121,8 @@ class SignRepositoryImpl @Inject constructor(
         }
         return ResponseData(responseResult, tokenData)
     }
-    private fun mapperSignUpInfoToData(signInfo: SignInfo): SignUpRequestDTO {
-        return SignUpRequestDTO(signInfo.name, signInfo.email, signInfo.photoUrl, signInfo.provider)
+    private fun mapperSignUpInfoToData(userAccountInfo: UserAccountInfo): UserAccountDTO {
+        return UserAccountDTO(userAccountInfo.name, userAccountInfo.email, userAccountInfo.photoUrl, userAccountInfo.provider)
     }
 
 }

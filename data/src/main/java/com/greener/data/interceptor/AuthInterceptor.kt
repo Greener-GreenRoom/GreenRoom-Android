@@ -1,5 +1,6 @@
 package com.greener.data.interceptor
 
+import android.util.Log
 import com.greener.data.source.local.AuthDataSource
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
@@ -13,6 +14,7 @@ class AuthInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val token: String? = runBlocking {
             val accessToken = dataStore.getAccessToken().firstOrNull()
+            Log.d("확인","token: $accessToken")
             accessToken
         }
         val request = chain.request().newBuilder().header(AUTHORIZATION, "Bearer $token").build()

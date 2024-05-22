@@ -2,7 +2,10 @@ package com.greener.data.repository
 
 import android.Manifest
 import android.content.Context
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
+import android.provider.MediaStore
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -17,11 +20,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 class ImageRepositoryImpl @Inject constructor(
     @ActivityContext private val context: Context,
-): ImageRepository {
+) : ImageRepository {
     private val imageEvent = MutableSharedFlow<String>()
     private val pickImageResult = (context as AppCompatActivity).registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         CoroutineScope(Dispatchers.Default).launch {
@@ -31,7 +35,7 @@ class ImageRepositoryImpl @Inject constructor(
 
     private val getTakePicturePreview = (context as AppCompatActivity).registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
         CoroutineScope(Dispatchers.Default).launch {
-            imageEvent.emit(it.toString())
+            it?.let { it1 -> bitmapToUri(it1).toString() }?.let { it2 -> imageEvent.emit(it2) }
         }
     }
 
@@ -46,7 +50,7 @@ class ImageRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun takePicture(): Result<String>  {
+    override suspend fun takePicture(): Result<String> {
         val result = getCameraPermissionResult()
 
         return if (result.isGranted) {
@@ -56,7 +60,6 @@ class ImageRepositoryImpl @Inject constructor(
             Result.failure(RequestDeniedException(result.deniedPermissions.first()))
         }
     }
-
 
     private suspend fun getReadPermissionResult(): TedPermissionResult {
         val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -75,4 +78,12 @@ class ImageRepositoryImpl @Inject constructor(
             .setDeniedMessage(R.string.camera_permission_denied)
             .setPermissions(Manifest.permission.CAMERA)
             .check()
+
+    private fun bitmapToUri(bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "", null)
+        return Uri.parse(path)
+    }
 }

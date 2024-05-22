@@ -1,7 +1,8 @@
 package com.greener.domain.model.mypage
 
 data class MyPageInfo(
-    val name: String,
+    val simpleProfile: SimpleProfile,
     val gradeDto: Grade,
-    val daysFromCreated: Int
+    val daysFromCreated: Int,
+    val myTier:GradeTier
 )

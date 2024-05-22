@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.greener.presentation.ui.mypage.main.MyPageMainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,20 +20,13 @@
             android:layout_height="56dp"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_my_page_main_back_arrow"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="18dp"
-                android:src="@drawable/ic_arrow_back" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
                 android:text="@string/my_page_title"
                 android:textAppearance="@style/body1"
                 android:textColor="@color/gray700" />
@@ -49,17 +45,19 @@
                 android:id="@+id/iv_my_page_main_my_profile"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                setMyProfileImage="@{vm.profile.profileUrl}"
+                tools:src="@drawable/img_default_real_profile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearance="@style/ShapeAppearance.Circle"
-                tools:src="@drawable/img_default_real_profile" />
+                app:shapeAppearance="@style/ShapeAppearance.Circle" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_my_page_main_my_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:text="@{vm.profile.name}"
                 android:textAppearance="@style/body1"
                 android:textColor="@color/gray700"
                 app:layout_constraintBottom_toTopOf="@id/iv_my_page_main_badge"
@@ -68,31 +66,33 @@
                 tools:text="식물 사랑" />
 
             <ImageView
-                android:id="@+id/iv_my_page_main_modify_nickname"
+                android:id="@+id/iv_my_page_main_to_edit_profile"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginStart="4dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_my_page_main_my_nickname"
                 app:layout_constraintStart_toEndOf="@id/tv_my_page_main_my_nickname"
                 app:layout_constraintTop_toTopOf="@+id/tv_my_page_main_my_nickname"
-                tools:src="@drawable/shape_circle" />
+                android:src="@drawable/ic_edit" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_my_page_main_badge"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginTop="4dp"
+                tools:src="@drawable/img_default_real_profile"
+                setMyBadge="@{vm.myTier}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_my_page_main_my_profile"
                 app:layout_constraintStart_toStartOf="@id/tv_my_page_main_my_nickname"
                 app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_my_nickname"
-                app:shapeAppearance="@style/ShapeAppearance.Circle"
-                tools:src="@drawable/img_default_real_profile" />
+                app:shapeAppearance="@style/ShapeAppearance.Circle" />
 
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:text="@{vm.grade.description+ ` · Lv.` + Integer.toString(vm.grade.currentLevel)}"
                 android:textAppearance="@style/caption2"
                 android:textColor="@color/gray400"
                 app:layout_constraintBottom_toBottomOf="@id/iv_my_page_main_badge"
@@ -138,12 +138,13 @@
                     android:id="@+id/tv_my_page_main_require_seed_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 씨앗 6개"
+                    android:text="@{` 씨앗` + Integer.toString(vm.grade.requiredSeedToNextLevel)+ `개`}"
                     android:textAppearance="@style/caption2"
                     android:textColor="@color/gray700"
                     app:layout_constraintBottom_toBottomOf="@id/tv_my_page_main_next_level"
                     app:layout_constraintStart_toEndOf="@id/tv_my_page_main_next_level"
-                    app:layout_constraintTop_toTopOf="@id/tv_my_page_main_next_level" />
+                    app:layout_constraintTop_toTopOf="@id/tv_my_page_main_next_level"
+                    tools:text=" 씨앗 6개" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -153,6 +154,7 @@
                     android:minHeight="0dp"
                     android:paddingStart="5dp"
                     android:paddingTop="2dp"
+                    android:id="@+id/tv_my_page_main_to_level"
                     android:paddingEnd="5dp"
                     android:paddingBottom="2dp"
                     android:text="@string/util_detail"
@@ -167,7 +169,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/shape_circle"
+                    android:src="@drawable/img_fill_heart"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_my_page_main_seed" />
 
@@ -187,12 +189,13 @@
                     android:id="@+id/tv_my_page_main_usage_days"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 14일째"
+                    android:text="@{` `+Integer.toString(vm.daysFromCreated) + `일째`}"
                     android:textAppearance="@style/caption2"
                     android:textColor="@color/gray700"
                     app:layout_constraintBottom_toBottomOf="@id/tv_my_page_main_usage_days_with_green_room"
                     app:layout_constraintStart_toEndOf="@+id/tv_my_page_main_usage_days_with_green_room"
-                    app:layout_constraintTop_toTopOf="@id/tv_my_page_main_usage_days_with_green_room" />
+                    app:layout_constraintTop_toTopOf="@id/tv_my_page_main_usage_days_with_green_room"
+                    tools:text=" 14일째" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -204,118 +207,143 @@
             android:background="@color/gray100"
             app:layout_constraintTop_toBottomOf="@id/ly_my_page_main_my_info" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_my_page_main_setting"
+        <ScrollView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            android:text="@string/my_page_setting"
-            android:textAppearance="@style/caption2"
-            android:textColor="@color/gray300"
-            app:layout_constraintEnd_toEndOf="@id/gl_my_page_main_end"
-            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
-            app:layout_constraintTop_toBottomOf="@id/view_my_page_main_divider" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_my_page_main_push_notification_setting"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
+            android:overScrollMode="always"
             android:paddingBottom="12dp"
-            android:text="@string/my_page_setting_push"
-            android:textAppearance="@style/body4"
-            android:textColor="@color/gray700"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_my_page_main_end"
             app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_setting" />
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_main_divider"
+           >
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_my_page_main_terms_of_use"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/my_page_terms_of_use"
-            android:textAppearance="@style/caption2"
-            android:textColor="@color/gray300"
-            app:layout_constraintEnd_toEndOf="@id/gl_my_page_main_end"
-            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_push_notification_setting" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_my_page_main_terms_of_service"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:text="@string/my_page_terms_of_service"
-            android:textAppearance="@style/body4"
-            android:textColor="@color/gray700"
-            app:layout_constraintEnd_toEndOf="@id/gl_my_page_main_end"
-            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_terms_of_use" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_my_page_main_etc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/my_page_etc"
-            android:textAppearance="@style/caption2"
-            android:textColor="@color/gray300"
-            app:layout_constraintEnd_toEndOf="@id/gl_my_page_main_end"
-            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_terms_of_service" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_my_page_main_suggest"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:text="@string/my_page_suggest_to_developer"
-            android:textAppearance="@style/body4"
-            android:textColor="@color/gray700"
-            app:layout_constraintEnd_toEndOf="@id/gl_my_page_main_end"
-            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_etc" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_my_page_main_app_version_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:text="앱 버전 1.0.0"
-            android:textAppearance="@style/body4"
-            android:textColor="@color/gray700"
-            app:layout_constraintEnd_toEndOf="@id/gl_my_page_main_end"
-            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_suggest" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_my_page_main_logout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:text="@string/my_page_logout"
-            android:textAppearance="@style/body4"
-            android:textColor="@color/gray700"
-            app:layout_constraintEnd_toEndOf="@id/gl_my_page_main_end"
-            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_app_version_title" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_setting"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_page_setting"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray300"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_my_page_main_withdraw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/my_page_withdraw"
-            android:textAppearance="@style/caption2"
-            android:textColor="@color/gray400"
-            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_logout" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_push_notification_setting"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/my_page_setting_push"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_setting" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_terms_of_use"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/my_page_terms_of_use"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray300"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_push_notification_setting" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_terms_of_service"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/my_page_terms_of_service"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_terms_of_use" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_etc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/my_page_etc"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray300"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_terms_of_service" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_suggest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/my_page_suggest_to_developer"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_etc" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_app_version_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="앱 버전 1.0.0"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_suggest" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_logout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/my_page_logout"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_app_version_title" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_withdraw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/my_page_withdraw"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray400"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_logout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_my_page_main_start"

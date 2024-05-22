@@ -1,6 +1,6 @@
 package com.greener.data.source.remote
 
-import com.greener.data.model.sign.request.SignUpRequestDTO
+import com.greener.data.model.sign.request.UserAccountDTO
 import com.greener.data.model.auth.TokenDTO
 import com.greener.data.model.sign.request.AuthenticateRequestDTO
 import com.greener.data.model.response.ResponseFormDTO
@@ -13,9 +13,9 @@ import javax.inject.Inject
 class SignDataSource @Inject constructor(
     private val service: SignService
 ) {
-    suspend fun signUp(signUpRequestDTO: SignUpRequestDTO): ApiState<ResponseFormDTO<TokenDTO>> {
+    suspend fun signUp(userAccountDTO: UserAccountDTO): ApiState<ResponseFormDTO<TokenDTO>> {
         return try {
-            val response = service.signUp(signUpRequestDTO)
+            val response = service.signUp(userAccountDTO)
             if (response.responseDTO.output == SUCCESS) {
                 ApiState.Success(response)
             } else {

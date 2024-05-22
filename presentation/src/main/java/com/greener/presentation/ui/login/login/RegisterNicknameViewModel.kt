@@ -3,7 +3,7 @@ package com.greener.presentation.ui.login.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.ApiState
-import com.greener.domain.model.sign.SignInfo
+import com.greener.domain.model.sign.UserAccountInfo
 import com.greener.domain.usecase.datastore.SetUserInfoUseCase
 import com.greener.domain.usecase.sign.GetTokenUseCase
 import com.greener.domain.usecase.sign.SignUpUseCase
@@ -47,14 +47,14 @@ class RegisterNicknameViewModel @Inject constructor(
     }
 
     fun signUp() {
-        val signInfo = SignInfo(_email.value, _nickname.value, _provider.value, _photoUrl.value)
+        val userAccountInfo = UserAccountInfo( _nickname.value, _email.value, _photoUrl.value,_provider.value)
         viewModelScope.launch {
             _uiState.update { UiState.Loading }
-            val responseResult = signUpUseCase(signInfo)
+            val responseResult = signUpUseCase(userAccountInfo)
 
             when (responseResult) {
                 is ApiState.Success -> {
-                    getTokenFromServer(signInfo)
+                    getTokenFromServer(userAccountInfo)
                 }
 
                 is ApiState.Fail -> {
@@ -70,8 +70,8 @@ class RegisterNicknameViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getTokenFromServer(signInfo: SignInfo) {
-        val responseData = getTokenUseCase(signInfo.email)
+    private suspend fun getTokenFromServer(userAccountInfo: UserAccountInfo) {
+        val responseData = getTokenUseCase(userAccountInfo.email)
         when (responseData) {
             is ApiState.Success -> {
                 setUserInfoAtLocal(
