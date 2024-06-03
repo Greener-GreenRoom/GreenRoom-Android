@@ -55,6 +55,18 @@ class MyPageDataSource @Inject constructor(
             ApiState.Exception(e)
         }
     }
+    suspend fun editUserProfile(userDto:RequestBody):ApiState<ResponseFormDTO<UserAccountDTO>> {
+        return try {
+            val response = service.editUserProfile(userDto)
+            if (response.responseDTO.output == 0) {
+                ApiState.Success(response)
+            } else {
+                ApiState.Fail(response)
+            }
+        } catch (e:Exception) {
+            ApiState.Exception(e)
+        }
+    }
 
     suspend fun logout() {
         service.logout()

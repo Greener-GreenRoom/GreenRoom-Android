@@ -24,10 +24,6 @@ fun setMyEditProfileImage(view: ShapeableImageView, url: String?) {
     Log.d("확인","url: $url")
     val context = view.context
 
-    /*if(url == "" ) {
-        view.setImageResource(R.drawable.img_edit_default)
-        return
-    }*/
     Glide.with(context)
         .applyDefaultRequestOptions( RequestOptions()
             .placeholder(R.drawable.img_edit_default)

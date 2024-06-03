@@ -10,7 +10,7 @@ interface MyPageRepository {
 
     suspend fun getMyLevelInfo(): Result<MyLevelInfo>
 
-    suspend fun editUserProfile(name: String, profileUrl: String): Result<UserAccountInfo>
+    suspend fun editUserProfile(name: String, profileUrl: String?): Result<UserAccountInfo>
 
     suspend fun logout()
 }

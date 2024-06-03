@@ -7,7 +7,7 @@ import javax.inject.Inject
 class EditUserProfileUseCase @Inject constructor(
     private val repository: MyPageRepository
 ) {
-    suspend operator fun invoke(name:String,profileUrl:String):Result<UserAccountInfo> {
+    suspend operator fun invoke(name:String,profileUrl:String?):Result<UserAccountInfo> {
         return repository.editUserProfile(name,profileUrl)
     }
 }

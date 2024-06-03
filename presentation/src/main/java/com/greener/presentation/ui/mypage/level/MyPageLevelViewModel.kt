@@ -1,5 +1,6 @@
 package com.greener.presentation.ui.mypage.level
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.mypage.GradeTier
@@ -28,7 +29,6 @@ class MyPageLevelViewModel @Inject constructor(
             val result = getMyLevelInfoUseCase()
             if (result.isSuccess) {
                 _myLevelInfo.update { result.getOrNull()!! }
-
             }
         }
     }

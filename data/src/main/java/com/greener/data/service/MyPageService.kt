@@ -27,6 +27,12 @@ interface MyPageService {
         @Part("userDto") userDto: RequestBody
     ): ResponseFormDTO<UserAccountDTO>
 
+    @Multipart
+    @PATCH("api/user")
+    suspend fun editUserProfile(
+        @Part("userDto") userDto: RequestBody
+    ): ResponseFormDTO<UserAccountDTO>
+
     @DELETE("api/authenticate/logout")
     suspend fun logout()
 }

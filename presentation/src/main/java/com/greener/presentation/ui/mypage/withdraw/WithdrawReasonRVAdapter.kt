@@ -12,13 +12,16 @@ import com.greener.domain.model.mypage.WithdrawReason
 import com.greener.presentation.R
 import com.greener.presentation.databinding.ItemWithdrawReasonBinding
 
-class WithdrawReasonRVAdapter(val items: List<WithdrawReason>) :
+class WithdrawReasonRVAdapter(
+    val items: List<WithdrawReason>,
+    val showInputArea: () -> Unit,
+    val hideInputArea: () -> Unit,
+) :
     RecyclerView.Adapter<WithdrawReasonRVAdapter.WithdrawReasonViewHolder>() {
     val selectedReasons = mutableSetOf<WithdrawReason>()
 
     init {
         Log.d("확인", "itmes: $items")
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WithdrawReasonViewHolder {
@@ -49,7 +52,12 @@ class WithdrawReasonRVAdapter(val items: List<WithdrawReason>) :
         val context = binding.root.context
         selectedReasons.add(binding.item!!)
         binding.cvItemWithdrawReason.strokeColor = getColor(context, R.color.red100)
-        binding.cvItemWithdrawReason.setCardBackgroundColor(getColor(context, R.color.withdraw_reason_selected_background))
+        binding.cvItemWithdrawReason.setCardBackgroundColor(
+            getColor(
+                context,
+                R.color.withdraw_reason_selected_background
+            )
+        )
 
 
         binding.tvItemWithdrawReason.setTextColor(
@@ -59,6 +67,9 @@ class WithdrawReasonRVAdapter(val items: List<WithdrawReason>) :
             )
         )
         binding.ivWithdrawReasonCheck.visibility = View.VISIBLE
+        if (binding.item == WithdrawReason.DIRECT_INPUT) {
+            showInputArea()
+        }
 
     }
 
@@ -76,6 +87,9 @@ class WithdrawReasonRVAdapter(val items: List<WithdrawReason>) :
             )
         )
         binding.ivWithdrawReasonCheck.visibility = View.INVISIBLE
+        if(binding.item == WithdrawReason.DIRECT_INPUT) {
+            hideInputArea()
+        }
     }
 
     inner class WithdrawReasonViewHolder(val binding: ItemWithdrawReasonBinding) :

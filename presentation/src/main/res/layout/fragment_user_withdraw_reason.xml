@@ -88,16 +88,18 @@
             android:background="@drawable/round_all_4_no_stroke"
             android:backgroundTint="@color/gray000"
             android:maxLength="120"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:counterEnabled="true"
             app:counterMaxLength="120"
             app:counterTextAppearance="@style/caption2"
             app:counterTextColor="@color/gray300"
+            app:layout_constraintBottom_toTopOf="@id/btn_withdraw_reason_next"
             app:layout_constraintEnd_toEndOf="@id/gl_user_withdraw_end"
             app:layout_constraintStart_toStartOf="@id/gl_user_withdraw_start"
-            app:layout_constraintTop_toBottomOf="@id/rv_withdraw_reason">
+            android:layout_marginBottom="30dp"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_withdraw_reason"
@@ -119,9 +121,11 @@
             android:backgroundTint="@color/red100"
             android:text="@string/util_next"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/gl_user_withdraw_bottom"
             app:layout_constraintEnd_toEndOf="@id/gl_user_withdraw_end"
-            app:layout_constraintStart_toStartOf="@id/gl_user_withdraw_start" />
+            app:layout_constraintStart_toStartOf="@id/gl_user_withdraw_start"
+
+            />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_user_withdraw_start"
@@ -135,6 +139,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/grid_system_end" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_user_withdraw_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintGuide_end="@dimen/grid_system_end" />
 
 

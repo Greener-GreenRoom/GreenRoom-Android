@@ -2,6 +2,7 @@ package com.greener.presentation.ui.mypage.edit
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.greener.presentation.databinding.FragmentEditPushBinding
 import com.greener.presentation.ui.base.BaseFragment
 
@@ -13,6 +14,8 @@ class EditPushFragment:BaseFragment<FragmentEditPushBinding>(
     }
 
     override fun initListener() {
-
+        binding.tbEditPushToolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 }

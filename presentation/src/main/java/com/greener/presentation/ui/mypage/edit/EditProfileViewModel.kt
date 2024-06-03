@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.usecase.image.PickImageUseCase
 import com.greener.domain.usecase.mypage.EditUserProfileUseCase
+import com.greener.presentation.model.UiState
 import com.greener.presentation.model.mypage.UserSimpleInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,9 +26,21 @@ class EditProfileViewModel @Inject constructor(
     private val _profileImage = MutableStateFlow<String?>("")
     val profileImage: StateFlow<String?> get() = _profileImage
 
+    private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
+    val uiState: StateFlow<UiState> get() = _uiState
 
-    suspend fun editUserProfile(realPath: String) {
-        val response = editUserProfileUseCase(_userSimpleInfo.value!!.nickName, realPath)
+
+    suspend fun editUserProfile(realPath: String?) {
+        var path = realPath
+        Log.d("확인", "realPath: $realPath")
+        if (realPath!!.startsWith("https://")) {
+            path = null
+        }
+
+        val response = editUserProfileUseCase(_userSimpleInfo.value!!.nickName, path)
+        if (response.isSuccess) {
+            _uiState.update { UiState.Success }
+        }
         Log.d("확인", "response: ${response.getOrThrow()}")
     }
 
@@ -47,8 +60,12 @@ class EditProfileViewModel @Inject constructor(
             val result = pickImageUseCase()
             if (result.isSuccess) {
                 val image = result.getOrThrow()
-                Log.d("확인", "성공 $image")
-                _profileImage.update { image }
+                Log.d("확인", "getImage 성공 $image")
+                if (image != "null") {
+                    Log.d("확인", "null이 아닐 때 진입 이때 image는 $image")
+                    _profileImage.update { image }
+                }
+
             } else {
                 Log.d("확인", "실패")
                 // todo 에러 처리
@@ -57,7 +74,7 @@ class EditProfileViewModel @Inject constructor(
     }
 
 
-    fun setProfileImage(url: String?) {
+    fun setProfileImage(url: String? = null) {
         if (url == null) {
             _profileImage.update { "" }
             return

@@ -10,6 +10,8 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.core.net.toUri
 import com.greener.data.model.mypage.UserDTO
+import com.greener.data.model.response.ResponseFormDTO
+import com.greener.data.model.sign.request.UserAccountDTO
 import com.greener.data.source.remote.MyPageDataSource
 import com.greener.domain.model.ApiState
 import com.greener.domain.model.mypage.MyLevelInfo
@@ -18,6 +20,7 @@ import com.greener.domain.model.sign.UserAccountInfo
 import com.greener.domain.repository.MyPageRepository
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -75,21 +78,23 @@ class MyPageRepositoryImpl @Inject constructor(
 
     override suspend fun editUserProfile(
         name: String,
-        profileUrl: String
+        profileUrl: String?
     ): Result<UserAccountInfo> {
-        val imageFile = makeImageFile(Uri.parse(profileUrl))
-
         val userDtoRequestBody = transformDataToRequestBody(name)
+        var imagePart: MultipartBody.Part?
+        val response:  ApiState<ResponseFormDTO<UserAccountDTO>>
 
+        if(profileUrl.isNullOrBlank()) {
+            Log.d("확인","url is null or blank")
+            response = dataSource.editUserProfile(userDtoRequestBody, null)
+        }
+        else {
+            val imageFile = makeImageFile(Uri.parse(profileUrl))
+            imagePart = makeMultiPart(imageFile)
+            response = dataSource.editUserProfile(userDtoRequestBody, imagePart)
 
-        val imagePart = makeMultiPart(imageFile)
-        //val imagePart = transformDataToMultiPart(profileUrl)
-        Log.d("확인", "imagePart 헤더: ${imagePart.headers}")
-        Log.d("확인", "imagePart 바디: ${imagePart.body}")
-        Log.d("확인", "imagePart 바디 컨텐트 타입: ${imagePart.body.contentType()}")
+        }
 
-
-        val response = dataSource.editUserProfile(userDtoRequestBody, imagePart)
         return when (response) {
             is ApiState.Success -> {
                 Result.success(response.result.data!!.toDomain())
@@ -114,7 +119,6 @@ class MyPageRepositoryImpl @Inject constructor(
         val bitmap = context.contentResolver.openInputStream(uri).use {
             BitmapFactory.decodeStream(it)
         }
-
         // 캐시 파일 생성
         val tempFile = File.createTempFile("image_", ".jpeg", context.cacheDir)
         Log.d("확인","절대 경로 : ${tempFile.absolutePath}")
@@ -132,24 +136,6 @@ class MyPageRepositoryImpl @Inject constructor(
         val imageRequestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
         return MultipartBody.Part.createFormData("imageFile", imageFile.name, imageRequestBody)
     }
-
-    private fun transformDataToMultiPart(profileUrl: String): MultipartBody.Part? {
-        val imagePart: MultipartBody.Part? = if (profileUrl != null) {
-            // 여기서 파일 못찾는 문제 발생
-            val uri = Uri.parse(profileUrl)
-
-            val imageFile = File(uri.path)
-            Log.d("확인", imageFile.toString())
-
-
-            val imageRequestBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
-            MultipartBody.Part.createFormData("imageFile", imageFile.name, imageRequestBody)
-        } else {
-            null
-        }
-        return imagePart
-    }
-
 
     private fun transformDataToRequestBody(name: String): RequestBody {
         val userDto = UserDTO(name)

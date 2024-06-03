@@ -1,6 +1,7 @@
 package com.greener.presentation.ui.mypage.main
 
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -35,3 +36,4 @@ fun setMyProfileImage(view: ShapeableImageView, url: String?) {
         .into(view)
 
 }
+

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GreenRoom</string>
 
-<!--  util  -->
+    <!--  util  -->
     <string name="util_add">추가</string>
 
     <string name="util_go_next">건너뛰기</string>
@@ -19,7 +19,7 @@
 
     <string name="util_detail">자세히</string>
 
-<!--  Login  -->
+    <!--  Login  -->
     <string name="google_web_client_id">712990012729-kc9m2p6a9oltejsul1dvseh0mj8d8b66.apps.googleusercontent.com</string>
     <string name="google_android_client_id">712990012729-smbduqfeoqvphohd0gcphdi27f7b10p1.apps.googleusercontent.com</string>
     <string name="register_nickname_welcome_title">그린룸에 오신 걸 환영해요!\n닉네임을 설정해 주세요</string>
@@ -31,19 +31,19 @@
     <string name="login_onboarding4_subtitle">다이어리에서 식물을 관리하고 일기를 써보세요.</string>
 
 
-<!--  home  -->
+    <!--  home  -->
     <string name="home">홈</string>
     <string name="green_room_empty_no_plant_msg">키우는 식물이 없어요.\n나의 식물을 등록할까요?</string>
     <string name="green_room_empty_register_plant">나의 식물 등록하기</string>
     <string name="home_my_plant_text">나의 식물</string>
 
-    <string name ="home_action_decorate">꾸미기</string>
-    <string name ="home_action_all_complete">모두 완료</string>
-    <string name = "home_dialog_all_complete_title">모두 완료</string>
-    <string name = "home_dialog_ask_complete_all">모든 할 일을 완료했나요?</string>
+    <string name="home_action_decorate">꾸미기</string>
+    <string name="home_action_all_complete">모두 완료</string>
+    <string name="home_dialog_all_complete_title">모두 완료</string>
+    <string name="home_dialog_ask_complete_all">모든 할 일을 완료했나요?</string>
 
-    <string name = "home_dialog_not_yet">아직이에요</string>
-    <string name = "home_dialog_complete_all">완료했어요</string>
+    <string name="home_dialog_not_yet">아직이에요</string>
+    <string name="home_dialog_complete_all">완료했어요</string>
 
     <!--  plant registration  -->
     <string name="plant_registration_what_kind">어떤 식물을 키우세요?</string>
@@ -79,13 +79,13 @@
     <string name="plant_registration_complete">%s을(를) 그린룸에\n추가했어요!</string>
     <string name="plant_registration_complete_mention">초대해줘서 고마워!</string>
 
-<!--  collection  -->
+    <!--  collection  -->
     <string name="collection">컬렉션</string>
 
-<!--  community  -->
+    <!--  community  -->
     <string name="community">커뮤니티</string>
-    
-<!--  diary  -->
+
+    <!--  diary  -->
     <string name="diary">다이어리</string>
 
     <!--  species  -->
@@ -99,7 +99,7 @@
     <string name="tuberous">괴근식물</string>
 
 
-<!-- MyPage -->
+    <!-- MyPage -->
     <string name="my_page_title">마이 페이지</string>
     <string name="my_page_until_next_level">다음 레벨까지 </string>
     <string name="my_page_usage_days">그린룸과 함께한지</string>
@@ -125,10 +125,17 @@
     <string name="my_page_push_notice_detail">새로운 공지사항에 대한 알림을 받아요.</string>
 
     <string name="my_page_logout_msg">정말 로그아웃 할까요?</string>
-    
+
     <string name="withdraw_reason_title">탈퇴하려는 이유를 알려주세요</string>
     <string name="withdraw_select_guide">*중복 선택 가능해요</string>
 
-    
-    
+    <string name="withdraw_final_title">탈퇴 시 아래 정보가 모두 사라져요\n정말 탈퇴하시겠습니까?</string>
+    <string name="withdraw_bye_bye">\"안녕 잘가.. 다음에 또 봐"\"</string>
+    <string name="withdraw_notice_1"><li>탈퇴가 완료되면 개인정보는 즉시 파기되며, 복구할 수 없어요</li></string>
+    <string name="withdraw_notice_2"><li>커뮤니티 활동 내역은 탈퇴 후에도 일부 남아있어요\n(회원이 업로드한 게시물, 회원이 남긴 댓글)</li></string>
+    <string name="withdraw_final_consent">안내사항을 모두 확인하였습니다</string>
+    <string name="withdraw_back_space">이전 페이지로</string>
+    <string name="withdraw_final_confirm">탈퇴할게요</string>
+
+
 </resources>

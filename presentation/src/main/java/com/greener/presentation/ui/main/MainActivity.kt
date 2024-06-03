@@ -43,6 +43,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.id.myPageLevelFragment,
         R.id.editProfileFragment,
         R.id.userWithdrawReasonFragment,
+        R.id.userWithdrawFinalFragment,
+        R.id.editPushFragment,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
