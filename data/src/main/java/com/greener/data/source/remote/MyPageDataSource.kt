@@ -27,7 +27,6 @@ class MyPageDataSource @Inject constructor(
             Log.d("확인","response 실패: ${e.message}")
             ApiState.Exception(e)
         }
-
     }
 
     suspend fun getMyLevelInfo(): ApiState<ResponseFormDTO<MyPageLevelDTO>> {

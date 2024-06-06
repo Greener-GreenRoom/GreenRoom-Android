@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.usecase.image.PickImageUseCase
+import com.greener.domain.usecase.image.TakePictureUseCase
 import com.greener.domain.usecase.mypage.EditUserProfileUseCase
 import com.greener.presentation.model.UiState
 import com.greener.presentation.model.mypage.UserSimpleInfo
@@ -73,7 +74,19 @@ class EditProfileViewModel @Inject constructor(
         }
     }
 
-
+    fun takePicture(takePictureUseCase: TakePictureUseCase) {
+        viewModelScope.launch {
+            val result = takePictureUseCase()
+            if(result.isSuccess) {
+                val image = result.getOrThrow()
+                Log.d("확인","takePicture 성공: $image")
+                _profileImage.update { image }
+            }
+            else {
+                Log.d("확인","takePicture 실패")
+            }
+        }
+    }
     fun setProfileImage(url: String? = null) {
         if (url == null) {
             _profileImage.update { "" }
@@ -81,6 +94,4 @@ class EditProfileViewModel @Inject constructor(
         }
         _profileImage.update { url }
     }
-
-
 }

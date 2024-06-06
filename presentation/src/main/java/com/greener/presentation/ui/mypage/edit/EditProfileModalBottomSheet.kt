@@ -34,6 +34,7 @@ class EditProfileModalBottomSheet constructor(
         }
 
         binding.btnImageTakePicture.setOnClickListener {
+            takePhoto()
             dismiss()
         }
 

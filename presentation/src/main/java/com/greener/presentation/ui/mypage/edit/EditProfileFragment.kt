@@ -23,6 +23,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 import com.greener.domain.usecase.image.PickImageUseCase
+import com.greener.domain.usecase.image.TakePictureUseCase
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentEditProfileBinding
 import com.greener.presentation.model.UiState
@@ -44,6 +45,8 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
 
     @Inject
     lateinit var pickImageUseCase: PickImageUseCase
+    @Inject
+    lateinit var takePictureUseCase: TakePictureUseCase
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,7 +66,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         }
 
         binding.ivEditProfileMyProfileImg.setOnClickListener {
-            val modal = EditProfileModalBottomSheet({ viewModel.getImage(pickImageUseCase) }, {})
+            val modal = EditProfileModalBottomSheet({ viewModel.getImage(pickImageUseCase) }, {viewModel.takePicture(takePictureUseCase)})
             modal.show(childFragmentManager, "")
         }
 
