@@ -147,10 +147,15 @@
         android:label="UserWithdrawReasonFragment" >
         <action
             android:id="@+id/action_userWithdrawReasonFragment_to_userWithdrawFinalFragment"
-            app:destination="@id/userWithdrawFinalFragment" />
+            app:destination="@id/userWithdrawFinalFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/userWithdrawFinalFragment"
         android:name="com.greener.presentation.ui.mypage.withdraw.UserWithdrawFinalFragment"
-        android:label="UserWithdrawFinalFragment" />
+        android:label="UserWithdrawFinalFragment" >
+        <argument
+            android:name="reasons"
+            app:argType="string[]" />
+    </fragment>
 </navigation>

@@ -1,5 +1,7 @@
 package com.greener.presentation.ui.mypage.main
 
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
@@ -21,7 +23,7 @@ fun setMyGrade(view: TextView, grade: Grade) {
 
 @BindingAdapter("setMyProfileImage")
 fun setMyProfileImage(view: ShapeableImageView, url: String?) {
-    Log.d("확인","url: $url")
+    Log.d("확인", "url: $url")
     val context = view.context
 
     /*if(url == "" ) {
@@ -29,11 +31,41 @@ fun setMyProfileImage(view: ShapeableImageView, url: String?) {
         return
     }*/
     Glide.with(context)
-        .applyDefaultRequestOptions( RequestOptions()
-            .placeholder(R.drawable.img_default_profile)
-            .error(R.drawable.img_default_profile))
+        .applyDefaultRequestOptions(
+            RequestOptions()
+                .placeholder(R.drawable.img_default_profile)
+                .error(R.drawable.img_default_profile)
+        )
         .load(url)
         .into(view)
 
+}
+
+@BindingAdapter("setAppVersion")
+fun setAppVersion(view: TextView, version: String) {
+    val context = view.context
+    val packageName = view.context.packageName
+    try {
+        val textResId = context.resources.getIdentifier(
+            "my_page_app_version",
+            "string",
+            packageName
+        )
+        val text = context.getString(textResId, version)
+        val colorResId = context.resources.getIdentifier("gray300", "color", packageName)
+        val color = context.getColor(colorResId)
+        val spannableString = SpannableString(text)
+
+        spannableString.setSpan(
+            ForegroundColorSpan(color),
+            5, // 시작 위치
+            text.length, // 끝 위치 (exclusive)
+            0
+        )
+        view.text = spannableString
+    } catch (e: Exception) {
+        Log.d("확인", "${e.stackTrace}")
+        Log.d("확인", e.message.toString())
+    }
 }
 

@@ -16,13 +16,9 @@ class WithdrawReasonRVAdapter(
     val items: List<WithdrawReason>,
     val showInputArea: () -> Unit,
     val hideInputArea: () -> Unit,
-) :
-    RecyclerView.Adapter<WithdrawReasonRVAdapter.WithdrawReasonViewHolder>() {
-    val selectedReasons = mutableSetOf<WithdrawReason>()
+) : RecyclerView.Adapter<WithdrawReasonRVAdapter.WithdrawReasonViewHolder>() {
 
-    init {
-        Log.d("확인", "itmes: $items")
-    }
+    private val selectedReasons = mutableSetOf<WithdrawReason>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WithdrawReasonViewHolder {
         val binding: ItemWithdrawReasonBinding = DataBindingUtil.inflate(
@@ -70,7 +66,6 @@ class WithdrawReasonRVAdapter(
         if (binding.item == WithdrawReason.DIRECT_INPUT) {
             showInputArea()
         }
-
     }
 
     private fun unselect(binding: ItemWithdrawReasonBinding) {
@@ -92,10 +87,13 @@ class WithdrawReasonRVAdapter(
         }
     }
 
+    fun getWithdrawReasons():List<WithdrawReason> {
+        return selectedReasons.toList()
+    }
+
     inner class WithdrawReasonViewHolder(val binding: ItemWithdrawReasonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: WithdrawReason) {
-            Log.d("확인", "bind: ${item.name}")
             binding.item = item
         }
     }

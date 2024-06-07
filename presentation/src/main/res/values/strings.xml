@@ -109,7 +109,7 @@
     <string name="my_page_terms_of_service">서비스 이용약관</string>
     <string name="my_page_etc">기타</string>
     <string name="my_page_suggest_to_developer">개발팀에 건의하기</string>
-    <string name="my_page_app_version">앱 버전</string>
+    <string name="my_page_app_version">앱 버전 %1$s</string>
     <string name="my_page_logout">로그아웃</string>
     <string name="my_page_withdraw"><u>회원탈퇴</u></string>
 

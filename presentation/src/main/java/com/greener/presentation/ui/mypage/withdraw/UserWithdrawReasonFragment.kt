@@ -19,6 +19,7 @@ class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBindin
     FragmentUserWithdrawReasonBinding::inflate
 ) {
     private lateinit var backPressedCallback: OnBackPressedCallback
+    private lateinit var rvAdapter: WithdrawReasonRVAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -42,18 +43,15 @@ class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBindin
 
     }
 
-
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         backPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                Log.d("확인","handleOnBackPressed")
-                if(binding.etWithdrawReason.isFocused) {
+                if (binding.etWithdrawReason.isFocused) {
                     binding.etWithdrawReason.clearFocus()
                 } else {
-                    isEnabled = false // Disable the callback to let the activity handle the back press
+                    isEnabled =
+                        false // Disable the callback to let the activity handle the back press
                     requireActivity().onBackPressed() // Call the activity's onBackPressed method
                     isEnabled = true // Re-enable the callback
                 }
@@ -63,10 +61,13 @@ class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBindin
     }
 
     private fun setWithdrawReasonRv() {
-        binding.rvWithdrawReason.adapter = WithdrawReasonRVAdapter(
+        rvAdapter = WithdrawReasonRVAdapter(
             WithdrawReason.entries.toList(),
             { showInputArea() },
-            { hideInputArea() })
+            { hideInputArea() },
+        )
+        binding.rvWithdrawReason.adapter = rvAdapter
+
     }
 
     private fun showInputArea() {
@@ -78,7 +79,18 @@ class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBindin
     }
 
     private fun moveToWithdrawFinal() {
-        findNavController().navigate(R.id.action_userWithdrawReasonFragment_to_userWithdrawFinalFragment)
+        val selectedReasons = rvAdapter.getWithdrawReasons()
+        val reasons = mutableListOf<String>()
+
+        for(reason in selectedReasons) {
+            if(reason == WithdrawReason.DIRECT_INPUT) {
+                reasons.add(binding.etWithdrawReason.text.toString())
+                continue
+            }
+            reasons.add(reason.reason)
+        }
+        val action = UserWithdrawReasonFragmentDirections.actionUserWithdrawReasonFragmentToUserWithdrawFinalFragment(reasons.toTypedArray())
+        findNavController().navigate(action)
     }
 
     private fun hideKeyboard(view: View) {
@@ -86,6 +98,4 @@ class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBindin
         imm.hideSoftInputFromWindow(view.windowToken, 0)
         binding.etWithdrawReason.clearFocus()
     }
-
-
 }
