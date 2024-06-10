@@ -1,11 +1,13 @@
 package com.greener.presentation.ui.mypage.level
 
+import android.content.Context
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.greener.domain.model.GreenRoomItem
 import com.greener.domain.model.mypage.GradeTier
 import com.greener.presentation.R
 
@@ -49,3 +51,43 @@ fun setNextRewardGuide(view: TextView, nextLevel: Int) {
     )
     view.text = spannableString
 }
+
+@BindingAdapter("setNextRewardItemImage")
+fun setNextRewardItemImage(view: ImageView, greenRoomItem: GreenRoomItem) {
+    Log.d("확인","greenRoomItem: $greenRoomItem")
+    val itemType = greenRoomItem.itemType.lowercase()
+    val itemName = greenRoomItem.itemName.lowercase()
+    val context = view.context
+    var resId = 0
+    when (itemType) {
+        HAIR_ACCESSORY -> {
+            resId = getAsset("head", itemName, context)
+        }
+
+        GLASSES -> {
+            resId = getAsset("glass", itemName, context)
+        }
+
+        BACKGROUND_WINDOW -> {
+            resId = getAsset("window", itemName, context)
+        }
+
+        BACKGROUND_SHELF -> {
+            resId = getAsset("shelf", itemName, context)
+        }
+    }
+    view.setImageResource(resId)
+}
+
+fun getAsset(type: String, name: String, context: Context): Int {
+
+    val resId =
+        context.resources.getIdentifier("asset_${type}_${name}", "drawable", context.packageName)
+    return resId
+}
+
+const val HAIR_ACCESSORY = "hair_accessory"
+const val GLASSES = "glasses"
+const val BACKGROUND_WINDOW = "background_window"
+const val BACKGROUND_SHELF = "background_shelf"
+const val SHAPE = "shape"

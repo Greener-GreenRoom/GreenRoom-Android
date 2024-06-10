@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <variable
+            name="greenRoomItem"
+            type="com.greener.domain.model.GreenRoomItem" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +22,7 @@
             android:layout_height="46dp"
             android:id="@+id/iv_next_reward_asset"
             tools:src="@drawable/asset_eye_sunglasses"
+            setNextRewardItemImage="@{greenRoomItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -27,6 +31,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_next_reward_name"
             tools:text="까만 선글라스"
+            android:text="@{greenRoomItem.itemName}"
             android:textAppearance="@style/caption2"
             android:textColor="@color/gray700"
             app:layout_constraintTop_toTopOf="parent"

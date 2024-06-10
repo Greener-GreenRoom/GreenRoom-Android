@@ -47,7 +47,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearance="@style/ShapeAppearance.Circle"
-                    tools:src="@drawable/asset_badge_fruit" />
+                    tools:src="@drawable/asset_badge_berry" />
 
                 <TextView
                     android:id="@+id/tv_my_page_level_current_rank"
@@ -139,6 +139,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="19dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="@id/gl_my_page_level_end"
                     app:layout_constraintStart_toStartOf="@id/gl_my_page_level_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_my_page_level_guide_next_reward" />
@@ -221,7 +223,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/include_my_page_level_badge_root"
                     app:myLevel="@{vm.myLevel}"
-                    app:tier="@{gradeTier.LEAF}" />
+                    app:tier="@{gradeTier.LEAVES}" />
 
                 <include
                     android:id="@+id/include_my_page_level_badge_fruit"
@@ -233,7 +235,7 @@
                     app:layout_constraintStart_toEndOf="@id/include_my_page_level_badge_leaf"
                     app:layout_constraintTop_toTopOf="@id/include_my_page_level_badge_leaf"
                     app:myLevel="@{vm.myLevel}"
-                    app:tier="@{gradeTier.FRUIT}" />
+                    app:tier="@{gradeTier.BERRY}" />
 
                 <include
                     android:id="@+id/include_my_page_level_badge_tree"

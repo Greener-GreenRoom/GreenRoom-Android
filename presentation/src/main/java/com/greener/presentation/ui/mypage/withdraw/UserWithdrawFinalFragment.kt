@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.mypage.withdraw
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,7 +13,7 @@ import com.greener.presentation.ui.base.BaseFragment
 class UserWithdrawFinalFragment: BaseFragment<FragmentUserWithdrawFinalBinding>(
     FragmentUserWithdrawFinalBinding::inflate
 ) {
-    val args: UserWithdrawFinalFragmentArgs by navArgs()
+    private val args: UserWithdrawFinalFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("확인","args; ${args.toString()}")
@@ -41,7 +40,6 @@ class UserWithdrawFinalFragment: BaseFragment<FragmentUserWithdrawFinalBinding>(
         binding.btnUserWithdrawFinalConfirm.isEnabled = true
         binding.btnUserWithdrawFinalConfirm.backgroundTintList =
             ContextCompat.getColorStateList(requireContext(), R.color.red100)
-
     }
 
     private fun isNotChecked() {

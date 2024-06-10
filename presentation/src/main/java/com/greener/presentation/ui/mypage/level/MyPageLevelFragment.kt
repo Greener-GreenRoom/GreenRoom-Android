@@ -2,6 +2,7 @@ package com.greener.presentation.ui.mypage.level
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -13,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.greener.domain.model.GreenRoomItem
 import com.greener.presentation.databinding.FragmentMyPageLevelBinding
 import com.greener.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +34,6 @@ class MyPageLevelFragment : BaseFragment<FragmentMyPageLevelBinding>(
     }
 
     override fun initListener() {
-        super.initListener()
         observeApiResult()
         binding.tbMyPageLevelToolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -43,13 +44,21 @@ class MyPageLevelFragment : BaseFragment<FragmentMyPageLevelBinding>(
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.myLevelInfo.collect {
+                    Log.d("확인","myLevelInfo: $it")
                     binding.vm = viewModel
                     setProgress()
+                    if(it !=null) {
+                        setNextRewardItemAdapter(it.greenRoomItems)
+                    }
                 }
             }
         }
     }
 
+    private fun setNextRewardItemAdapter(greenRoomItems:List<GreenRoomItem>) {
+        Log.d("확인","setNextRewardItemAdapter: $greenRoomItems")
+        binding.rvMyPageLevelNextRewardItem.adapter = NextRewardRVAdapter(greenRoomItems)
+    }
 
 
     private fun setProgress() {
@@ -61,6 +70,7 @@ class MyPageLevelFragment : BaseFragment<FragmentMyPageLevelBinding>(
         anim.duration = 500
         binding.pbMyPageLevelProgressbar.startAnimation(anim)
     }
+
     private fun softInputAdjustResize() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             requireActivity().window.setDecorFitsSystemWindows(false)
