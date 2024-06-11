@@ -1,9 +1,9 @@
 package com.greener.presentation.ui.mypage.edit
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.greener.domain.model.mypage.ImageUpdateFlag
 import com.greener.domain.usecase.image.PickImageUseCase
 import com.greener.domain.usecase.image.TakePictureUseCase
 import com.greener.domain.usecase.mypage.EditUserProfileUseCase
@@ -31,18 +31,20 @@ class EditProfileViewModel @Inject constructor(
     val uiState: StateFlow<UiState> get() = _uiState
 
 
-    suspend fun editUserProfile(realPath: String?) {
+    suspend fun editUserProfile(realPath: String?,nickName:String) {
         var path = realPath
-        Log.d("확인", "realPath: $realPath")
-        if (realPath!!.startsWith("https://")) {
-            path = null
+        var imageUpdateFlag = ImageUpdateFlag.UPDATE.name
+
+        if (realPath!!.startsWith("https:")) {
+            imageUpdateFlag = ImageUpdateFlag.NONE.name
+        } else if (realPath.isNullOrBlank()) {
+            imageUpdateFlag = ImageUpdateFlag.REMOVE.name
         }
 
-        val response = editUserProfileUseCase(_userSimpleInfo.value!!.nickName, path)
+        val response = editUserProfileUseCase(nickName, path, imageUpdateFlag)
         if (response.isSuccess) {
             _uiState.update { UiState.Success }
         }
-        Log.d("확인", "response: ${response.getOrThrow()}")
     }
 
     fun setUserSimpleInfo(userInfo: UserSimpleInfo) {
@@ -61,9 +63,7 @@ class EditProfileViewModel @Inject constructor(
             val result = pickImageUseCase()
             if (result.isSuccess) {
                 val image = result.getOrThrow()
-                Log.d("확인", "getImage 성공 $image")
                 if (image != "null") {
-                    Log.d("확인", "null이 아닐 때 진입 이때 image는 $image")
                     _profileImage.update { image }
                 }
 
@@ -77,16 +77,16 @@ class EditProfileViewModel @Inject constructor(
     fun takePicture(takePictureUseCase: TakePictureUseCase) {
         viewModelScope.launch {
             val result = takePictureUseCase()
-            if(result.isSuccess) {
+            if (result.isSuccess) {
                 val image = result.getOrThrow()
-                Log.d("확인","takePicture 성공: $image")
+                Log.d("확인", "takePicture 성공: $image")
                 _profileImage.update { image }
-            }
-            else {
-                Log.d("확인","takePicture 실패")
+            } else {
+                Log.d("확인", "takePicture 실패")
             }
         }
     }
+
     fun setProfileImage(url: String? = null) {
         if (url == null) {
             _profileImage.update { "" }

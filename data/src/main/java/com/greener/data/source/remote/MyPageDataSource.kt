@@ -7,6 +7,7 @@ import com.greener.data.model.response.ResponseFormDTO
 import com.greener.data.model.sign.request.UserAccountDTO
 import com.greener.data.service.MyPageService
 import com.greener.domain.model.ApiState
+import com.greener.domain.model.mypage.ImageUpdateFlag
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -17,14 +18,14 @@ class MyPageDataSource @Inject constructor(
     suspend fun getMyPageInfo(): ApiState<ResponseFormDTO<MyPageInfoDTO>> {
         return try {
             val response = service.getMyPageInfo()
-            Log.d("확인","response: ${response.data}")
+
             if (response.responseDTO.output == 0) {
                 ApiState.Success(response)
             } else {
                 ApiState.Fail(response)
             }
         } catch (e: Exception) {
-            Log.d("확인","response 실패: ${e.message}")
+            Log.d("확인", "response 실패: ${e.message}")
             ApiState.Exception(e)
         }
     }
@@ -42,27 +43,35 @@ class MyPageDataSource @Inject constructor(
         }
     }
 
-    suspend fun editUserProfile(userDto:RequestBody,imagePart: MultipartBody.Part?):ApiState<ResponseFormDTO<UserAccountDTO>> {
+    suspend fun editUserProfile(
+        name: RequestBody,
+        imagePart: MultipartBody.Part?,
+        imageUpdateFlag: RequestBody
+    ): ApiState<ResponseFormDTO<UserAccountDTO>> {
         return try {
-            val response = service.editUserProfile(imagePart,userDto)
+            val response = service.editUserProfile(imagePart, name, imageUpdateFlag)
             if (response.responseDTO.output == 0) {
                 ApiState.Success(response)
             } else {
                 ApiState.Fail(response)
             }
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             ApiState.Exception(e)
         }
     }
-    suspend fun editUserProfile(userDto:RequestBody):ApiState<ResponseFormDTO<UserAccountDTO>> {
+
+    suspend fun editUserProfile(
+        name: RequestBody,
+        imageUpdateFlag: RequestBody
+    ): ApiState<ResponseFormDTO<UserAccountDTO>> {
         return try {
-            val response = service.editUserProfile(userDto)
+            val response = service.editUserProfile(name, imageUpdateFlag)
             if (response.responseDTO.output == 0) {
                 ApiState.Success(response)
             } else {
                 ApiState.Fail(response)
             }
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             ApiState.Exception(e)
         }
     }

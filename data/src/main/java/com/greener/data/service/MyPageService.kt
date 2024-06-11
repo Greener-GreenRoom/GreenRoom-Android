@@ -15,7 +15,7 @@ import retrofit2.http.Part
 interface MyPageService {
 
     @GET("api/myPage")
-    suspend fun getMyPageInfo():ResponseFormDTO<MyPageInfoDTO>
+    suspend fun getMyPageInfo(): ResponseFormDTO<MyPageInfoDTO>
 
     @GET("api/myPage/grade")
     suspend fun getMyLevelInfo(): ResponseFormDTO<MyPageLevelDTO>
@@ -24,13 +24,15 @@ interface MyPageService {
     @PATCH("api/user")
     suspend fun editUserProfile(
         @Part userImage: MultipartBody.Part?,
-        @Part("userDto") userDto: RequestBody
+        @Part("name") name: RequestBody,
+        @Part("imageUpdateFlag") imageUpdateFlag: RequestBody
     ): ResponseFormDTO<UserAccountDTO>
 
     @Multipart
     @PATCH("api/user")
     suspend fun editUserProfile(
-        @Part("userDto") userDto: RequestBody
+        @Part("name") name: RequestBody,
+        @Part("imageUpdateFlag") imageUpdateFlag: RequestBody
     ): ResponseFormDTO<UserAccountDTO>
 
     @DELETE("api/authenticate/logout")

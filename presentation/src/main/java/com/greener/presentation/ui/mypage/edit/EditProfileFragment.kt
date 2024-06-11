@@ -45,6 +45,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
 
     @Inject
     lateinit var pickImageUseCase: PickImageUseCase
+
     @Inject
     lateinit var takePictureUseCase: TakePictureUseCase
 
@@ -66,7 +67,8 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         }
 
         binding.ivEditProfileMyProfileImg.setOnClickListener {
-            val modal = EditProfileModalBottomSheet({ viewModel.getImage(pickImageUseCase) }, {viewModel.takePicture(takePictureUseCase)})
+            val modal = EditProfileModalBottomSheet({ viewModel.getImage(pickImageUseCase) },
+                { viewModel.takePicture(takePictureUseCase) })
             modal.show(childFragmentManager, "")
         }
 
@@ -105,7 +107,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
     private fun editUserProfile(realPath: String) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.editUserProfile(realPath)
+                viewModel.editUserProfile(realPath, binding.etEditProfileNickname.text.toString())
                 observeUiState()
             }
         }
@@ -153,6 +155,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
             true
         }
     }
+
     private fun moveToMyPageMain() {
         findNavController().navigate(R.id.action_editProfileFragment_to_myPageMainFragment)
     }
