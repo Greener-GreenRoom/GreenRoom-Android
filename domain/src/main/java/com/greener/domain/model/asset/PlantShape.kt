@@ -1,6 +1,6 @@
 package com.greener.domain.model.asset
 
-enum class PlantShapeName(val nameString: String) {
+enum class PlantShape(val nameString: String) {
     Sunflower("Sunflower"),
     Viola_Tricolor("Viola_Tricolor"),
     Lilium("Lilium"),

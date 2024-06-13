@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="plantShape"
+            type="com.greener.domain.model.asset.PlantShapeInfo" />
+
+        <variable
+            name="plantAccessory"
+            type="com.greener.domain.model.asset.PlantAccessoryInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:background="@drawable/selector_asset_choice"
+        android:checked="true"
+        android:clipToPadding="true">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_item_asset_detail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_item_asset_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lock"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_item_asset_detail"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_item_asset_detail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/white"
+            android:text="@string/util_nothing"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_item_asset_lock"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
