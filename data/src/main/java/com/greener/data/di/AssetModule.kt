@@ -55,7 +55,7 @@ class AssetModule {
     fun provideAssetDataSource(
         plantShapeDatabase: PlantShapeDatabase,
         plantAccessoryDatabase: PlantAccessoryDatabase,
-        backgroundAccessoryDatabase: BackgroundAccessoryDatabase
+        backgroundAccessoryDatabase: BackgroundAccessoryDatabase,
     ): AssetDataSource =
         AssetDataSource(plantShapeDatabase, plantAccessoryDatabase, backgroundAccessoryDatabase)
 
@@ -63,7 +63,7 @@ class AssetModule {
     @Provides
     fun provideAssetRepository(
         dataSource: AssetDataSource,
-        @ApplicationContext context: Context
-        ): AssetRepository =
+        @ApplicationContext context: Context,
+    ): AssetRepository =
         AssetRepositoryImpl(dataSource, context)
 }

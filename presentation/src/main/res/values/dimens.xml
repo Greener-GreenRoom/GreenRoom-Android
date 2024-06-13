@@ -55,7 +55,12 @@
     <dimen name="bottom_sheet_home_size_empty">160dp</dimen>
     <dimen name="bottom_sheet_home_size_not_empty">224dp</dimen>
 
+    <!-- Recyclerview padding   -->
+    <dimen name="asset_detail_type_left_padding">8dp</dimen>
+    <dimen name="asset_all_view_bottom_padding">32dp</dimen>
 
+    <dimen name="asset_view_left_padding">22dp</dimen>
+    <dimen name="asset_view_bottom_padding">22dp</dimen>
 
 
 

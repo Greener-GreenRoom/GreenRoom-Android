@@ -11,7 +11,7 @@ import javax.inject.Inject
 class AssetDataSource @Inject constructor(
     private val plantShapeDatabase: PlantShapeDatabase,
     private val plantAccessoryDatabase: PlantAccessoryDatabase,
-    private val backgroundAccessoryDatabase: BackgroundAccessoryDatabase
+    private val backgroundAccessoryDatabase: BackgroundAccessoryDatabase,
 ) {
     suspend fun getAllPlantShapes(): List<PlantShapeEntity> =
         plantShapeDatabase.plantShapeDao().getAllPlantShapes()

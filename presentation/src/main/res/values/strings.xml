@@ -7,6 +7,7 @@
     <string name="util_go_next">건너뛰기</string>
     <string name="util_go_home">홈으로</string>
     <string name="util_next">다음</string>
+    <string name="util_nothing">없음</string>
 
     <string name="util_take_picture">사진 촬영</string>
     <string name="util_my_album">내 앨범 선택</string>
@@ -76,6 +77,13 @@
     <string name="plant_registration_complete">%s을(를) 그린룸에\n추가했어요!</string>
     <string name="plant_registration_complete_mention">초대해줘서 고마워!</string>
 
+    <!--  decoration  -->
+    <string name="decoration_title">꾸미기</string>
+    <string name="decoration_plant_shape">형태</string>
+    <string name="decoration_plant_accessory">악세사리</string>
+    <string name="decoration_background_accessory">배경</string>
+    <string name="decoration_level_limit">레벨 %d</string>
+
 <!--  collection  -->
     <string name="collection">컬렉션</string>
 
@@ -85,7 +93,9 @@
 <!--  diary  -->
     <string name="diary">다이어리</string>
 
-    <!--  species  -->
+    <!--  detail type  -->
+    <string name="all">전체</string>
+
     <string name="foliage">관엽식물</string>
     <string name="succeulent_cactus">다육이,선인장</string>
     <string name="annual">한해살이풀</string>
@@ -94,4 +104,14 @@
     <string name="herb">허브</string>
     <string name="epiphyte">착색식물</string>
     <string name="tuberous">괴근식물</string>
+    <string name="other">기본식물</string>
+
+    <string name="head">머리핀</string>
+    <string name="eye">안경</string>
+    <string name="face">표정</string>
+
+    <string name="back_left">창문 소품</string>
+    <string name="back_right">선반 소품</string>
+
+
 </resources>
