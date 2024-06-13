@@ -6,15 +6,24 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.greener.domain.usecase.image.PickImageUseCase
+import com.greener.domain.usecase.image.TakePictureUseCase
 import com.greener.presentation.R
 import com.greener.presentation.databinding.ActivityMainBinding
 import com.greener.presentation.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(
     ActivityMainBinding::inflate,
 ) {
+
+    @Inject
+    lateinit var pickImageUseCase: PickImageUseCase
+
+    @Inject
+    lateinit var takePictureUseCase: TakePictureUseCase
 
     private lateinit var navController: NavController
     private val destinationChangedListener =

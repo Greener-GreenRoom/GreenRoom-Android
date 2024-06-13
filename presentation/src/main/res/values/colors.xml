@@ -24,6 +24,9 @@
     <color name="gray700">#1B1D1F</color>
     <color name="black">#FF000000</color>
 
+    <!-- google font guideline -->
+    <color name="google_font_color">#8A000000</color>
+
     <!-- BackgroundColor -->
     <color name ="empty_floor">#D0DDD6</color>
     <color name ="sample_wall">#E9FFF3</color>

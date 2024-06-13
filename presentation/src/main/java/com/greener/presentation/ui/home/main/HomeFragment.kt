@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentHomeBinding
@@ -48,6 +49,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             showActionDialog()
         }
         viewModel.initFab()
+        binding.includeHomeBottomSheet.btnBottomSheetHomeAddButton.setOnClickListener {
+            moveToRegistration()
+        }
+        binding.includeHomeBottomSheet.tvBottomSheetHomeAddPlant.setOnClickListener {
+            moveToRegistration()
+        }
     }
 
     private fun setGreenRoomViewPager() {
@@ -80,6 +87,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         binding.vpHomeGreenRoom.currentItem = position
         viewModel.currentPlant.value = viewModel.myPlants.value[position]
         select(position)
+    }
+
+    private fun moveToRegistration() {
+        findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
     }
 
     private fun select(position: Int) {
