@@ -12,6 +12,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -77,15 +78,11 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         }
 
         binding.btnEditProfileSaveChange.setOnClickListener {
-
             editUserProfile(viewModel.profileImage.value!!)
-            //editUserProfile(realPath!!)
         }
         binding.tbEditProfileToolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-
-
     }
 
     private fun softInputAdjustResize() {

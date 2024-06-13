@@ -135,7 +135,9 @@
             app:argType="com.greener.presentation.model.mypage.UserSimpleInfo" />
         <action
             android:id="@+id/action_editProfileFragment_to_myPageMainFragment"
-            app:destination="@id/myPageMainFragment" />
+            app:destination="@id/myPageMainFragment"
+            app:popUpTo="@id/myPageMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/editPushFragment"

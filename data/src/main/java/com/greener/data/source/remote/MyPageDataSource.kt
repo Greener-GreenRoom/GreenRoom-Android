@@ -25,7 +25,7 @@ class MyPageDataSource @Inject constructor(
                 ApiState.Fail(response)
             }
         } catch (e: Exception) {
-            Log.d("확인", "response 실패: ${e.message}")
+            Log.d("확인", "response 실패: ${ApiState.Exception(e).checkException()}")
             ApiState.Exception(e)
         }
     }
@@ -51,11 +51,14 @@ class MyPageDataSource @Inject constructor(
         return try {
             val response = service.editUserProfile(imagePart, name, imageUpdateFlag)
             if (response.responseDTO.output == 0) {
+                Log.d("확인","success: ${response.data}")
                 ApiState.Success(response)
             } else {
+                Log.d("확인","fail: ${response.data}")
                 ApiState.Fail(response)
             }
         } catch (e: Exception) {
+            Log.d("확인","exception: ${e.message}")
             ApiState.Exception(e)
         }
     }

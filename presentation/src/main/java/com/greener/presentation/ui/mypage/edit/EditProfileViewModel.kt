@@ -32,7 +32,7 @@ class EditProfileViewModel @Inject constructor(
 
 
     suspend fun editUserProfile(realPath: String?,nickName:String) {
-        var path = realPath
+
         var imageUpdateFlag = ImageUpdateFlag.UPDATE.name
 
         if (realPath!!.startsWith("https:")) {
@@ -41,7 +41,7 @@ class EditProfileViewModel @Inject constructor(
             imageUpdateFlag = ImageUpdateFlag.REMOVE.name
         }
 
-        val response = editUserProfileUseCase(nickName, path, imageUpdateFlag)
+        val response = editUserProfileUseCase(nickName, realPath, imageUpdateFlag)
         if (response.isSuccess) {
             _uiState.update { UiState.Success }
         }
@@ -66,7 +66,6 @@ class EditProfileViewModel @Inject constructor(
                 if (image != "null") {
                     _profileImage.update { image }
                 }
-
             } else {
                 Log.d("확인", "실패")
                 // todo 에러 처리
@@ -79,7 +78,6 @@ class EditProfileViewModel @Inject constructor(
             val result = takePictureUseCase()
             if (result.isSuccess) {
                 val image = result.getOrThrow()
-                Log.d("확인", "takePicture 성공: $image")
                 _profileImage.update { image }
             } else {
                 Log.d("확인", "takePicture 실패")

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentMyPageMainBinding
+import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +38,7 @@ class MyPageMainFragment : BaseFragment<FragmentMyPageMainBinding>(
         initListener()
     }
     override fun initListener() {
+        viewModel.getMyPageInfo()
         observeMyInfo()
         binding.tvMyPageMainPushNotificationSetting.setOnClickListener {
             moveToEditPush()
@@ -69,8 +72,13 @@ class MyPageMainFragment : BaseFragment<FragmentMyPageMainBinding>(
     private fun observeMyInfo() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.grade.collect {
-                    binding.vm = viewModel
+                viewModel.uiState.collect {
+                    if(it == UiState.Success) {
+                        binding.vm = viewModel
+                    }
+                    else if(it is UiState.Error) {
+                        Toast.makeText(requireActivity(),it.message,Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -92,7 +100,6 @@ class MyPageMainFragment : BaseFragment<FragmentMyPageMainBinding>(
 
         mGoogleSignInClient.signOut()
             .addOnCompleteListener {
-                Log.d("확인","로그아웃 성공")
                 viewModel.logout()
                 moveToSignActivity()
             }

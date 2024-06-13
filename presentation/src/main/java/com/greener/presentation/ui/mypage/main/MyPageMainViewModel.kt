@@ -8,6 +8,7 @@ import com.greener.domain.model.mypage.GradeTier
 import com.greener.domain.model.mypage.SimpleProfile
 import com.greener.domain.usecase.mypage.GetMyPageInfoUseCase
 import com.greener.domain.usecase.mypage.LogoutUseCase
+import com.greener.presentation.model.UiState
 import com.greener.presentation.model.mypage.UserSimpleInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,10 +37,8 @@ class MyPageMainViewModel @Inject constructor(
     private val _userSimpleInfo = MutableStateFlow<UserSimpleInfo?>(null)
     val userSimpleInfo: StateFlow<UserSimpleInfo?> get() = _userSimpleInfo
 
-
-    init {
-        getMyPageInfo()
-    }
+    private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
+    val uiState: StateFlow<UiState> get() = _uiState
 
     fun logout() {
         viewModelScope.launch {
@@ -47,7 +46,7 @@ class MyPageMainViewModel @Inject constructor(
         }
     }
 
-    private fun getMyPageInfo() {
+    fun getMyPageInfo() {
         viewModelScope.launch {
             val result = getMyPageInfoUseCase()
             if (result.isSuccess) {
@@ -56,6 +55,7 @@ class MyPageMainViewModel @Inject constructor(
                 _profile.update { result.getOrNull()!!.simpleProfile }
                 _daysFromCreated.update { result.getOrNull()!!.daysFromCreated }
                 _myTier.update { findMyTier(_grade.value!!.currentLevel) }
+                _uiState.update { UiState.Success }
                 _userSimpleInfo.update {
                     UserSimpleInfo(
                         profile.value!!.name,
@@ -63,6 +63,8 @@ class MyPageMainViewModel @Inject constructor(
                         _profile.value!!.profileUrl
                     )
                 }
+            } else {
+                _uiState.update { UiState.Error(result.exceptionOrNull()!!.message) }
             }
 
         }
