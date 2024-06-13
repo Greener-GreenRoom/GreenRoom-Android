@@ -53,6 +53,9 @@ class DecorationViewModel @Inject constructor(
     private val _choiceViewAssets = MutableStateFlow<List<AssetViewItem>>(emptyList())
     val choiceViewAssets: StateFlow<List<AssetViewItem>> get() = _choiceViewAssets
 
+    private val _myLevel = MutableStateFlow(10)
+    val myLevel : StateFlow<Int> get() = _myLevel
+
     private val _plantDecorationInfo = MutableStateFlow(PlantDecorationDetailInfo())
     val plantDecorationInfo: StateFlow<PlantDecorationDetailInfo> get() = _plantDecorationInfo
 

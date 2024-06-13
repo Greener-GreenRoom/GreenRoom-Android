@@ -68,6 +68,8 @@ dependencies {
     implementation("com.orhanobut:logger:2.2.0")
 
     implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("jp.wasabeef:glide-transformations:4.3.0")
+    implementation ("jp.co.cyberagent.android:gpuimage:2.1.0")
 
     implementation("com.google.android.flexbox:flexbox:3.0.0")
 

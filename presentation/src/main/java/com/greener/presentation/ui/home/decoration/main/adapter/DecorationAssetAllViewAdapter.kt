@@ -26,7 +26,8 @@ import com.greener.presentation.util.SpaceDecoration
 class DecorationAssetAllViewAdapter(
     private val onClickPlantShape : (PlantShapeInfo, PlantShapeType) -> Unit,
     private val onClickPlantAccessory : (PlantAccessoryInfo, PlantAccessoryType) -> Unit,
-    private val onClickBackgroundAccessory : (BackgroundAccessoryInfo, BackgroundAccessoryType) -> Unit
+    private val onClickBackgroundAccessory : (BackgroundAccessoryInfo, BackgroundAccessoryType) -> Unit,
+    var myLevel: Int
 ): ListAdapter<AllAssetViewItem, RecyclerView.ViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -62,7 +63,7 @@ class DecorationAssetAllViewAdapter(
             .apply {
             flexWrap = FlexWrap.WRAP
         }
-        private val decorationAssetViewAdapter = DecorationAssetViewAdapter( onClickPlantShape, onClickPlantAccessory, onClickBackgroundAccessory )
+        private val decorationAssetViewAdapter = DecorationAssetViewAdapter( onClickPlantShape, onClickPlantAccessory, onClickBackgroundAccessory, myLevel )
 
         init {
             binding.rvItemAssetAllItem.run {
@@ -92,7 +93,7 @@ class DecorationAssetAllViewAdapter(
         private val flexboxLayout = FlexboxLayoutManager(binding.root.context).apply {
             flexWrap = FlexWrap.WRAP
         }
-        private val decorationAssetViewAdapter = DecorationAssetViewAdapter( onClickPlantShape, onClickPlantAccessory, onClickBackgroundAccessory )
+        private val decorationAssetViewAdapter = DecorationAssetViewAdapter( onClickPlantShape, onClickPlantAccessory, onClickBackgroundAccessory, myLevel )
         init {
             binding.rvItemAssetAllItem.run {
                 layoutManager = flexboxLayout
@@ -119,7 +120,7 @@ class DecorationAssetAllViewAdapter(
         private val flexboxLayout = FlexboxLayoutManager(binding.root.context).apply {
             flexWrap = FlexWrap.WRAP
         }
-        private val decorationAssetViewAdapter = DecorationAssetViewAdapter( onClickPlantShape, onClickPlantAccessory, onClickBackgroundAccessory )
+        private val decorationAssetViewAdapter = DecorationAssetViewAdapter( onClickPlantShape, onClickPlantAccessory, onClickBackgroundAccessory, myLevel )
 
         init {
             binding.rvItemAssetAllItem.run {

@@ -1,14 +1,17 @@
 package com.greener.presentation.ui.home.decoration.main.adapter
 
 import android.annotation.SuppressLint
+import android.opengl.Visibility
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.greener.domain.model.asset.AssetType
 import com.greener.domain.model.asset.BackgroundAccessoryInfo
 import com.greener.domain.model.asset.BackgroundAccessoryType
@@ -20,12 +23,14 @@ import com.greener.presentation.R
 import com.greener.presentation.databinding.ItemAssetDetailItemBinding
 import com.greener.presentation.model.decoration.AssetViewItem
 import com.greener.presentation.model.decoration.AssetViewObject
+import jp.wasabeef.glide.transformations.BlurTransformation
 
 
 class DecorationAssetViewAdapter(
     private val onClickPlantShape: (PlantShapeInfo, PlantShapeType) -> Unit,
     private val onClickPlantAccessory: (PlantAccessoryInfo, PlantAccessoryType) -> Unit,
     private val onClickBackgroundAccessory: (BackgroundAccessoryInfo, BackgroundAccessoryType) -> Unit,
+    var myLevel: Int
 ) : ListAdapter<AssetViewItem, RecyclerView.ViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -118,28 +123,46 @@ class DecorationAssetViewAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AssetViewItem) {
             val viewObject = item.viewObject as AssetViewObject.PlantAccessoriesObject
-
             val isEmpty = viewObject.infoList.drawableID == EMPTY_ACCESSORY
-            binding.tvItemAssetDetail.isVisible = isEmpty
-            binding.ivItemAssetDetail.isVisible = isEmpty.not()
+            val isLevelLimit = viewObject.infoList.limitLevel > myLevel
+
             if (isEmpty) {
+                binding.tvItemAssetDetail.visibility = View.VISIBLE
                 binding.tvItemAssetDetail.text = binding.root.context.getText(R.string.util_nothing)
             } else {
-                Glide.with(binding.root)
-                    .asDrawable()
-                    .load(viewObject.infoList.drawableID)
-                    .into(binding.ivItemAssetDetail)
+                if (isLevelLimit) {
+                    binding.tvItemAssetDetail.visibility = View.VISIBLE
+                    binding.ivItemAssetLock.visibility = View.VISIBLE
+                    binding.tvItemAssetDetail.text = binding.root.context.getString(
+                        R.string.decoration_level_limit,
+                        viewObject.infoList.limitLevel
+                    )
+                    Glide.with(binding.root)
+                        .asDrawable()
+                        .load(viewObject.infoList.drawableID)
+                        .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
+                        .into(binding.ivItemAssetDetail)
+                } else {
+                    binding.tvItemAssetDetail.visibility = View.GONE
+                    binding.ivItemAssetLock.visibility = View.GONE
+                    Glide.with(binding.root)
+                        .asDrawable()
+                        .load(viewObject.infoList.drawableID)
+                        .into(binding.ivItemAssetDetail)
+                }
             }
 
-            if (viewObject.infoList.isChecked) {
-                binding.root.setBackgroundResource(R.drawable.shape_asset_on)
-            } else {
-                binding.root.setBackgroundResource(R.drawable.shape_asset_off)
-            }
+            if (isLevelLimit.not()) {
+                if (viewObject.infoList.isChecked) {
+                    binding.root.setBackgroundResource(R.drawable.shape_asset_on)
+                } else {
+                    binding.root.setBackgroundResource(R.drawable.shape_asset_off)
+                }
 
-            binding.root.setOnClickListener {
-                onClickPlantAccessory(viewObject.infoList, viewObject.infoList.itemType)
-                notifyDataSetChanged()
+                binding.root.setOnClickListener {
+                    onClickPlantAccessory(viewObject.infoList, viewObject.infoList.itemType)
+                    notifyDataSetChanged()
+                }
             }
         }
     }
@@ -150,28 +173,46 @@ class DecorationAssetViewAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AssetViewItem) {
             val viewObject = item.viewObject as AssetViewObject.BackgroundAccessoriesObject
-
             val isEmpty = viewObject.infoList.drawableID == EMPTY_ACCESSORY
-            binding.tvItemAssetDetail.isVisible = isEmpty
-            binding.ivItemAssetDetail.isVisible = isEmpty.not()
+            val isLevelLimit = viewObject.infoList.limitLevel > myLevel
+
             if (isEmpty) {
+                binding.tvItemAssetDetail.visibility = View.VISIBLE
                 binding.tvItemAssetDetail.text = binding.root.context.getText(R.string.util_nothing)
             } else {
-                Glide.with(binding.root)
-                    .asDrawable()
-                    .load(viewObject.infoList.drawableID)
-                    .into(binding.ivItemAssetDetail)
+                if (isLevelLimit) {
+                    binding.tvItemAssetDetail.visibility = View.VISIBLE
+                    binding.ivItemAssetLock.visibility = View.VISIBLE
+                    binding.tvItemAssetDetail.text = binding.root.context.getString(
+                        R.string.decoration_level_limit,
+                        viewObject.infoList.limitLevel
+                    )
+                    Glide.with(binding.root)
+                        .asDrawable()
+                        .load(viewObject.infoList.drawableID)
+                        .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
+                        .into(binding.ivItemAssetDetail)
+                } else {
+                    binding.tvItemAssetDetail.visibility = View.GONE
+                    binding.ivItemAssetLock.visibility = View.GONE
+                    Glide.with(binding.root)
+                        .asDrawable()
+                        .load(viewObject.infoList.drawableID)
+                        .into(binding.ivItemAssetDetail)
+                }
             }
 
-            if (viewObject.infoList.isChecked) {
-                binding.root.setBackgroundResource(R.drawable.shape_asset_on)
-            } else {
-                binding.root.setBackgroundResource(R.drawable.shape_asset_off)
-            }
+            if (isLevelLimit.not()) {
+                if (viewObject.infoList.isChecked) {
+                    binding.root.setBackgroundResource(R.drawable.shape_asset_on)
+                } else {
+                    binding.root.setBackgroundResource(R.drawable.shape_asset_off)
+                }
 
-            binding.root.setOnClickListener {
-                onClickBackgroundAccessory(viewObject.infoList, viewObject.infoList.itemType)
-                notifyDataSetChanged()
+                binding.root.setOnClickListener {
+                    onClickBackgroundAccessory(viewObject.infoList, viewObject.infoList.itemType)
+                    notifyDataSetChanged()
+                }
             }
         }
     }

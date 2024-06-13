@@ -68,6 +68,7 @@
     <string name="decoration_plant_shape">형태</string>
     <string name="decoration_plant_accessory">악세사리</string>
     <string name="decoration_background_accessory">배경</string>
+    <string name="decoration_level_limit">레벨 %d</string>
 
 <!--  collection  -->
     <string name="collection">컬렉션</string>

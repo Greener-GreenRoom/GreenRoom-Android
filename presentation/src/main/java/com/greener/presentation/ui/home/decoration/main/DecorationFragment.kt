@@ -35,12 +35,14 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
     private val decorationAllViewAdapter = DecorationAssetAllViewAdapter(
         { info, _ -> viewModel.updatePlantShapeAsset( targetPlantShape = info, isAll = true) },
         { info, type -> viewModel.updatePlantAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = true )},
-        { info, type -> viewModel.updateBackgroundAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = true )}
+        { info, type -> viewModel.updateBackgroundAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = true )},
+        0
     )
     private val decorationViewAdapter = DecorationAssetViewAdapter(
         { info, type -> viewModel.updatePlantShapeAsset(plantType = type, targetPlantShape = info, isAll = false) },
         { info, type -> viewModel.updatePlantAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = false)},
-        { info, type -> viewModel.updateBackgroundAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = false )}
+        { info, type -> viewModel.updateBackgroundAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = false )},
+        0
     )
 
 
@@ -54,6 +56,13 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
         repeatOnStarted(viewLifecycleOwner) {
             viewModel.assetDetailTypes.collectLatest {
                 decorationAssetDetailTypeAdapter.submitList(it)
+            }
+        }
+
+        repeatOnStarted(viewLifecycleOwner) {
+            viewModel.myLevel.collectLatest {
+                decorationViewAdapter.myLevel = it
+                decorationAllViewAdapter.myLevel = it
             }
         }
 
