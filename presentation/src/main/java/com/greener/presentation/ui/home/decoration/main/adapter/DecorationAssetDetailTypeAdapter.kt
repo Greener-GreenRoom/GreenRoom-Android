@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greener.domain.model.asset.AssetDetailTypeInfo
+import com.greener.domain.model.asset.AssetType
 import com.greener.presentation.databinding.ItemAssetDetailTypeDarkBinding
 
 class DecorationAssetDetailTypeAdapter(
-    private val changeCheck : (Int) -> Unit
+    private val changeCheck : (AssetType, Int) -> Unit
 ): ListAdapter<AssetDetailTypeInfo, DecorationAssetDetailTypeAdapter.ViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(ItemAssetDetailTypeDarkBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -18,13 +19,14 @@ class DecorationAssetDetailTypeAdapter(
         holder.bind(getItem(position))
     }
 
+
     inner class ViewHolder(
         private val binding: ItemAssetDetailTypeDarkBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
-                changeCheck( getItem(absoluteAdapterPosition).id )
+                changeCheck( getItem(absoluteAdapterPosition).assetType, getItem(absoluteAdapterPosition).id )
                 notifyDataSetChanged()
             }
         }

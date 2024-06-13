@@ -64,27 +64,36 @@ class AssetRepositoryImpl @Inject constructor(
     override suspend fun getAllBackgroundAccessoryAsset(): List<BackgroundAccessoryInfo> {
         val list = dataSource.getAllBackgroundAccessory()
 
-        return list.map {
+        val x = list.map {
             BackgroundAccessoryInfo(
                 id = it.id,
                 itemType = initBackgroundAccessoryType(it.itemType.uppercase()),
                 backgroundAccessory = initBackgroundAccessoryName(it.itemName),
                 limitLevel = it.limitLevel,
                 drawableID = when (initBackgroundAccessoryType(it.itemType.uppercase())) {
-                    BackgroundAccessoryType.OTHER -> {
-                        getDrawableId(BACKGROUND_ACCESSORY_OTHER, it.itemName)
+                    BackgroundAccessoryType.BACK_LEFT -> {
+                        getDrawableId(BACKGROUND_ACCESSORY_LEFT, it.itemName)
                     }
 
-                    BackgroundAccessoryType.GLASS -> {
-                        getDrawableId(BACKGROUND_ACCESSORY_GLASS, it.itemName)
-                    }
-
-                    BackgroundAccessoryType.SHELF -> {
-                        getDrawableId(BACKGROUND_ACCESSORY_SHELF, it.itemName)
+                    BackgroundAccessoryType.BACK_RIGHT -> {
+                        getDrawableId(BACKGROUND_ACCESSORY_RIGHT, it.itemName)
                     }
                 },
+                viewDrawableId = when (initBackgroundAccessoryType(it.itemType.uppercase())) {
+                    BackgroundAccessoryType.BACK_LEFT -> {
+                        getDrawableId(BACKGROUND_ACCESSORY_WINDOW, it.itemName)
+                    }
+
+                    BackgroundAccessoryType.BACK_RIGHT -> {
+                        getDrawableId(BACKGROUND_ACCESSORY_SHELF, it.itemName)
+                    }
+                }
             )
         }.sortedBy { it.limitLevel }
+        x.forEach { info ->
+            Log.d("jomi", "${info.backgroundAccessory.name} : ${info.viewDrawableId}")
+        }
+        return x
     }
 
     override suspend fun getAssetDetailType(assetType: AssetType): List<AssetDetailTypeInfo> {
@@ -134,7 +143,6 @@ class AssetRepositoryImpl @Inject constructor(
                 }
             }
         }
-
 
         return assetDetailList
     }
@@ -203,9 +211,9 @@ class AssetRepositoryImpl @Inject constructor(
                 )
             }
 
-            BACKGROUND_ACCESSORY_GLASS -> {
+            BACKGROUND_ACCESSORY_WINDOW -> {
                 context.resources.getIdentifier(
-                    ASSET + GLASS + lowerName,
+                    ASSET + WINDOW + lowerName,
                     DRAWABLE,
                     context.packageName,
                 )
@@ -219,11 +227,19 @@ class AssetRepositoryImpl @Inject constructor(
                 )
             }
 
-            BACKGROUND_ACCESSORY_OTHER -> {
+            BACKGROUND_ACCESSORY_LEFT -> {
                 context.resources.getIdentifier(
-                    ASSET + OTHER + lowerName,
+                    ASSET + BACK_LEFT + lowerName,
                     DRAWABLE,
                     context.packageName,
+                )
+            }
+
+            BACKGROUND_ACCESSORY_RIGHT -> {
+                context.resources.getIdentifier(
+                    ASSET + BACK_RIGHT + lowerName,
+                    DRAWABLE,
+                    context.packageName
                 )
             }
 
@@ -245,9 +261,10 @@ class AssetRepositoryImpl @Inject constructor(
         const val PLANT_ACCESSORY_EYE = 1
         const val PLANT_ACCESSORY_HEAD = 2
         const val PLANT_ACCESSORY_FACE = 3
-        const val BACKGROUND_ACCESSORY_GLASS = 4
-        const val BACKGROUND_ACCESSORY_SHELF = 5
-        const val BACKGROUND_ACCESSORY_OTHER = 6
+        const val BACKGROUND_ACCESSORY_LEFT = 4
+        const val BACKGROUND_ACCESSORY_RIGHT = 5
+        const val BACKGROUND_ACCESSORY_WINDOW = 6
+        const val BACKGROUND_ACCESSORY_SHELF = 7
 
         const val DRAWABLE = "drawable"
         const val STRING = "string"
@@ -257,8 +274,9 @@ class AssetRepositoryImpl @Inject constructor(
         const val EYE = "eye_"
         const val HEAD = "head_"
         const val FACE = "face_"
-        const val GLASS = "glass_"
+        const val BACK_LEFT = "back_left_"
+        const val BACK_RIGHT = "back_right_"
+        const val WINDOW = "window_"
         const val SHELF = "shelf_"
-        const val OTHER = "other_"
     }
 }

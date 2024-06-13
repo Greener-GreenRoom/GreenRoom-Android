@@ -95,8 +95,8 @@
     <string name="eye">안경</string>
     <string name="face">표정</string>
 
-    <string name="glass">창문 소품</string>
-    <string name="shelf">선반 소품</string>
+    <string name="back_left">창문 소품</string>
+    <string name="back_right">선반 소품</string>
 
 
 </resources>

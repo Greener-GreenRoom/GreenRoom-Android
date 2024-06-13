@@ -1,9 +1,9 @@
 package com.greener.presentation.ui.home.decoration.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayout
 import com.greener.domain.model.asset.AssetType
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentDecorationBinding
-import com.greener.presentation.model.decoration.PlantDecorationIdInfo
+import com.greener.presentation.model.decoration.DecorationTabState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.home.decoration.background.DecorationBackgroundPreviewFragment
 import com.greener.presentation.ui.home.decoration.main.adapter.DecorationAssetAllViewAdapter
@@ -29,11 +29,19 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
 ) {
     private val viewModel: DecorationViewModel by viewModels()
 
-    private val decorationAssetDetailTypeAdapter = DecorationAssetDetailTypeAdapter{
-        viewModel.changeAssetDetailTypeCheck(it)
+    private val decorationAssetDetailTypeAdapter = DecorationAssetDetailTypeAdapter{ type, target ->
+        viewModel.changeAssetDetailType(type, target)
     }
-    private val decorationAllViewAdapter = DecorationAssetAllViewAdapter{ viewModel.updatePlantShapeAsset(it, true)}
-    private val decorationViewAdapter = DecorationAssetViewAdapter{ viewModel.updatePlantShapeAsset(it, false) }
+    private val decorationAllViewAdapter = DecorationAssetAllViewAdapter(
+        { info, _ -> viewModel.updatePlantShapeAsset( targetPlantShape = info, isAll = true) },
+        { info, type -> viewModel.updatePlantAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = true )},
+        { info, type -> viewModel.updateBackgroundAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = true )}
+    )
+    private val decorationViewAdapter = DecorationAssetViewAdapter(
+        { info, type -> viewModel.updatePlantShapeAsset(plantType = type, targetPlantShape = info, isAll = false) },
+        { info, type -> viewModel.updatePlantAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = false)},
+        { info, type -> viewModel.updateBackgroundAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = false )}
+    )
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,8 +69,12 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
         }
 
         repeatOnStarted(viewLifecycleOwner) {
-            viewModel.plantDecorationIdInfo.collectLatest { info ->
-                updatePreview(DecorationPlantPreviewFragment(info))
+            viewModel.totalDecorationInfo.collectLatest { info ->
+                if(info.decorationState == DecorationTabState.PLANT_DECORATION) {
+                    updatePreview(DecorationPlantPreviewFragment(info.decorationDetailInfo!!))
+                } else if (info.decorationState == DecorationTabState.BACKGROUND_DECORATION) {
+                    updatePreview(DecorationBackgroundPreviewFragment(info.decorationDetailInfo!!))
+                }
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.greener.presentation.ui.home.decoration.main.adapter
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -8,7 +10,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.greener.domain.model.asset.AssetType
+import com.greener.domain.model.asset.BackgroundAccessoryInfo
+import com.greener.domain.model.asset.BackgroundAccessoryType
+import com.greener.domain.model.asset.PlantAccessoryInfo
+import com.greener.domain.model.asset.PlantAccessoryType
 import com.greener.domain.model.asset.PlantShapeInfo
+import com.greener.domain.model.asset.PlantShapeType
 import com.greener.presentation.R
 import com.greener.presentation.databinding.ItemAssetDetailItemBinding
 import com.greener.presentation.model.decoration.AssetViewItem
@@ -16,14 +23,43 @@ import com.greener.presentation.model.decoration.AssetViewObject
 
 
 class DecorationAssetViewAdapter(
-    private val onClickPlantShape: (PlantShapeInfo) -> Unit
-): ListAdapter<AssetViewItem, RecyclerView.ViewHolder>(diffUtil) {
+    private val onClickPlantShape: (PlantShapeInfo, PlantShapeType) -> Unit,
+    private val onClickPlantAccessory: (PlantAccessoryInfo, PlantAccessoryType) -> Unit,
+    private val onClickBackgroundAccessory: (BackgroundAccessoryInfo, BackgroundAccessoryType) -> Unit,
+) : ListAdapter<AssetViewItem, RecyclerView.ViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            PLANT_SHAPE_VIEW_HOLDER -> PlantShapeViewHolder(ItemAssetDetailItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-            PLANT_ACCESSORY_VIEW_HOLDER -> PlantAccessoryViewHolder(ItemAssetDetailItemBinding.inflate(LayoutInflater.from(parent.context),parent, false))
-            BACKGROUND_ACCESSORY_VIEW_HOLDER -> BackgroundAccessoryViewHolder(ItemAssetDetailItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-            else -> BackgroundAccessoryViewHolder(ItemAssetDetailItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            PLANT_SHAPE_VIEW_HOLDER -> PlantShapeViewHolder(
+                ItemAssetDetailItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            PLANT_ACCESSORY_VIEW_HOLDER -> PlantAccessoryViewHolder(
+                ItemAssetDetailItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            BACKGROUND_ACCESSORY_VIEW_HOLDER -> BackgroundAccessoryViewHolder(
+                ItemAssetDetailItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            else -> BackgroundAccessoryViewHolder(
+                ItemAssetDetailItemBinding.inflate(
+                    LayoutInflater.from(
+                        parent.context
+                    ), parent, false
+                )
+            )
         }
     }
 
@@ -31,9 +67,17 @@ class DecorationAssetViewAdapter(
         val item = getItem(position)
 
         when (holder) {
-            is PlantShapeViewHolder -> { holder.bind(item) }
-            is PlantAccessoryViewHolder -> { holder.bind(item) }
-            is BackgroundAccessoryViewHolder -> { holder.bind(item) }
+            is PlantShapeViewHolder -> {
+                holder.bind(item)
+            }
+
+            is PlantAccessoryViewHolder -> {
+                holder.bind(item)
+            }
+
+            is BackgroundAccessoryViewHolder -> {
+                holder.bind(item)
+            }
         }
     }
 
@@ -44,11 +88,12 @@ class DecorationAssetViewAdapter(
             AssetType.BACKGROUND_ACCESSORY -> BACKGROUND_ACCESSORY_VIEW_HOLDER
         }
 
+    @SuppressLint("notifyDataSetChanged")
     inner class PlantShapeViewHolder(
-        private val binding : ItemAssetDetailItemBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+        private val binding: ItemAssetDetailItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: AssetViewItem){
+        fun bind(item: AssetViewItem) {
             val viewObject = item.viewObject as AssetViewObject.PlantShapeObject
             Glide.with(binding.root)
                 .load(viewObject.infoList.drawableID)
@@ -61,37 +106,73 @@ class DecorationAssetViewAdapter(
             }
 
             binding.root.setOnClickListener {
-                onClickPlantShape(viewObject.infoList)
+                onClickPlantShape(viewObject.infoList, viewObject.infoList.plantShapeType)
                 notifyDataSetChanged()
             }
         }
     }
 
+    @SuppressLint("notifyDataSetChanged")
     inner class PlantAccessoryViewHolder(
-        private val binding : ItemAssetDetailItemBinding
-    ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: AssetViewItem){
+        private val binding: ItemAssetDetailItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: AssetViewItem) {
             val viewObject = item.viewObject as AssetViewObject.PlantAccessoriesObject
-            Glide.with(binding.root)
-                .load(viewObject.infoList.drawableID)
-                .into(binding.ivItemAssetDetail)
 
             val isEmpty = viewObject.infoList.drawableID == EMPTY_ACCESSORY
             binding.tvItemAssetDetail.isVisible = isEmpty
+            binding.ivItemAssetDetail.isVisible = isEmpty.not()
             if (isEmpty) {
                 binding.tvItemAssetDetail.text = binding.root.context.getText(R.string.util_nothing)
+            } else {
+                Glide.with(binding.root)
+                    .asDrawable()
+                    .load(viewObject.infoList.drawableID)
+                    .into(binding.ivItemAssetDetail)
+            }
+
+            if (viewObject.infoList.isChecked) {
+                binding.root.setBackgroundResource(R.drawable.shape_asset_on)
+            } else {
+                binding.root.setBackgroundResource(R.drawable.shape_asset_off)
+            }
+
+            binding.root.setOnClickListener {
+                onClickPlantAccessory(viewObject.infoList, viewObject.infoList.itemType)
+                notifyDataSetChanged()
             }
         }
     }
 
+    @SuppressLint("notifyDataSetChanged")
     inner class BackgroundAccessoryViewHolder(
-        private val binding : ItemAssetDetailItemBinding
-    ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: AssetViewItem){
+        private val binding: ItemAssetDetailItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: AssetViewItem) {
             val viewObject = item.viewObject as AssetViewObject.BackgroundAccessoriesObject
-            Glide.with(binding.root)
-                .load(viewObject.infoList.drawableID)
-                .into(binding.ivItemAssetDetail)
+
+            val isEmpty = viewObject.infoList.drawableID == EMPTY_ACCESSORY
+            binding.tvItemAssetDetail.isVisible = isEmpty
+            binding.ivItemAssetDetail.isVisible = isEmpty.not()
+            if (isEmpty) {
+                binding.tvItemAssetDetail.text = binding.root.context.getText(R.string.util_nothing)
+            } else {
+                Glide.with(binding.root)
+                    .asDrawable()
+                    .load(viewObject.infoList.drawableID)
+                    .into(binding.ivItemAssetDetail)
+            }
+
+            if (viewObject.infoList.isChecked) {
+                binding.root.setBackgroundResource(R.drawable.shape_asset_on)
+            } else {
+                binding.root.setBackgroundResource(R.drawable.shape_asset_off)
+            }
+
+            binding.root.setOnClickListener {
+                onClickBackgroundAccessory(viewObject.infoList, viewObject.infoList.itemType)
+                notifyDataSetChanged()
+            }
         }
     }
 
@@ -101,10 +182,14 @@ class DecorationAssetViewAdapter(
                 return oldItem.assetType == newItem.assetType
             }
 
-            override fun areContentsTheSame(oldItem: AssetViewItem, newItem: AssetViewItem): Boolean {
+            override fun areContentsTheSame(
+                oldItem: AssetViewItem,
+                newItem: AssetViewItem
+            ): Boolean {
                 return oldItem == newItem
             }
         }
+
         private const val PLANT_SHAPE_VIEW_HOLDER = 0
         private const val PLANT_ACCESSORY_VIEW_HOLDER = 1
         private const val BACKGROUND_ACCESSORY_VIEW_HOLDER = 2

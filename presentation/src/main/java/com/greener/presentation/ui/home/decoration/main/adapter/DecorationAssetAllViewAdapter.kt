@@ -8,7 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.greener.domain.model.asset.AssetType
+import com.greener.domain.model.asset.BackgroundAccessoryInfo
+import com.greener.domain.model.asset.BackgroundAccessoryType
+import com.greener.domain.model.asset.PlantAccessoryInfo
+import com.greener.domain.model.asset.PlantAccessoryType
 import com.greener.domain.model.asset.PlantShapeInfo
+import com.greener.domain.model.asset.PlantShapeType
 import com.greener.presentation.R
 import com.greener.presentation.databinding.ItemAssetDetailAllItemBinding
 import com.greener.presentation.model.decoration.AllAssetViewItem
@@ -19,7 +24,9 @@ import com.greener.presentation.util.SpaceDecoration
 
 
 class DecorationAssetAllViewAdapter(
-    private val onClickPlantShape : (PlantShapeInfo) -> Unit
+    private val onClickPlantShape : (PlantShapeInfo, PlantShapeType) -> Unit,
+    private val onClickPlantAccessory : (PlantAccessoryInfo, PlantAccessoryType) -> Unit,
+    private val onClickBackgroundAccessory : (BackgroundAccessoryInfo, BackgroundAccessoryType) -> Unit
 ): ListAdapter<AllAssetViewItem, RecyclerView.ViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -36,12 +43,8 @@ class DecorationAssetAllViewAdapter(
 
         when (holder) {
             is AllPlantShapeViewHolder -> { holder.bind(item) }
-            is AllPlantAccessoryViewHolder -> {
-//                holder.bind(item)
-            }
-            is AllBackgroundAccessoryViewHolder -> {
-//                holder.bind(item)
-            }
+            is AllPlantAccessoryViewHolder -> { holder.bind(item) }
+            is AllBackgroundAccessoryViewHolder -> { holder.bind(item) }
         }
     }
 
@@ -59,7 +62,7 @@ class DecorationAssetAllViewAdapter(
             .apply {
             flexWrap = FlexWrap.WRAP
         }
-        private val decorationAssetViewAdapter = DecorationAssetViewAdapter{ onClickPlantShape(it) }
+        private val decorationAssetViewAdapter = DecorationAssetViewAdapter( onClickPlantShape, onClickPlantAccessory, onClickBackgroundAccessory )
 
         init {
             binding.rvItemAssetAllItem.run {
@@ -86,60 +89,56 @@ class DecorationAssetAllViewAdapter(
     inner class AllPlantAccessoryViewHolder(
         private val binding : ItemAssetDetailAllItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
-//        private val flexboxLayout = FlexboxLayoutManager(binding.root.context).apply {
-//            flexWrap = FlexWrap.WRAP
-//        }
-//        private val decorationAssetViewAdapter = DecorationAssetViewAdapter{temp(it)}
-//        init {
-//            binding.rvItemAssetAllItem.run {
-//                layoutManager = flexboxLayout
-//                adapter = decorationAssetViewAdapter
-//                addItemDecoration(SpaceDecoration(resources, rightDP = R.dimen.asset_view_left_padding, bottomDP = R.dimen.asset_view_bottom_padding))
-//            }
-//        }
-//        fun bind(item: AllAssetViewItem){
-//            val viewObject = item.viewObject as AllAssetViewObject.AllPlantAccessoriesObject
-//            val itemList = emptyList<AssetViewItem>().toMutableList()
-//            viewObject.infoList.forEach {
-//                itemList.add(
-//                    AssetViewItem(AssetType.PLANT_ACCESSORY, AssetViewObject.PlantAccessoriesObject(it))
-//                )
-//            }
-//            binding.tvItemAssetAllType.text = binding.root.context.getText(viewObject.plantAccessoryTypeCode)
-//            decorationAssetViewAdapter.submitList(itemList)
-//        }
+        private val flexboxLayout = FlexboxLayoutManager(binding.root.context).apply {
+            flexWrap = FlexWrap.WRAP
+        }
+        private val decorationAssetViewAdapter = DecorationAssetViewAdapter( onClickPlantShape, onClickPlantAccessory, onClickBackgroundAccessory )
+        init {
+            binding.rvItemAssetAllItem.run {
+                layoutManager = flexboxLayout
+                adapter = decorationAssetViewAdapter
+                addItemDecoration(SpaceDecoration(resources, rightDP = R.dimen.asset_view_left_padding, bottomDP = R.dimen.asset_view_bottom_padding))
+            }
+        }
+        fun bind(item: AllAssetViewItem){
+            val viewObject = item.viewObject as AllAssetViewObject.AllPlantAccessoriesObject
+            val itemList = emptyList<AssetViewItem>().toMutableList()
+            viewObject.infoList.forEach {
+                itemList.add(
+                    AssetViewItem(AssetType.PLANT_ACCESSORY, AssetViewObject.PlantAccessoriesObject(it))
+                )
+            }
+            binding.tvItemAssetAllType.text = binding.root.context.getText(viewObject.plantAccessoryTypeCode)
+            decorationAssetViewAdapter.submitList(itemList)
+        }
     }
 
     inner class AllBackgroundAccessoryViewHolder(
         private val binding : ItemAssetDetailAllItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
-//        private val flexboxLayout = FlexboxLayoutManager(binding.root.context).apply {
-//            flexWrap = FlexWrap.WRAP
-//        }
-//        private val decorationAssetViewAdapter = DecorationAssetViewAdapter{temp(it)}
-//
-//        init {
-//            binding.rvItemAssetAllItem.run {
-//                layoutManager = flexboxLayout
-//                adapter = decorationAssetViewAdapter
-//                addItemDecoration(SpaceDecoration(resources, rightDP = R.dimen.asset_view_left_padding, bottomDP = R.dimen.asset_view_bottom_padding))
-//            }
-//        }
-//        fun bind(item: AllAssetViewItem){
-//            val viewObject = item.viewObject as AllAssetViewObject.AllBackgroundAccessoriesObject
-//            val itemList = emptyList<AssetViewItem>().toMutableList()
-//            viewObject.infoList.forEach {
-//                itemList.add(
-//                    AssetViewItem(AssetType.BACKGROUND_ACCESSORY, AssetViewObject.BackgroundAccessoriesObject(it))
-//                )
-//            }
-//            binding.tvItemAssetAllType.text = binding.root.context.getText(viewObject.backgroundAccessoryTypeCode)
-//            decorationAssetViewAdapter.submitList(itemList)
-//        }
-    }
+        private val flexboxLayout = FlexboxLayoutManager(binding.root.context).apply {
+            flexWrap = FlexWrap.WRAP
+        }
+        private val decorationAssetViewAdapter = DecorationAssetViewAdapter( onClickPlantShape, onClickPlantAccessory, onClickBackgroundAccessory )
 
-    private fun temp(x: Int) {
-
+        init {
+            binding.rvItemAssetAllItem.run {
+                layoutManager = flexboxLayout
+                adapter = decorationAssetViewAdapter
+                addItemDecoration(SpaceDecoration(resources, rightDP = R.dimen.asset_view_left_padding, bottomDP = R.dimen.asset_view_bottom_padding))
+            }
+        }
+        fun bind(item: AllAssetViewItem){
+            val viewObject = item.viewObject as AllAssetViewObject.AllBackgroundAccessoriesObject
+            val itemList = emptyList<AssetViewItem>().toMutableList()
+            viewObject.infoList.forEach {
+                itemList.add(
+                    AssetViewItem(AssetType.BACKGROUND_ACCESSORY, AssetViewObject.BackgroundAccessoriesObject(it))
+                )
+            }
+            binding.tvItemAssetAllType.text = binding.root.context.getText(viewObject.backgroundAccessoryTypeCode)
+            decorationAssetViewAdapter.submitList(itemList)
+        }
     }
 
     companion object {
