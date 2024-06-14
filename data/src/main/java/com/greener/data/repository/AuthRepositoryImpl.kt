@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val dataSource: AuthDataSource
+    private val dataSource: AuthDataSource,
 ) : AuthRepository {
     override suspend fun setToken(accessToken: String) {
         dataSource.setToken(accessToken)
@@ -20,7 +20,7 @@ class AuthRepositoryImpl @Inject constructor(
         userEmail: String,
         provider: String,
         accessToken: String,
-        refreshToken: String
+        refreshToken: String,
     ) {
         dataSource.setUserInfo(userEmail, provider, accessToken, refreshToken)
     }
@@ -36,5 +36,4 @@ class AuthRepositoryImpl @Inject constructor(
     override fun getRefreshToken(): Flow<String?> {
         return dataSource.getRefreshToken()
     }
-
 }

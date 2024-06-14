@@ -1,6 +1,7 @@
 package com.greener.data.di
 
 import com.greener.data.interceptor.AuthInterceptor
+import com.greener.data.service.HomeGreenRoomService
 import com.greener.data.service.SignService
 import com.greener.data.source.local.AuthDataSource
 import com.squareup.moshi.Moshi
@@ -29,12 +30,6 @@ object NetworkModule {
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun provideSignService(retrofit: Retrofit): SignService {
-        return retrofit.create(SignService::class.java)
-    }
-
     @Singleton
     @Provides
     fun provideOkHttp(authInterceptor: AuthInterceptor): OkHttpClient {
@@ -49,10 +44,21 @@ object NetworkModule {
         return AuthInterceptor(dataStore)
     }
 
+    @Provides
+    @Singleton
+    fun provideSignService(retrofit: Retrofit): SignService {
+        return retrofit.create(SignService::class.java)
+    }
 
-@Singleton
-@Provides
-fun provideMoshi(): Moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
+    @Provides
+    @Singleton
+    fun provideHomeGreenRoomService(retrofit: Retrofit): HomeGreenRoomService {
+        return retrofit.create(HomeGreenRoomService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 }

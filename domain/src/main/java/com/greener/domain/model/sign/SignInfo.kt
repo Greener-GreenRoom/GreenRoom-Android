@@ -4,5 +4,5 @@ data class SignInfo(
     val email: String,
     val name: String,
     val provider: String,
-    val photoUrl:String =""
+    val photoUrl: String = "",
 )

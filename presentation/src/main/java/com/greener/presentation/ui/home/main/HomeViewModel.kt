@@ -1,74 +1,68 @@
 package com.greener.presentation.ui.home.main
 
 import androidx.lifecycle.ViewModel
-import com.greener.domain.model.ExampleModel
+import androidx.lifecycle.viewModelScope
+import com.greener.domain.model.ActionTodo
+import com.greener.domain.model.greenroom.GreenRoomTotalInfo
+import com.greener.domain.usecase.greenroom.GetUserGreenRoomListUseCase
+import com.greener.presentation.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val getUserGreenRoomListUseCase: GetUserGreenRoomListUseCase,
+) : ViewModel() {
 
-    private val _myPlants = MutableStateFlow<List<ExampleModel>>(listOf())
-    val myPlants: MutableStateFlow<List<ExampleModel>> get() = _myPlants
+    private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+    private val _myGreenRooms = MutableStateFlow<List<GreenRoomTotalInfo>>(listOf())
+    val myGreenRooms: MutableStateFlow<List<GreenRoomTotalInfo>> get() = _myGreenRooms
 
-    init {
-        getMyPlants()
-    }
-
-    private val _currentPlant = MutableStateFlow(
-        if (_myPlants.value.isNotEmpty()) _myPlants.value[0] else null,
-    )
-    val currentPlant: MutableStateFlow<ExampleModel?> get() = _currentPlant
+    private val _currentGreenRoom = MutableStateFlow<GreenRoomTotalInfo?>(null)
+    val currentGreenRoom: StateFlow<GreenRoomTotalInfo?> get() = _currentGreenRoom
 
     private val _isFabOpen = MutableStateFlow(false)
     val isFabOpen: MutableStateFlow<Boolean> get() = _isFabOpen
 
-    private fun getMyPlants() {
-        val plant1 = ExampleModel(
-            1,
-            "초롱이",
-            1,
-            "#000000",
-            "#000000",
-            1,
-            1,
-            2,
-        )
-        val plant2 = ExampleModel(
-            1,
-            "아롱이",
-            2,
-            "#000000",
-            "#000000",
-            2,
-            3,
-            3,
-        )
-        val plant3 = ExampleModel(
-            1,
-            "로롱이",
-            3,
-            "#000000",
-            "#000000",
-            3,
-            4,
-            4,
-        )
-        val plants = listOf(plant1, plant2, plant3)
-        // val plants = listOf<ExampleModel>()
-        _myPlants.value = plants
+    fun changeTodo(position: Int, actionTodo: ActionTodo) {
+        if (actionTodo == ActionTodo.COMPLETE_ALL) {
+            _myGreenRooms.value[position].greenRoomTodos.clear()
+            return
+        }
+        _myGreenRooms.value[position].greenRoomTodos.removeIf {
+            it.actionTodo == actionTodo
+        }
+    }
+
+    fun getUserGreenRoomsInfo() {
+        viewModelScope.launch {
+            val result = getUserGreenRoomListUseCase()
+            if (result.isSuccess) {
+                _uiState.update { UiState.Success }
+                _currentGreenRoom.update { result.getOrNull()?.greenRoomsTotalInfo?.get(0) }
+                _myGreenRooms.value = result.getOrNull()?.greenRoomsTotalInfo ?: emptyList()
+            } else {
+                _uiState.update { UiState.Error(result.exceptionOrNull()!!.message!!) }
+            }
+        }
     }
 
     fun getCountsToString(): String {
-        return _myPlants.value.size.toString()
+        return _myGreenRooms.value.size.toString()
     }
-    fun isAnyPlants(): Boolean {
-        return _myPlants.value.isNotEmpty()
+
+    fun isAnyGreenRooms(): Boolean {
+        return _myGreenRooms.value.isNotEmpty()
     }
 
     fun getCounts(): Int {
-        return _myPlants.value.size
+        return _myGreenRooms.value.size
     }
 
     fun setIsFabOpen() {
@@ -77,5 +71,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
 
     fun initFab() {
         isFabOpen.value = false
+    }
+
+    fun updateCurrentGreenRoom(position: Int) {
+        _currentGreenRoom.update { myGreenRooms.value[position] }
     }
 }

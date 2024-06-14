@@ -2,7 +2,6 @@ package com.greener.presentation.ui.login.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.greener.domain.model.ApiState
 import com.greener.domain.usecase.datastore.SetUserInfoUseCase
 import com.greener.domain.usecase.sign.GetTokenUseCase
 import com.greener.presentation.model.UiState
@@ -16,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val getTokenUseCase: GetTokenUseCase,
-    private val setUserInfoUseCase: SetUserInfoUseCase
+    private val setUserInfoUseCase: SetUserInfoUseCase,
 ) : ViewModel() {
 
     private val _email = MutableStateFlow("")
@@ -60,22 +59,14 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { UiState.Loading }
             val responseData = getTokenUseCase(_email.value)
-            when (responseData) {
-                is ApiState.Success -> {
-                    _accessToken.value = responseData.result.data!!.accessToken
-                    _refreshToken.value = responseData.result.data!!.refreshToken
-                    setUserInfoAtLocal()
-                    _uiState.update { UiState.Success }
-                }
-
-                is ApiState.Fail -> {
-                    _uiState.update { UiState.Fail }
-                }
-
-                is ApiState.Exception -> {
-                    val errorMessage = responseData.checkException()
-                    _uiState.update { UiState.Error(errorMessage) }
-                }
+            if (responseData.isSuccess) {
+                _accessToken.value = responseData.getOrNull()!!.data!!.accessToken
+                _refreshToken.value = responseData.getOrNull()!!.data!!.refreshToken
+                setUserInfoAtLocal()
+                _uiState.update { UiState.Success }
+            } else {
+                _uiState.update { UiState.Fail }
+                _uiState.update { UiState.Empty }
             }
         }
     }
@@ -85,9 +76,7 @@ class LoginViewModel @Inject constructor(
             _email.value,
             _provider.value,
             _accessToken.value,
-            _refreshToken.value
+            _refreshToken.value,
         )
-
     }
-
 }

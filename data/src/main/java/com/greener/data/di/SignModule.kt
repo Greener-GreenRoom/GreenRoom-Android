@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 internal abstract class SignModule {
     @Binds
     abstract fun bindSignRepository(
-        repository: SignRepositoryImpl
+        repository: SignRepositoryImpl,
     ): SignRepository
 }

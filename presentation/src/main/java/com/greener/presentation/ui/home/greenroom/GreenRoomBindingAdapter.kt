@@ -1,93 +1,134 @@
 package com.greener.presentation.ui.home.greenroom
 
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.greener.domain.model.ActionTodo
 import com.greener.presentation.R
 
 @BindingAdapter("setPlantType")
-fun setPlantType(view: ImageView, id: Int) {
-    when (id) {
-        1 -> {
-            view.setImageResource(R.drawable.img_plant_1_empty)
-        }
-
-        2 -> {
-            view.setImageResource(R.drawable.img_plant_2_empty)
-        }
-
-        3 -> {
-            view.setImageResource(R.drawable.img_plant_3_empty)
-        }
-
-        4 -> {
-            view.setImageResource(R.drawable.img_plant_4_empty)
-        }
-    }
+fun setPlantType(view: ImageView, type: String) {
+    val plantType = type.lowercase()
+    val context = view.context
+    val resId =
+        context.resources.getIdentifier("asset_plant_$plantType", "drawable", context.packageName)
+    view.setImageResource(resId)
 }
 
 @BindingAdapter("setPlantFace")
 fun setPlantFace(view: ImageView, id: Int) {
     when (id) {
-        1 -> {
-            view.setImageResource(R.drawable.img_face_default)
+        0 -> {
+            view.setImageResource(R.drawable.asset_face_happy)
         }
 
-        2 -> {
-            view.setImageResource(R.drawable.img_face_happy)
+        1, 2 -> {
+            view.setImageResource(R.drawable.asset_face_default)
         }
 
-        3 -> {
-            view.setImageResource(R.drawable.img_face_angry)
+        3, 4 -> {
+            view.setImageResource(R.drawable.asset_face_sad)
         }
 
         else -> {
-            view.setImageResource(R.drawable.img_face_default)
+            view.setImageResource(R.drawable.asset_face_angry)
         }
     }
 }
 
 @BindingAdapter("setWindowImg")
-fun setWindowImg(view: ImageView, id: Int) {
-    when (id) {
-        1 -> {
-            view.setImageResource(R.drawable.img_window_1)
-        }
-
-        2 -> {
-            view.setImageResource(R.drawable.img_window_2)
-        }
-
-        3 -> {
-            view.setImageResource(R.drawable.img_window_3)
-        }
-
-        4 -> {
-            view.setImageResource(R.drawable.img_window_4)
-        }
+fun setWindowImg(view: ImageView, window: String) {
+    val windowLowerCase = window.lowercase()
+    val context = view.context
+    val resId =
+        context.resources.getIdentifier(
+            "asset_window_$windowLowerCase",
+            "drawable",
+            context.packageName,
+        )
+    if (resId == 0) {
+        view.setImageResource(R.drawable.img_window_1)
+    } else {
+        view.setImageResource(resId)
     }
 }
 
 @BindingAdapter("setShelfImg")
-fun setShelfImg(view: ImageView, id: Int) {
-    when (id) {
-        1 -> {
-            view.setImageResource(R.drawable.img_shelf_1)
-        }
+fun setShelfImg(view: ImageView, shelf: String) {
+    val shelfLowerCase = shelf.lowercase()
+    val context = view.context
+    val resId =
+        context.resources.getIdentifier(
+            "asset_shelf_$shelfLowerCase",
+            "drawable",
+            context.packageName,
+        )
+    if (resId == 0) {
+        view.setImageResource(R.drawable.img_shelf_1)
+    } else {
+        view.setImageResource(resId)
+    }
+}
 
-        2 -> {
-            view.setImageResource(R.drawable.img_shelf_2)
-        }
+@BindingAdapter("setHairAccessory")
+fun setHairAccessory(view: ImageView, hairAccessory: String) {
+    val hairAccessoryLowerCase = hairAccessory.lowercase()
+    val context = view.context
+    val resId =
+        context.resources.getIdentifier(
+            "asset_head_$hairAccessoryLowerCase",
+            "drawable",
+            context.packageName,
+        )
+    if (resId == 0) {
+        view.visibility = View.GONE
+    } else {
+        view.setImageResource(resId)
+    }
+}
 
-        3 -> {
-            view.setImageResource(R.drawable.img_shelf_3)
-        }
+@BindingAdapter("setGlasses")
+fun setGlasses(view: ImageView, glasses: String) {
+    val glassesLowerCase = glasses.lowercase()
+    val context = view.context
+    val resId =
+        context.resources.getIdentifier(
+            "asset_glass_$glassesLowerCase",
+            "drawable",
+            context.packageName,
+        )
+    if (resId == 0) {
+        view.visibility = View.GONE
+    } else {
+        view.setImageResource(resId)
+    }
+}
 
-        4 -> {
-            view.setImageResource(R.drawable.img_shelf_4)
-        }
+@BindingAdapter("setTextBalloon")
+fun setTextBalloon(view: TextView, actionTodo: ActionTodo?) {
+    val context = view.context
+    val packageName = view.context.packageName
+    try {
+        val textResId = context.resources.getIdentifier(
+            "${actionTodo!!.activity}_text_balloon",
+            "string",
+            packageName,
+        )
+        val text = context.getString(textResId)
+        val colorResId = context.resources.getIdentifier(actionTodo.color, "color", packageName)
+        val color = context.getColor(colorResId)
+        val spannableString = SpannableString(text)
 
-        5 -> {
-            view.setImageResource(R.drawable.img_shelf_5)
-        }
+        spannableString.setSpan(
+            ForegroundColorSpan(color),
+            0, // 시작 위치
+            actionTodo.size, // 끝 위치 (exclusive)
+            0,
+        )
+        view.text = spannableString
+    } catch (e: Exception) {
     }
 }
