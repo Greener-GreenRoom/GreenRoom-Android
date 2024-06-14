@@ -41,7 +41,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 setBottomProfileAdapter()
             }
         }
-
     }
 
     override fun initListener() {
@@ -75,7 +74,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private fun onChangedTodo(position: Int, actionTodo: ActionTodo) {
         viewModel.changeTodo(position, actionTodo)
         binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.adapter!!.notifyItemChanged(position)
-
     }
 
     private fun setGreenRoomViewPager() {
@@ -83,12 +81,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             this@HomeFragment,
             viewModel.myGreenRooms.value,
 
-            ) { position, actionTodo ->
+        ) { position, actionTodo ->
             onChangedTodo(position, actionTodo)
         }
         binding.vpHomeGreenRoom.isUserInputEnabled = false
-        //binding.vpHomeGreenRoom.offscreenPageLimit = 100
-        //binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
+        // binding.vpHomeGreenRoom.offscreenPageLimit = 100
+        // binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
     }
 
     private fun setBottomProfileAdapter() {
@@ -217,9 +215,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
                         // Fade the page relative to its size.
                         alpha = (
-                                MIN_ALPHA +
-                                        (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA))
-                                )
+                            MIN_ALPHA +
+                                (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA))
+                            )
                     }
 
                     else -> { // (1,+Infinity]

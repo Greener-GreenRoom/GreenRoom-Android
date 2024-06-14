@@ -6,5 +6,5 @@ data class GreenRoomBaseInfo(
     val period: Int,
     val memo: String,
     val imgUrl: String,
-    val status: Boolean
+    val status: Boolean,
 )

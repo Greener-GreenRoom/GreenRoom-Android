@@ -50,7 +50,7 @@ class CompleteTodoSnackBar(view: View, val seedPoint: Int) {
 }
 
 object CompleteTodoToast {
-    fun createToast(context: Context,seedPoint: Int): Toast? {
+    fun createToast(context: Context, seedPoint: Int): Toast? {
         val inflater = LayoutInflater.from(context)
         val binding: SnackbarCompleteTodoBinding =
             DataBindingUtil.inflate(inflater, R.layout.snackbar_complete_todo, null, false)

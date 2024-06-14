@@ -6,5 +6,5 @@ import java.util.Date
 data class GreenRoomTodo(
     val actionTodo: ActionTodo,
     val activity: String,
-    val todoDate: Date
+    val todoDate: Date,
 )

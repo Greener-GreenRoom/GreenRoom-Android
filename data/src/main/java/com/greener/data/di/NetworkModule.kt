@@ -30,7 +30,6 @@ object NetworkModule {
             .build()
     }
 
-
     @Singleton
     @Provides
     fun provideOkHttp(authInterceptor: AuthInterceptor): OkHttpClient {
@@ -57,10 +56,9 @@ object NetworkModule {
         return retrofit.create(HomeGreenRoomService::class.java)
     }
 
-
-@Singleton
-@Provides
-fun provideMoshi(): Moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
+    @Singleton
+    @Provides
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 }

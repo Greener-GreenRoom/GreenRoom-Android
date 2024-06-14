@@ -27,9 +27,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 ) {
     private val viewModel: LoginViewModel by viewModels()
 
-
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
-
 
     private val googleAuthLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -43,7 +41,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 viewModel.setName(userName)
                 viewModel.setProvider(GOOGLE)
                 getToken()
-
             } catch (e: ApiException) {
                 Log.e("확인", e.stackTraceToString())
             }
@@ -53,7 +50,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         super.onViewCreated(view, savedInstanceState)
         binding.vpLoginOnboarding.adapter = LoginOnBoardingVPAdapter(requireActivity())
         binding.indicatorLoginVp.attachTo(binding.vpLoginOnboarding)
-
     }
 
     override fun initListener() {
@@ -65,7 +61,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         }
         checkExistUser()
     }
-
 
     private fun checkExistUser() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -84,17 +79,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                     }
 
                     is UiState.Loading -> {
-
                     }
 
                     is UiState.Empty -> {
-
                     }
                 }
             }
         }
     }
-
 
     private fun requestGoogleLogin() {
         googleSignInClient.signOut()
@@ -112,7 +104,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         return GoogleSignIn.getClient(requireActivity(), googleSignInOption)
     }
 
-
     private fun moveToMain() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
@@ -125,10 +116,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
     private fun moveToRegisterNickName() {
         val action = LoginFragmentDirections.actionLoginFragmentToLoginRegisterNicknameFragment(
-            arrayOf(viewModel.email.value, viewModel.photoUrl.value, viewModel.provider.value)
+            arrayOf(viewModel.email.value, viewModel.photoUrl.value, viewModel.provider.value),
         )
         Navigation.findNavController(binding.root).navigate(action)
-
     }
 
     companion object {

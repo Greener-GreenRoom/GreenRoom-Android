@@ -12,7 +12,7 @@ import java.util.concurrent.Executors
 @Database(
     entities = [PlantAccessoryEntity::class],
     version = 1,
-    exportSchema = false
+    exportSchema = false,
 )
 abstract class PlantAccessoryDatabase : RoomDatabase() {
     abstract fun plantAccessoryDao(): PlantAccessoryDao
@@ -36,11 +36,10 @@ abstract class PlantAccessoryDatabase : RoomDatabase() {
                                             id = token[0].toInt(),
                                             itemType = token[1],
                                             itemName = token[2],
-                                            limitLevel = token[3].toInt()
-                                        )
+                                            limitLevel = token[3].toInt(),
+                                        ),
                                     )
                                 }
-
                             }
                         }
                     }

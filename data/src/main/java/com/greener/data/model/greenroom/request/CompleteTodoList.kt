@@ -5,5 +5,5 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class CompleteTodoList(
-    @Json(name = "activityList") val activityList: List<Int>
+    @Json(name = "activityList") val activityList: List<Int>,
 )

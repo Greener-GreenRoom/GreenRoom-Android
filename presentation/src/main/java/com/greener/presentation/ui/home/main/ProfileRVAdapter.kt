@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.greener.domain.model.ExampleModel
 import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 import com.greener.presentation.R
 import com.greener.presentation.databinding.ItemProfileBinding
@@ -43,7 +42,7 @@ class ProfileRVAdapter(
                 ContextCompat.getColor(
                     holder.binding.tvItemProfilePlantName.context,
                     R.color.green300,
-                )
+                ),
             )
         } else {
             holder.binding.ivItemProfileBackground.setImageResource(R.drawable.img_profile_background_circle_non_selected)
@@ -60,7 +59,6 @@ class ProfileRVAdapter(
             currentPosition = holder.bindingAdapterPosition
             notifyItemChanged(previouslySelectedItemPosition)
             notifyItemChanged(currentPosition)
-
         }
     }
 

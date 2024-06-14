@@ -8,9 +8,8 @@ import com.greener.data.service.HomeGreenRoomService
 import com.greener.domain.model.ApiState
 import javax.inject.Inject
 
-
 class HomeGreenRoomDataSource @Inject constructor(
-    private val service: HomeGreenRoomService
+    private val service: HomeGreenRoomService,
 ) {
     suspend fun getUserGreenRoomList(): ApiState<ResponseFormDTO<UserGreenRoomsInfoDTO?>> {
         return try {
@@ -27,7 +26,7 @@ class HomeGreenRoomDataSource @Inject constructor(
 
     suspend fun completeTodo(
         id: Int,
-        todoList: List<Int>
+        todoList: List<Int>,
     ): ApiState<ResponseFormDTO<TodoCompleteDTO>> {
         return try {
             val response = service.completeTodo(id, CompleteTodoList(todoList))

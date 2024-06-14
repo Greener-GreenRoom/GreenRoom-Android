@@ -4,5 +4,5 @@ import com.greener.domain.model.user.UserInfo
 
 data class UserGreenRoomsInfo(
     val userInfo: UserInfo,
-    val greenRoomsTotalInfo: List<GreenRoomTotalInfo>
+    val greenRoomsTotalInfo: List<GreenRoomTotalInfo>,
 )

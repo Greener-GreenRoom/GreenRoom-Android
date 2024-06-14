@@ -10,22 +10,22 @@ import java.util.Locale
 @JsonClass(generateAdapter = true)
 data class GreenRoomTodoDTO(
     @Json(name = "activity") val activity: String,
-    @Json(name = "todoDate") val todoDate: String
+    @Json(name = "todoDate") val todoDate: String,
 ) {
 
     fun toDomain(): GreenRoomTodo {
-        val actionTodo:ActionTodo
-        when(activity)  {
+        val actionTodo: ActionTodo
+        when (activity) {
             ActionTodo.WATERING.activity -> {
-                actionTodo =ActionTodo.WATERING
+                actionTodo = ActionTodo.WATERING
             }
-            ActionTodo.RE_POT.activity-> {
+            ActionTodo.RE_POT.activity -> {
                 actionTodo = ActionTodo.RE_POT
             }
-            ActionTodo.PRUNING.activity ->{
+            ActionTodo.PRUNING.activity -> {
                 actionTodo = ActionTodo.PRUNING
             }
-            ActionTodo.NUTRITION.activity-> {
+            ActionTodo.NUTRITION.activity -> {
                 actionTodo = ActionTodo.NUTRITION
             }
             ActionTodo.VENTILATION.activity -> {
@@ -33,13 +33,11 @@ data class GreenRoomTodoDTO(
             }
 
             else -> {
-                //TODO else 처리
                 actionTodo = ActionTodo.PRUNING
             }
-
         }
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = sdf.parse(todoDate)
-        return GreenRoomTodo(actionTodo,activity, date)
+        return GreenRoomTodo(actionTodo, activity, date)
     }
 }

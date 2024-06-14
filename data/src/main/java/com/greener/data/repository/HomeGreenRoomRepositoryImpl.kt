@@ -9,7 +9,7 @@ import com.greener.domain.repository.HomeGreenRoomRepository
 import javax.inject.Inject
 
 class HomeGreenRoomRepositoryImpl @Inject constructor(
-    private val dataSource: HomeGreenRoomDataSource
+    private val dataSource: HomeGreenRoomDataSource,
 ) : HomeGreenRoomRepository {
     override suspend fun getUserGreenRoomList(): Result<UserGreenRoomsInfo?> {
         val response = dataSource.getUserGreenRoomList()
@@ -54,6 +54,5 @@ class HomeGreenRoomRepositoryImpl @Inject constructor(
             }
         }
         return Exception("알 수 없는 에러가 발생하였습니다.")
-
     }
 }

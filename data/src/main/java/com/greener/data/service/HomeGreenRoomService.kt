@@ -1,6 +1,5 @@
 package com.greener.data.service
 
-import com.greener.data.model.greenroom.GreenRoomTotalInfoDTO
 import com.greener.data.model.greenroom.TodoCompleteDTO
 import com.greener.data.model.greenroom.UserGreenRoomsInfoDTO
 import com.greener.data.model.greenroom.request.CompleteTodoList
@@ -13,12 +12,11 @@ import retrofit2.http.Path
 interface HomeGreenRoomService {
 
     @GET("greenrooms?filter=enabled&sort=desc")
-    suspend fun getUserGreenRoomList():ResponseFormDTO<UserGreenRoomsInfoDTO?>
+    suspend fun getUserGreenRoomList(): ResponseFormDTO<UserGreenRoomsInfoDTO?>
 
     @PATCH("greenrooms/{greenRoomId}/todo")
     suspend fun completeTodo(
-        @Path(value = "greenRoomId") greenRoomId : Int,
-        @Body todoList: CompleteTodoList
-    ):ResponseFormDTO<TodoCompleteDTO>
-
+        @Path(value = "greenRoomId") greenRoomId: Int,
+        @Body todoList: CompleteTodoList,
+    ): ResponseFormDTO<TodoCompleteDTO>
 }

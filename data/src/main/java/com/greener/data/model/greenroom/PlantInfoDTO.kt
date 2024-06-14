@@ -20,7 +20,7 @@ data class PlantInfoDTO(
             plantAlias,
             plantPictureUrl,
             plantExplanation,
-            plantCategory
+            plantCategory,
         )
     }
 }

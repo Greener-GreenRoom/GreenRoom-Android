@@ -5,7 +5,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.greener.domain.model.ActionTodo
 import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 
-
 class GreenRoomViewPagerAdapter(
     frag: Fragment,
     myGreenRooms: List<GreenRoomTotalInfo>,

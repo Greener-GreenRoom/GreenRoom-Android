@@ -1,11 +1,9 @@
 package com.greener.presentation.ui.home.greenroom
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.ActionTodo
-import com.greener.domain.model.ApiState
 import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 import com.greener.domain.usecase.greenroom.CompleteTodoUseCase
 import com.greener.presentation.model.UiState
@@ -19,12 +17,11 @@ import kotlinx.coroutines.launch
 
 class GreenRoomViewModel @AssistedInject constructor(
     @Assisted private val greenRoom: GreenRoomTotalInfo,
-    private val completeTodoUseCase: CompleteTodoUseCase
+    private val completeTodoUseCase: CompleteTodoUseCase,
 ) : ViewModel() {
 
     private val _myGreenRoom = MutableStateFlow<GreenRoomTotalInfo?>(null)
     val myGreenRoom: StateFlow<GreenRoomTotalInfo?> get() = _myGreenRoom
-
 
     private val _increasingPoint = MutableStateFlow(0)
     val increasingPoint: StateFlow<Int> get() = _increasingPoint
@@ -52,7 +49,7 @@ class GreenRoomViewModel @AssistedInject constructor(
         viewModelScope.launch {
             val response = completeTodoUseCase(
                 _myGreenRoom.value!!.greenRoomInfo.greenRoomBaseInfo.greenroomId,
-                todoList
+                todoList,
             )
             if (response.isSuccess) {
                 _uiState.update { UiState.Success }
@@ -64,31 +61,31 @@ class GreenRoomViewModel @AssistedInject constructor(
             } else {
                 _uiState.update { UiState.Error(response.exceptionOrNull()!!.message!!) }
                 _uiState.update { UiState.Empty }
-                }
-            }
-        }
-
-        fun resetIncreasingPoint() {
-            _increasingPoint.value = 0
-        }
-
-        fun resetIsLevelUp() {
-            _level.value = 0
-        }
-
-        @AssistedFactory
-        interface GreenRoomViewModelFactory {
-            fun create(greenRoom: GreenRoomTotalInfo): GreenRoomViewModel
-        }
-
-        companion object {
-            fun providesFactory(
-                assistedFactory: GreenRoomViewModelFactory,
-                greenRoom: GreenRoomTotalInfo,
-            ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return assistedFactory.create(greenRoom) as T
-                }
             }
         }
     }
+
+    fun resetIncreasingPoint() {
+        _increasingPoint.value = 0
+    }
+
+    fun resetIsLevelUp() {
+        _level.value = 0
+    }
+
+    @AssistedFactory
+    interface GreenRoomViewModelFactory {
+        fun create(greenRoom: GreenRoomTotalInfo): GreenRoomViewModel
+    }
+
+    companion object {
+        fun providesFactory(
+            assistedFactory: GreenRoomViewModelFactory,
+            greenRoom: GreenRoomTotalInfo,
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return assistedFactory.create(greenRoom) as T
+            }
+        }
+    }
+}

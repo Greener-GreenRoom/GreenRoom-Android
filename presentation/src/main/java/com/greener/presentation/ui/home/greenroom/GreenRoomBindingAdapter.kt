@@ -14,7 +14,7 @@ fun setPlantType(view: ImageView, type: String) {
     val plantType = type.lowercase()
     val context = view.context
     val resId =
-        context.resources.getIdentifier("asset_plant_${plantType}", "drawable", context.packageName)
+        context.resources.getIdentifier("asset_plant_$plantType", "drawable", context.packageName)
     view.setImageResource(resId)
 }
 
@@ -41,14 +41,13 @@ fun setPlantFace(view: ImageView, id: Int) {
 
 @BindingAdapter("setWindowImg")
 fun setWindowImg(view: ImageView, window: String) {
-
     val windowLowerCase = window.lowercase()
     val context = view.context
     val resId =
         context.resources.getIdentifier(
-            "asset_window_${windowLowerCase}",
+            "asset_window_$windowLowerCase",
             "drawable",
-            context.packageName
+            context.packageName,
         )
     if (resId == 0) {
         view.setImageResource(R.drawable.img_window_1)
@@ -63,14 +62,13 @@ fun setShelfImg(view: ImageView, shelf: String) {
     val context = view.context
     val resId =
         context.resources.getIdentifier(
-            "asset_shelf_${shelfLowerCase}",
+            "asset_shelf_$shelfLowerCase",
             "drawable",
-            context.packageName
+            context.packageName,
         )
-    if(resId == 0) {
+    if (resId == 0) {
         view.setImageResource(R.drawable.img_shelf_1)
-    }
-    else {
+    } else {
         view.setImageResource(resId)
     }
 }
@@ -81,9 +79,9 @@ fun setHairAccessory(view: ImageView, hairAccessory: String) {
     val context = view.context
     val resId =
         context.resources.getIdentifier(
-            "asset_head_${hairAccessoryLowerCase}",
+            "asset_head_$hairAccessoryLowerCase",
             "drawable",
-            context.packageName
+            context.packageName,
         )
     if (resId == 0) {
         view.visibility = View.GONE
@@ -98,9 +96,9 @@ fun setGlasses(view: ImageView, glasses: String) {
     val context = view.context
     val resId =
         context.resources.getIdentifier(
-            "asset_glass_${glassesLowerCase}",
+            "asset_glass_$glassesLowerCase",
             "drawable",
-            context.packageName
+            context.packageName,
         )
     if (resId == 0) {
         view.visibility = View.GONE
@@ -117,7 +115,7 @@ fun setTextBalloon(view: TextView, actionTodo: ActionTodo?) {
         val textResId = context.resources.getIdentifier(
             "${actionTodo!!.activity}_text_balloon",
             "string",
-            packageName
+            packageName,
         )
         val text = context.getString(textResId)
         val colorResId = context.resources.getIdentifier(actionTodo.color, "color", packageName)
@@ -128,7 +126,7 @@ fun setTextBalloon(view: TextView, actionTodo: ActionTodo?) {
             ForegroundColorSpan(color),
             0, // 시작 위치
             actionTodo.size, // 끝 위치 (exclusive)
-            0
+            0,
         )
         view.text = spannableString
     } catch (e: Exception) {

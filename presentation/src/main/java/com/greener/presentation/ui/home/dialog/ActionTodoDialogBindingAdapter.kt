@@ -4,11 +4,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.greener.domain.model.ActionTodo
-import dagger.hilt.android.internal.Contexts
-
 
 @BindingAdapter("setDialogTitle")
-fun setTitle(view: TextView, actionTodo:ActionTodo) {
+fun setTitle(view: TextView, actionTodo: ActionTodo) {
     val context = view.context
     val packageName = context.packageName
     val textId =
@@ -19,7 +17,6 @@ fun setTitle(view: TextView, actionTodo:ActionTodo) {
     view.setText(textId)
     view.setTextColor(textColor)
 }
-
 
 @BindingAdapter("setDialogAsk")
 fun setAsk(view: TextView, todoName: String) {
@@ -38,4 +35,3 @@ fun setConfirm(view: Button, todoName: String) {
 
     view.setText(resId)
 }
-

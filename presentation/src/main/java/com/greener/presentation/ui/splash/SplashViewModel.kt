@@ -2,7 +2,6 @@ package com.greener.presentation.ui.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.greener.domain.model.ApiState
 import com.greener.domain.usecase.datastore.SetLocalTokensUseCase
 import com.greener.domain.usecase.sign.UpdateTokenUseCase
 import com.greener.presentation.model.UiState
@@ -17,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val updateTokenUseCase: UpdateTokenUseCase,
-    private val setLocalTokensUseCase: SetLocalTokensUseCase
+    private val setLocalTokensUseCase: SetLocalTokensUseCase,
 ) : ViewModel() {
 
     private val _accessToken = MutableStateFlow("")
@@ -33,24 +32,18 @@ class SplashViewModel @Inject constructor(
             val responseData = updateTokenUseCase()
 
             if (responseData.isSuccess) {
-
                 setTokensAtLocal(
                     responseData.getOrNull()!!.data!!.accessToken,
-                    responseData.getOrNull()!!.data!!.refreshToken
+                    responseData.getOrNull()!!.data!!.refreshToken,
                 )
                 _uiState.update { UiState.Success }
             } else {
                 _uiState.update { UiState.Fail }
             }
 
-
-
-
-
             delay(5000)
             _uiState.update { UiState.Fail }
         }
-
     }
     private suspend fun setTokensAtLocal(accessToken: String, refreshToken: String) {
         setLocalTokensUseCase(accessToken, refreshToken)

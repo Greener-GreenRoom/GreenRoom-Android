@@ -5,5 +5,5 @@ data class GreenRoomItems(
     val shelf: String?,
     val window: String?,
     val hair: String?,
-    val glasses:String?
-    )
+    val glasses: String?,
+)

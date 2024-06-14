@@ -8,8 +8,10 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class UserGreenRoomsInfoDTO(
     @Json(name = "userInfo") val userInfo: UserInfoDTO,
-    @Json(name = "greenroomTotalInfo") val greenRoomsTotalInfo: List<GreenRoomTotalInfoDTO>
+    @Json(name = "greenroomTotalInfo") val greenRoomsTotalInfo: List<GreenRoomTotalInfoDTO>,
 ) {
-    fun toDomain(): UserGreenRoomsInfo = UserGreenRoomsInfo(userInfo.toDomain(),
-        greenRoomsTotalInfo.map { it.toDomain() })
+    fun toDomain(): UserGreenRoomsInfo = UserGreenRoomsInfo(
+        userInfo.toDomain(),
+        greenRoomsTotalInfo.map { it.toDomain() },
+    )
 }

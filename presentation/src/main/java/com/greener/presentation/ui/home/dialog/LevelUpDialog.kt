@@ -9,8 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
-import com.greener.domain.model.ActionTodo
-import com.greener.presentation.databinding.DialogActionTodoBinding
 import com.greener.presentation.databinding.DialogLevelUpBinding
 
 class LevelUpDialog(context: Context, val level: Int, val onClickConfirm: () -> Unit) :

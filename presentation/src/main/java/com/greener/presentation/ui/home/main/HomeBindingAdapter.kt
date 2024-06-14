@@ -35,6 +35,6 @@ fun setRealPlantImg(view: ImageView, url: String?) {
     if (url == "" || url == null) {
         view.setImageResource(R.drawable.img_default_real_profile)
     } else {
-        Glide.with(view).load(url).into(view);
+        Glide.with(view).load(url).into(view)
     }
 }

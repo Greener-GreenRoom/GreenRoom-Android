@@ -14,7 +14,6 @@ import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.home.dialog.ActionDialog
 import com.greener.presentation.ui.home.dialog.LevelUpDialog
-import com.greener.presentation.ui.home.toast.CompleteTodoSnackBar
 import com.greener.presentation.ui.home.toast.CompleteTodoToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.cancel
@@ -25,7 +24,7 @@ import javax.inject.Inject
 class GreenRoomFragment constructor(
     private val myGreenRoom: GreenRoomTotalInfo,
     private val position: Int,
-    val onChangedTodo: (Int, ActionTodo) -> Unit
+    val onChangedTodo: (Int, ActionTodo) -> Unit,
 ) : BaseFragment<FragmentGreenRoomBinding>(
     FragmentGreenRoomBinding::inflate,
 ) {
@@ -46,7 +45,6 @@ class GreenRoomFragment constructor(
         binding.greenRoom = viewModel.myGreenRoom.value
         binding.todoNum = viewModel.myGreenRoom.value!!.greenRoomTodos.size
         binding.lifecycleOwner = this
-
 
         binding.includeGreenRoomBalloon1.cardTextBalloon.setOnClickListener {
             val actionTodo = binding.includeGreenRoomBalloon1.actionTodo as ActionTodo
@@ -96,7 +94,6 @@ class GreenRoomFragment constructor(
                     if (it is UiState.Error) {
                         Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
                     }
-
                 }
             }
         }
@@ -122,7 +119,6 @@ class GreenRoomFragment constructor(
             override fun onClick() {
                 viewModel.completeTodo(actionTodo)
                 observeCompleteTodo(actionTodo, view)
-
             }
         })
         dialog.show()
@@ -131,13 +127,12 @@ class GreenRoomFragment constructor(
     private fun observeCompleteTodo(actionTodo: ActionTodo, view: View?) {
         lifecycleScope.launch {
             viewModel.uiState.collect {
-                if(it == UiState.Success) {
+                if (it == UiState.Success) {
                     hideTextBalloon(view)
                     onChangedTodo(position, actionTodo)
                     setPlantFace(binding.ivGreenRoomPlantFace, myGreenRoom.greenRoomTodos.size)
                     this.cancel()
-                }
-                else if(it is UiState.Error) {
+                } else if (it is UiState.Error) {
                     this.cancel()
                 }
             }

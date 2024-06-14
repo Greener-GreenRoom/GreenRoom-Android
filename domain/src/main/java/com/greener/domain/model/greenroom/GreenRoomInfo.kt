@@ -4,5 +4,5 @@ import com.greener.domain.model.PlantInfo
 
 data class GreenRoomInfo(
     val greenRoomBaseInfo: GreenRoomBaseInfo,
-    val plantInfo: PlantInfo
+    val plantInfo: PlantInfo,
 )

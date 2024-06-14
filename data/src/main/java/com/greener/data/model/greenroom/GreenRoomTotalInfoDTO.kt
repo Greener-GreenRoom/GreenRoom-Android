@@ -12,7 +12,7 @@ import java.util.Locale
 data class GreenRoomTotalInfoDTO(
     @Json(name = "greenroomInfo") val greenRoomInfo: GreenRoomInfoDTO,
     @Json(name = "greenroomItem") val greenRoomItems: List<GreenRoomItemDTO>,
-    @Json(name = "greenroomTodo") val greenRoomTodos: List<GreenRoomTodoDTO>
+    @Json(name = "greenroomTodo") val greenRoomTodos: List<GreenRoomTodoDTO>,
 
 ) {
     fun toDomain(): GreenRoomTotalInfo {
@@ -21,7 +21,7 @@ data class GreenRoomTotalInfoDTO(
             "hair_accessory" to "",
             "glasses" to "",
             "background_shelf" to "",
-            "background_window" to ""
+            "background_window" to "",
         )
 
         greenRoomItems.forEach {
@@ -30,7 +30,7 @@ data class GreenRoomTotalInfoDTO(
         return GreenRoomTotalInfo(
             greenRoomInfo.toDomain(),
             greenRoomItemMap,
-            toDate(greenRoomTodos)
+            toDate(greenRoomTodos),
         )
     }
 

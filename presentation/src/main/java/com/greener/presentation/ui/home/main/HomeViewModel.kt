@@ -3,7 +3,6 @@ package com.greener.presentation.ui.home.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.ActionTodo
-import com.greener.domain.model.ApiState
 import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 import com.greener.domain.usecase.greenroom.GetUserGreenRoomListUseCase
 import com.greener.presentation.model.UiState
@@ -27,7 +26,6 @@ class HomeViewModel @Inject constructor(
 
     private val _currentGreenRoom = MutableStateFlow<GreenRoomTotalInfo?>(null)
     val currentGreenRoom: StateFlow<GreenRoomTotalInfo?> get() = _currentGreenRoom
-
 
     private val _isFabOpen = MutableStateFlow(false)
     val isFabOpen: MutableStateFlow<Boolean> get() = _isFabOpen
