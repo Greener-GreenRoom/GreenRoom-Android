@@ -2,6 +2,7 @@ package com.greener.data.repository
 
 import com.greener.data.source.remote.HomeGreenRoomDataSource
 import com.greener.domain.model.ApiState
+import com.greener.domain.model.ResponseCode
 import com.greener.domain.model.greenroom.TodoCompleteInfo
 import com.greener.domain.model.greenroom.UserGreenRoomsInfo
 import com.greener.domain.repository.HomeGreenRoomRepository
@@ -23,7 +24,7 @@ class HomeGreenRoomRepositoryImpl @Inject constructor(
             }
 
             is ApiState.Exception -> {
-                Result.failure(response.t!!)
+                Result.failure(Exception(ApiState.Exception(response.t).checkException()))
             }
         }
     }
@@ -41,11 +42,18 @@ class HomeGreenRoomRepositoryImpl @Inject constructor(
             }
 
             is ApiState.Exception -> {
-                Result.failure(response.t!!)
+                Result.failure(Exception(ApiState.Exception(response.t).checkException()))
             }
         }
     }
 
-    private fun handleGreenRoomFailure(errorCode: Int): Exception =
-        Exception()
+    private fun handleGreenRoomFailure(errorCode: Int): Exception {
+        ResponseCode.entries.forEach {
+            if (it.codeNumber == errorCode) {
+                return Exception(it.message)
+            }
+        }
+        return Exception("알 수 없는 에러가 발생하였습니다.")
+
+    }
 }

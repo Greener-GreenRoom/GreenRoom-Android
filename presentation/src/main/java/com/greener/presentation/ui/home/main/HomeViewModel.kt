@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.home.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.ActionTodo
@@ -50,11 +49,8 @@ class HomeViewModel @Inject constructor(
                 _uiState.update { UiState.Success }
                 _currentGreenRoom.update { result.getOrNull()?.greenRoomsTotalInfo?.get(0) }
                 _myGreenRooms.value = result.getOrNull()?.greenRoomsTotalInfo ?: emptyList()
-                Log.d("확인", result.getOrNull().toString())
             } else {
-                //TODO 예외 처리
-                Log.d("확인", "result.isFailure: ${result.getOrThrow()}")
-
+                _uiState.update { UiState.Error(result.exceptionOrNull()!!.message!!) }
             }
         }
     }

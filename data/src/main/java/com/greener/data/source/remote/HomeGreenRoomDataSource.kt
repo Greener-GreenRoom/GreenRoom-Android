@@ -1,6 +1,5 @@
 package com.greener.data.source.remote
 
-import android.util.Log
 import com.greener.data.model.greenroom.TodoCompleteDTO
 import com.greener.data.model.greenroom.UserGreenRoomsInfoDTO
 import com.greener.data.model.greenroom.request.CompleteTodoList
@@ -35,7 +34,6 @@ class HomeGreenRoomDataSource @Inject constructor(
             if (response.responseDTO.output == 0) {
                 ApiState.Success(response)
             } else {
-                Log.d("확인", "Fail: ${response.responseDTO.output}\n${response.responseDTO.result}")
                 ApiState.Fail(response)
             }
         } catch (e: Exception) {

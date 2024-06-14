@@ -2,7 +2,6 @@ package com.greener.presentation.ui.home.greenroom
 
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -87,7 +86,6 @@ fun setHairAccessory(view: ImageView, hairAccessory: String) {
             context.packageName
         )
     if (resId == 0) {
-        Log.d("확인", "헤어 악세사리 resId = 0")
         view.visibility = View.GONE
     } else {
         view.setImageResource(resId)
@@ -105,7 +103,6 @@ fun setGlasses(view: ImageView, glasses: String) {
             context.packageName
         )
     if (resId == 0) {
-        Log.d("확인", "안경 resId = 0")
         view.visibility = View.GONE
     } else {
         view.setImageResource(resId)
@@ -135,7 +132,5 @@ fun setTextBalloon(view: TextView, actionTodo: ActionTodo?) {
         )
         view.text = spannableString
     } catch (e: Exception) {
-        Log.d("확인", "${e.stackTrace}")
-        Log.d("확인", e.message.toString())
     }
 }

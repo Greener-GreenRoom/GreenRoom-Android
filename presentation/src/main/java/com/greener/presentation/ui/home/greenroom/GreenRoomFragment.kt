@@ -2,6 +2,7 @@ package com.greener.presentation.ui.home.greenroom
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -9,19 +10,21 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.greener.domain.model.ActionTodo
 import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 import com.greener.presentation.databinding.FragmentGreenRoomBinding
+import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.home.dialog.ActionDialog
 import com.greener.presentation.ui.home.dialog.LevelUpDialog
 import com.greener.presentation.ui.home.toast.CompleteTodoSnackBar
 import com.greener.presentation.ui.home.toast.CompleteTodoToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class GreenRoomFragment constructor(
     private val myGreenRoom: GreenRoomTotalInfo,
-    val position: Int,
+    private val position: Int,
     val onChangedTodo: (Int, ActionTodo) -> Unit
 ) : BaseFragment<FragmentGreenRoomBinding>(
     FragmentGreenRoomBinding::inflate,
@@ -62,26 +65,38 @@ class GreenRoomFragment constructor(
         binding.includeGreenRoomBalloon4.cardTextBalloon.setOnClickListener {
             val actionTodo = binding.includeGreenRoomBalloon4.actionTodo as ActionTodo
             showActionDialog(actionTodo, binding.includeGreenRoomBalloon4.root)
-
         }
 
         binding.includeGreenRoomBalloon5.cardTextBalloon.setOnClickListener {
             val actionTodo = binding.includeGreenRoomBalloon5.actionTodo as ActionTodo
             showActionDialog(actionTodo, binding.includeGreenRoomBalloon5.root)
         }
-        observeIncreasingPoint(view)
+        observeIncreasingPoint()
         observeIsLevelUp()
+        observeUiState()
     }
 
-    private fun observeIncreasingPoint(view: View) {
+    private fun observeIncreasingPoint() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.increasingPoint.collect {
                     if (it > 0) {
-                        //CompleteTodoSnackBar.make(view, it).show()
                         CompleteTodoToast.createToast(requireActivity(), it)!!.show()
                         viewModel.resetIncreasingPoint()
                     }
+                }
+            }
+        }
+    }
+
+    private fun observeUiState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect {
+                    if (it is UiState.Error) {
+                        Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+
                 }
             }
         }
@@ -106,12 +121,27 @@ class GreenRoomFragment constructor(
         dialog.setItemClickListener(object : ActionDialog.ClickListener {
             override fun onClick() {
                 viewModel.completeTodo(actionTodo)
-                hideTextBalloon(view)
-                onChangedTodo(position, actionTodo)
-                setPlantFace(binding.ivGreenRoomPlantFace, myGreenRoom.greenRoomTodos.size)
+                observeCompleteTodo(actionTodo, view)
+
             }
         })
         dialog.show()
+    }
+
+    private fun observeCompleteTodo(actionTodo: ActionTodo, view: View?) {
+        lifecycleScope.launch {
+            viewModel.uiState.collect {
+                if(it == UiState.Success) {
+                    hideTextBalloon(view)
+                    onChangedTodo(position, actionTodo)
+                    setPlantFace(binding.ivGreenRoomPlantFace, myGreenRoom.greenRoomTodos.size)
+                    this.cancel()
+                }
+                else if(it is UiState.Error) {
+                    this.cancel()
+                }
+            }
+        }
     }
 
     private fun hideTextBalloon(view: View?) {

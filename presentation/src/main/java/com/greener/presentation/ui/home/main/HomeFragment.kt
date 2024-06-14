@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.view.ViewPropertyAnimator
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.greener.domain.model.ActionTodo
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentHomeBinding
+import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.home.greenroom.GreenRoomFragment
 import com.greener.presentation.ui.home.greenroom.GreenRoomViewPagerAdapter
@@ -43,6 +45,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     }
 
     override fun initListener() {
+        observeUiState()
         binding.viewHomeWallpaper.setOnClickListener {
             viewModel.setIsFabOpen()
         }
@@ -57,6 +60,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             moveToRegistration()
         }
         viewModel.initFab()
+    }
+
+    private fun observeUiState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.uiState.collect {
+                if (it is UiState.Error) {
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun onChangedTodo(position: Int, actionTodo: ActionTodo) {

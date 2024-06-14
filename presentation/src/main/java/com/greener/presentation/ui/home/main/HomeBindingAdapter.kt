@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.home.main
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -33,7 +32,6 @@ fun setMemo(view: TextView, memo: String?) {
 
 @BindingAdapter("setRealPlantImg")
 fun setRealPlantImg(view: ImageView, url: String?) {
-    Log.d("확인", "setRealPlantImg 실행")
     if (url == "" || url == null) {
         view.setImageResource(R.drawable.img_default_real_profile)
     } else {

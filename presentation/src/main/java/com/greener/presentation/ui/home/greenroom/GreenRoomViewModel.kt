@@ -8,11 +8,13 @@ import com.greener.domain.model.ActionTodo
 import com.greener.domain.model.ApiState
 import com.greener.domain.model.greenroom.GreenRoomTotalInfo
 import com.greener.domain.usecase.greenroom.CompleteTodoUseCase
+import com.greener.presentation.model.UiState
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class GreenRoomViewModel @AssistedInject constructor(
@@ -30,6 +32,9 @@ class GreenRoomViewModel @AssistedInject constructor(
     private val _level = MutableStateFlow(0)
     val level: StateFlow<Int> get() = _level
 
+    private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
+    val uiState: StateFlow<UiState> get() = _uiState
+
     init {
         _myGreenRoom.value = greenRoom
     }
@@ -40,7 +45,6 @@ class GreenRoomViewModel @AssistedInject constructor(
             _myGreenRoom.value!!.greenRoomTodos.forEach {
                 todoList.add(it.actionTodo.actionId)
             }
-
         } else {
             todoList.add(actionTodo.actionId)
         }
@@ -51,15 +55,15 @@ class GreenRoomViewModel @AssistedInject constructor(
                 todoList
             )
             if (response.isSuccess) {
-                Log.d("확인", "Success: ${response.getOrNull()}")
+                _uiState.update { UiState.Success }
+                _uiState.update { UiState.Empty }
                 _increasingPoint.emit(response.getOrNull()!!.increasingPoint)
                 if (response.getOrNull()!!.isLevelUpdated) {
                     _level.emit(response.getOrNull()!!.level)
                 }
             } else {
-                //TODO 에러 처리
-                Log.d("확인","${response.getOrThrow()}")
-
+                _uiState.update { UiState.Error(response.exceptionOrNull()!!.message!!) }
+                _uiState.update { UiState.Empty }
                 }
             }
         }
