@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.mypage.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.mypage.Grade
@@ -50,7 +49,6 @@ class MyPageMainViewModel @Inject constructor(
         viewModelScope.launch {
             val result = getMyPageInfoUseCase()
             if (result.isSuccess) {
-                Log.d("확인", result.toString())
                 _grade.update { result.getOrNull()!!.gradeDto }
                 _profile.update { result.getOrNull()!!.simpleProfile }
                 _daysFromCreated.update { result.getOrNull()!!.daysFromCreated }

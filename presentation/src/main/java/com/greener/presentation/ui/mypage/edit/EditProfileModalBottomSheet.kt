@@ -1,14 +1,12 @@
 package com.greener.presentation.ui.mypage.edit
 
-import android.app.Dialog
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.greener.presentation.R
 import com.greener.presentation.databinding.BottomSheetImageBinding
-import com.greener.presentation.databinding.BottomSheetPlantRegistrationImageBinding
 
 class EditProfileModalBottomSheet constructor(
     val getImageFromPictures: () -> Unit,

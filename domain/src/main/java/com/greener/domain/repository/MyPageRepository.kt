@@ -14,4 +14,6 @@ interface MyPageRepository {
     suspend fun editUserProfile(name: String, profileUrl: String?, imageUpdateFlag: String): Result<UserAccountInfo>
 
     suspend fun logout()
+
+    suspend fun deleteUser():Result<Int>
 }

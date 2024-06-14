@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.mypage.edit
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.mypage.ImageUpdateFlag
@@ -24,18 +23,18 @@ class EditProfileViewModel @Inject constructor(
     private val _userSimpleInfo = MutableStateFlow<UserSimpleInfo?>(null)
     val userSimpleInfo: StateFlow<UserSimpleInfo?> get() = _userSimpleInfo
 
-    private val _profileImage = MutableStateFlow<String?>("")
+    private val _profileImage = MutableStateFlow<String?>(BLANK)
     val profileImage: StateFlow<String?> get() = _profileImage
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
     val uiState: StateFlow<UiState> get() = _uiState
 
 
-    suspend fun editUserProfile(realPath: String?,nickName:String) {
+    suspend fun editUserProfile(realPath: String?, nickName: String) {
 
         var imageUpdateFlag = ImageUpdateFlag.UPDATE.name
 
-        if (realPath!!.startsWith("https:")) {
+        if (realPath!!.startsWith(START_HTTPS)) {
             imageUpdateFlag = ImageUpdateFlag.NONE.name
         } else if (realPath.isNullOrBlank()) {
             imageUpdateFlag = ImageUpdateFlag.REMOVE.name
@@ -44,6 +43,9 @@ class EditProfileViewModel @Inject constructor(
         val response = editUserProfileUseCase(nickName, realPath, imageUpdateFlag)
         if (response.isSuccess) {
             _uiState.update { UiState.Success }
+        } else {
+            _uiState.update { UiState.Error(response.exceptionOrNull()!!.message) }
+            _uiState.update { UiState.Empty }
         }
     }
 
@@ -53,7 +55,7 @@ class EditProfileViewModel @Inject constructor(
 
     fun getMyNickName(): String {
         if (_userSimpleInfo.value == null) {
-            return ""
+            return BLANK
         }
         return _userSimpleInfo.value!!.nickName
     }
@@ -63,12 +65,12 @@ class EditProfileViewModel @Inject constructor(
             val result = pickImageUseCase()
             if (result.isSuccess) {
                 val image = result.getOrThrow()
-                if (image != "null") {
+                if (image != NULL) {
                     _profileImage.update { image }
                 }
             } else {
-                Log.d("확인", "실패")
-                // todo 에러 처리
+                _profileImage.update { FAIL }
+                _profileImage.update { BLANK }
             }
         }
     }
@@ -80,16 +82,24 @@ class EditProfileViewModel @Inject constructor(
                 val image = result.getOrThrow()
                 _profileImage.update { image }
             } else {
-                Log.d("확인", "takePicture 실패")
+                _profileImage.update { FAIL }
+                _profileImage.update { BLANK }
             }
         }
     }
 
     fun setProfileImage(url: String? = null) {
         if (url == null) {
-            _profileImage.update { "" }
+            _profileImage.update { BLANK }
             return
         }
         _profileImage.update { url }
+    }
+
+    companion object {
+        const val FAIL = "fail"
+        const val NULL = "null"
+        const val BLANK = ""
+        const val START_HTTPS = "https:"
     }
 }

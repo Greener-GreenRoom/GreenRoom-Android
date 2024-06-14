@@ -1,11 +1,12 @@
 package com.greener.presentation.ui.mypage.level
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.greener.domain.model.ApiState
 import com.greener.domain.model.mypage.GradeTier
 import com.greener.domain.model.mypage.MyLevelInfo
 import com.greener.domain.usecase.mypage.GetMyLevelInfoUseCase
+import com.greener.presentation.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,11 +25,18 @@ class MyPageLevelViewModel @Inject constructor(
     private val _myLevelInfo = MutableStateFlow<MyLevelInfo?>(null)
     val myLevelInfo: StateFlow<MyLevelInfo?> get() = _myLevelInfo
 
+    private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
+    val uiState: StateFlow<UiState> get() = _uiState
+
     private fun getMyLevelInfo() {
         viewModelScope.launch {
             val result = getMyLevelInfoUseCase()
             if (result.isSuccess) {
                 _myLevelInfo.update { result.getOrNull()!! }
+                _uiState.update { UiState.Success }
+            } else {
+                _uiState.update { UiState.Error(result.exceptionOrNull()!!.message) }
+
             }
         }
     }

@@ -2,9 +2,6 @@ package com.greener.presentation.ui.mypage.main
 
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.BindingAdapter
@@ -23,13 +20,7 @@ fun setMyGrade(view: TextView, grade: Grade) {
 
 @BindingAdapter("setMyProfileImage")
 fun setMyProfileImage(view: ShapeableImageView, url: String?) {
-    Log.d("확인", "url: $url")
     val context = view.context
-
-    /*if(url == "" ) {
-        view.setImageResource(R.drawable.img_edit_default)
-        return
-    }*/
     Glide.with(context)
         .applyDefaultRequestOptions(
             RequestOptions()
@@ -64,8 +55,6 @@ fun setAppVersion(view: TextView, version: String) {
         )
         view.text = spannableString
     } catch (e: Exception) {
-        Log.d("확인", "${e.stackTrace}")
-        Log.d("확인", e.message.toString())
     }
 }
 

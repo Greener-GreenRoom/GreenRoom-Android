@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.mypage.level
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -32,7 +31,6 @@ class NextRewardRVAdapter(
     inner class NextRewardViewHolder(val binding: ItemNextRewardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GreenRoomItem) {
-            Log.d("확인","bind: $item")
             binding.greenRoomItem = item
         }
 

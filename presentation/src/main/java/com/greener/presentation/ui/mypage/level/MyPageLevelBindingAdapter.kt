@@ -3,7 +3,6 @@ package com.greener.presentation.ui.mypage.level
 import android.content.Context
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -38,7 +37,6 @@ fun setNextRewardGuide(view: TextView, nextLevel: Int) {
     val defaultSize = 3
     val endPosition = startPosition + defaultSize + levelSize
     val text = context.getString(R.string.my_page_next_reward_guide, nextLevel)
-    Log.d("확인", "text: $text")
 
     val color = context.getColor(R.color.primary)
     val spannableString = SpannableString(text)
@@ -54,7 +52,6 @@ fun setNextRewardGuide(view: TextView, nextLevel: Int) {
 
 @BindingAdapter("setNextRewardItemImage")
 fun setNextRewardItemImage(view: ImageView, greenRoomItem: GreenRoomItem) {
-    Log.d("확인","greenRoomItem: $greenRoomItem")
     val itemType = greenRoomItem.itemType.lowercase()
     val itemName = greenRoomItem.itemName.lowercase()
     val context = view.context

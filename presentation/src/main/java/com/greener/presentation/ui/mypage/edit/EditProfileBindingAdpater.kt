@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.mypage.edit
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -21,7 +20,6 @@ fun setClearVisibility(view: ImageView,profileUrl:String?) {
 
 @BindingAdapter("setMyEditProfileImage")
 fun setMyEditProfileImage(view: ShapeableImageView, url: String?) {
-    Log.d("확인","url: $url")
     val context = view.context
 
     Glide.with(context)

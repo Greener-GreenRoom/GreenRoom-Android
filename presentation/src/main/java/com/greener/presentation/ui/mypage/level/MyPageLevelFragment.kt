@@ -2,13 +2,13 @@ package com.greener.presentation.ui.mypage.level
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.greener.domain.model.GreenRoomItem
 import com.greener.presentation.databinding.FragmentMyPageLevelBinding
+import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.coroutineScope
@@ -43,20 +44,23 @@ class MyPageLevelFragment : BaseFragment<FragmentMyPageLevelBinding>(
     private fun observeApiResult() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.myLevelInfo.collect {
-                    Log.d("확인","myLevelInfo: $it")
-                    binding.vm = viewModel
-                    setProgress()
-                    if(it !=null) {
-                        setNextRewardItemAdapter(it.greenRoomItems)
+                viewModel.uiState.collect {
+                    if(it == UiState.Success) {
+                        binding.vm = viewModel
+                        setProgress()
+                        if(viewModel.myLevelInfo.value !=null) {
+                            setNextRewardItemAdapter(viewModel.myLevelInfo.value!!.greenRoomItems)
+                        }
+                    } else if(it is UiState.Error) {
+                        Toast.makeText(requireActivity(),it.message, Toast.LENGTH_SHORT).show()
                     }
+
                 }
             }
         }
     }
 
     private fun setNextRewardItemAdapter(greenRoomItems:List<GreenRoomItem>) {
-        Log.d("확인","setNextRewardItemAdapter: $greenRoomItems")
         binding.rvMyPageLevelNextRewardItem.adapter = NextRewardRVAdapter(greenRoomItems)
     }
 

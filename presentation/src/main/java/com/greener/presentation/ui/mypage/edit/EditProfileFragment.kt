@@ -1,16 +1,13 @@
 package com.greener.presentation.ui.mypage.edit
 
-import android.content.Context
-import android.database.Cursor
-import android.net.Uri
+
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import android.provider.OpenableColumns
-import android.util.Log
+
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.core.widget.doOnTextChanged
@@ -54,12 +51,13 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         super.onViewCreated(view, savedInstanceState)
         softInputAdjustResize()
         viewModel.setUserSimpleInfo(args.userSimpleInfo)
-        initListener()
 
     }
 
     override fun initListener() {
         observeUserInfo()
+        observeUiState()
+        observeProfileImage()
         binding.etEditProfileNickname.doOnTextChanged { _, _, _, _ ->
             binding.btnEditProfileSaveChange.isEnabled = validateNickname()
         }
@@ -105,15 +103,20 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.editUserProfile(realPath, binding.etEditProfileNickname.text.toString())
-                observeUiState()
             }
         }
     }
 
-    private suspend fun observeUiState() {
-        viewModel.uiState.collect {
-            if (it == UiState.Success) {
-                moveToMyPageMain()
+    private fun observeUiState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect {
+                    if (it == UiState.Success) {
+                        moveToMyPageMain()
+                    } else if (it is UiState.Error) {
+                        Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
@@ -125,6 +128,18 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
                     binding.vm = viewModel
                     if (it != null) {
                         viewModel.setProfileImage(it.imageUrl)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeProfileImage() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.profileImage.collect {
+                    if(it == FAIL ) {
+                        Toast.makeText(requireActivity(), RETRY,Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -155,5 +170,10 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
 
     private fun moveToMyPageMain() {
         findNavController().navigate(R.id.action_editProfileFragment_to_myPageMainFragment)
+    }
+
+    companion object {
+        const val FAIL = "fail"
+        const val RETRY ="이미지 업로드 실패\n다시 시도해주세요"
     }
 }

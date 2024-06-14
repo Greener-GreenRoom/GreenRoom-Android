@@ -3,8 +3,6 @@ package com.greener.presentation.ui.mypage.withdraw
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
@@ -14,7 +12,9 @@ import com.greener.domain.model.mypage.WithdrawReason
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentUserWithdrawReasonBinding
 import com.greener.presentation.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBinding>(
     FragmentUserWithdrawReasonBinding::inflate
 ) {

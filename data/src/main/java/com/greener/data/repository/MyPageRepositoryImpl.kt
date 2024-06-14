@@ -6,12 +6,6 @@ import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
-import android.provider.DocumentsContract
-import android.provider.MediaStore
-import android.util.Log
-import androidx.core.net.toFile
-import androidx.core.net.toUri
 import com.greener.data.model.response.ResponseFormDTO
 import com.greener.data.model.sign.request.UserAccountDTO
 import com.greener.data.source.remote.MyPageDataSource
@@ -61,6 +55,7 @@ class MyPageRepositoryImpl @Inject constructor(
     override suspend fun getMyLevelInfo(): Result<MyLevelInfo> {
         val response = dataSource.getMyLevelInfo()
 
+
         return when (response) {
             is ApiState.Success -> {
                 Result.success(response.result.data!!.toDomain())
@@ -71,7 +66,7 @@ class MyPageRepositoryImpl @Inject constructor(
             }
 
             is ApiState.Exception -> {
-                Result.failure(response.t!!)
+                Result.failure(Exception(ApiState.Exception(response.t).checkException()))
             }
         }
     }
@@ -86,7 +81,6 @@ class MyPageRepositoryImpl @Inject constructor(
 
         if (imageUpdateFlag == ImageUpdateFlag.UPDATE.name) {
             val imageFile = makeImageFile(Uri.parse(profileUrl))
-            Log.d("확인", "imageFIle: $imageFile")
             imagePart = makeMultiPart(imageFile)
 
             response = dataSource.editUserProfile(
@@ -94,7 +88,6 @@ class MyPageRepositoryImpl @Inject constructor(
                 imagePart,
                 imageUpdateFlag.toRequestBody()
             )
-            Log.d("확인","resposne:${response.toString()}")
             deleteFileFromCache(context, imageFile.name)
         } else {
             response =
@@ -111,13 +104,29 @@ class MyPageRepositoryImpl @Inject constructor(
             }
 
             is ApiState.Exception -> {
-                Result.failure(response.t!!)
+                Result.failure(Exception(ApiState.Exception(response.t).checkException()))
             }
         }
     }
 
     override suspend fun logout() {
         dataSource.logout()
+    }
+
+    override suspend fun deleteUser():Result<Int> {
+        val response = dataSource.deleteUser()
+
+        return when(response) {
+            is ApiState.Success -> {
+                Result.success(response.result.responseDTO.output)
+            }
+            is ApiState.Fail -> {
+                Result.failure(handleMyPageFailure(response.result.responseDTO.output))
+            }
+            is ApiState.Exception -> {
+                Result.failure(Exception(ApiState.Exception(response.t).checkException()))
+            }
+        }
     }
 
     private fun makeImageFile(uri: Uri): File {
@@ -127,8 +136,6 @@ class MyPageRepositoryImpl @Inject constructor(
         }
         // 캐시 파일 생성
         val tempFile = File.createTempFile("image_", ".jpeg", context.cacheDir)
-        Log.d("확인", "절대 경로 : ${tempFile.absolutePath}")
-        Log.d("확인", "name : ${tempFile.name}")
 
         // 파일 스트림을 통해 파일에 비트맵 저장
         FileOutputStream(tempFile).use {
@@ -141,10 +148,8 @@ class MyPageRepositoryImpl @Inject constructor(
         val cacheDir = context.cacheDir
         val file = File(cacheDir, fileName)
         return if (file.exists()) {
-            Log.d("확인","delete 성공")
             file.delete()
         } else {
-            Log.d("확인","delete 실패")
             false
         }
     }
