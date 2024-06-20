@@ -8,6 +8,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentLoginRegisterNicknameBinding
 import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
@@ -52,7 +53,7 @@ class LoginRegisterNicknameFragment : BaseFragment<FragmentLoginRegisterNickname
                     }
 
                     is UiState.Fail -> {
-                        Toast.makeText(activity, "다시 시도해주세요", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, resources.getString(R.string.util_retry), Toast.LENGTH_SHORT).show()
                     }
 
                     is UiState.Error -> {

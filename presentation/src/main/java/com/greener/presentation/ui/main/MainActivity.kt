@@ -39,6 +39,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.id.registrationWaterFragment,
         R.id.registrationCharacterFragment,
         R.id.registrationCompleteFragment,
+        R.id.myPageMainFragment,
+        R.id.myPageLevelFragment,
+        R.id.editProfileFragment,
+        R.id.userWithdrawReasonFragment,
+        R.id.userWithdrawFinalFragment,
+        R.id.editPushFragment,
         R.id.decorationFragment
     )
 

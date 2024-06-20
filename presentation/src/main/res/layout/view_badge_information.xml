@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="tier"
+            type="com.greener.domain.model.mypage.GradeTier" />
+
+        <variable
+            name="myLevel"
+            type="int" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_badge_image"
+            setBadgeImage="@{tier}"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:alpha="@{tier.tierBegin &lt; myLevel ?1.0f:0.5f}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/asset_badge_branch" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_badge_tier_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{tier.tierName}"
+            android:textAppearance="@style/caption1"
+            android:textColor="@color/gray700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_badge_image"
+            tools:text="뿌리집사" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_badge_level_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/round_all_4_no_stroke"
+            android:backgroundTint="@color/gray000"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="@{`Lv.`+Integer.toString(tier.tierBegin)+`~`+Integer.toString(tier.tierEnd)}"
+            android:textAppearance="@style/caption2"
+            android:textColor="@color/gray400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_badge_tier_name"
+            tools:text="Lv.1~5" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

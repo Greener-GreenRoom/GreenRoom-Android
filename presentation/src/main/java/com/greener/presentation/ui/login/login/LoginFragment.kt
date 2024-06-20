@@ -28,7 +28,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     private val viewModel: LoginViewModel by viewModels()
 
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
-
     private val googleAuthLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)

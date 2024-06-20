@@ -28,6 +28,11 @@
         <action
             android:id="@+id/action_homeFragment_to_registrationSearchFragment"
             app:destination="@id/registrationSearchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myPageMainFragment"
+            app:destination="@id/myPageMainFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/registrationSearchFragment"
@@ -99,6 +104,62 @@
             android:id="@+id/action_registrationCycleBottomSheet_to_registrationNicknameImageFragment"
             app:destination="@id/registrationNicknameImageFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/myPageMainFragment"
+        android:name="com.greener.presentation.ui.mypage.main.MyPageMainFragment"
+        android:label="MyPageMainFragment" >
+        <action
+            android:id="@+id/action_myPageMainFragment_to_myPageLevelFragment"
+            app:destination="@id/myPageLevelFragment" />
+        <action
+            android:id="@+id/action_myPageMainFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_myPageMainFragment_to_editPushFragment"
+            app:destination="@id/editPushFragment" />
+        <action
+            android:id="@+id/action_myPageMainFragment_to_userWithdrawReasonFragment"
+            app:destination="@id/userWithdrawReasonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myPageLevelFragment"
+        android:name="com.greener.presentation.ui.mypage.level.MyPageLevelFragment"
+        android:label="MyPageLevelFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.greener.presentation.ui.mypage.edit.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <argument
+            android:name="userSimpleInfo"
+            app:argType="com.greener.presentation.model.mypage.UserSimpleInfo" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_myPageMainFragment"
+            app:destination="@id/myPageMainFragment"
+            app:popUpTo="@id/myPageMainFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPushFragment"
+        android:name="com.greener.presentation.ui.mypage.edit.EditPushFragment"
+        android:label="EditPushFragment" />
+    <fragment
+        android:id="@+id/userWithdrawReasonFragment"
+        android:name="com.greener.presentation.ui.mypage.withdraw.UserWithdrawReasonFragment"
+        android:label="UserWithdrawReasonFragment" >
+        <action
+            android:id="@+id/action_userWithdrawReasonFragment_to_userWithdrawFinalFragment"
+            app:destination="@id/userWithdrawFinalFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/userWithdrawFinalFragment"
+        android:name="com.greener.presentation.ui.mypage.withdraw.UserWithdrawFinalFragment"
+        android:label="UserWithdrawFinalFragment" >
+        <argument
+            android:name="reasons"
+            app:argType="string[]" />
+    </fragment>
     <fragment
         android:id="@+id/decorationFragment"
         android:name="com.greener.presentation.ui.home.decoration.main.DecorationFragment"

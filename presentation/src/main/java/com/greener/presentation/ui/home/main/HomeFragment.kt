@@ -58,6 +58,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         binding.includeHomeBottomSheet.tvBottomSheetHomeAddPlant.setOnClickListener {
             moveToRegistration()
         }
+        binding.tbHomeToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.item_home_toolbar_my_info -> {
+                    moveToMyPage()
+                    true
+                }
+
+                else -> {
+                    true
+                }
+            }
+        }
         viewModel.initFab()
     }
 
@@ -158,6 +170,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     private fun moveToRegistration() {
         findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
+    }
+    private fun moveToMyPage() {
+        findNavController().navigate(R.id.action_homeFragment_to_myPageMainFragment)
     }
 
     private fun completeAllTodoAtGreenRoom() {

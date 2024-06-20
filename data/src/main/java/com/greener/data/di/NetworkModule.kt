@@ -1,6 +1,7 @@
 package com.greener.data.di
 
 import com.greener.data.interceptor.AuthInterceptor
+import com.greener.data.service.MyPageService
 import com.greener.data.service.HomeGreenRoomService
 import com.greener.data.service.SignService
 import com.greener.data.source.local.AuthDataSource
@@ -30,6 +31,18 @@ object NetworkModule {
             .build()
     }
 
+    @Provides
+    @Singleton
+    fun provideSignService(retrofit: Retrofit): SignService {
+        return retrofit.create(SignService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMyPageService(retrofit: Retrofit): MyPageService {
+        return retrofit.create(MyPageService::class.java)
+    }
+
     @Singleton
     @Provides
     fun provideOkHttp(authInterceptor: AuthInterceptor): OkHttpClient {
@@ -42,12 +55,6 @@ object NetworkModule {
     @Provides
     fun provideAuthInterceptor(dataStore: AuthDataSource): AuthInterceptor {
         return AuthInterceptor(dataStore)
-    }
-
-    @Provides
-    @Singleton
-    fun provideSignService(retrofit: Retrofit): SignService {
-        return retrofit.create(SignService::class.java)
     }
 
     @Provides

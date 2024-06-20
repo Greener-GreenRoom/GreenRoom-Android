@@ -14,8 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegistrationNicknameImageViewModel @Inject constructor(
-) : ViewModel() {
+class RegistrationNicknameImageViewModel @Inject constructor() : ViewModel() {
 
     val inputNickname = MutableStateFlow("")
 
@@ -23,7 +22,7 @@ class RegistrationNicknameImageViewModel @Inject constructor(
     val plantRegistrationInfo: StateFlow<PlantRegistrationInfo?> get() = _plantRegistrationInfo
 
     private val _plantImage = MutableStateFlow("")
-    val plantImage : StateFlow<String> get() = _plantImage
+    val plantImage: StateFlow<String> get() = _plantImage
 
     private val _event = MutableEventFlow<Event>()
     val event = _event.asEventFlow()

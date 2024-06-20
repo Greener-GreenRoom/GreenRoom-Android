@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.greener.presentation.ui.mypage.main.MyPageMainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_my_page_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_page_title"
+                android:textAppearance="@style/body1"
+                android:textColor="@color/gray700" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_my_page_main_my_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            app:layout_constraintEnd_toEndOf="@+id/gl_my_page_main_end"
+            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
+            app:layout_constraintTop_toBottomOf="@+id/tb_my_page_toolbar">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_my_page_main_my_profile"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:scaleType="centerCrop"
+                setMyProfileImage="@{vm.profile.profileUrl}"
+                tools:src="@drawable/img_default_real_profile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.Circle" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_my_page_main_my_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{vm.profile.name}"
+                android:textAppearance="@style/body1"
+                android:textColor="@color/gray700"
+                app:layout_constraintBottom_toTopOf="@id/iv_my_page_main_badge"
+                app:layout_constraintStart_toEndOf="@+id/iv_my_page_main_my_profile"
+                app:layout_constraintTop_toTopOf="@id/iv_my_page_main_my_profile"
+                tools:text="식물 사랑" />
+
+            <ImageView
+                android:id="@+id/iv_my_page_main_to_edit_profile"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_my_page_main_my_nickname"
+                app:layout_constraintStart_toEndOf="@id/tv_my_page_main_my_nickname"
+                app:layout_constraintTop_toTopOf="@+id/tv_my_page_main_my_nickname"
+                android:src="@drawable/ic_edit" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_my_page_main_badge"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="4dp"
+                tools:src="@drawable/img_default_real_profile"
+                setMyBadge="@{vm.myTier}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_my_page_main_my_profile"
+                app:layout_constraintStart_toStartOf="@id/tv_my_page_main_my_nickname"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_my_nickname"
+                app:shapeAppearance="@style/ShapeAppearance.Circle" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@{vm.grade.description+ ` · Lv.` + Integer.toString(vm.grade.currentLevel)}"
+                android:textAppearance="@style/caption2"
+                android:textColor="@color/gray400"
+                app:layout_constraintBottom_toBottomOf="@id/iv_my_page_main_badge"
+                app:layout_constraintStart_toEndOf="@+id/iv_my_page_main_badge"
+                app:layout_constraintTop_toTopOf="@id/iv_my_page_main_badge"
+                tools:text="뿌리 집사 · Lv.4 " />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/round_all_8"
+                android:backgroundTint="@color/gray000"
+                android:paddingStart="12dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_my_page_main_my_profile">
+
+                <ImageView
+                    android:id="@+id/iv_my_page_main_seed"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/seed_point"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_next_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/my_page_until_next_level"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray400"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_my_page_main_seed"
+                    app:layout_constraintStart_toEndOf="@id/iv_my_page_main_seed"
+                    app:layout_constraintTop_toTopOf="@id/iv_my_page_main_seed" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_require_seed_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{` 씨앗` + Integer.toString(vm.grade.requiredSeedToNextLevel)+ `개`}"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_my_page_main_next_level"
+                    app:layout_constraintStart_toEndOf="@id/tv_my_page_main_next_level"
+                    app:layout_constraintTop_toTopOf="@id/tv_my_page_main_next_level"
+                    tools:text=" 씨앗 6개" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_all_99"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="2dp"
+                    android:id="@+id/tv_my_page_main_to_level"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="2dp"
+                    android:text="@string/util_detail"
+                    android:textAppearance="@style/caption4"
+                    android:textColor="@color/gray300"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_my_page_main_next_level"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_my_page_main_next_level" />
+
+                <ImageView
+                    android:id="@+id/iv_my_page_main_heart"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/img_fill_heart"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_my_page_main_seed" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_usage_days_with_green_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/my_page_usage_days"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray400"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_my_page_main_heart"
+                    app:layout_constraintStart_toEndOf="@id/iv_my_page_main_heart"
+                    app:layout_constraintTop_toTopOf="@+id/iv_my_page_main_heart" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_usage_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{` `+Integer.toString(vm.daysFromCreated) + `일째`}"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_my_page_main_usage_days_with_green_room"
+                    app:layout_constraintStart_toEndOf="@+id/tv_my_page_main_usage_days_with_green_room"
+                    app:layout_constraintTop_toTopOf="@id/tv_my_page_main_usage_days_with_green_room"
+                    tools:text=" 14일째" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/view_my_page_main_divider"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray100"
+            app:layout_constraintTop_toBottomOf="@id/ly_my_page_main_my_info" />
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:overScrollMode="always"
+            android:paddingBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_my_page_main_end"
+            app:layout_constraintStart_toStartOf="@id/gl_my_page_main_start"
+            app:layout_constraintTop_toBottomOf="@id/view_my_page_main_divider"
+           >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_setting"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_page_setting"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray300"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_push_notification_setting"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/my_page_setting_push"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_setting" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_terms_of_use"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/my_page_terms_of_use"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray300"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_push_notification_setting" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_terms_of_service"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/my_page_terms_of_service"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_terms_of_use" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_etc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/my_page_etc"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray300"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_terms_of_service" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_suggest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/my_page_suggest_to_developer"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_etc" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_app_version_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    setAppVersion="@{`1.0.0`}"
+                    tools:text="앱 버전 1.0.0"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_suggest" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_logout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/my_page_logout"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_app_version_title" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_my_page_main_withdraw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/my_page_withdraw"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray400"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_my_page_main_logout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_my_page_main_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_my_page_main_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

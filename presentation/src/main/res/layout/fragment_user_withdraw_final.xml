@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_user_withdraw_final_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back"></com.google.android.material.appbar.MaterialToolbar>
+
+        <View
+            android:id="@+id/view_user_withdraw_indicator1"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginEnd="2dp"
+            android:background="@drawable/round_all_99"
+            android:backgroundTint="@color/red100"
+            app:layout_constraintEnd_toStartOf="@id/view_user_withdraw_indicator2"
+            app:layout_constraintStart_toStartOf="@+id/gl_user_withdraw_final_start"
+            app:layout_constraintTop_toBottomOf="@+id/tb_user_withdraw_final_toolbar" />
+
+        <View
+            android:id="@+id/view_user_withdraw_indicator2"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/round_all_99"
+            android:backgroundTint="@color/red100"
+            app:layout_constraintBottom_toBottomOf="@+id/view_user_withdraw_indicator1"
+            app:layout_constraintEnd_toEndOf="@id/gl_user_withdraw_final_end"
+            app:layout_constraintStart_toEndOf="@id/view_user_withdraw_indicator1"
+            app:layout_constraintTop_toTopOf="@id/view_user_withdraw_indicator1" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_user_withdraw_final_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@string/withdraw_final_title"
+            android:textAppearance="@style/head3"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/gl_user_withdraw_final_start"
+            app:layout_constraintTop_toBottomOf="@id/view_user_withdraw_indicator1" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_user_withdraw_bye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="95dp"
+            android:text="@string/withdraw_bye_bye"
+            android:textAppearance="@style/body5"
+            android:textColor="@color/gray400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_withdraw_final_title" />
+
+        <ImageView
+            android:id="@+id/iv_user_withdraw_final_sad_face"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/asset_face_bye"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_withdraw_bye" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_user_withdraw_final_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_user_withdraw_final_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/grid_system_end" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_user_withdraw_notice_area"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="27dp"
+            android:background="@drawable/round_all_8_no_stroke"
+            android:backgroundTint="@color/gray000"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/cb_user_withdraw_final"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_user_withdraw_notice_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/withdraw_notice_1"
+                android:textAppearance="@style/caption2"
+                android:textColor="@color/gray400"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_user_withdraw_notice_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/withdraw_notice_2"
+                android:textAppearance="@style/caption2"
+                android:textColor="@color/gray400"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_withdraw_notice_1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cb_user_withdraw_final"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="25dp"
+            android:text="@string/withdraw_final_consent"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray700"
+            app:buttonTint="@color/red100"
+            app:checkedState="unchecked"
+            app:layout_constraintBottom_toTopOf="@+id/btn_user_withdraw_final_back"
+            app:layout_constraintEnd_toEndOf="@id/gl_user_withdraw_final_end"
+            app:layout_constraintStart_toStartOf="@id/gl_user_withdraw_final_start"
+             />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_user_withdraw_final_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_user_withdraw_final_confirm"
+            android:background="@drawable/round_all_8_no_stroke"
+            android:backgroundTint="@color/gray200"
+            android:text="@string/withdraw_back_space"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintStart_toStartOf="@id/gl_user_withdraw_final_start"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_user_withdraw_final_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/round_all_8_no_stroke"
+            android:backgroundTint="@color/gray200"
+            android:enabled="false"
+            android:text="@string/withdraw_final_confirm"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_user_withdraw_final_back"
+            app:layout_constraintEnd_toEndOf="@id/gl_user_withdraw_final_end"
+            app:layout_constraintStart_toEndOf="@+id/btn_user_withdraw_final_back"
+            app:layout_constraintTop_toTopOf="@+id/btn_user_withdraw_final_back" />
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
