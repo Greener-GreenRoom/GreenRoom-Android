@@ -1,6 +1,8 @@
 package com.greener.presentation.ui.home.registration.nickname_image
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.usecase.image.PickImageUseCase
 import com.greener.domain.usecase.image.TakePictureUseCase
@@ -8,16 +10,24 @@ import com.greener.domain.usecase.plant_register.IsDuplicateGreenRoomNicknameUse
 import com.greener.presentation.model.registration.PlantRegistrationInfo
 import com.greener.presentation.util.MutableEventFlow
 import com.greener.presentation.util.asEventFlow
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class RegistrationNicknameImageViewModel @Inject constructor(
+class RegistrationNicknameImageViewModel @AssistedInject constructor(
     private val isDuplicateGreenRoomNicknameUseCase: IsDuplicateGreenRoomNicknameUseCase,
+    @Assisted private val plantRegistrationInfo: PlantRegistrationInfo
 ) : ViewModel() {
+
+    @AssistedFactory
+    interface PlantRegistrationInfoFactory {
+        fun create(plantRegistrationInfo: PlantRegistrationInfo): RegistrationNicknameImageViewModel
+    }
 
     val inputNickname = MutableStateFlow("")
 
@@ -31,12 +41,6 @@ class RegistrationNicknameImageViewModel @Inject constructor(
 
     private val _event = MutableEventFlow<Event>()
     val event = _event.asEventFlow()
-
-    fun initNavArgsData(plantRegistrationInfo: PlantRegistrationInfo) {
-        viewModelScope.launch {
-            _plantRegistrationInfo.emit(plantRegistrationInfo)
-        }
-    }
 
     fun checkGoodNickname(nickname: String) {
         viewModelScope.launch {
@@ -83,7 +87,7 @@ class RegistrationNicknameImageViewModel @Inject constructor(
 
             _plantRegistrationInfo.emit(
                 PlantRegistrationInfo(
-                    plantId = newPlantRegistrationInfo?.plantId,
+                    plantId = plantRegistrationInfo.plantId,
                     nickname = nickname,
                     lastWatering = newPlantRegistrationInfo?.lastWatering,
                     waterDuration = newPlantRegistrationInfo?.waterDuration,
@@ -153,10 +157,20 @@ class RegistrationNicknameImageViewModel @Inject constructor(
             val plantRegistrationInfo: PlantRegistrationInfo,
         ) : Event()
 
-        object ShowGetImageBottomSheet : Event()
+        data object ShowGetImageBottomSheet : Event()
     }
 
     companion object {
+
+        fun provideFactory(
+            assistedFactory: PlantRegistrationInfoFactory,
+            plantRegistrationInfo: PlantRegistrationInfo
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return assistedFactory.create(plantRegistrationInfo) as T
+            }
+        }
+
         const val regex = "[^A-Za-z0-9가-힣 ]"
     }
 }

@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class PlantRegistrationInfo(
     val plantId: Long?,
     val nickname: String?,
-    val lastWatering: Int?,
+    val lastWatering: String?,
     val waterDuration: Int?,
     val shape: String?,
     val plantImage: String? = null,

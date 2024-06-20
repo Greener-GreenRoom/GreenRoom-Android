@@ -37,7 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.id.registrationSearchFragment,
         R.id.registrationNicknameImageFragment,
         R.id.registrationWaterFragment,
-        R.id.registrationCharacterFragment,
+        R.id.registrationPlantShapeFragment,
         R.id.registrationCompleteFragment,
         R.id.decorationFragment
     )

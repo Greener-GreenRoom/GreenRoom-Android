@@ -61,26 +61,26 @@
         android:name="com.greener.presentation.ui.home.registration.water.RegistrationWaterFragment"
         android:label="registrationWaterFragment"
         tools:layout="@layout/fragment_plant_registration_water">
-        <action
-            android:id="@+id/action_registrationWaterFragment_to_registrationCharacterFragment"
-            app:destination="@id/registrationCharacterFragment" />
         <argument
             android:name="PlantRegistraionInfo"
             app:argType="com.greener.presentation.model.registration.PlantRegistrationInfo" />
+        <action
+            android:id="@+id/action_registrationWaterFragment_to_registrationPlantShapeFragment"
+            app:destination="@id/registrationPlantShapeFragment" />
         <action
             android:id="@+id/action_registrationWaterFragment_to_registrationNicknameImageFragment"
             app:destination="@id/registrationNicknameImageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/registrationCharacterFragment"
-        android:name="com.greener.presentation.ui.home.registration.character.RegistrationCharacterFragment"
-        android:label="registrationCharacterFragment"
-        tools:layout="@layout/fragment_plant_registration_character">
+        android:id="@+id/registrationPlantShapeFragment"
+        android:name="com.greener.presentation.ui.home.registration.plant_shape.RegistrationPlantShapeFragment"
+        android:label="registrationPlantShapeFragment"
+        tools:layout="@layout/fragment_plant_registration_plant_shape">
         <action
             android:id="@+id/action_registrationCharacterFragment_to_registrationCompleteFragment"
             app:destination="@id/registrationCompleteFragment" />
         <argument
-            android:name="PlanrRegistrationInfo"
+            android:name="PlantRegistrationInfo"
             app:argType="com.greener.presentation.model.registration.PlantRegistrationInfo" />
 
     </fragment>
@@ -92,7 +92,7 @@
     </fragment>
     <dialog
         android:id="@+id/registrationCycleBottomSheet"
-        android:name="com.greener.presentation.ui.home.registration.cycle.RegistrationCycleBottomSheet"
+        android:name="com.greener.presentation.ui.home.registration.bottom_sheet.RegistrationGetImageBottomSheet"
         android:label="RegistrationCycleBottomSheet"
         tools:layout="@layout/bottom_sheet_plant_registration_image">
         <action

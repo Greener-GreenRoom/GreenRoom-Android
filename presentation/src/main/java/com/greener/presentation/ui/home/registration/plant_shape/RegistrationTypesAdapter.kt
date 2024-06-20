@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.decoration.main.adapter
+package com.greener.presentation.ui.home.registration.plant_shape
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,30 +9,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.greener.domain.model.asset.AssetDetailTypeInfo
 import com.greener.domain.model.asset.AssetType
 import com.greener.presentation.databinding.ItemAssetDetailTypeDarkBinding
+import com.greener.presentation.databinding.ItemAssetDetailTypeLightBinding
 
-class DecorationAssetDetailTypeAdapter(
-    private val changeCheck : (AssetType, Int) -> Unit
-): ListAdapter<AssetDetailTypeInfo, DecorationAssetDetailTypeAdapter.ViewHolder>(diffUtil) {
+class RegistrationTypesAdapter(
+    private val changeCheck: (Int) -> Unit
+): ListAdapter<AssetDetailTypeInfo, RegistrationTypesAdapter.ViewHolder>(diffUtil) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(ItemAssetDetailTypeDarkBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        ViewHolder(ItemAssetDetailTypeLightBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
     @SuppressLint("notifyDataSetChanged")
-    inner class ViewHolder(
-        private val binding: ItemAssetDetailTypeDarkBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
+    inner class ViewHolder (
+        private val binding: ItemAssetDetailTypeLightBinding
+    ): RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
-                changeCheck( getItem(absoluteAdapterPosition).assetType, getItem(absoluteAdapterPosition).id )
+                changeCheck(getItem(absoluteAdapterPosition).id)
                 notifyDataSetChanged()
             }
         }
-
-        fun bind(item : AssetDetailTypeInfo) {
+        fun bind(item: AssetDetailTypeInfo) {
             binding.info = item
         }
     }

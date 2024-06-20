@@ -26,13 +26,24 @@ import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RegistrationNicknameImageFragment : BaseFragment<FragmentPlantRegistrationNicknameImageBinding> (
-    FragmentPlantRegistrationNicknameImageBinding::inflate,
-) {
-    private val viewModel: RegistrationNicknameImageViewModel by viewModels()
-    private val args: RegistrationNicknameImageFragmentArgs by navArgs()
+class RegistrationNicknameImageFragment :
+    BaseFragment<FragmentPlantRegistrationNicknameImageBinding>(
+        FragmentPlantRegistrationNicknameImageBinding::inflate,
+    ) {
+    @Inject
+    lateinit var viewModelFactory: RegistrationNicknameImageViewModel.PlantRegistrationInfoFactory
 
-    private val modal = RegistrationGetImageBottomSheet({ viewModel.getImage(pickImageUseCase) }, { viewModel.takePicture(takePictureUseCase) })
+    private val args: RegistrationNicknameImageFragmentArgs by navArgs()
+    private val viewModel: RegistrationNicknameImageViewModel by viewModels {
+        RegistrationNicknameImageViewModel.provideFactory(
+            viewModelFactory,
+            args.PlantRegistrationInfo
+        )
+    }
+
+    private val modal = RegistrationGetImageBottomSheet({ viewModel.getImage(pickImageUseCase) },
+        { viewModel.takePicture(takePictureUseCase) })
+
 
     @Inject
     lateinit var pickImageUseCase: PickImageUseCase
@@ -43,8 +54,6 @@ class RegistrationNicknameImageFragment : BaseFragment<FragmentPlantRegistration
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
-
-        viewModel.initNavArgsData(args.PlantRegistrationInfo)
 
         InitRegistrationIndicator.initRegistrationIndicator(
             binding.includePlantRegistrationNicknameImageIndicator,
@@ -77,28 +86,57 @@ class RegistrationNicknameImageFragment : BaseFragment<FragmentPlantRegistration
             viewModel.stateOfNickname.collectLatest { state ->
                 when (state) {
                     RegistrationNicknameImageViewModel.StateOfNickname.Duplicate -> {
-                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor = requireContext().getColor(R.color.red100)
-                        binding.tvPlantRegistrationNicknameImagePlantNicknameHint.text = getText(R.string.plant_registration_nickname_duplicate)
-                        binding.btnPlantRegistrationGoNext.setBackgroundColor(requireContext().getColor(R.color.gray200))
+                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor =
+                            requireContext().getColor(R.color.red100)
+                        binding.tvPlantRegistrationNicknameImagePlantNicknameHint.text =
+                            getText(R.string.plant_registration_nickname_duplicate)
+                        binding.btnPlantRegistrationGoNext.setBackgroundColor(
+                            requireContext().getColor(
+                                R.color.gray200
+                            )
+                        )
                     }
+
                     RegistrationNicknameImageViewModel.StateOfNickname.SpecialChar -> {
-                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor = requireContext().getColor(R.color.red100)
-                        binding.tvPlantRegistrationNicknameImagePlantNicknameHint.text = getText(R.string.plant_registration_nickname_warning)
-                        binding.btnPlantRegistrationGoNext.setBackgroundColor(requireContext().getColor(R.color.gray200))
+                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor =
+                            requireContext().getColor(R.color.red100)
+                        binding.tvPlantRegistrationNicknameImagePlantNicknameHint.text =
+                            getText(R.string.plant_registration_nickname_warning)
+                        binding.btnPlantRegistrationGoNext.setBackgroundColor(
+                            requireContext().getColor(
+                                R.color.gray200
+                            )
+                        )
                     }
+
                     RegistrationNicknameImageViewModel.StateOfNickname.TooLong -> {
-                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor = requireContext().getColor(R.color.red100)
-                        binding.tvPlantRegistrationNicknameImagePlantNicknameHint.text = getText(R.string.plant_registration_nickname_warning)
-                        binding.btnPlantRegistrationGoNext.setBackgroundColor(requireContext().getColor(R.color.gray200))
+                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor =
+                            requireContext().getColor(R.color.red100)
+                        binding.tvPlantRegistrationNicknameImagePlantNicknameHint.text =
+                            getText(R.string.plant_registration_nickname_warning)
+                        binding.btnPlantRegistrationGoNext.setBackgroundColor(
+                            requireContext().getColor(
+                                R.color.gray200
+                            )
+                        )
                     }
+
                     RegistrationNicknameImageViewModel.StateOfNickname.Blank -> {
-                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor = requireContext().getColor(R.color.red100)
-                        binding.tvPlantRegistrationNicknameImagePlantNicknameHint.text = getText(R.string.plant_registration_nickname_warning)
-                        binding.btnPlantRegistrationGoNext.setBackgroundColor(requireContext().getColor(R.color.gray200))
+                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor =
+                            requireContext().getColor(R.color.red100)
+                        binding.tvPlantRegistrationNicknameImagePlantNicknameHint.text =
+                            getText(R.string.plant_registration_nickname_warning)
+                        binding.btnPlantRegistrationGoNext.setBackgroundColor(
+                            requireContext().getColor(
+                                R.color.gray200
+                            )
+                        )
                     }
+
                     else -> {
                         binding.tvPlantRegistrationNicknameImagePlantNicknameHint.text = null
-                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor = requireContext().getColor(R.color.gray400)
+                        binding.tlPlantRegistrationNicknameImage.boxStrokeColor =
+                            requireContext().getColor(R.color.gray400)
                         binding.btnPlantRegistrationGoNext.setBackgroundColor(
                             requireContext().getColor(
                                 R.color.primary,
@@ -130,7 +168,8 @@ class RegistrationNicknameImageFragment : BaseFragment<FragmentPlantRegistration
     }
 
     private fun highlightNicknameStarColor() {
-        val mainText: String = requireContext().getString(R.string.plant_registration_plant_nickname)
+        val mainText: String =
+            requireContext().getString(R.string.plant_registration_plant_nickname)
         val spannableStringBuilder = SpannableStringBuilder(mainText)
         spannableStringBuilder.apply {
             setSpan(
@@ -168,12 +207,16 @@ class RegistrationNicknameImageFragment : BaseFragment<FragmentPlantRegistration
     private fun handleEvent(event: RegistrationNicknameImageViewModel.Event) {
         when (event) {
             is RegistrationNicknameImageViewModel.Event.MoveToWatering -> {
-                val action = RegistrationNicknameImageFragmentDirections.actionRegistrationNicknameImageFragmentToRegistrationWaterFragment(
-                    event.plantRegistrationInfo,
-                )
+                val action =
+                    RegistrationNicknameImageFragmentDirections.actionRegistrationNicknameImageFragmentToRegistrationWaterFragment(
+                        event.plantRegistrationInfo,
+                    )
                 findNavController().navigate(action)
             }
-            RegistrationNicknameImageViewModel.Event.ShowGetImageBottomSheet -> { showGetImageBottomSheet() }
+
+            RegistrationNicknameImageViewModel.Event.ShowGetImageBottomSheet -> {
+                showGetImageBottomSheet()
+            }
         }
     }
 

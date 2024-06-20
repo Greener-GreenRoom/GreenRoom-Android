@@ -191,7 +191,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--   todo visible 설정     -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_plant_registration_search_best_plant"
             android:layout_width="0dp"
@@ -208,12 +207,16 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_plant_registration_plant_search"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginTop="12dp"
+            android:scrollbars="vertical"
+            android:scrollbarFadeDuration="0"
+            app:layout_constraintVertical_bias="0"
             app:layout_constraintStart_toStartOf="@id/gl_plant_registration_search_start"
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_search_end"
             app:layout_constraintTop_toBottomOf="@id/tv_plant_registration_search_best_plant"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_search_plant"
             tools:itemCount="1"/>
 

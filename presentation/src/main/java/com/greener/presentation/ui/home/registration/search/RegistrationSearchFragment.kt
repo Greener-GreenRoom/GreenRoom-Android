@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentPlantRegistrationSearchBinding
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.home.registration.InitRegistrationIndicator
+import com.greener.presentation.util.SpaceDecoration
 import com.greener.presentation.util.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -71,7 +73,7 @@ class RegistrationSearchFragment : BaseFragment<FragmentPlantRegistrationSearchB
     private fun initRV() {
         binding.rvPlantRegistrationPlantSearch.apply {
             adapter = plantInfoAdapter
-            // todo addDecoration
+            addItemDecoration(SpaceDecoration(resources, bottomDP = R.dimen.plant_infomation_bottom_padding))
         }
     }
 
