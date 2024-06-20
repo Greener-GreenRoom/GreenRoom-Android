@@ -137,6 +137,16 @@
 
 <!--  collection  -->
     <string name="collection">컬렉션</string>
+    <string name="collection_plant_dictionary">식물사전</string>
+
+    <string name="collection_main_name">%s의 컬렉션</string>
+
+    <string name="collection_main_all_plant">전체 식물 %d</string>
+    <string name="collection_main_living_plant">키우고 있는 식물 %d</string>
+    <string name="collection_main_dead_plant">수명을 다한 식물 %d</string>
+
+    <string name="collection_main_latest_sort">최근 추가 순</string>
+    <string name="collection_main_oldest_sort">오래된 순</string>
 
 <!--  community  -->
     <string name="community">커뮤니티</string>

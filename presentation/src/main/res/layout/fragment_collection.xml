@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,16 +11,141 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textview.MaterialTextView
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_collection_main_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="컬랙션 프레그먼트"
-            android:textAppearance="@style/head1"
-            android:textColor="@color/primary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_collection_main_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end ="@dimen/grid_system_end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_collection_main"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_system_tool_bar"
+            app:title="@string/collection"
+            app:titleTextAppearance="@style/body1"
+            app:titleTextColor="@color/gray700"
+            app:titleMarginStart="@dimen/grid_system_start"
+            app:menu="@menu/collection_main_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_collection_main_my_profile"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/ShapeAppearance.Circle"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_main_start"
+            app:layout_constraintTop_toBottomOf="@id/tb_collection_main"
+            tools:src="@tools:sample/avatars"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_collection_main_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/collection_main_name"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray400"
+            android:layout_marginStart="12dp"
+            android:maxLines="1"
+            android:ellipsize="middle"
+            app:layout_constraintStart_toEndOf="@id/iv_collection_main_my_profile"
+            app:layout_constraintEnd_toEndOf="@id/gl_collection_main_end"
+            app:layout_constraintTop_toTopOf="@id/iv_collection_main_my_profile"
+            app:layout_constraintBottom_toBottomOf="@id/iv_collection_main_my_profile"
+            tools:text="식물사랑dfdsfasdfsafdsfsafdsfsafsafdsfsafasdfdsasdgagdag의 컬렉션"/>
+        
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_collection_main_plant_list"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="16dp"
+            app:dividerColor="@color/gray100"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_collection_main_my_profile"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_collection_main_filter_alive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/collection_main_all_plant"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray500"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:layout_marginTop="12dp"
+            android:padding="6dp"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_main_start"
+            app:layout_constraintTop_toBottomOf="@id/divider_collection_main_plant_list"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_collection_main_sort_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/collection_main_latest_sort"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray500"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:layout_marginTop="12dp"
+            android:padding="6dp"
+            app:layout_constraintStart_toEndOf="@id/tv_collection_main_filter_alive"
+            app:layout_constraintTop_toBottomOf="@id/divider_collection_main_plant_list"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_collection_main_no_plant_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/green_room_empty_no_plant_msg"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray400"
+            android:layout_marginTop="85dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_main_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_collection_main_end"
+            app:layout_constraintTop_toBottomOf="@id/tv_collection_main_filter_alive"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_collection_main_go_registration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/green_room_empty_register_plant"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary"
+            app:cornerRadius="8dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_main_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_collection_main_end"
+            app:layout_constraintTop_toBottomOf="@id/tv_collection_main_no_plant_msg"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_collection_plant"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_main_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_collection_main_end"
+            app:layout_constraintTop_toBottomOf="@id/btn_collection_main_go_registration"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_collection_plant_card"
+            tools:itemCount="5"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
