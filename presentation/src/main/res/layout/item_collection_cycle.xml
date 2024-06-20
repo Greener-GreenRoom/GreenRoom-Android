@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_item_collection_cycle_watering"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/gray100"
+        app:cardCornerRadius="8dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_collection_cycle_title">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvitem_collection_cycle_watering"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_watering_title"
+                android:textAppearance="@style/body3"
+                android:textColor="@color/blue100"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvitem_collection_cycle_watering_period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/collection_detail_period"
+                android:textAppearance="@style/body4"
+                android:textColor="@color/gray700"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvitem_collection_cycle_watering"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvitem_collection_cycle_watering_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/collection_detail_deadline"
+                android:textAppearance="@style/caption2"
+                android:textColor="@color/gray400"
+                android:layout_marginStart="4dp"
+                app:layout_constraintStart_toEndOf="@id/tvitem_collection_cycle_watering_period"
+                app:layout_constraintTop_toTopOf="@id/tvitem_collection_cycle_watering_period"
+                app:layout_constraintBottom_toBottomOf="@id/tvitem_collection_cycle_watering_period" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
