@@ -11,6 +11,8 @@
     <!--  system  -->
     <color name="red100">#FF7373</color>
     <color name="blue100">#3292F2</color>
+    <color name="brown100">#88734C</color>
+    <color name="grayish100">#7594B3</color>
 
     <!--  gray  -->
     <color name="white">#FFFFFF</color>
@@ -33,5 +35,9 @@
     <color name="registration_background">#B8DCCD</color>
     <color name="tip_background">#0D3292F2</color>
     <color name ="withdraw_reason_selected_background">#0DFF7373</color>
+
+    <color name="asset_choice_gradient_start">#1B1D1F</color>
+    <color name="asset_choice_gradient_end">#2B6347</color>
+    <color name="asset_choice_level_limit">#80FFFFFF</color>
 
 </resources>

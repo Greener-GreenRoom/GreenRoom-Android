@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">GreenRoom</string>
 
-    <!--  util  -->
+<!--  util  -->
     <string name="util_add">추가</string>
 
     <string name="util_go_next">건너뛰기</string>
     <string name="util_go_home">홈으로</string>
     <string name="util_next">다음</string>
+    <string name="util_nothing">없음</string>
 
     <string name="util_take_picture">사진 촬영</string>
     <string name="util_my_album">내 앨범 선택</string>
@@ -19,8 +20,48 @@
 
     <string name="util_detail">자세히</string>
     <string name="util_fail">fail</string>
+    <string name="confirm_long">확인했어요</string>
 
-    <!--  Login  -->
+    <!-- Action Dialog -->
+
+    <string name="dialog_not_yet">아직이에요</string>
+    <!-- Complete All -->
+
+    <string name="dialog_complete_all_title">모두 완료</string>
+    <string name="dialog_complete_all_ask">모든 할 일을 완료했나요?</string>
+    <string name="dialog_complete_all_confirm">완료했어요</string>
+
+    <!-- Watering -->
+    <string name="watering_text_balloon">물이 필요해</string>
+    <string name="dialog_watering_title">물주기</string>
+    <string name="dialog_watering_ask">식물에게 물을 줬나요?</string>
+    <string name="dialog_watering_confirm">물을 줬어요</string>
+
+    <!-- RE_POT -->
+    <string name="repot_text_balloon">분갈이가 필요해</string>
+    <string name="dialog_repot_title">분갈이</string>
+    <string name="dialog_repot_ask">식물의 화분을 교체했나요?</string>
+    <string name="dialog_repot_confirm">교체했어요</string>
+
+    <!-- PRUNING -->
+    <string name="pruning_text_balloon">가지치기가 필요해</string>
+    <string name="dialog_pruning_title">가지치기</string>
+    <string name="dialog_pruning_ask">식물의 가지를 다듬었나요?</string>
+    <string name="dialog_pruning_confirm">다듬었어요</string>
+
+    <!-- NUTRITION -->
+    <string name="nutrition_text_balloon">영양관리가 필요해</string>
+    <string name="dialog_nutrition_title">영양관리</string>
+    <string name="dialog_nutrition_ask">식물에게 영양분을 공급했나요?</string>
+    <string name="dialog_nutrition_confirm">공급했어요</string>
+
+    <!-- VENTILATION -->
+    <string name="ventilation_text_balloon">환기가 필요해</string>
+    <string name="dialog_ventilation_title">환기</string>
+    <string name="dialog_ventilation_ask">식물이 있는 공간을 환기했나요?</string>
+    <string name="dialog_ventilation_confirm">환기했어요</string>
+
+<!--  Login  -->
     <string name="google_web_client_id">712990012729-kc9m2p6a9oltejsul1dvseh0mj8d8b66.apps.googleusercontent.com</string>
     <string name="google_android_client_id">712990012729-smbduqfeoqvphohd0gcphdi27f7b10p1.apps.googleusercontent.com</string>
     <string name="register_nickname_welcome_title">그린룸에 오신 걸 환영해요!\n닉네임을 설정해 주세요</string>
@@ -32,19 +73,26 @@
     <string name="login_onboarding4_subtitle">다이어리에서 식물을 관리하고 일기를 써보세요.</string>
 
 
-    <!--  home  -->
+<!--  home  -->
     <string name="home">홈</string>
     <string name="green_room_empty_no_plant_msg">키우는 식물이 없어요.\n나의 식물을 등록할까요?</string>
     <string name="green_room_empty_register_plant">나의 식물 등록하기</string>
     <string name="home_my_plant_text">나의 식물</string>
+    <string name="home_bottom_sheet_memo_guide">자유롭게 메모해 보세요.</string>
+
+    <string name="home_level_up_title">레벨업</string>
 
     <string name="home_action_decorate">꾸미기</string>
     <string name="home_action_all_complete">모두 완료</string>
     <string name="home_dialog_all_complete_title">모두 완료</string>
     <string name="home_dialog_ask_complete_all">모든 할 일을 완료했나요?</string>
+    <string name="home_action_decorate">꾸미기</string>
+    <string name="home_action_all_complete">모두 완료</string>
 
     <string name="home_dialog_not_yet">아직이에요</string>
     <string name="home_dialog_complete_all">완료했어요</string>
+    <string name="home_snack_bar_msg_head">씨앗을</string>
+    <string name="home_snack_bar_msg_tail">얻었어요</string>
 
     <!--  plant registration  -->
     <string name="plant_registration_what_kind">어떤 식물을 키우세요?</string>
@@ -80,16 +128,25 @@
     <string name="plant_registration_complete">%s을(를) 그린룸에\n추가했어요!</string>
     <string name="plant_registration_complete_mention">초대해줘서 고마워!</string>
 
-    <!--  collection  -->
+    <!--  decoration  -->
+    <string name="decoration_title">꾸미기</string>
+    <string name="decoration_plant_shape">형태</string>
+    <string name="decoration_plant_accessory">악세사리</string>
+    <string name="decoration_background_accessory">배경</string>
+    <string name="decoration_level_limit">레벨 %d</string>
+
+<!--  collection  -->
     <string name="collection">컬렉션</string>
 
-    <!--  community  -->
+<!--  community  -->
     <string name="community">커뮤니티</string>
-
-    <!--  diary  -->
+    
+<!--  diary  -->
     <string name="diary">다이어리</string>
 
-    <!--  species  -->
+    <!--  detail type  -->
+    <string name="all">전체</string>
+
     <string name="foliage">관엽식물</string>
     <string name="succeulent_cactus">다육이,선인장</string>
     <string name="annual">한해살이풀</string>
@@ -98,6 +155,16 @@
     <string name="herb">허브</string>
     <string name="epiphyte">착색식물</string>
     <string name="tuberous">괴근식물</string>
+    <string name="other">기본식물</string>
+
+    <string name="head">머리핀</string>
+    <string name="eye">안경</string>
+    <string name="face">표정</string>
+
+    <string name="back_left">창문 소품</string>
+    <string name="back_right">선반 소품</string>
+
+
 
 
     <!-- MyPage -->

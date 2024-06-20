@@ -45,6 +45,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.id.userWithdrawReasonFragment,
         R.id.userWithdrawFinalFragment,
         R.id.editPushFragment,
+        R.id.decorationFragment
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

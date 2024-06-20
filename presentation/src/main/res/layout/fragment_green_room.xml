@@ -6,9 +6,14 @@
     <data>
 
         <variable
-            name="myPlant"
-            type="com.greener.domain.model.ExampleModel" />
+            name="greenRoom"
+            type="com.greener.domain.model.greenroom.GreenRoomTotalInfo" />
 
+        <variable
+            name="todoNum"
+            type="int" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +22,7 @@
 
         <View
             android:id="@+id/view_green_room_top_area"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/sample_wall"
             android:padding="0dp"
@@ -36,12 +41,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="@dimen/green_room_bottom_area_height_percent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_green_room_top_area" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/iv_green_room_window"
-            setWindowImg="@{myPlant.window}"
+            setWindowImg="@{greenRoom.greenRoomItems.get(`background_window`)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/view_green_room_top_area"
@@ -52,7 +56,7 @@
 
         <ImageView
             android:id="@+id/iv_green_room_shelf"
-            setShelfImg="@{myPlant.shelf}"
+            setShelfImg="@{greenRoom.greenRoomItems.get(`background_shelf`)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/view_green_room_top_area"
@@ -61,10 +65,9 @@
             app:layout_constraintVertical_bias="@dimen/green_room_shelf_vertical_bias"
             tools:src="@drawable/img_shelf_2" />
 
-
         <ImageView
             android:id="@+id/iv_green_room_plant_type"
-            setPlantType="@{myPlant.type}"
+            setPlantType="@{greenRoom.greenRoomItems.get(`shape`)}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@id/gl_green_room_empty_start"
@@ -75,10 +78,9 @@
             app:layout_constraintWidth_percent="@dimen/green_room_plant_width_percent"
             tools:src="@drawable/img_plant_1_default_shadow" />
 
-
         <ImageView
             android:id="@+id/iv_green_room_plant_face"
-            setPlantFace="@{myPlant.status}"
+            setPlantFace="@{greenRoom.greenRoomTodos.size()}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@id/iv_green_room_plant_type"
@@ -89,8 +91,34 @@
             app:layout_constraintTop_toTopOf="@id/iv_green_room_plant_type"
             app:layout_constraintVertical_bias="@dimen/plant_face_vertical_bias"
             app:layout_constraintWidth_percent="@dimen/green_room_plant_face_width_percent"
-            tools:src="@drawable/img_face_sad" />
+            tools:src="@drawable/img_face_default" />
 
+        <ImageView
+            android:id="@+id/iv_green_room_plant_glasses"
+            setGlasses="@{greenRoom.greenRoomItems.get(`glasses`)}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintDimensionRatio="65:36"
+            app:layout_constraintEnd_toEndOf="@+id/iv_green_room_plant_face"
+            app:layout_constraintHeight_percent="0.0920"
+            app:layout_constraintStart_toStartOf="@id/iv_green_room_plant_face"
+            app:layout_constraintTop_toTopOf="@id/iv_green_room_plant_face"
+            app:layout_constraintWidth_percent="0.1806"
+            tools:src="@drawable/asset_eye_sunglasses" />
+
+        <ImageView
+            android:id="@+id/iv_green_room_plant_head"
+            setGlasses="@{greenRoom.greenRoomItems.get(`hair_accessory`)}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/iv_green_room_plant_face"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/iv_green_room_plant_face"
+            app:layout_constraintStart_toStartOf="@+id/iv_green_room_plant_face"
+            app:layout_constraintTop_toTopOf="@+id/iv_green_room_plant_face"
+            app:layout_constraintWidth_percent="0.1278"
+            tools:src="@drawable/asset_head_big_ribbon" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_green_room_empty_start"
@@ -100,6 +128,87 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="@dimen/green_room_guide_percent_for_plant_bottom" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_green_room_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_green_room_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/grid_system_end" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_green_room_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+
+        <include
+            android:id="@+id/include_green_room_balloon_1"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{todoNum>=2?View.VISIBLE:View.GONE}"
+            app:actionTodo="@{greenRoom.greenRoomTodos[0].actionTodo}"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_green_room_window"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_center"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_start"
+            app:layout_constraintTop_toTopOf="@+id/iv_green_room_window"
+            app:layout_constraintVertical_bias="0.503" />
+
+
+        <include
+            android:id="@+id/include_green_room_balloon_2"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{todoNum>=2?View.VISIBLE:View.GONE}"
+            app:actionTodo="@{greenRoom.greenRoomTodos[1].actionTodo}"
+            app:layout_constraintBottom_toBottomOf="@+id/include_green_room_balloon_1"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_center"
+            app:layout_constraintTop_toTopOf="@+id/include_green_room_balloon_1" />
+
+        <include
+            android:id="@+id/include_green_room_balloon_3"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{todoNum>=3 || todoNum==1 ?View.VISIBLE:View.GONE}"
+            app:actionTodo="@{greenRoom.greenRoomTodos[todoNum == 1 ? 0 : 2].actionTodo}"
+            app:layout_constraintBottom_toTopOf="@+id/include_green_room_balloon_1"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_center"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_center" />
+
+        <include
+            android:id="@+id/include_green_room_balloon_4"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{todoNum>=4?View.VISIBLE:View.GONE}"
+            app:actionTodo="@{greenRoom.greenRoomTodos[3].actionTodo}"
+            app:layout_constraintBottom_toTopOf="@+id/include_green_room_balloon_3"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_center"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_start" />
+
+        <include
+            android:id="@+id/include_green_room_balloon_5"
+            layout="@layout/view_text_balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{todoNum>=5?View.VISIBLE:View.GONE}"
+            app:actionTodo="@{greenRoom.greenRoomTodos[4].actionTodo}"
+            app:layout_constraintBottom_toBottomOf="@+id/include_green_room_balloon_4"
+            app:layout_constraintEnd_toEndOf="@+id/gl_green_room_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_green_room_center"
+            app:layout_constraintTop_toTopOf="@+id/include_green_room_balloon_4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

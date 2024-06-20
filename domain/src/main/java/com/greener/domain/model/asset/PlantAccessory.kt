@@ -1,6 +1,6 @@
 package com.greener.domain.model.asset
 
-enum class PlantAccessoryName(itemName: String) {
+enum class PlantAccessory(itemName: String) {
     default("default"),
     bad("bad"),
     sad("sad"),
@@ -8,9 +8,11 @@ enum class PlantAccessoryName(itemName: String) {
     wink("wink"),
     happy("happy"),
     angry("angry"),
+    empty("empty"),
     Glasses("Glasses"),
     Sunglasses("Sunglasses"),
     Heart_Sunglasses("Heart_Sunglasses"),
+    Hip_Sunglasses("Hip_Sunglasses"),
     Fried_Egg("Fried_Egg"),
     Ribbon("Ribbon"),
     Flower_Hairpin("Flower_Hairpin"),

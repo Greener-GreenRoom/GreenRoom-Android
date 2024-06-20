@@ -1,6 +1,6 @@
 package com.greener.domain.model.asset
 
-enum class PlantType {
+enum class PlantShapeType {
     FOLIAGE, // 관엽식물
     SUCCEULENT_CACTUS, // 다육이,선인장
     ANNUAL, // 한해살이풀

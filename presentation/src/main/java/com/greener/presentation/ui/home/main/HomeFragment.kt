@@ -4,23 +4,24 @@ import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.view.ViewPropertyAnimator
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.greener.domain.model.ActionTodo
 import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentHomeBinding
+import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
-import com.greener.presentation.ui.home.ActionDialog
+import com.greener.presentation.ui.home.greenroom.GreenRoomFragment
 import com.greener.presentation.ui.home.greenroom.GreenRoomViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
-private const val MIN_SCALE = 0.85f
-private const val MIN_ALPHA = 0.5f
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
@@ -30,84 +31,83 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = viewModel
-        setGreenRoomViewPager()
-        setBottomProfileAdapter()
-        setFABClickEvent()
-        observeFAB()
-
-        initListener()
+        viewModel.getUserGreenRoomsInfo()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.myGreenRooms.collect {
+                binding.vm = viewModel
+                setFABClickEvent()
+                observeFAB()
+                setGreenRoomViewPager()
+                setBottomProfileAdapter()
+            }
+        }
     }
 
     override fun initListener() {
+        observeUiState()
         binding.viewHomeWallpaper.setOnClickListener {
             viewModel.setIsFabOpen()
         }
-
         binding.tvHomeActionComplete.setOnClickListener {
             viewModel.setIsFabOpen()
-            showActionDialog()
+            completeAllTodoAtGreenRoom()
         }
-        viewModel.initFab()
         binding.includeHomeBottomSheet.btnBottomSheetHomeAddButton.setOnClickListener {
             moveToRegistration()
         }
         binding.includeHomeBottomSheet.tvBottomSheetHomeAddPlant.setOnClickListener {
             moveToRegistration()
         }
+        viewModel.initFab()
+    }
 
-        binding.tbHomeToolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.item_home_toolbar_my_info -> {
-                    moveToMyPage()
-                    true
-                }
-
-                else -> {
-                    true
+    private fun observeUiState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.uiState.collect {
+                if (it is UiState.Error) {
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
+    private fun onChangedTodo(position: Int, actionTodo: ActionTodo) {
+        viewModel.changeTodo(position, actionTodo)
+        binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.adapter!!.notifyItemChanged(position)
+    }
+
     private fun setGreenRoomViewPager() {
         binding.vpHomeGreenRoom.adapter = GreenRoomViewPagerAdapter(
-            this,
-            viewModel.myPlants.value,
-        )
-        binding.vpHomeGreenRoom.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            this@HomeFragment,
+            viewModel.myGreenRooms.value,
 
-        /**
-         * 하단 코드는 옵션
-         * 적용할지 말지는 선택입니다.
-         */
-
+        ) { position, actionTodo ->
+            onChangedTodo(position, actionTodo)
+        }
         binding.vpHomeGreenRoom.isUserInputEnabled = false
-        binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
+        // binding.vpHomeGreenRoom.offscreenPageLimit = 100
+        // binding.vpHomeGreenRoom.setPageTransformer(ZoomOutPageTransformer())
     }
 
     private fun setBottomProfileAdapter() {
         binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.adapter =
             ProfileRVAdapter(
-                viewModel.myPlants.value,
-                viewModel.currentPlant.value,
-                { onClickProfile(it) },
-                { unSelect(it) },
-            )
+                viewModel.myGreenRooms.value,
+                viewModel.currentGreenRoom.value,
+            ) { onClickProfile(it) }
     }
 
     private fun onClickProfile(position: Int) {
         binding.vpHomeGreenRoom.currentItem = position
-        viewModel.currentPlant.value = viewModel.myPlants.value[position]
+        viewModel.updateCurrentGreenRoom(position)
         select(position)
+        scrollToCenter(position)
     }
 
-    private fun moveToRegistration() {
-        findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
-    }
-
-    private fun moveToMyPage() {
-        findNavController().navigate(R.id.action_homeFragment_to_myPageMainFragment)
+    private fun scrollToCenter(position: Int) {
+        val recyclerView = binding.includeHomeBottomSheet.rvBottomSheetHomeProfile
+        val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+        layoutManager.scrollToPositionWithOffset(position, recyclerView.width / 2)
     }
 
     private fun select(position: Int) {
@@ -122,31 +122,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 R.color.green300,
             ),
         )
-    }
-
-    private fun unSelect(position: Int) {
-        val viewHolder =
-            binding.includeHomeBottomSheet.rvBottomSheetHomeProfile.findViewHolderForAdapterPosition(
-                position,
-            ) as ProfileRVAdapter.ProfileViewHolder
-
-        viewHolder.binding.ivItemProfileBackground.setImageResource(R.drawable.img_profile_background_circle_non_selected)
-        viewHolder.binding.tvItemProfilePlantName.setTextColor(
-            ContextCompat.getColor(
-                requireActivity(),
-                R.color.gray700,
-            ),
-        )
-    }
-
-    private fun showActionDialog() {
-        val dialog = ActionDialog(requireActivity())
-
-        dialog.setItemClickListener(object : ActionDialog.ClickListener {
-            override fun onClick() {
-            }
-        })
-        dialog.show()
     }
 
     private fun observeFAB() {
@@ -178,8 +153,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private fun shutActionMenu() {
         ObjectAnimator.ofFloat(binding.fabHomeActions, View.ROTATION, 45f, 0f).apply { start() }
         binding.lyHomeActionList.visibility = View.GONE
-        // binding.layoutActionDialog.fadeOut(50)
         binding.viewHomeWallpaper.visibility = View.GONE
+    }
+
+    private fun moveToRegistration() {
+        findNavController().navigate(R.id.action_homeFragment_to_registrationSearchFragment)
+    }
+
+    private fun completeAllTodoAtGreenRoom() {
+        val currentItem = binding.vpHomeGreenRoom.currentItem
+        val myFragment =
+            childFragmentManager.findFragmentByTag("f$currentItem") as GreenRoomFragment
+        myFragment.completeAllTodo()
     }
 
     private fun View.fadeIn(duration: Long = 500): ViewPropertyAnimator {
@@ -242,5 +227,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 }
             }
         }
+    }
+
+    companion object {
+        private const val MIN_SCALE = 0.85f
+        private const val MIN_ALPHA = 0.5f
     }
 }
