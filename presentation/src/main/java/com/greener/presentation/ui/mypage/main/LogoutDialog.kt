@@ -24,22 +24,18 @@ class LogoutDialog(context: Context) : Dialog(context) {
 
         context.dialogResize(this@LogoutDialog, 0.777f, 0.23f)
 
-        // 배경을 투명하게
-        // 다이얼로그를 둥글게 표현하기 위해 필요
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        // 다이얼로그 바깥쪽 클릭시 종료
         setCanceledOnTouchOutside(true)
-        // 취소 가능 유무
+
         setCancelable(true)
 
         binding.btnDialogLogoutConfirm.setOnClickListener {
             clickListener.onClick()
-            dismiss() // 다이얼로그 닫기 (Close the dialog)
+            dismiss()
         }
 
         binding.btnDialogLogoutDismiss.setOnClickListener {
-            // DoSomething
             dismiss()
         }
     }

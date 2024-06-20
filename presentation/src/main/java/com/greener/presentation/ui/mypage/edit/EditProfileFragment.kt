@@ -138,8 +138,8 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.profileImage.collect {
-                    if(it == FAIL ) {
-                        Toast.makeText(requireActivity(), RETRY,Toast.LENGTH_SHORT).show()
+                    if(it == getString(R.string.util_fail) ) {
+                        Toast.makeText(requireActivity(), resources.getString(R.string.image_upload_fail),Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -170,10 +170,5 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
 
     private fun moveToMyPageMain() {
         findNavController().navigate(R.id.action_editProfileFragment_to_myPageMainFragment)
-    }
-
-    companion object {
-        const val FAIL = "fail"
-        const val RETRY ="이미지 업로드 실패\n다시 시도해주세요"
     }
 }

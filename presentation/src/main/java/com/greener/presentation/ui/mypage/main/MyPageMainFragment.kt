@@ -62,7 +62,7 @@ class MyPageMainFragment : BaseFragment<FragmentMyPageMainBinding>(
             moveToWithdraw()
         }
         binding.tvMyPageMainSuggest.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://tally.so/r/nGzplZ"))
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(TALLY_SUGGEST))
             startActivity(browserIntent)
         }
         binding.tvMyPageMainAppVersionTitle.isClickable
@@ -143,8 +143,7 @@ class MyPageMainFragment : BaseFragment<FragmentMyPageMainBinding>(
             requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         }
     }
-
-
-
-
+    companion object {
+        const val TALLY_SUGGEST = "https://tally.so/r/nGzplZ"
+    }
 }

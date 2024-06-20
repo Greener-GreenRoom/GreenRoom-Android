@@ -18,6 +18,7 @@
     <string name="util_dismiss">닫기</string>
 
     <string name="util_detail">자세히</string>
+    <string name="util_fail">fail</string>
 
     <!--  Login  -->
     <string name="google_web_client_id">712990012729-kc9m2p6a9oltejsul1dvseh0mj8d8b66.apps.googleusercontent.com</string>
@@ -136,6 +137,6 @@
     <string name="withdraw_final_consent">안내사항을 모두 확인하였습니다</string>
     <string name="withdraw_back_space">이전 페이지로</string>
     <string name="withdraw_final_confirm">탈퇴할게요</string>
-
-
+    <string name="withdraw_success_message">회원 탈퇴신청이 완료되었습니다\n해당 계정은 확인 후 삭제 예정입니다</string>
+    <string name="image_upload_fail">이미지 업로드 실패\n다시 시도해주세요</string>
 </resources>

@@ -68,7 +68,7 @@ class UserWithdrawFinalFragment : BaseFragment<FragmentUserWithdrawFinalBinding>
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
                     if (it is UiState.Success) {
-                        Toast.makeText(requireActivity(), WITHDRAW_SUCCESS, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), getString(R.string.withdraw_success_message), Toast.LENGTH_SHORT).show()
                         moveToSignActivity()
                     } else if (it is UiState.Error) {
                         Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
@@ -83,9 +83,5 @@ class UserWithdrawFinalFragment : BaseFragment<FragmentUserWithdrawFinalBinding>
         val intent = Intent(requireActivity(), LoginActivity::class.java)
         startActivity(intent)
         activity?.finish()
-    }
-
-    companion object {
-        const val WITHDRAW_SUCCESS = "회원 탈퇴신청이 완료되었습니다\n해당 계정은 확인 후 삭제 예정입니다"
     }
 }

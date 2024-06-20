@@ -1,11 +1,11 @@
 package com.greener.data.repository
 
-import android.content.ContentUris
+
 import android.content.Context
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import com.greener.data.R
 import com.greener.data.model.response.ResponseFormDTO
 import com.greener.data.model.sign.request.UserAccountDTO
 import com.greener.data.source.remote.MyPageDataSource
@@ -113,16 +113,18 @@ class MyPageRepositoryImpl @Inject constructor(
         dataSource.logout()
     }
 
-    override suspend fun deleteUser():Result<Int> {
+    override suspend fun deleteUser(): Result<Int> {
         val response = dataSource.deleteUser()
 
-        return when(response) {
+        return when (response) {
             is ApiState.Success -> {
                 Result.success(response.result.responseDTO.output)
             }
+
             is ApiState.Fail -> {
                 Result.failure(handleMyPageFailure(response.result.responseDTO.output))
             }
+
             is ApiState.Exception -> {
                 Result.failure(Exception(ApiState.Exception(response.t).checkException()))
             }
@@ -165,6 +167,6 @@ class MyPageRepositoryImpl @Inject constructor(
                 return Exception(it.message)
             }
         }
-        return Exception("알 수 없는 에러가 발생하였습니다.")
+        return Exception(context.resources.getString(R.string.unknownError))
     }
 }

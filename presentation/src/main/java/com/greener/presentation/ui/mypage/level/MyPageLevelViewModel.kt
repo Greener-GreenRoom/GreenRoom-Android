@@ -66,7 +66,10 @@ class MyPageLevelViewModel @Inject constructor(
         if (_myLevelInfo.value == null) {
             return 0
         }
-        return (myLevelInfo.value!!.grade.currentSeed * 100 / _myLevelInfo.value!!.grade.nextLevelSeed)
+        return (myLevelInfo.value!!.grade.currentSeed * PERCENT_UNIT / _myLevelInfo.value!!.grade.nextLevelSeed)
+    }
+    companion object {
+        const val PERCENT_UNIT = 100
     }
 
 }
