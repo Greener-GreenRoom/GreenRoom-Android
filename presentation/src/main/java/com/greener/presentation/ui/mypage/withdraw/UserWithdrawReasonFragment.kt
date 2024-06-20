@@ -6,23 +6,20 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.setViewTreeOnBackPressedDispatcherOwner
 import androidx.navigation.fragment.findNavController
 import com.greener.domain.model.mypage.WithdrawReason
-import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentUserWithdrawReasonBinding
 import com.greener.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBinding>(
-    FragmentUserWithdrawReasonBinding::inflate
+    FragmentUserWithdrawReasonBinding::inflate,
 ) {
     private lateinit var backPressedCallback: OnBackPressedCallback
     private lateinit var rvAdapter: WithdrawReasonRVAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun initListener() {
@@ -40,7 +37,6 @@ class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBindin
             binding.etWithdrawReason.clearFocus()
             false
         }
-
     }
 
     override fun onAttach(context: Context) {
@@ -67,7 +63,6 @@ class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBindin
             { hideInputArea() },
         )
         binding.rvWithdrawReason.adapter = rvAdapter
-
     }
 
     private fun showInputArea() {
@@ -82,8 +77,8 @@ class UserWithdrawReasonFragment : BaseFragment<FragmentUserWithdrawReasonBindin
         val selectedReasons = rvAdapter.getWithdrawReasons()
         val reasons = mutableListOf<String>()
 
-        for(reason in selectedReasons) {
-            if(reason == WithdrawReason.DIRECT_INPUT) {
+        for (reason in selectedReasons) {
+            if (reason == WithdrawReason.DIRECT_INPUT) {
                 reasons.add(binding.etWithdrawReason.text.toString())
                 continue
             }

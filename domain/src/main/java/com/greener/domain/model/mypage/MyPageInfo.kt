@@ -4,5 +4,5 @@ data class MyPageInfo(
     val simpleProfile: SimpleProfile,
     val gradeDto: Grade,
     val daysFromCreated: Int,
-    val myTier:GradeTier
+    val myTier: GradeTier,
 )

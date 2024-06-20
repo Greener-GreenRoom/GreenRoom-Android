@@ -8,5 +8,5 @@ data class BackgroundAccessoryEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val itemType: String,
     val itemName: String,
-    val limitLevel: Int
+    val limitLevel: Int,
 )

@@ -11,7 +11,7 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 class MyPageDataSource @Inject constructor(
-    private val service: MyPageService
+    private val service: MyPageService,
 ) {
     suspend fun getMyPageInfo(): ApiState<ResponseFormDTO<MyPageInfoDTO>> {
         return try {
@@ -43,7 +43,7 @@ class MyPageDataSource @Inject constructor(
     suspend fun editUserProfile(
         name: RequestBody,
         imagePart: MultipartBody.Part?,
-        imageUpdateFlag: RequestBody
+        imageUpdateFlag: RequestBody,
     ): ApiState<ResponseFormDTO<UserAccountDTO>> {
         return try {
             val response = service.editUserProfile(imagePart, name, imageUpdateFlag)
@@ -59,7 +59,7 @@ class MyPageDataSource @Inject constructor(
 
     suspend fun editUserProfile(
         name: RequestBody,
-        imageUpdateFlag: RequestBody
+        imageUpdateFlag: RequestBody,
     ): ApiState<ResponseFormDTO<UserAccountDTO>> {
         return try {
             val response = service.editUserProfile(name, imageUpdateFlag)

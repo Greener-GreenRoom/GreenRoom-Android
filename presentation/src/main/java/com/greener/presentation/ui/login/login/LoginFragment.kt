@@ -40,7 +40,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 viewModel.setName(userName)
                 viewModel.setProvider(GOOGLE)
                 getToken()
-
             } catch (e: ApiException) {
                 Log.e("확인", e.stackTraceToString())
             }
@@ -50,7 +49,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         super.onViewCreated(view, savedInstanceState)
         binding.vpLoginOnboarding.adapter = LoginOnBoardingVPAdapter(requireActivity())
         binding.indicatorLoginVp.attachTo(binding.vpLoginOnboarding)
-
     }
 
     override fun initListener() {
@@ -80,11 +78,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                     }
 
                     is UiState.Loading -> {
-
                     }
 
                     is UiState.Empty -> {
-
                     }
                 }
             }
@@ -119,10 +115,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
     private fun moveToRegisterNickName() {
         val action = LoginFragmentDirections.actionLoginFragmentToLoginRegisterNicknameFragment(
-            arrayOf(viewModel.email.value, viewModel.photoUrl.value, viewModel.provider.value)
+            arrayOf(viewModel.email.value, viewModel.photoUrl.value, viewModel.provider.value),
         )
         Navigation.findNavController(binding.root).navigate(action)
-
     }
 
     companion object {

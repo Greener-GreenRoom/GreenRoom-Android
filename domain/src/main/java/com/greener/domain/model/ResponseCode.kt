@@ -13,5 +13,5 @@ enum class ResponseCode(val codeNumber: Int, val message: String) {
 
     FAIL_DATA_PARSE(-0x3001, "데이터를 읽는데 실패하였습니다"),
     INVALID_CREDENTIALS(-0x4001, "invalid credentials"),
-    INVALID_FORMAT(-0x5001, "유효하지 않은 형식입니다");
+    INVALID_FORMAT(-0x5001, "유효하지 않은 형식입니다"),
 }

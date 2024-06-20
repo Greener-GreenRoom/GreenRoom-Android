@@ -5,9 +5,9 @@ import com.greener.domain.repository.MyPageRepository
 import javax.inject.Inject
 
 class GetMyLevelInfoUseCase @Inject constructor(
-    private val repository: MyPageRepository
+    private val repository: MyPageRepository,
 ) {
-    suspend operator fun invoke():Result<MyLevelInfo> {
+    suspend operator fun invoke(): Result<MyLevelInfo> {
         return repository.getMyLevelInfo()
     }
 }

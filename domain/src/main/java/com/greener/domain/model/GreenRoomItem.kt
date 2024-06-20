@@ -1,6 +1,6 @@
 package com.greener.domain.model
 
-data class GreenRoomItem (
-    val itemType:String,
-    val itemName:String
+data class GreenRoomItem(
+    val itemType: String,
+    val itemName: String,
 )

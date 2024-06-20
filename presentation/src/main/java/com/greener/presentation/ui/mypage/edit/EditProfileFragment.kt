@@ -1,25 +1,18 @@
 package com.greener.presentation.ui.mypage.edit
 
-
 import android.os.Build
 import android.os.Bundle
-
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.net.toUri
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
-import com.bumptech.glide.GlideBuilder
 import com.greener.domain.usecase.image.PickImageUseCase
 import com.greener.domain.usecase.image.TakePictureUseCase
 import com.greener.presentation.R
@@ -28,15 +21,11 @@ import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.IOException
-import java.io.InputStream
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
-    FragmentEditProfileBinding::inflate
+    FragmentEditProfileBinding::inflate,
 ) {
     private val viewModel: EditProfileViewModel by viewModels()
     private val args: EditProfileFragmentArgs by navArgs()
@@ -51,7 +40,6 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         super.onViewCreated(view, savedInstanceState)
         softInputAdjustResize()
         viewModel.setUserSimpleInfo(args.userSimpleInfo)
-
     }
 
     override fun initListener() {
@@ -66,8 +54,10 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         }
 
         binding.ivEditProfileMyProfileImg.setOnClickListener {
-            val modal = EditProfileModalBottomSheet({ viewModel.getImage(pickImageUseCase) },
-                { viewModel.takePicture(takePictureUseCase) })
+            val modal = EditProfileModalBottomSheet(
+                { viewModel.getImage(pickImageUseCase) },
+                { viewModel.takePicture(takePictureUseCase) },
+            )
             modal.show(childFragmentManager, "")
         }
 
@@ -138,8 +128,8 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.profileImage.collect {
-                    if(it == getString(R.string.util_fail) ) {
-                        Toast.makeText(requireActivity(), resources.getString(R.string.image_upload_fail),Toast.LENGTH_SHORT).show()
+                    if (it == getString(R.string.util_fail)) {
+                        Toast.makeText(requireActivity(), resources.getString(R.string.image_upload_fail), Toast.LENGTH_SHORT).show()
                     }
                 }
             }

@@ -29,6 +29,4 @@ sealed class ApiState<out T : Any> {
         const val IO_EXCEPTION_MSG = "네트워크 연결을 확인해주세요"
         const val DEFAULT_ERROR_MSG = "알 수 없는 에러가 발생했습니다."
     }
-
-
 }

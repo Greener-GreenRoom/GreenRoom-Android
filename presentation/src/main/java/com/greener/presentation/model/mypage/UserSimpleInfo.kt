@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UserSimpleInfo(
-    val nickName:String,
-    val tier:GradeTier,
-    val imageUrl:String?
+    val nickName: String,
+    val tier: GradeTier,
+    val imageUrl: String?,
 ) : Parcelable

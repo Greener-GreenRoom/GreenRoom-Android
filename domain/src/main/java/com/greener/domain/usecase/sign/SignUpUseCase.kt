@@ -7,10 +7,9 @@ import com.greener.domain.repository.SignRepository
 import javax.inject.Inject
 
 class SignUpUseCase @Inject constructor(
-    private val repository: SignRepository
+    private val repository: SignRepository,
 ) {
     suspend operator fun invoke(userAccountInfo: UserAccountInfo): ApiState<ResponseResult> {
-
         return repository.signUp(userAccountInfo)
     }
 }

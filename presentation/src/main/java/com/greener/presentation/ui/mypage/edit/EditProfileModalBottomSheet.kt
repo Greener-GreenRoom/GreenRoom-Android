@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.mypage.edit
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +10,15 @@ import com.greener.presentation.databinding.BottomSheetImageBinding
 class EditProfileModalBottomSheet constructor(
     val getImageFromPictures: () -> Unit,
     val takePhoto: () -> Unit,
-): BottomSheetDialogFragment() {
+) : BottomSheetDialogFragment() {
     lateinit var binding: BottomSheetImageBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding = BottomSheetImageBinding.inflate(inflater,container,false)
+        binding = BottomSheetImageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,7 +34,5 @@ class EditProfileModalBottomSheet constructor(
             takePhoto()
             dismiss()
         }
-
-
     }
 }

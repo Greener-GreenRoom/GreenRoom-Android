@@ -1,6 +1,5 @@
 package com.greener.data.repository
 
-
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -17,22 +16,18 @@ import com.greener.domain.model.mypage.MyPageInfo
 import com.greener.domain.model.sign.UserAccountInfo
 import com.greener.domain.repository.MyPageRepository
 import com.squareup.moshi.Moshi
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
 import javax.inject.Inject
-
 
 class MyPageRepositoryImpl @Inject constructor(
     private val dataSource: MyPageDataSource,
     private val moshi: Moshi,
-    private val context: Context
+    private val context: Context,
 ) : MyPageRepository {
     override suspend fun getMyPageInfo(): Result<MyPageInfo> {
         val response = dataSource.getMyPageInfo()
@@ -55,7 +50,6 @@ class MyPageRepositoryImpl @Inject constructor(
     override suspend fun getMyLevelInfo(): Result<MyLevelInfo> {
         val response = dataSource.getMyLevelInfo()
 
-
         return when (response) {
             is ApiState.Success -> {
                 Result.success(response.result.data!!.toDomain())
@@ -74,7 +68,7 @@ class MyPageRepositoryImpl @Inject constructor(
     override suspend fun editUserProfile(
         name: String,
         profileUrl: String?,
-        imageUpdateFlag: String
+        imageUpdateFlag: String,
     ): Result<UserAccountInfo> {
         val imagePart: MultipartBody.Part?
         val response: ApiState<ResponseFormDTO<UserAccountDTO>>
@@ -86,7 +80,7 @@ class MyPageRepositoryImpl @Inject constructor(
             response = dataSource.editUserProfile(
                 name.toRequestBody(),
                 imagePart,
-                imageUpdateFlag.toRequestBody()
+                imageUpdateFlag.toRequestBody(),
             )
             deleteFileFromCache(context, imageFile.name)
         } else {

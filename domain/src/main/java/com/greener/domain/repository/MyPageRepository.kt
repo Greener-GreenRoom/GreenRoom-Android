@@ -1,8 +1,7 @@
 package com.greener.domain.repository
 
-import com.greener.domain.model.mypage.ImageUpdateFlag
-import com.greener.domain.model.mypage.MyPageInfo
 import com.greener.domain.model.mypage.MyLevelInfo
+import com.greener.domain.model.mypage.MyPageInfo
 import com.greener.domain.model.sign.UserAccountInfo
 
 interface MyPageRepository {
@@ -15,5 +14,5 @@ interface MyPageRepository {
 
     suspend fun logout()
 
-    suspend fun deleteUser():Result<Int>
+    suspend fun deleteUser(): Result<Int>
 }

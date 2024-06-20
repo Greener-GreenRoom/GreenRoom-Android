@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MyPageMainViewModel @Inject constructor(
     val getMyPageInfoUseCase: GetMyPageInfoUseCase,
-    val logoutUseCase: LogoutUseCase
+    val logoutUseCase: LogoutUseCase,
 ) : ViewModel() {
     private val _profile = MutableStateFlow<SimpleProfile?>(null)
     val profile: StateFlow<SimpleProfile?> get() = _profile
@@ -58,13 +58,12 @@ class MyPageMainViewModel @Inject constructor(
                     UserSimpleInfo(
                         profile.value!!.name,
                         findMyTier(_grade.value!!.currentLevel),
-                        _profile.value!!.profileUrl
+                        _profile.value!!.profileUrl,
                     )
                 }
             } else {
                 _uiState.update { UiState.Error(result.exceptionOrNull()!!.message) }
             }
-
         }
     }
 
@@ -76,5 +75,4 @@ class MyPageMainViewModel @Inject constructor(
         }
         return GradeTier.NONE
     }
-
 }

@@ -9,18 +9,18 @@ import com.squareup.moshi.JsonClass
 data class MyPageInfoDTO(
     @Json(name = "profile") val simpleProfileDto: SimpleProfileDTO,
     @Json(name = "gradeDto") val gradeDto: GradeDTO,
-    @Json(name = "daysFromCreated") val daysFromCreated: Int
+    @Json(name = "daysFromCreated") val daysFromCreated: Int,
 ) {
     fun toDomain() = MyPageInfo(
         simpleProfileDto.toDomain(),
         gradeDto.toDomain(),
         daysFromCreated,
-        findMyTier(gradeDto.currentLevel)
+        findMyTier(gradeDto.currentLevel),
     )
 
-    private fun findMyTier(myLevel:Int):GradeTier {
-        for(tier in GradeTier.entries) {
-            if(tier.tierBegin<=myLevel && myLevel<= tier.tierEnd){
+    private fun findMyTier(myLevel: Int): GradeTier {
+        for (tier in GradeTier.entries) {
+            if (tier.tierBegin <= myLevel && myLevel <= tier.tierEnd) {
                 return tier
             }
         }

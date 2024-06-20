@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditProfileViewModel @Inject constructor(
-    private val editUserProfileUseCase: EditUserProfileUseCase
+    private val editUserProfileUseCase: EditUserProfileUseCase,
 ) : ViewModel() {
 
     private val _userSimpleInfo = MutableStateFlow<UserSimpleInfo?>(null)
@@ -29,9 +29,7 @@ class EditProfileViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
     val uiState: StateFlow<UiState> get() = _uiState
 
-
     suspend fun editUserProfile(realPath: String?, nickName: String) {
-
         var imageUpdateFlag = ImageUpdateFlag.UPDATE.name
 
         if (realPath!!.startsWith(START_HTTPS)) {

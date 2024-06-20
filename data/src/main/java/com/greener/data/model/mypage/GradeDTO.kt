@@ -11,7 +11,7 @@ data class GradeDTO(
     @Json(name = "requiredSeedToNextLevel") val requiredSeedToNextLevel: Int,
     @Json(name = "currentSeed") val currentSeed: Int,
     @Json(name = "nextLevelSeed") val nextLevelSeed: Int,
-    @Json(name = "currentLevel") val currentLevel: Int
+    @Json(name = "currentLevel") val currentLevel: Int,
 ) {
     fun toDomain() = Grade(
         description,
@@ -19,6 +19,6 @@ data class GradeDTO(
         requiredSeedToNextLevel,
         currentSeed,
         nextLevelSeed,
-        currentLevel
+        currentLevel,
     )
 }

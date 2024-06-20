@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserWithdrawViewModel @Inject constructor(
-    private val deleteUserUserCase: DeleteUserUserCase
+    private val deleteUserUserCase: DeleteUserUserCase,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
     val uiState: StateFlow<UiState> get() = _uiState

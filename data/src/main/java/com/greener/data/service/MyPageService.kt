@@ -1,6 +1,5 @@
 package com.greener.data.service
 
-import androidx.datastore.preferences.protobuf.NullValue
 import com.greener.data.model.mypage.MyPageInfoDTO
 import com.greener.data.model.mypage.MyPageLevelDTO
 import com.greener.data.model.response.ResponseFormDTO
@@ -26,19 +25,19 @@ interface MyPageService {
     suspend fun editUserProfile(
         @Part userImage: MultipartBody.Part?,
         @Part("name") name: RequestBody,
-        @Part("imageUpdateFlag") imageUpdateFlag: RequestBody
+        @Part("imageUpdateFlag") imageUpdateFlag: RequestBody,
     ): ResponseFormDTO<UserAccountDTO>
 
     @Multipart
     @PATCH("api/user")
     suspend fun editUserProfile(
         @Part("name") name: RequestBody,
-        @Part("imageUpdateFlag") imageUpdateFlag: RequestBody
+        @Part("imageUpdateFlag") imageUpdateFlag: RequestBody,
     ): ResponseFormDTO<UserAccountDTO>
 
     @DELETE("api/authenticate/logout")
     suspend fun logout()
 
     @DELETE("api/user/delete")
-    suspend fun deleteUser():ResponseFormDTO<String?>
+    suspend fun deleteUser(): ResponseFormDTO<String?>
 }

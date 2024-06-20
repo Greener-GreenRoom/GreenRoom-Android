@@ -19,14 +19,12 @@ import com.greener.presentation.databinding.FragmentMyPageLevelBinding
 import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MyPageLevelFragment : BaseFragment<FragmentMyPageLevelBinding>(
-    FragmentMyPageLevelBinding::inflate
+    FragmentMyPageLevelBinding::inflate,
 ) {
     private val viewModel: MyPageLevelViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,31 +43,29 @@ class MyPageLevelFragment : BaseFragment<FragmentMyPageLevelBinding>(
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
-                    if(it == UiState.Success) {
+                    if (it == UiState.Success) {
                         binding.vm = viewModel
                         setProgress()
-                        if(viewModel.myLevelInfo.value !=null) {
+                        if (viewModel.myLevelInfo.value != null) {
                             setNextRewardItemAdapter(viewModel.myLevelInfo.value!!.greenRoomItems)
                         }
-                    } else if(it is UiState.Error) {
-                        Toast.makeText(requireActivity(),it.message, Toast.LENGTH_SHORT).show()
+                    } else if (it is UiState.Error) {
+                        Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
                     }
-
                 }
             }
         }
     }
 
-    private fun setNextRewardItemAdapter(greenRoomItems:List<GreenRoomItem>) {
+    private fun setNextRewardItemAdapter(greenRoomItems: List<GreenRoomItem>) {
         binding.rvMyPageLevelNextRewardItem.adapter = NextRewardRVAdapter(greenRoomItems)
     }
-
 
     private fun setProgress() {
         val anim = AnimateProgressBar(
             binding.pbMyPageLevelProgressbar,
             0f,
-            viewModel.getProgress().toFloat()
+            viewModel.getProgress().toFloat(),
         )
         anim.duration = 500
         binding.pbMyPageLevelProgressbar.startAnimation(anim)
@@ -95,7 +91,7 @@ class MyPageLevelFragment : BaseFragment<FragmentMyPageLevelBinding>(
 class AnimateProgressBar(
     private var progressBar: ProgressBar,
     private var from: Float,
-    private var to: Float
+    private var to: Float,
 ) : Animation() {
     override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
         super.applyTransformation(interpolatedTime, t)

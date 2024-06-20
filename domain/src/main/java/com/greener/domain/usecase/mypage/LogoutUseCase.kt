@@ -4,9 +4,9 @@ import com.greener.domain.repository.MyPageRepository
 import javax.inject.Inject
 
 class LogoutUseCase @Inject constructor(
-    private val repository: MyPageRepository
+    private val repository: MyPageRepository,
 ) {
-    suspend operator fun invoke(){
+    suspend operator fun invoke() {
         repository.logout()
     }
 }

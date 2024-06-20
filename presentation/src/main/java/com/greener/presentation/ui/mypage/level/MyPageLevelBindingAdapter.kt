@@ -10,13 +10,12 @@ import com.greener.domain.model.GreenRoomItem
 import com.greener.domain.model.mypage.GradeTier
 import com.greener.presentation.R
 
-
 @BindingAdapter("setMyBadge")
 fun setMyBadge(view: ImageView, myTier: GradeTier?) {
     val tier = myTier?.tierCode
     val context = view.context
     val resId =
-        context.resources.getIdentifier("asset_badge_${tier}", "drawable", context.packageName)
+        context.resources.getIdentifier("asset_badge_$tier", "drawable", context.packageName)
     view.setImageResource(resId)
 }
 
@@ -25,7 +24,7 @@ fun setBadgeImage(view: ImageView, gradeTier: GradeTier?) {
     val tier = gradeTier?.tierCode
     val context = view.context
     val resId =
-        context.resources.getIdentifier("asset_badge_${tier}", "drawable", context.packageName)
+        context.resources.getIdentifier("asset_badge_$tier", "drawable", context.packageName)
     view.setImageResource(resId)
 }
 
@@ -45,7 +44,7 @@ fun setNextRewardGuide(view: TextView, nextLevel: Int) {
         ForegroundColorSpan(color),
         startPosition, // 시작 위치
         endPosition, // 끝 위치 (exclusive)
-        0
+        0,
     )
     view.text = spannableString
 }
@@ -77,9 +76,8 @@ fun setNextRewardItemImage(view: ImageView, greenRoomItem: GreenRoomItem) {
 }
 
 fun getAsset(type: String, name: String, context: Context): Int {
-
     val resId =
-        context.resources.getIdentifier("asset_${type}_${name}", "drawable", context.packageName)
+        context.resources.getIdentifier("asset_${type}_$name", "drawable", context.packageName)
     return resId
 }
 

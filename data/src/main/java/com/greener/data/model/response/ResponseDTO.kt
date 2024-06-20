@@ -6,5 +6,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ResponseDTO(
     @Json(name = "output") val output: Int,
-    @Json(name = "result") val result: String
+    @Json(name = "result") val result: String,
 )

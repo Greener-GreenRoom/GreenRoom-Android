@@ -6,8 +6,8 @@ import androidx.navigation.fragment.findNavController
 import com.greener.presentation.databinding.FragmentEditPushBinding
 import com.greener.presentation.ui.base.BaseFragment
 
-class EditPushFragment:BaseFragment<FragmentEditPushBinding>(
-    FragmentEditPushBinding::inflate
+class EditPushFragment : BaseFragment<FragmentEditPushBinding>(
+    FragmentEditPushBinding::inflate,
 ) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

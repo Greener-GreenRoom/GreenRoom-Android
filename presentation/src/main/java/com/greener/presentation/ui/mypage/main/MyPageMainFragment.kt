@@ -23,7 +23,6 @@ import com.greener.presentation.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class MyPageMainFragment : BaseFragment<FragmentMyPageMainBinding>(
     FragmentMyPageMainBinding::inflate,
@@ -52,11 +51,9 @@ class MyPageMainFragment : BaseFragment<FragmentMyPageMainBinding>(
             moveToEditProfile()
         }
         binding.tvMyPageMainTermsOfService.setOnClickListener {
-
         }
         binding.tvMyPageMainLogout.setOnClickListener {
             showLogoutDialog()
-
         }
         binding.tvMyPageMainWithdraw.setOnClickListener {
             moveToWithdraw()
@@ -72,11 +69,10 @@ class MyPageMainFragment : BaseFragment<FragmentMyPageMainBinding>(
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
-                    if(it == UiState.Success) {
+                    if (it == UiState.Success) {
                         binding.vm = viewModel
-                    }
-                    else if(it is UiState.Error) {
-                        Toast.makeText(requireActivity(),it.message,Toast.LENGTH_SHORT).show()
+                    } else if (it is UiState.Error) {
+                        Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -102,11 +98,9 @@ class MyPageMainFragment : BaseFragment<FragmentMyPageMainBinding>(
                 viewModel.logout()
                 moveToSignActivity()
             }
-
-
     }
     private fun moveToSignActivity() {
-        val intent = Intent(requireActivity(),LoginActivity::class.java)
+        val intent = Intent(requireActivity(), LoginActivity::class.java)
         startActivity(intent)
         activity?.finish()
     }

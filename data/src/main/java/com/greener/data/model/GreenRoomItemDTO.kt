@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class GreenRoomItemDTO(
     @Json(name = "itemType") val itemType: String,
-    @Json(name = "itemName") val itemName: String
+    @Json(name = "itemName") val itemName: String,
 ) {
     fun toDomain(): GreenRoomItem {
         return GreenRoomItem(itemType, itemName)

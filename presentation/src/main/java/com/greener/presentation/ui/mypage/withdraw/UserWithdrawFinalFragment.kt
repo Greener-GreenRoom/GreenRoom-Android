@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class UserWithdrawFinalFragment : BaseFragment<FragmentUserWithdrawFinalBinding>(
-    FragmentUserWithdrawFinalBinding::inflate
+    FragmentUserWithdrawFinalBinding::inflate,
 ) {
     private val viewModel: UserWithdrawViewModel by viewModels()
 
@@ -76,7 +76,6 @@ class UserWithdrawFinalFragment : BaseFragment<FragmentUserWithdrawFinalBinding>
                 }
             }
         }
-
     }
 
     private fun moveToSignActivity() {

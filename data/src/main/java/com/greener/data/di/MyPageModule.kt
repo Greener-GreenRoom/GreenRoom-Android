@@ -25,7 +25,7 @@ object MyPageModule {
     fun provideMyPageRepository(
         dataSource: MyPageDataSource,
         moshi: Moshi,
-        context: Context
+        context: Context,
     ): MyPageRepository =
         MyPageRepositoryImpl(dataSource, moshi, context)
 }

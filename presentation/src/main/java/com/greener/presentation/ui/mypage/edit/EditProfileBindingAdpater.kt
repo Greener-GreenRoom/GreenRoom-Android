@@ -8,14 +8,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.greener.presentation.R
 
-
 @BindingAdapter("setClearVisibility")
-fun setClearVisibility(view: ImageView,profileUrl:String?) {
-    if(profileUrl.isNullOrBlank()) {
-        view.visibility= View.GONE
+fun setClearVisibility(view: ImageView, profileUrl: String?) {
+    if (profileUrl.isNullOrBlank()) {
+        view.visibility = View.GONE
         return
     }
-    view.visibility=View.VISIBLE
+    view.visibility = View.VISIBLE
 }
 
 @BindingAdapter("setMyEditProfileImage")
@@ -23,10 +22,11 @@ fun setMyEditProfileImage(view: ShapeableImageView, url: String?) {
     val context = view.context
 
     Glide.with(context)
-        .applyDefaultRequestOptions( RequestOptions()
-            .placeholder(R.drawable.img_edit_default)
-            .error(R.drawable.img_edit_default))
+        .applyDefaultRequestOptions(
+            RequestOptions()
+                .placeholder(R.drawable.img_edit_default)
+                .error(R.drawable.img_edit_default),
+        )
         .load(url)
         .into(view)
-
 }

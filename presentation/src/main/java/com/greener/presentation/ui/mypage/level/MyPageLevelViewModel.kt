@@ -2,7 +2,6 @@ package com.greener.presentation.ui.mypage.level
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.greener.domain.model.ApiState
 import com.greener.domain.model.mypage.GradeTier
 import com.greener.domain.model.mypage.MyLevelInfo
 import com.greener.domain.usecase.mypage.GetMyLevelInfoUseCase
@@ -16,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyPageLevelViewModel @Inject constructor(
-    private val getMyLevelInfoUseCase: GetMyLevelInfoUseCase
+    private val getMyLevelInfoUseCase: GetMyLevelInfoUseCase,
 ) : ViewModel() {
     init {
         getMyLevelInfo()
@@ -36,7 +35,6 @@ class MyPageLevelViewModel @Inject constructor(
                 _uiState.update { UiState.Success }
             } else {
                 _uiState.update { UiState.Error(result.exceptionOrNull()!!.message) }
-
             }
         }
     }
@@ -58,7 +56,6 @@ class MyPageLevelViewModel @Inject constructor(
     }
 
     fun getMyTier(): GradeTier? {
-
         return _myLevelInfo.value?.myTier
     }
 
@@ -71,5 +68,4 @@ class MyPageLevelViewModel @Inject constructor(
     companion object {
         const val PERCENT_UNIT = 100
     }
-
 }

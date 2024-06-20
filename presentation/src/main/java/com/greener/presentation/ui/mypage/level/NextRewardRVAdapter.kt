@@ -9,7 +9,7 @@ import com.greener.presentation.R
 import com.greener.presentation.databinding.ItemNextRewardBinding
 
 class NextRewardRVAdapter(
-    private val items: List<GreenRoomItem>
+    private val items: List<GreenRoomItem>,
 ) : RecyclerView.Adapter<NextRewardRVAdapter.NextRewardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NextRewardViewHolder {
@@ -17,7 +17,7 @@ class NextRewardRVAdapter(
             LayoutInflater.from(parent.context),
             R.layout.item_next_reward,
             parent,
-            false
+            false,
         )
         return NextRewardViewHolder(binding)
     }
@@ -33,7 +33,5 @@ class NextRewardRVAdapter(
         fun bind(item: GreenRoomItem) {
             binding.greenRoomItem = item
         }
-
     }
 }
-

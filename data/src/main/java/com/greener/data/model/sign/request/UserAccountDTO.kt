@@ -9,7 +9,7 @@ data class UserAccountDTO(
     @Json(name = "name") val name: String,
     @Json(name = "email") val email: String,
     @Json(name = "profileUrl") val photoUrl: String,
-    @Json(name = "provider") val provider: String
-){
-    fun toDomain() = UserAccountInfo(name,email,photoUrl,provider)
+    @Json(name = "provider") val provider: String,
+) {
+    fun toDomain() = UserAccountInfo(name, email, photoUrl, provider)
 }

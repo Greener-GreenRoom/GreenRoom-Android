@@ -56,10 +56,9 @@ object NetworkModule {
         return AuthInterceptor(dataStore)
     }
 
-
-@Singleton
-@Provides
-fun provideMoshi(): Moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
+    @Singleton
+    @Provides
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 }

@@ -1,10 +1,8 @@
 package com.greener.presentation.ui.mypage.withdraw
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -25,13 +23,12 @@ class WithdrawReasonRVAdapter(
             LayoutInflater.from(parent.context),
             R.layout.item_withdraw_reason,
             parent,
-            false
+            false,
         )
         return WithdrawReasonViewHolder(binding)
     }
 
     override fun getItemCount(): Int = items.size
-
 
     override fun onBindViewHolder(holder: WithdrawReasonViewHolder, position: Int) {
         holder.bind(items[position])
@@ -51,16 +48,15 @@ class WithdrawReasonRVAdapter(
         binding.cvItemWithdrawReason.setCardBackgroundColor(
             getColor(
                 context,
-                R.color.withdraw_reason_selected_background
-            )
+                R.color.withdraw_reason_selected_background,
+            ),
         )
-
 
         binding.tvItemWithdrawReason.setTextColor(
             getColor(
                 context,
                 R.color.red100,
-            )
+            ),
         )
         binding.ivWithdrawReasonCheck.visibility = View.VISIBLE
         if (binding.item == WithdrawReason.DIRECT_INPUT) {
@@ -79,15 +75,15 @@ class WithdrawReasonRVAdapter(
             getColor(
                 context,
                 R.color.gray700,
-            )
+            ),
         )
         binding.ivWithdrawReasonCheck.visibility = View.INVISIBLE
-        if(binding.item == WithdrawReason.DIRECT_INPUT) {
+        if (binding.item == WithdrawReason.DIRECT_INPUT) {
             hideInputArea()
         }
     }
 
-    fun getWithdrawReasons():List<WithdrawReason> {
+    fun getWithdrawReasons(): List<WithdrawReason> {
         return selectedReasons.toList()
     }
 

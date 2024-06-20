@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val getTokenUseCase: GetTokenUseCase,
-    private val setUserInfoUseCase: SetUserInfoUseCase
+    private val setUserInfoUseCase: SetUserInfoUseCase,
 ) : ViewModel() {
 
     private val _email = MutableStateFlow("")
@@ -85,9 +85,7 @@ class LoginViewModel @Inject constructor(
             _email.value,
             _provider.value,
             _accessToken.value,
-            _refreshToken.value
+            _refreshToken.value,
         )
-
     }
-
 }

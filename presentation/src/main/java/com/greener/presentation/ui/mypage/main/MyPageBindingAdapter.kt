@@ -3,14 +3,12 @@ package com.greener.presentation.ui.mypage.main
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.greener.domain.model.mypage.Grade
 import com.greener.presentation.R
-
 
 @BindingAdapter("setMyGrade")
 fun setMyGrade(view: TextView, grade: Grade) {
@@ -25,11 +23,10 @@ fun setMyProfileImage(view: ShapeableImageView, url: String?) {
         .applyDefaultRequestOptions(
             RequestOptions()
                 .placeholder(R.drawable.img_default_profile)
-                .error(R.drawable.img_default_profile)
+                .error(R.drawable.img_default_profile),
         )
         .load(url)
         .into(view)
-
 }
 
 @BindingAdapter("setAppVersion")
@@ -40,7 +37,7 @@ fun setAppVersion(view: TextView, version: String) {
         val textResId = context.resources.getIdentifier(
             "my_page_app_version",
             "string",
-            packageName
+            packageName,
         )
         val text = context.getString(textResId, version)
         val colorResId = context.resources.getIdentifier("gray300", "color", packageName)
@@ -51,10 +48,9 @@ fun setAppVersion(view: TextView, version: String) {
             ForegroundColorSpan(color),
             5, // 시작 위치
             text.length, // 끝 위치 (exclusive)
-            0
+            0,
         )
         view.text = spannableString
     } catch (e: Exception) {
     }
 }
-

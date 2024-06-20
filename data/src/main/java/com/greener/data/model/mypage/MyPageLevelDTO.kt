@@ -10,7 +10,7 @@ import com.squareup.moshi.JsonClass
 data class MyPageLevelDTO(
     @Json(name = "gradeDto") val gradeDto: GradeDTO,
     @Json(name = "nextLevelToGetItems") val nextLevelToGetItems: Int,
-    @Json(name = "itemDtoList") val itemDtoList: List<GreenRoomItemDTO>
+    @Json(name = "itemDtoList") val itemDtoList: List<GreenRoomItemDTO>,
 ) {
     fun toDomain() =
         MyLevelInfo(gradeDto.toDomain(), findMyTier(gradeDto.currentLevel), nextLevelToGetItems, itemDtoList.map { it.toDomain() })

@@ -9,9 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
-import com.greener.presentation.databinding.DialogCompleteTodoAllBinding
 import com.greener.presentation.databinding.DialogLogoutBinding
-
 
 class LogoutDialog(context: Context) : Dialog(context) {
 
