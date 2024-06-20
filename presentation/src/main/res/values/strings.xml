@@ -17,6 +17,8 @@
     <string name="user_nickname_rule">한글 또는 영문, 10자 이내로 가능해요</string>
     <string name="confirm">확인</string>
     <string name="util_dismiss">닫기</string>
+    <string name="util_edit">편집</string>
+    <string name="util_more">더보기</string>
 
     <string name="util_detail">자세히</string>
     <string name="util_fail">fail</string>
@@ -137,6 +139,44 @@
 
 <!--  collection  -->
     <string name="collection">컬렉션</string>
+    <string name="collection_plant_dictionary">식물사전</string>
+
+    <!--  main  -->
+    <string name="collection_main_name">%s의 컬렉션</string>
+
+    <string name="collection_main_all_plant">전체 식물 %d</string>
+    <string name="collection_main_living_plant">키우고 있는 식물 %d</string>
+    <string name="collection_main_dead_plant">수명을 다한 식물 %d</string>
+
+    <string name="collection_main_latest_sort">최근 추가 순</string>
+    <string name="collection_main_oldest_sort">오래된 순</string>
+
+    <!--  detail  -->
+    <string name="collection_detail_time_together">그림룸과 %d일쨰</string>
+    <string name="collection_detail_no_species">미등록</string>
+    <string name="collection_detail_memo_hint">자유롭게 메모해 보세요.</string>
+
+    <string name="collection_detail_period">%d일 간격</string>
+    <string name="collection_detail_deadline">(다음 %s까지 %3)</string>
+
+    <string name="collection_detail_cycle">관리 주기</string>
+
+    <string name="collection_detail_information">식물 정보</string>
+
+    <string name="collection_detail_know_how">키우는 법</string>
+    <string name="collection_detail_management">관리</string>
+    <string name="collection_detail_temperature">온도</string>
+    <string name="collection_detail_sun">햇빛</string>
+    <string name="collection_detail_watering">물주기</string>
+    <string name="collection_detail_moisture">습도</string>
+    <string name="collection_detail_fertilizer">비료</string>
+
+    <!--  memo  -->
+    <string name="collection_memo_title">메모하기</string>
+    <string name="collection_memo_hint">30자 이내로 자유롭게 메모해 보세요</string>
+    <string name="collection_memo_count">(%d/30)</string>
+    <string name="collection_memo_complete">메모 완료</string>
+
 
 <!--  community  -->
     <string name="community">커뮤니티</string>

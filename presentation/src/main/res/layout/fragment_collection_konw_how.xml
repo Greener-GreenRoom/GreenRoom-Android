@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_collection_know_how_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/collection_detail_know_how"
+            android:textAppearance="@style/body3"
+            android:textColor="@color/gray300"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_collection_know_how_management"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray000"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_collection_know_how_title">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_collection_know_how_management"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/collection_detail_management"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray400"
+                    android:drawableStart="@drawable/ic_management"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv__collection_know_how_management_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="쉬워요"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_collection_know_how_management"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_collection_know_how_sun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray000"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_collection_know_how_temperature">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_collection_know_how_sun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/collection_detail_sun"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray400"
+                    android:drawableStart="@drawable/ic_sun"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv__collection_know_how_sun_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="쉬워요"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_collection_know_how_sun"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_collection_know_how_watering"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray000"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_collection_know_how_sun">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_collection_know_how_watering"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/collection_detail_watering"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray400"
+                    android:drawableStart="@drawable/ic_watering"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv__collection_know_how_watering_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="쉬워요"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_collection_know_how_watering"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_collection_know_how_moisture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray000"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_collection_know_how_watering">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_collection_know_how_moisture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/collection_detail_moisture"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray400"
+                    android:drawableStart="@drawable/ic_moisture"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv__collection_know_how_moisture_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="쉬워요"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_collection_know_how_moisture"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_collection_know_how_fertilizer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray000"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_collection_know_how_moisture">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_collection_know_how_fertilizer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/collection_detail_fertilizer"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray400"
+                    android:drawableStart="@drawable/ic_fertilizer"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv__collection_know_how_fertilizer_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="쉬워요"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_collection_know_how_fertilizer"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_collection_know_how_temperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray000"
+            app:cardCornerRadius="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_collection_know_how_management">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_collection_know_how_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/collection_detail_temperature"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray400"
+                    android:drawableStart="@drawable/ic_temperature"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv__collection_know_how_temperature_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="쉬워요"
+                    android:textAppearance="@style/body4"
+                    android:textColor="@color/gray700"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_collection_know_how_temperature"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

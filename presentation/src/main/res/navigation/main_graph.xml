@@ -9,7 +9,7 @@
         android:id="@+id/collectionFragment"
         android:name="com.greener.presentation.ui.collection.CollectionFragment"
         android:label="CollectionFragment"
-        tools:layout="@layout/fragment_collection"/>
+        tools:layout="@layout/fragment_collection_main"/>
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.greener.presentation.ui.community.CommunityFragment"

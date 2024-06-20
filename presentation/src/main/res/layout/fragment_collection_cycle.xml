@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_collection_cycle_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/collection_detail_cycle"
+        android:textAppearance="@style/body3"
+        android:textColor="@color/gray300"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_collection_cycle_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/util_edit"
+        android:textAppearance="@style/body3"
+        android:textColor="@color/gray300"
+        android:layout_marginTop="24dp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_collection_cycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_collection_cycle_title"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_collection_cycle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
