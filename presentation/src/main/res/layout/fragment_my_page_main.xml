@@ -118,7 +118,7 @@
                     android:id="@+id/iv_my_page_main_seed"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@drawable/shape_circle"
+                    android:src="@drawable/seed_point"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

@@ -34,11 +34,11 @@ class MyPageRepositoryImpl @Inject constructor(
 
         return when (response) {
             is ApiState.Success -> {
-                Result.success(response.result.data!!.toDomain())
+                Result.success(response.result!!.data!!.toDomain())
             }
 
             is ApiState.Fail -> {
-                Result.failure(handleMyPageFailure(response.result.responseDTO.output))
+                Result.failure(handleMyPageFailure(response.result!!.responseDTO.output))
             }
 
             is ApiState.Exception -> {
@@ -52,11 +52,11 @@ class MyPageRepositoryImpl @Inject constructor(
 
         return when (response) {
             is ApiState.Success -> {
-                Result.success(response.result.data!!.toDomain())
+                Result.success(response.result!!.data!!.toDomain())
             }
 
             is ApiState.Fail -> {
-                Result.failure(handleMyPageFailure(response.result.responseDTO.output))
+                Result.failure(handleMyPageFailure(response.result!!.responseDTO.output))
             }
 
             is ApiState.Exception -> {
@@ -90,11 +90,11 @@ class MyPageRepositoryImpl @Inject constructor(
 
         return when (response) {
             is ApiState.Success -> {
-                Result.success(response.result.data!!.toDomain())
+                Result.success(response.result!!.data!!.toDomain())
             }
 
             is ApiState.Fail -> {
-                Result.failure(handleMyPageFailure(response.result.responseDTO.output))
+                Result.failure(handleMyPageFailure(response.result!!.responseDTO.output))
             }
 
             is ApiState.Exception -> {
@@ -112,11 +112,11 @@ class MyPageRepositoryImpl @Inject constructor(
 
         return when (response) {
             is ApiState.Success -> {
-                Result.success(response.result.responseDTO.output)
+                Result.success(response.result!!.responseDTO.output)
             }
 
             is ApiState.Fail -> {
-                Result.failure(handleMyPageFailure(response.result.responseDTO.output))
+                Result.failure(handleMyPageFailure(response.result!!.responseDTO.output))
             }
 
             is ApiState.Exception -> {
