@@ -34,8 +34,7 @@
             app:layout_constraintEnd_toEndOf="@+id/iv_item_profile_background"
             app:layout_constraintStart_toStartOf="@+id/iv_item_profile_background"
             app:layout_constraintTop_toTopOf="@+id/iv_item_profile_background"
-            app:setProfilePlantType="@{profile.greenRoomItems.get(`shape`)}"
-            tools:src="@drawable/img_plant_1_empty" />
+            app:setProfilePlantType="@{profile.greenRoomItems.get(`shape`)}" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_item_profile_plant_name"

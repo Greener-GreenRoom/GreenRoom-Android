@@ -118,7 +118,7 @@
                     android:id="@+id/iv_my_page_main_seed"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@drawable/seed_point"
+                    android:src="@drawable/img_seed_point"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -169,7 +169,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/img_fill_heart"
+                    android:src="@drawable/ic_fill_heart"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_my_page_main_seed" />
 
