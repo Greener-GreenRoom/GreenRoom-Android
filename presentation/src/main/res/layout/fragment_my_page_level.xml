@@ -97,7 +97,7 @@
                     android:id="@+id/iv_my_page_level_seed"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@drawable/seed_point"
+                    android:src="@drawable/img_seed_point"
                     app:layout_constraintBottom_toBottomOf="@id/tv_my_page_level_current_level"
                     app:layout_constraintEnd_toStartOf="@id/tv_my_page_level_current_point"
                     app:layout_constraintTop_toTopOf="@id/tv_my_page_level_current_level" />

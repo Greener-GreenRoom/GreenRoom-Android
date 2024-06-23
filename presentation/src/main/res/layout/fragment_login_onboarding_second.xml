@@ -10,7 +10,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:id="@+id/iv_login_onboarding_2_leaf"
-            android:src="@drawable/img_leaf"
+            android:src="@drawable/ic_leaf"
             app:layout_constraintStart_toStartOf="@id/gl_login_onboarding_2_start"
             app:layout_constraintTop_toTopOf="parent"/>
 

@@ -50,7 +50,7 @@ fun setWindowImg(view: ImageView, window: String) {
             context.packageName,
         )
     if (resId == 0) {
-        view.setImageResource(R.drawable.img_window_1)
+        view.setImageResource(R.drawable.asset_window_empty)
     } else {
         view.setImageResource(resId)
     }
@@ -67,7 +67,7 @@ fun setShelfImg(view: ImageView, shelf: String) {
             context.packageName,
         )
     if (resId == 0) {
-        view.setImageResource(R.drawable.img_shelf_1)
+        view.setImageResource(R.drawable.asset_shelf_none)
     } else {
         view.setImageResource(resId)
     }
