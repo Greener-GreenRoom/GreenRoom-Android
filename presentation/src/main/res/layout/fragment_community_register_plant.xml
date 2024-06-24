@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_community_register_plant_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_community_register_plant_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/community_register_plant_title"
+            android:textAppearance="@style/head3"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/gl_community_register_plant_begin"
+            app:layout_constraintTop_toBottomOf="@+id/tb_community_register_plant_toolbar" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_community_register_plant_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/util_plant_name"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/gl_community_register_plant_begin"
+            app:layout_constraintTop_toBottomOf="@+id/tv_community_register_plant_title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_community_register_plant_error_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/community_register_plant_error_msg"
+            android:textAppearance="@style/caption2"
+            android:textColor="@color/red100"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_community_register_plant_name"
+            app:layout_constraintStart_toEndOf="@id/tv_community_register_plant_name"
+            app:layout_constraintTop_toTopOf="@id/tv_community_register_plant_name" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tl_community_register_plant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@id/gl_community_register_plant_end"
+            app:layout_constraintStart_toStartOf="@id/gl_community_register_plant_begin"
+            app:layout_constraintTop_toBottomOf="@+id/tv_community_register_plant_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_community_register_plant"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/community_register_plant_hint"
+                android:textAppearance="@style/body4"
+                android:textColor="@color/gray700" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_community_register_plant_image_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/plant_registration_registration_picture"
+            android:textAppearance="@style/body2"
+            android:textColor="@color/gray700"
+            app:layout_constraintStart_toStartOf="@id/gl_community_register_plant_begin"
+            app:layout_constraintTop_toBottomOf="@id/tl_community_register_plant" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_community_register_plant_image_sub_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/community_register_plant_sub_message"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray300"
+            app:layout_constraintStart_toStartOf="@id/gl_community_register_plant_begin"
+            app:layout_constraintTop_toBottomOf="@+id/tv_community_register_plant_image_title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_community_register_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:maxLines="1"
+            android:text="@string/plant_registration_count_picture_num"
+            android:textAppearance="@style/caption2"
+            android:textColor="@color/gray300"
+            app:backgroundTint="@color/gray000"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_camera"
+            app:iconGravity="textTop"
+            app:iconPadding="3dp"
+            app:iconSize="32dp"
+            app:iconTint="@color/gray300"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/gl_community_register_plant_begin"
+            app:layout_constraintTop_toBottomOf="@id/tv_community_register_plant_image_sub_msg"
+            app:strokeColor="@color/gray100"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_community_register_plant_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/community_register_plant_confirm"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_community_register_plant_end"
+            app:layout_constraintStart_toStartOf="@id/gl_community_register_plant_begin" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_community_register_plant_begin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_community_register_plant_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/grid_system_end" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

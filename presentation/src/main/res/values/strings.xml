@@ -22,6 +22,7 @@
     <string name="util_fail">fail</string>
     <string name="util_retry">다시 시도해주세요</string>
     <string name="confirm_long">확인했어요</string>
+    <string name="util_plant_name">식물 이름</string>
 
     <!-- Action Dialog -->
 
@@ -140,7 +141,23 @@
 
 <!--  community  -->
     <string name="community">커뮤니티</string>
-    
+    <string name="community_tab_suggest">건의해요</string>
+    <string name="community_tab_boast">자랑해요</string>
+    <string name="community_tab_green_ranking">그린랭킹</string>
+    <string name="community_suggest_btn">원하는 식물 건의하기</string>
+    <string name="community_not_ready">아직 준비중인 서비스예요.\n조만간 찾아올게요!</string>
+
+    <string name="community_suggest_new_plant_title">이번주, 새로 추가된 식물</string>
+    <string name="community_suggest_update_date">%s 업데이트</string>
+    <string name="community_suggest_current_suggested_plants_title">실시간 건의된 식물</string>
+    <string name="community_suggest_waiting_message">함께할 날을 조금만 기다려 주세요!</string>
+    <string name="community_register_plant_title">그린룸에\n어떤 식물이 있으면 좋을까요?</string>
+    <string name="community_register_plant_hint">그린룸에 추가하고 싶은 식물</string>
+    <string name="community_register_plant_confirm">건의하기</string>
+    <string name="community_register_plant_sub_message">관리자가 알아볼 수 있도록 사진을 올려주세요! (선택)</string>
+    <string name="community_register_plant_error_msg">이미 그린룸에 등록된 식물이에요.</string>
+    <string name="community_register_complete_title">소중한 의견 감사합니다</string>
+    <string name="community_register_complete_sub">더 만족스러운 서비스를 위해\n빠른 시일 내에 반영하겠습니다.</string>
 <!--  diary  -->
     <string name="diary">다이어리</string>
 
@@ -206,4 +223,5 @@
     <string name="withdraw_final_confirm">탈퇴할게요</string>
     <string name="withdraw_success_message">회원 탈퇴신청이 완료되었습니다\n해당 계정은 확인 후 삭제 예정입니다</string>
     <string name="image_upload_fail">이미지 업로드 실패\n다시 시도해주세요</string>
+    <string name="withdraw_hint">의견을 들려주세요</string>
 </resources>
