@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.mypage.edit
+package com.greener.presentation.util
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.greener.presentation.databinding.BottomSheetImageBinding
 
-class EditProfileModalBottomSheet constructor(
+class ImageModalBottomSheet constructor(
     val getImageFromPictures: () -> Unit,
     val takePhoto: () -> Unit,
 ) : BottomSheetDialogFragment() {
