@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_community_suggest_top"
+            layout="@layout/view_community_tab_top"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="139dp"
+            android:layout_height="91dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/img_community_suggest_letter"
+            app:layout_constraintBottom_toBottomOf="@+id/include_community_suggest_top"
+            app:layout_constraintStart_toStartOf="@+id/include_community_suggest_top" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_community_suggest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/round_all_8_no_stroke"
+            android:backgroundTint="@color/green300"
+            android:paddingStart="12dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="10dp"
+            android:text="@string/community_suggest_btn"
+            android:textAppearance="@style/caption2"
+            app:layout_constraintBottom_toBottomOf="@id/include_community_suggest_top"
+            app:layout_constraintEnd_toEndOf="@+id/include_community_suggest_top" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_community_suggest_top">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_community_suggest_new_plant_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/community_suggest_new_plant_title"
+                    android:textAppearance="@style/body1"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintStart_toStartOf="@id/gl_community_suggest_begin"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_community_suggest_update_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/community_suggest_update_date"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray300"
+                    app:layout_constraintStart_toStartOf="@id/gl_community_suggest_begin"
+                    app:layout_constraintTop_toBottomOf="@id/tv_community_suggest_new_plant_title" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_community_suggest_new_plants"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    tools:listitem="@layout/item_new_plant"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@id/gl_community_suggest_end"
+                    app:layout_constraintStart_toStartOf="@+id/gl_community_suggest_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_community_suggest_update_date" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_community_suggest_current_suggested_plants_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/community_suggest_current_suggested_plants_title"
+                    android:textAppearance="@style/body1"
+                    android:textColor="@color/gray700"
+                    app:layout_constraintStart_toStartOf="@id/gl_community_suggest_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_community_suggest_new_plants" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_community_suggest_wating_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/community_suggest_waiting_message"
+                    android:textAppearance="@style/caption2"
+                    android:textColor="@color/gray300"
+                    app:layout_constraintStart_toStartOf="@id/gl_community_suggest_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_community_suggest_current_suggested_plants_title" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_community_suggest_refresh"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/shape_circle"
+                    android:backgroundTint="@color/gray000"
+                    android:src="@drawable/ic_refresh"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_community_suggest_wating_message"
+                    app:layout_constraintEnd_toEndOf="@id/gl_community_suggest_end" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_community_suggest_current_suggested_plants"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    tools:listitem="@layout/item_new_suggested"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@id/gl_community_suggest_end"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@id/gl_community_suggest_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_community_suggest_wating_message" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_community_suggest_begin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/grid_system_start" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_community_suggest_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/grid_system_end" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

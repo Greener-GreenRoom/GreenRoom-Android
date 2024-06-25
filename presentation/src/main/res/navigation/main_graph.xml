@@ -14,7 +14,11 @@
         android:id="@+id/communityFragment"
         android:name="com.greener.presentation.ui.community.CommunityFragment"
         android:label="CommunityFragment"
-        tools:layout="@layout/fragment_community"/>
+        tools:layout="@layout/fragment_community">
+        <action
+            android:id="@+id/action_communityFragment_to_communityRegisterPlantFragment"
+            app:destination="@id/communityRegisterPlantFragment" />
+    </fragment>
     <fragment
         android:id="@+id/diaryFragment"
         android:name="com.greener.presentation.ui.diary.DiaryFragment"
@@ -164,4 +168,22 @@
         android:id="@+id/decorationFragment"
         android:name="com.greener.presentation.ui.home.decoration.main.DecorationFragment"
         android:label="DecorationFragment" />
+    <fragment
+        android:id="@+id/communityRegisterPlantFragment"
+        android:name="com.greener.presentation.ui.community.register.CommunityRegisterPlantFragment"
+        android:label="CommunityRegisterPlantFragment" >
+        <action
+            android:id="@+id/action_communityRegisterPlantFragment_to_communityRegisterCompleteFragment"
+            app:destination="@id/communityRegisterCompleteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/communityRegisterCompleteFragment"
+        android:name="com.greener.presentation.ui.community.register.CommunityRegisterCompleteFragment"
+        android:label="CommunityRegisterCompleteFragment" >
+        <action
+            android:id="@+id/action_communityRegisterCompleteFragment_to_communityFragment"
+            app:destination="@id/communityFragment"
+            app:popUpTo="@id/collectionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
