@@ -37,13 +37,14 @@ class RegistrationNicknameImageFragment :
     private val viewModel: RegistrationNicknameImageViewModel by viewModels {
         RegistrationNicknameImageViewModel.provideFactory(
             viewModelFactory,
-            args.PlantRegistrationInfo
+            args.PlantRegistrationInfo,
         )
     }
 
-    private val modal = RegistrationGetImageBottomSheet({ viewModel.getImage(pickImageUseCase) },
-        { viewModel.takePicture(takePictureUseCase) })
-
+    private val modal = RegistrationGetImageBottomSheet(
+        { viewModel.getImage(pickImageUseCase) },
+        { viewModel.takePicture(takePictureUseCase) },
+    )
 
     @Inject
     lateinit var pickImageUseCase: PickImageUseCase
@@ -92,8 +93,8 @@ class RegistrationNicknameImageFragment :
                             getText(R.string.plant_registration_nickname_duplicate)
                         binding.btnPlantRegistrationGoNext.setBackgroundColor(
                             requireContext().getColor(
-                                R.color.gray200
-                            )
+                                R.color.gray200,
+                            ),
                         )
                     }
 
@@ -104,8 +105,8 @@ class RegistrationNicknameImageFragment :
                             getText(R.string.plant_registration_nickname_warning)
                         binding.btnPlantRegistrationGoNext.setBackgroundColor(
                             requireContext().getColor(
-                                R.color.gray200
-                            )
+                                R.color.gray200,
+                            ),
                         )
                     }
 
@@ -116,8 +117,8 @@ class RegistrationNicknameImageFragment :
                             getText(R.string.plant_registration_nickname_warning)
                         binding.btnPlantRegistrationGoNext.setBackgroundColor(
                             requireContext().getColor(
-                                R.color.gray200
-                            )
+                                R.color.gray200,
+                            ),
                         )
                     }
 
@@ -128,8 +129,8 @@ class RegistrationNicknameImageFragment :
                             getText(R.string.plant_registration_nickname_warning)
                         binding.btnPlantRegistrationGoNext.setBackgroundColor(
                             requireContext().getColor(
-                                R.color.gray200
-                            )
+                                R.color.gray200,
+                            ),
                         )
                     }
 

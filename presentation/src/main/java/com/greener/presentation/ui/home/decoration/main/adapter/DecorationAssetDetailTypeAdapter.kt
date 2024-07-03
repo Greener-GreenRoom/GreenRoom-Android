@@ -11,8 +11,8 @@ import com.greener.domain.model.asset.AssetType
 import com.greener.presentation.databinding.ItemAssetDetailTypeDarkBinding
 
 class DecorationAssetDetailTypeAdapter(
-    private val changeCheck : (AssetType, Int) -> Unit
-): ListAdapter<AssetDetailTypeInfo, DecorationAssetDetailTypeAdapter.ViewHolder>(diffUtil) {
+    private val changeCheck: (AssetType, Int) -> Unit,
+) : ListAdapter<AssetDetailTypeInfo, DecorationAssetDetailTypeAdapter.ViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(ItemAssetDetailTypeDarkBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
@@ -22,17 +22,17 @@ class DecorationAssetDetailTypeAdapter(
 
     @SuppressLint("notifyDataSetChanged")
     inner class ViewHolder(
-        private val binding: ItemAssetDetailTypeDarkBinding
+        private val binding: ItemAssetDetailTypeDarkBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
-                changeCheck( getItem(absoluteAdapterPosition).assetType, getItem(absoluteAdapterPosition).id )
+                changeCheck(getItem(absoluteAdapterPosition).assetType, getItem(absoluteAdapterPosition).id)
                 notifyDataSetChanged()
             }
         }
 
-        fun bind(item : AssetDetailTypeInfo) {
+        fun bind(item: AssetDetailTypeInfo) {
             binding.info = item
         }
     }
@@ -41,13 +41,13 @@ class DecorationAssetDetailTypeAdapter(
         private val diffUtil = object : DiffUtil.ItemCallback<AssetDetailTypeInfo>() {
             override fun areItemsTheSame(
                 oldItem: AssetDetailTypeInfo,
-                newItem: AssetDetailTypeInfo
+                newItem: AssetDetailTypeInfo,
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
                 oldItem: AssetDetailTypeInfo,
-                newItem: AssetDetailTypeInfo
+                newItem: AssetDetailTypeInfo,
             ): Boolean =
                 oldItem == newItem
         }

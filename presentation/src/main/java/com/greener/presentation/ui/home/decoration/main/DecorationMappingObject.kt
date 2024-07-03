@@ -16,7 +16,7 @@ import com.greener.presentation.model.decoration.AssetViewObject
 object DecorationMappingObject {
     fun AssetDetailTypeInfo.toAllPlantShapeAssetViewItem(
         target: PlantShapeInfo,
-        plantShapeList: List<PlantShapeInfo> = emptyList()
+        plantShapeList: List<PlantShapeInfo> = emptyList(),
     ): AllAssetViewItem =
         AllAssetViewItem(
             AssetType.PLANT_SHAPE,
@@ -25,8 +25,8 @@ object DecorationMappingObject {
                 plantShapeTypeCode = this.typeCode,
                 infoList = plantShapeList
                     .filter { it.plantShapeType.name == this.type }
-                    .map { info -> info.updateChecked(target.id) }
-            )
+                    .map { info -> info.updateChecked(target.id) },
+            ),
         )
 
     fun PlantShapeInfo.toPlantShapeAsserViewItem(
@@ -35,14 +35,14 @@ object DecorationMappingObject {
         AssetViewItem(
             AssetType.PLANT_SHAPE,
             AssetViewObject.PlantShapeObject(
-                this.updateChecked(target.id)
-            )
+                this.updateChecked(target.id),
+            ),
         )
 
     fun AssetDetailTypeInfo.toAllPlantAccessoryAssetViewItem(
         target: PlantAccessoryInfo,
         other: PlantAccessoryInfo,
-        plantAccessoryList: List<PlantAccessoryInfo> = emptyList()
+        plantAccessoryList: List<PlantAccessoryInfo> = emptyList(),
     ): AllAssetViewItem =
         AllAssetViewItem(
             AssetType.PLANT_ACCESSORY,
@@ -51,26 +51,26 @@ object DecorationMappingObject {
                 plantAccessoryTypeCode = this.typeCode,
                 infoList = plantAccessoryList
                     .filter { it.itemType.name == this.type }
-                    .map { info -> info.updateChecked(target.id, other.id) }
-            )
+                    .map { info -> info.updateChecked(target.id, other.id) },
+            ),
         )
 
     fun PlantAccessoryInfo.toPlantAccessoryViewItem(
         target: PlantAccessoryInfo,
-        other: PlantAccessoryInfo
+        other: PlantAccessoryInfo,
     ): AssetViewItem =
         AssetViewItem(
             AssetType.PLANT_ACCESSORY,
             AssetViewObject.PlantAccessoriesObject(
-                this.updateChecked(target.id, other.id)
-            )
+                this.updateChecked(target.id, other.id),
+            ),
         )
 
     fun AssetDetailTypeInfo.toAllBackgroundAccessoryAssetViewItem(
         target: BackgroundAccessoryInfo,
         other: BackgroundAccessoryInfo,
-        backgroundAccessoryList: List<BackgroundAccessoryInfo> = emptyList()
-    ) : AllAssetViewItem =
+        backgroundAccessoryList: List<BackgroundAccessoryInfo> = emptyList(),
+    ): AllAssetViewItem =
         AllAssetViewItem(
             AssetType.BACKGROUND_ACCESSORY,
             AllAssetViewObject.AllBackgroundAccessoriesObject(
@@ -78,28 +78,28 @@ object DecorationMappingObject {
                 backgroundAccessoryTypeCode = this.typeCode,
                 infoList = backgroundAccessoryList
                     .filter { it.itemType.name == this.type }
-                    .map { info -> info.updateChecked(target.id, other.id) }
-            )
+                    .map { info -> info.updateChecked(target.id, other.id) },
+            ),
         )
 
     fun BackgroundAccessoryInfo.toBackfroundAccessoryViewItem(
         target: BackgroundAccessoryInfo,
-        other: BackgroundAccessoryInfo
+        other: BackgroundAccessoryInfo,
     ): AssetViewItem =
         AssetViewItem(
             AssetType.BACKGROUND_ACCESSORY,
             AssetViewObject.BackgroundAccessoriesObject(
-                this.updateChecked(target.id, other.id)
-            )
+                this.updateChecked(target.id, other.id),
+            ),
         )
 
-    private fun PlantShapeInfo.updateChecked(targetId: Int): PlantShapeInfo =
+    fun PlantShapeInfo.updateChecked(targetId: Int): PlantShapeInfo =
         PlantShapeInfo(
             this.id,
             this.plantShapeType,
             this.plantShape,
             this.drawableID,
-            this.id == targetId
+            this.id == targetId,
         )
 
     private fun PlantAccessoryInfo.updateChecked(glassesId: Int, hairAccessoryId: Int): PlantAccessoryInfo =
@@ -109,7 +109,7 @@ object DecorationMappingObject {
             this.plantAccessory,
             this.limitLevel,
             this.drawableID,
-            this.id == glassesId || this.id == hairAccessoryId
+            this.id == glassesId || this.id == hairAccessoryId,
         )
 
     private fun BackgroundAccessoryInfo.updateChecked(shelfId: Int, windowId: Int): BackgroundAccessoryInfo =
@@ -120,7 +120,6 @@ object DecorationMappingObject {
             this.limitLevel,
             this.drawableID,
             this.viewDrawableId,
-            this.id == shelfId || this.id == windowId
+            this.id == shelfId || this.id == windowId,
         )
 }
-

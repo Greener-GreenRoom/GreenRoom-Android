@@ -5,14 +5,14 @@ import android.util.Log
 import com.greener.data.source.AssetDataSource
 import com.greener.domain.model.asset.AssetDetailTypeInfo
 import com.greener.domain.model.asset.AssetType
-import com.greener.domain.model.asset.BackgroundAccessoryInfo
 import com.greener.domain.model.asset.BackgroundAccessory
+import com.greener.domain.model.asset.BackgroundAccessoryInfo
 import com.greener.domain.model.asset.BackgroundAccessoryType
-import com.greener.domain.model.asset.PlantAccessoryInfo
 import com.greener.domain.model.asset.PlantAccessory
+import com.greener.domain.model.asset.PlantAccessoryInfo
 import com.greener.domain.model.asset.PlantAccessoryType
-import com.greener.domain.model.asset.PlantShapeInfo
 import com.greener.domain.model.asset.PlantShape
+import com.greener.domain.model.asset.PlantShapeInfo
 import com.greener.domain.model.asset.PlantShapeType
 import com.greener.domain.repository.AssetRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -87,7 +87,7 @@ class AssetRepositoryImpl @Inject constructor(
                     BackgroundAccessoryType.BACK_RIGHT -> {
                         getDrawableId(BACKGROUND_ACCESSORY_SHELF, it.itemName)
                     }
-                }
+                },
             )
         }.sortedBy { it.limitLevel }
         x.forEach { info ->
@@ -107,8 +107,8 @@ class AssetRepositoryImpl @Inject constructor(
                             id = index + 1,
                             assetType = AssetType.PLANT_SHAPE,
                             type = initPlantShapeType(type.uppercase()).name,
-                            typeCode = getStringId(type.uppercase())
-                        )
+                            typeCode = getStringId(type.uppercase()),
+                        ),
                     )
                 }
             }
@@ -120,8 +120,8 @@ class AssetRepositoryImpl @Inject constructor(
                             id = index + 1,
                             assetType = AssetType.PLANT_ACCESSORY,
                             type = initPlantAccessoryType(type.uppercase()).name,
-                            typeCode = getStringId(type.uppercase())
-                        )
+                            typeCode = getStringId(type.uppercase()),
+                        ),
                     )
                 }
             }
@@ -137,8 +137,8 @@ class AssetRepositoryImpl @Inject constructor(
                             id = index + 1,
                             assetType = AssetType.BACKGROUND_ACCESSORY,
                             type = initBackgroundAccessoryType(type.uppercase()).name,
-                            typeCode = getStringId(type.uppercase())
-                        )
+                            typeCode = getStringId(type.uppercase()),
+                        ),
                     )
                 }
             }
@@ -239,7 +239,7 @@ class AssetRepositoryImpl @Inject constructor(
                 context.resources.getIdentifier(
                     ASSET + BACK_RIGHT + lowerName,
                     DRAWABLE,
-                    context.packageName
+                    context.packageName,
                 )
             }
 

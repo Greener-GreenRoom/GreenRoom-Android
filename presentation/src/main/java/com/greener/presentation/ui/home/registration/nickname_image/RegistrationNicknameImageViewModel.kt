@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.home.registration.nickname_image
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -13,15 +12,13 @@ import com.greener.presentation.util.asEventFlow
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class RegistrationNicknameImageViewModel @AssistedInject constructor(
     private val isDuplicateGreenRoomNicknameUseCase: IsDuplicateGreenRoomNicknameUseCase,
-    @Assisted private val plantRegistrationInfo: PlantRegistrationInfo
+    @Assisted private val plantRegistrationInfo: PlantRegistrationInfo,
 ) : ViewModel() {
 
     @AssistedFactory
@@ -164,7 +161,7 @@ class RegistrationNicknameImageViewModel @AssistedInject constructor(
 
         fun provideFactory(
             assistedFactory: PlantRegistrationInfoFactory,
-            plantRegistrationInfo: PlantRegistrationInfo
+            plantRegistrationInfo: PlantRegistrationInfo,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return assistedFactory.create(plantRegistrationInfo) as T

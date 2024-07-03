@@ -7,13 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greener.domain.model.asset.AssetDetailTypeInfo
-import com.greener.domain.model.asset.AssetType
-import com.greener.presentation.databinding.ItemAssetDetailTypeDarkBinding
 import com.greener.presentation.databinding.ItemAssetDetailTypeLightBinding
 
 class RegistrationTypesAdapter(
-    private val changeCheck: (Int) -> Unit
-): ListAdapter<AssetDetailTypeInfo, RegistrationTypesAdapter.ViewHolder>(diffUtil) {
+    private val changeCheck: (Int) -> Unit,
+) : ListAdapter<AssetDetailTypeInfo, RegistrationTypesAdapter.ViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(ItemAssetDetailTypeLightBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -23,9 +21,9 @@ class RegistrationTypesAdapter(
     }
 
     @SuppressLint("notifyDataSetChanged")
-    inner class ViewHolder (
-        private val binding: ItemAssetDetailTypeLightBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(
+        private val binding: ItemAssetDetailTypeLightBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
                 changeCheck(getItem(absoluteAdapterPosition).id)
@@ -41,13 +39,13 @@ class RegistrationTypesAdapter(
         private val diffUtil = object : DiffUtil.ItemCallback<AssetDetailTypeInfo>() {
             override fun areItemsTheSame(
                 oldItem: AssetDetailTypeInfo,
-                newItem: AssetDetailTypeInfo
+                newItem: AssetDetailTypeInfo,
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
                 oldItem: AssetDetailTypeInfo,
-                newItem: AssetDetailTypeInfo
+                newItem: AssetDetailTypeInfo,
             ): Boolean =
                 oldItem == newItem
         }

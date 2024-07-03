@@ -7,5 +7,5 @@ data class BackgroundAccessoryInfo(
     val limitLevel: Int,
     val drawableID: Int,
     val viewDrawableId: Int,
-    val isChecked: Boolean = false
+    val isChecked: Boolean = false,
 )

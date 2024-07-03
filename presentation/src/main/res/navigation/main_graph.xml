@@ -76,12 +76,12 @@
         android:name="com.greener.presentation.ui.home.registration.plant_shape.RegistrationPlantShapeFragment"
         android:label="registrationPlantShapeFragment"
         tools:layout="@layout/fragment_plant_registration_plant_shape">
-        <action
-            android:id="@+id/action_registrationCharacterFragment_to_registrationCompleteFragment"
-            app:destination="@id/registrationCompleteFragment" />
         <argument
             android:name="PlantRegistrationInfo"
             app:argType="com.greener.presentation.model.registration.PlantRegistrationInfo" />
+        <action
+            android:id="@+id/action_registrationPlantShapeFragment_to_registrationCompleteFragment"
+            app:destination="@id/registrationCompleteFragment" />
 
     </fragment>
     <fragment
@@ -89,6 +89,12 @@
         android:name="com.greener.presentation.ui.home.registration.complete.RegistrationCompleteFragment"
         android:label="RegistrationCompleteFragment"
         tools:layout="@layout/fragment_plant_registration_complete">
+        <argument
+            android:name="PlantRegistrationInfo"
+            app:argType="com.greener.presentation.model.registration.PlantRegistrationInfo" />
+        <action
+            android:id="@+id/action_registrationCompleteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <dialog
         android:id="@+id/registrationCycleBottomSheet"

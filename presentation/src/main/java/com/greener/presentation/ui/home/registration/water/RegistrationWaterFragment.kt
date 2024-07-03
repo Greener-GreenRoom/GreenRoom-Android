@@ -1,7 +1,6 @@
 package com.greener.presentation.ui.home.registration.water
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -26,7 +25,7 @@ class RegistrationWaterFragment : BaseFragment<FragmentPlantRegistrationWaterBin
     lateinit var viewModelFactory: RegistrationWaterViewModel.PlantRegistrationInfoFactory
 
     private val args: RegistrationWaterFragmentArgs by navArgs()
-    private val viewModel: RegistrationWaterViewModel by viewModels{
+    private val viewModel: RegistrationWaterViewModel by viewModels {
         RegistrationWaterViewModel.provideFactory(viewModelFactory, args.PlantRegistraionInfo)
     }
     private val datePicker = MaterialDatePicker.Builder.datePicker().build()
@@ -40,11 +39,15 @@ class RegistrationWaterFragment : BaseFragment<FragmentPlantRegistrationWaterBin
             requireContext(),
             WATERING_POSITION,
         )
+
+        binding.tePlantRegistrationWaterCycle.addTextChangedListener {
+            viewModel.onUpdateDuration(it.toString())
+        }
     }
 
     override fun initCollector() {
         repeatOnStarted(viewLifecycleOwner) {
-            viewModel.viewLastWatering.collectLatest {date ->
+            viewModel.viewLastWatering.collectLatest { date ->
                 if (date.isNotBlank()) {
                     binding.btnPlantRegistrationWaterChooseDate.apply {
                         text = date
@@ -73,9 +76,7 @@ class RegistrationWaterFragment : BaseFragment<FragmentPlantRegistrationWaterBin
             findNavController().popBackStack()
         }
         binding.tePlantRegistrationWaterCycle.addTextChangedListener { duration ->
-            duration?.let {
-                viewModel.onUpdateDuration(duration.toString())
-            }
+            duration
         }
     }
 
@@ -92,10 +93,10 @@ class RegistrationWaterFragment : BaseFragment<FragmentPlantRegistrationWaterBin
     }
 
     private fun handleEvent(event: RegistrationWaterViewModel.Event) {
-        when(event) {
+        when (event) {
             is RegistrationWaterViewModel.Event.MoveToPlantShape -> {
                 val action = RegistrationWaterFragmentDirections.actionRegistrationWaterFragmentToRegistrationPlantShapeFragment(
-                    event.plantRegistrationInfo
+                    event.plantRegistrationInfo,
                 )
                 findNavController().navigate(action)
             }
@@ -119,6 +120,5 @@ class RegistrationWaterFragment : BaseFragment<FragmentPlantRegistrationWaterBin
     companion object {
         private const val WATERING_POSITION = 3
         private const val TAG = "tag"
-
     }
 }

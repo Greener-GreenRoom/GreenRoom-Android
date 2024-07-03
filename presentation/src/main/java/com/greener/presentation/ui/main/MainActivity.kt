@@ -39,7 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.id.registrationWaterFragment,
         R.id.registrationPlantShapeFragment,
         R.id.registrationCompleteFragment,
-        R.id.decorationFragment
+        R.id.decorationFragment,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -6,12 +6,18 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.greener.domain.model.asset.AssetDetailTypeInfo
 import com.greener.domain.model.asset.AssetType
+import com.greener.domain.model.asset.PlantShape
 import com.greener.domain.model.asset.PlantShapeInfo
+import com.greener.domain.model.asset.PlantShapeType
 import com.greener.domain.usecase.asset.GetAssetDetailTypeListUseCase
 import com.greener.domain.usecase.asset.GetPlantShapeListUseCase
 import com.greener.presentation.R
+import com.greener.presentation.model.decoration.AllAssetViewObject
 import com.greener.presentation.model.registration.PlantRegistrationInfo
-import com.greener.presentation.ui.home.decoration.main.DecorationViewModel
+import com.greener.presentation.ui.home.decoration.main.DecorationMappingObject.toAllPlantShapeAssetViewItem
+import com.greener.presentation.ui.home.decoration.main.DecorationMappingObject.updateChecked
+import com.greener.presentation.util.MutableEventFlow
+import com.greener.presentation.util.asEventFlow
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -22,7 +28,7 @@ import kotlinx.coroutines.launch
 class RegistrationPlantShapeViewModel @AssistedInject constructor(
     private val getAssetDetailTypeListUseCase: GetAssetDetailTypeListUseCase,
     private val getPlantShapeListUseCase: GetPlantShapeListUseCase,
-    @Assisted private val plantRegistrationInfo: PlantRegistrationInfo
+    @Assisted private val plantRegistrationInfo: PlantRegistrationInfo,
 ) : ViewModel() {
 
     @AssistedFactory
@@ -36,8 +42,14 @@ class RegistrationPlantShapeViewModel @AssistedInject constructor(
     private val _plantShapes = MutableStateFlow<List<PlantShapeInfo>>(emptyList())
     val plantShape: StateFlow<List<PlantShapeInfo>> get() = _plantShapes
 
-    private val _allPlantShapes = MutableStateFlow<List<PlantShapeInfo>>(emptyList())
-    val allPlantShape: StateFlow<List<PlantShapeInfo>> get() = _allPlantShapes
+    private val _allPlantShapes = MutableStateFlow<List<AllAssetViewObject.AllPlantShapeObject>>(emptyList())
+    val allPlantShape: StateFlow<List<AllAssetViewObject.AllPlantShapeObject>> get() = _allPlantShapes
+
+    private val _choicePlantShape = MutableStateFlow<PlantShapeInfo?>(null)
+    val choicePlantShape: StateFlow<PlantShapeInfo?> get() = _choicePlantShape
+
+    private val _event = MutableEventFlow<Event>()
+    val event = _event.asEventFlow()
 
     init {
         initData()
@@ -53,34 +65,104 @@ class RegistrationPlantShapeViewModel @AssistedInject constructor(
                     assetType = AssetType.PLANT_SHAPE,
                     type = ALL,
                     typeCode = R.string.all,
-                    isChecked = true
-                )
+                    isChecked = true,
+                ),
             )
             detailTypes.forEach { type ->
                 totalDetailTypes.add(type)
             }
             _shapeDetailTypes.emit(totalDetailTypes)
 
-            val plantShapes = getPlantShapeListUseCase()
-            _allPlantShapes.emit(plantShapes)
+            val defaultShape = getPlantShapeListUseCase().find { it.plantShape == PlantShape.Main_Character }
+            defaultShape?.let {
+                _choicePlantShape.emit(defaultShape)
+                updatePlantShapeAsset(null, it, true)
+            }
         }
     }
 
     fun onChangeType(targetId: Int) {
         viewModelScope.launch {
             val shapeDetailList = shapeDetailTypes.value
+            val targetDetailType = shapeDetailList.find { it.id == targetId }
+            val targetPlantShape = choicePlantShape.value
             shapeDetailList.forEach {
                 it.isChecked = it.id == targetId
             }
             _shapeDetailTypes.emit(shapeDetailList)
+
+            val plantShapeList = getPlantShapeListUseCase()
+            val isAll = shapeDetailList.find { it.id == targetId }?.type == ALL
+            val plantType = if (isAll) {
+                null
+            } else {
+                plantShapeList.find {
+                    it.plantShapeType == PlantShapeType.valueOf(targetDetailType?.type ?: "")
+                }?.plantShapeType
+            }
+
+            targetPlantShape?.let {
+                updatePlantShapeAsset(plantType, it, isAll)
+            }
         }
     }
 
+    fun updatePlantShapeAsset(
+        plantType: PlantShapeType? = null,
+        targetPlantShape: PlantShapeInfo,
+        isAll: Boolean,
+    ) {
+        viewModelScope.launch {
+            val plantShapeList = getPlantShapeListUseCase()
+            val detailTypes = getAssetDetailTypeListUseCase(AssetType.PLANT_SHAPE)
+            _choicePlantShape.emit(targetPlantShape)
+
+            if (isAll) {
+                val shapeAllList = emptyList<AllAssetViewObject.AllPlantShapeObject>().toMutableList()
+                detailTypes.forEach { type ->
+                    shapeAllList.add(type.toAllPlantShapeAssetViewItem(targetPlantShape, plantShapeList).viewObject as AllAssetViewObject.AllPlantShapeObject)
+                }
+                _allPlantShapes.emit(shapeAllList)
+                _plantShapes.emit(emptyList())
+            } else {
+                val shapeList = emptyList<PlantShapeInfo>().toMutableList()
+                val plantShapeByType = plantShapeList.filter { it.plantShapeType == plantType }
+                plantShapeByType.forEach { info ->
+                    shapeList.add(info.updateChecked(targetPlantShape.id))
+                }
+                _allPlantShapes.emit(emptyList())
+                _plantShapes.emit(shapeList)
+            }
+        }
+    }
+
+    fun completePlantRegistration() {
+        viewModelScope.launch {
+            val plantShape = choicePlantShape.value
+            val newInfo = PlantRegistrationInfo(
+                plantRegistrationInfo.plantId,
+                plantRegistrationInfo.nickname,
+                plantRegistrationInfo.lastWatering,
+                plantRegistrationInfo.waterDuration,
+                plantShape?.plantShape?.nameString ?: PlantShape.Main_Character.nameString,
+                plantRegistrationInfo.plantImage,
+            )
+
+            // todo api 연결
+            _event.emit(Event.MoveToComplete(newInfo))
+        }
+    }
+
+    sealed class Event() {
+        data class MoveToComplete(
+            val plantRegistrationInfo: PlantRegistrationInfo,
+        ) : Event()
+    }
 
     companion object {
         fun provideFactory(
             assisted: PlantRegistrationInfoFactory,
-            plantRegistrationInfo: PlantRegistrationInfo
+            plantRegistrationInfo: PlantRegistrationInfo,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 return assisted.create(plantRegistrationInfo) as T

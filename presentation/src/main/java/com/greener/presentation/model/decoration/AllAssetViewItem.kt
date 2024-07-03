@@ -4,5 +4,5 @@ import com.greener.domain.model.asset.AssetType
 
 data class AllAssetViewItem(
     val assetType: AssetType,
-    val viewObject: AllAssetViewObject
+    val viewObject: AllAssetViewObject,
 )

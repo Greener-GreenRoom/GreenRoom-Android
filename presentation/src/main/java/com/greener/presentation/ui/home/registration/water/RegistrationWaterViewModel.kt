@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat
 
 class RegistrationWaterViewModel @AssistedInject constructor(
     private val getPlantWateringTipUseCase: GetPlantWateringTipUseCase,
-    @Assisted private val plantRegistrationInfo: PlantRegistrationInfo
+    @Assisted private val plantRegistrationInfo: PlantRegistrationInfo,
 ) : ViewModel() {
 
     @AssistedFactory
@@ -26,16 +26,15 @@ class RegistrationWaterViewModel @AssistedInject constructor(
     }
 
     private val _plantWateringTip = MutableStateFlow("")
-    val plantWateringTip : StateFlow<String> get() = _plantWateringTip
+    val plantWateringTip: StateFlow<String> get() = _plantWateringTip
 
-    private val _lastWatering = MutableStateFlow("")
-    val lastWatering : StateFlow<String> get() = _lastWatering
+    private val lastWatering = MutableStateFlow("")
 
     private val _viewLastWatering = MutableStateFlow("")
-    val viewLastWatering : StateFlow<String> get() = _viewLastWatering
+    val viewLastWatering: StateFlow<String> get() = _viewLastWatering
 
     private val _waterDuration = MutableStateFlow(NO_PICK_DURATION)
-    val waterDuration : StateFlow<Int> get() = _waterDuration
+    val waterDuration: StateFlow<Int> get() = _waterDuration
 
     private val _event = MutableEventFlow<Event>()
     val event = _event.asEventFlow()
@@ -54,7 +53,6 @@ class RegistrationWaterViewModel @AssistedInject constructor(
             } else {
                 // todo 에러 처리
             }
-
         }
     }
 
@@ -66,23 +64,29 @@ class RegistrationWaterViewModel @AssistedInject constructor(
             val infoFormatTime = infoDateFormat.format(resultTime)
             val viewFormatTime = viewDateFormat.format(resultTime)
 
-            _lastWatering.emit(infoFormatTime)
+            lastWatering.emit(infoFormatTime)
             _viewLastWatering.emit(viewFormatTime)
 
             checkStateOfInput()
         }
     }
 
-    fun onUpdateDuration(duration: String) {
+    fun onUpdateDuration(duration: String?) {
         viewModelScope.launch {
-            val waterDurationInt = duration.toInt()
-            if (waterDurationInt == NO_PICK_DURATION) {
+            if (duration.isNullOrBlank()) {
+                _waterDuration.emit(NO_PICK_DURATION)
                 return@launch
-            } else if (waterDurationInt > MAX_DURATION) {
-                _event.emit(Event.InputMaxDuration)
-            } else {
-                _waterDuration.emit(waterDurationInt)
             }
+
+            if (duration.toInt() > MAX_DURATION) {
+                _event.emit(Event.InputMaxDuration)
+                _waterDuration.emit(NO_PICK_DURATION)
+                return@launch
+            }
+
+            _waterDuration.emit(duration.toInt())
+
+            checkStateOfInput()
         }
     }
 
@@ -133,19 +137,19 @@ class RegistrationWaterViewModel @AssistedInject constructor(
 
     sealed class Event() {
         data class MoveToPlantShape(
-            val plantRegistrationInfo: PlantRegistrationInfo
-        ): Event()
+            val plantRegistrationInfo: PlantRegistrationInfo,
+        ) : Event()
 
         data object ShowDatePicker : Event()
         data object InputMaxDuration : Event()
-        data object AllInputState: Event()
-        data object PartialInputState: Event()
+        data object AllInputState : Event()
+        data object PartialInputState : Event()
     }
 
     companion object {
         fun provideFactory(
             assisted: PlantRegistrationInfoFactory,
-            plantRegistrationInfo: PlantRegistrationInfo
+            plantRegistrationInfo: PlantRegistrationInfo,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return assisted.create(plantRegistrationInfo) as T
