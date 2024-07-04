@@ -1,5 +1,7 @@
 package com.greener.presentation.ui.community
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -14,6 +16,15 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
 
     override fun initListener() {
         softInputAdjustResize2()
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initTabLayout()
+    }
+
+    private fun initTabLayout() {
         binding.vpCommunityMain.adapter = CommunityTabAdapter(requireActivity())
         binding.vpCommunityMain.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
@@ -25,5 +36,6 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
             }
         }.attach()
     }
+
 
 }
