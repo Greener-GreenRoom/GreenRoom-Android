@@ -86,4 +86,6 @@ dependencies {
 
     // Splash
     implementation ("androidx.core:core-splashscreen:1.0.1")
+
+    implementation("com.kakao.sdk:v2-user:2.20.3")
 }

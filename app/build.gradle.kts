@@ -55,6 +55,8 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.49")
 
     implementation("com.orhanobut:logger:2.2.0")
+
+    implementation("com.kakao.sdk:v2-user:2.20.3")
 }
 
 kapt {

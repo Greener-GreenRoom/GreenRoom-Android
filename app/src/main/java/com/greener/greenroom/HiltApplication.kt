@@ -2,6 +2,7 @@ package com.greener.greenroom
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
+import com.kakao.sdk.common.KakaoSdk
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.HiltAndroidApp
@@ -12,5 +13,7 @@ class HiltApplication : Application() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         Logger.addLogAdapter(AndroidLogAdapter())
+
+        //KakaoSdk.init(this, "415202250d8317a60386e870558727f3")
     }
 }
