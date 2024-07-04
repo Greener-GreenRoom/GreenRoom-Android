@@ -152,7 +152,7 @@
     <string name="collection_main_oldest_sort">오래된 순</string>
 
     <!--  detail  -->
-    <string name="collection_detail_time_together">그림룸과 %d일쨰</string>
+    <string name="collection_detail_time_together">그림룸과 %d일째</string>
     <string name="collection_detail_no_species">미등록</string>
     <string name="collection_detail_memo_hint">자유롭게 메모해 보세요.</string>
 
