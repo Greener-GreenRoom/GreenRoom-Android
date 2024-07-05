@@ -152,4 +152,9 @@
         <item name="cornerSize">30dp</item>
     </style>
 
+    <style name="ShapeAppearance.Circle" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

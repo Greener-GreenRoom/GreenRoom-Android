@@ -17,6 +17,53 @@
     <string name="nickname">닉네임</string>
     <string name="user_nickname_rule">한글 또는 영문, 10자 이내로 가능해요</string>
     <string name="confirm">확인</string>
+    <string name="util_dismiss">닫기</string>
+    <string name="util_edit">편집</string>
+    <string name="util_more">더보기</string>
+
+    <string name="util_detail">자세히</string>
+    <string name="util_fail">fail</string>
+    <string name="util_retry">다시 시도해주세요</string>
+    <string name="confirm_long">확인했어요</string>
+
+    <!-- Action Dialog -->
+
+    <string name="dialog_not_yet">아직이에요</string>
+    <!-- Complete All -->
+
+    <string name="dialog_complete_all_title">모두 완료</string>
+    <string name="dialog_complete_all_ask">모든 할 일을 완료했나요?</string>
+    <string name="dialog_complete_all_confirm">완료했어요</string>
+
+    <!-- Watering -->
+    <string name="watering_text_balloon">물이 필요해</string>
+    <string name="dialog_watering_title">물주기</string>
+    <string name="dialog_watering_ask">식물에게 물을 줬나요?</string>
+    <string name="dialog_watering_confirm">물을 줬어요</string>
+
+    <!-- RE_POT -->
+    <string name="repot_text_balloon">분갈이가 필요해</string>
+    <string name="dialog_repot_title">분갈이</string>
+    <string name="dialog_repot_ask">식물의 화분을 교체했나요?</string>
+    <string name="dialog_repot_confirm">교체했어요</string>
+
+    <!-- PRUNING -->
+    <string name="pruning_text_balloon">가지치기가 필요해</string>
+    <string name="dialog_pruning_title">가지치기</string>
+    <string name="dialog_pruning_ask">식물의 가지를 다듬었나요?</string>
+    <string name="dialog_pruning_confirm">다듬었어요</string>
+
+    <!-- NUTRITION -->
+    <string name="nutrition_text_balloon">영양관리가 필요해</string>
+    <string name="dialog_nutrition_title">영양관리</string>
+    <string name="dialog_nutrition_ask">식물에게 영양분을 공급했나요?</string>
+    <string name="dialog_nutrition_confirm">공급했어요</string>
+
+    <!-- VENTILATION -->
+    <string name="ventilation_text_balloon">환기가 필요해</string>
+    <string name="dialog_ventilation_title">환기</string>
+    <string name="dialog_ventilation_ask">식물이 있는 공간을 환기했나요?</string>
+    <string name="dialog_ventilation_confirm">환기했어요</string>
 
 <!--  Login  -->
     <string name="google_web_client_id">712990012729-kc9m2p6a9oltejsul1dvseh0mj8d8b66.apps.googleusercontent.com</string>
@@ -35,14 +82,20 @@
     <string name="green_room_empty_no_plant_msg">키우는 식물이 없어요.\n나의 식물을 등록할까요?</string>
     <string name="green_room_empty_register_plant">나의 식물 등록하기</string>
     <string name="home_my_plant_text">나의 식물</string>
+    <string name="home_bottom_sheet_memo_guide">자유롭게 메모해 보세요.</string>
 
-    <string name ="home_action_decorate">꾸미기</string>
-    <string name ="home_action_all_complete">모두 완료</string>
-    <string name = "home_dialog_all_complete_title">모두 완료</string>
-    <string name = "home_dialog_ask_complete_all">모든 할 일을 완료했나요?</string>
+    <string name="home_level_up_title">레벨업</string>
 
-    <string name = "home_dialog_not_yet">아직이에요</string>
-    <string name = "home_dialog_complete_all">완료했어요</string>
+    <string name="home_action_decorate">꾸미기</string>
+    <string name="home_action_all_complete">모두 완료</string>
+    <string name="home_dialog_all_complete_title">모두 완료</string>
+    <string name="home_dialog_ask_complete_all">모든 할 일을 완료했나요?</string>
+
+
+    <string name="home_dialog_not_yet">아직이에요</string>
+    <string name="home_dialog_complete_all">완료했어요</string>
+    <string name="home_snack_bar_msg_head">씨앗을</string>
+    <string name="home_snack_bar_msg_tail">얻었어요</string>
 
     <!--  plant registration  -->
     <string name="plant_registration_what_kind">어떤 식물을 키우세요?</string>
@@ -88,6 +141,44 @@
 
 <!--  collection  -->
     <string name="collection">컬렉션</string>
+    <string name="collection_plant_dictionary">식물사전</string>
+
+    <!--  main  -->
+    <string name="collection_main_name">%s의 컬렉션</string>
+
+    <string name="collection_main_all_plant">전체 식물 %d</string>
+    <string name="collection_main_living_plant">키우고 있는 식물 %d</string>
+    <string name="collection_main_dead_plant">수명을 다한 식물 %d</string>
+
+    <string name="collection_main_latest_sort">최근 추가 순</string>
+    <string name="collection_main_oldest_sort">오래된 순</string>
+
+    <!--  detail  -->
+    <string name="collection_detail_time_together">그림룸과 %d일째</string>
+    <string name="collection_detail_no_species">미등록</string>
+    <string name="collection_detail_memo_hint">자유롭게 메모해 보세요.</string>
+
+    <string name="collection_detail_period">%d일 간격</string>
+    <string name="collection_detail_deadline">(다음 %s까지 %3)</string>
+
+    <string name="collection_detail_cycle">관리 주기</string>
+
+    <string name="collection_detail_information">식물 정보</string>
+
+    <string name="collection_detail_know_how">키우는 법</string>
+    <string name="collection_detail_management">관리</string>
+    <string name="collection_detail_temperature">온도</string>
+    <string name="collection_detail_sun">햇빛</string>
+    <string name="collection_detail_watering">물주기</string>
+    <string name="collection_detail_moisture">습도</string>
+    <string name="collection_detail_fertilizer">비료</string>
+
+    <!--  memo  -->
+    <string name="collection_memo_title">메모하기</string>
+    <string name="collection_memo_hint">30자 이내로 자유롭게 메모해 보세요</string>
+    <string name="collection_memo_count">(%d/30)</string>
+    <string name="collection_memo_complete">메모 완료</string>
+
 
 <!--  community  -->
     <string name="community">커뮤니티</string>
@@ -116,6 +207,47 @@
     <string name="back_right">선반 소품</string>
 
 
+
+
+    <!-- MyPage -->
+    <string name="my_page_title">마이 페이지</string>
+    <string name="my_page_until_next_level">다음 레벨까지 </string>
+    <string name="my_page_usage_days">그린룸과 함께한지</string>
+    <string name="my_page_setting">설정</string>
+    <string name="my_page_setting_push">푸시 알림 설정</string>
+    <string name="my_page_terms_of_use">이용약관</string>
+    <string name="my_page_terms_of_service">서비스 이용약관</string>
+    <string name="my_page_etc">기타</string>
+    <string name="my_page_suggest_to_developer">개발팀에 건의하기</string>
+    <string name="my_page_app_version">앱 버전 %1$s</string>
+    <string name="my_page_logout">로그아웃</string>
+    <string name="my_page_withdraw"><u>회원탈퇴</u></string>
+
+    <string name="my_page_next_reward_guide">다음 레벨, Lv.%1$d의 보상</string>
+    <string name="my_page_rank_list">등급표</string>
+    <string name="my_page_save_change">변경 사항 저장</string>
+    <string name="my_page_push">푸시 알림</string>
+    <string name="my_page_push_cycle_title">식물 주기 알림</string>
+    <string name="my_page_push_cycle_detail">식물 주기에 대한 알림을 받아요.</string>
+    <string name="my_page_my_grade">%1$s · Lv.%2$d</string>
+
+    <string name="my_page_push_notice_title">공지사항 알림</string>
+    <string name="my_page_push_notice_detail">새로운 공지사항에 대한 알림을 받아요.</string>
+
+    <string name="my_page_logout_msg">정말 로그아웃 할까요?</string>
+
+    <string name="withdraw_reason_title">탈퇴하려는 이유를 알려주세요</string>
+    <string name="withdraw_select_guide">*중복 선택 가능해요</string>
+
+    <string name="withdraw_final_title">탈퇴 시 아래 정보가 모두 사라져요\n정말 탈퇴하시겠습니까?</string>
+    <string name="withdraw_bye_bye">\"안녕 잘가.. 다음에 또 봐"\"</string>
+    <string name="withdraw_notice_1"><li>탈퇴가 완료되면 개인정보는 즉시 파기되며, 복구할 수 없어요</li></string>
+    <string name="withdraw_notice_2"><li>커뮤니티 활동 내역은 탈퇴 후에도 일부 남아있어요\n(회원이 업로드한 게시물, 회원이 남긴 댓글)</li></string>
+    <string name="withdraw_final_consent">안내사항을 모두 확인하였습니다</string>
+    <string name="withdraw_back_space">이전 페이지로</string>
+    <string name="withdraw_final_confirm">탈퇴할게요</string>
+    <string name="withdraw_success_message">회원 탈퇴신청이 완료되었습니다\n해당 계정은 확인 후 삭제 예정입니다</string>
+    <string name="image_upload_fail">이미지 업로드 실패\n다시 시도해주세요</string>
 <!--  warning Message  -->
     <!--  home  -->
     <string name="warning_max_water_duration">식물 물주기 간격은 365일(1년)을 초과할 수 없습니다.</string>

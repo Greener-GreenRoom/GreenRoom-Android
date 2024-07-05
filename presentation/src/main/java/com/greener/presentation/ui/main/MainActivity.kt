@@ -39,7 +39,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.id.registrationWaterFragment,
         R.id.registrationPlantShapeFragment,
         R.id.registrationCompleteFragment,
-        R.id.decorationFragment,
+        R.id.myPageMainFragment,
+        R.id.myPageLevelFragment,
+        R.id.editProfileFragment,
+        R.id.userWithdrawReasonFragment,
+        R.id.userWithdrawFinalFragment,
+        R.id.editPushFragment,
+        R.id.decorationFragment
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

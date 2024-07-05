@@ -11,6 +11,7 @@ import com.greener.domain.model.asset.PlantShapeInfo
 import com.greener.domain.model.asset.PlantShapeType
 import com.greener.domain.usecase.asset.GetAssetDetailTypeListUseCase
 import com.greener.domain.usecase.asset.GetPlantShapeListUseCase
+import com.greener.domain.usecase.plant_register.RegisterGreenRoomUseCase
 import com.greener.presentation.R
 import com.greener.presentation.model.decoration.AllAssetViewObject
 import com.greener.presentation.model.registration.PlantRegistrationInfo
@@ -28,6 +29,7 @@ import kotlinx.coroutines.launch
 class RegistrationPlantShapeViewModel @AssistedInject constructor(
     private val getAssetDetailTypeListUseCase: GetAssetDetailTypeListUseCase,
     private val getPlantShapeListUseCase: GetPlantShapeListUseCase,
+    private val registerGreenRoomUseCase: RegisterGreenRoomUseCase,
     @Assisted private val plantRegistrationInfo: PlantRegistrationInfo,
 ) : ViewModel() {
 

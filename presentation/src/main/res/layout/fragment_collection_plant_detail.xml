@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_collection_detail_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_begin="@dimen/grid_system_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_collection_detail_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_end="@dimen/grid_system_end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_collection_detail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/grid_system_tool_bar"
+            android:elevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/collection_detail_toolbar"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_collection_detail_plant_image"
+            android:layout_width="match_parent"
+            android:layout_height="268dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/collection_plant_image"
+            app:layout_constraintBottom_toBottomOf="@id/iv_collection_detail_plant_image"
+            app:layout_constraintEnd_toEndOf="@id/iv_collection_detail_plant_image"
+            app:layout_constraintStart_toStartOf="@id/iv_collection_detail_plant_image"
+            app:layout_constraintTop_toTopOf="@id/iv_collection_detail_plant_image" />
+
+        <include
+            android:id="@+id/include_collection_detail_preview"
+            layout="@layout/view_green_room_plant_mini_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-24dp"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_collection_detail_plant_image"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_detail_start" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_collection_detail_nickname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textAppearance="@style/head1"
+            android:textColor="@color/gray700"
+            app:layout_constraintEnd_toStartOf="@id/btn_collection_detail_diary"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_detail_start"
+            app:layout_constraintTop_toBottomOf="@id/include_collection_detail_preview"
+            tools:text="초롱이" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_collection_detail_diary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_diary"
+            app:layout_constraintEnd_toEndOf="@id/gl_collection_detail_end"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@id/tv_collection_detail_nickname"
+            app:layout_constraintTop_toBottomOf="@id/include_collection_detail_preview" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_collection_detail_plant_species"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@string/collection_detail_no_species"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray500"
+            app:layout_constraintEnd_toStartOf="@id/divider_collection_detail_species"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_detail_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_collection_detail_nickname" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_collection_detail_species"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:dividerColor="@color/gray200"
+            app:layout_constraintBottom_toBottomOf="@id/tv_collection_detail_plant_species"
+            app:layout_constraintEnd_toStartOf="@id/tv_collection_detail_time_together"
+            app:layout_constraintStart_toEndOf="@id/tv_collection_detail_plant_species"
+            app:layout_constraintTop_toTopOf="@id/tv_collection_detail_plant_species" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_collection_detail_time_together"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="none"
+            android:lines="1"
+            android:text="@string/collection_detail_time_together"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray300"
+            app:layout_constraintBottom_toBottomOf="@id/tv_collection_detail_plant_species"
+            app:layout_constraintEnd_toEndOf="@id/gl_collection_detail_end"
+            app:layout_constraintStart_toEndOf="@id/divider_collection_detail_species"
+            app:layout_constraintTop_toTopOf="@id/tv_collection_detail_plant_species" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_collection_detail_memo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="@id/gl_collection_detail_end"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_detail_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_collection_detail_plant_species"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_collection_detail_memo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_memo"
+                android:drawablePadding="4dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp"
+                android:textAppearance="@style/caption2"
+                android:textColor="@color/green300"
+                tools:text="@tools:sample/lorem/random" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_collection_detail_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/gl_collection_detail_end"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_detail_start"
+            app:layout_constraintTop_toBottomOf="@id/cv_collection_detail_memo"
+            app:tabGravity="start">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_collection_detail_cycle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/collection_detail_cycle" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_collection_detail_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/collection_detail_information" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ti_collection_detail_know_how"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/collection_detail_know_how" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:dividerColor="@color/gray100"
+            app:layout_constraintBottom_toBottomOf="@id/tl_collection_detail_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_collection_detail_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_collection_detail_end"
+            app:layout_constraintStart_toStartOf="@id/gl_collection_detail_start"
+            app:layout_constraintTop_toBottomOf="@id/tl_collection_detail_info"
+            app:layout_constraintVertical_bias="0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

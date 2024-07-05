@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_item_collect_plant_shape"
+            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:src="@drawable/asset_plant_main_character"
+            android:layout_gravity=""
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:src="@drawable/asset_plant_main_character" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_item_collect_plant_face"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="27.5dp"
+            android:layout_marginStart="35dp"
+            app:layout_constraintStart_toStartOf="@id/iv_item_collect_plant_shape"
+            app:layout_constraintTop_toTopOf="@id/iv_item_collect_plant_shape"
+            android:src="@drawable/asset_face_default" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_item_collect_plant_accessory_head"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="15.5dp"
+            android:layout_marginStart="22dp"
+            app:layout_constraintStart_toStartOf="@id/iv_item_collect_plant_shape"
+            app:layout_constraintTop_toTopOf="@id/iv_item_collect_plant_shape"
+            tools:src="@drawable/asset_head_fried_egg" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_item_collect_plant_accessory_eye"
+            android:layout_width="32.5dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="30.5dp"
+            android:layout_marginStart="33.75dp"
+            app:layout_constraintStart_toStartOf="@id/iv_item_collect_plant_shape"
+            app:layout_constraintTop_toTopOf="@id/iv_item_collect_plant_shape"
+            tools:src="@drawable/asset_eye_sunglasses" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
