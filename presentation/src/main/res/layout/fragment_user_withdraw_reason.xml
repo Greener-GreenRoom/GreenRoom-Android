@@ -121,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="start|top"
-                        android:hint="의견을 들려주세요"
+                        android:hint="@string/withdraw_hint"
                         android:textAppearance="@style/body4"
                         android:textColor="@color/gray300"
                         android:textColorHint="@color/gray300" />

@@ -9,17 +9,54 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.google.android.material.textview.MaterialTextView
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/green200"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tl_community_main"
+            app:layout_constraintBottom_toBottomOf="@id/tl_community_main"
+            android:id="@+id/view_community_tab_background"/>
+        <com.google.android.material.tabs.TabLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="커뮤니티 프레그먼트"
-            android:textAppearance="@style/head1"
-            android:textColor="@color/primary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/tl_community_main"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabGravity="fill"
+            android:layout_marginStart="10dp"
+            app:tabPadding="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@android:color/transparent"
+            app:tabTextAppearance="@style/body1"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/green100"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            >
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ti_community_main_suggest"
+                android:text="@string/community_tab_suggest"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ti_community_main_boast"
+                android:text="@string/community_tab_boast"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ti_community_main_green_ranking"
+                android:text="@string/community_tab_green_ranking"/>
+        </com.google.android.material.tabs.TabLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/vp_community_main"
+            app:layout_constraintTop_toBottomOf="@id/tl_community_main"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

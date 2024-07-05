@@ -19,6 +19,7 @@ import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentEditProfileBinding
 import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
+import com.greener.presentation.util.ImageModalBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -54,7 +55,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
         }
 
         binding.ivEditProfileMyProfileImg.setOnClickListener {
-            val modal = EditProfileModalBottomSheet(
+            val modal = ImageModalBottomSheet(
                 { viewModel.getImage(pickImageUseCase) },
                 { viewModel.takePicture(takePictureUseCase) },
             )
