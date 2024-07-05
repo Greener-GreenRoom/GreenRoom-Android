@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/collection_dictionary"
+        android:title="@string/collection_plant_dictionary"
+        android:icon="@drawable/ic_dictionary"
+        app:showAsAction="always"
+        />
+</menu>

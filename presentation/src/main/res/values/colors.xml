@@ -8,6 +8,8 @@
     <color name="green200">#29BA6C</color>
     <color name="green300">#209B59</color>
 
+    <color name="green_hint">#9BC9B0</color>
+
     <!--  system  -->
     <color name="red100">#FF7373</color>
     <color name="blue100">#3292F2</color>
@@ -39,5 +41,7 @@
     <color name="asset_choice_gradient_start">#1B1D1F</color>
     <color name="asset_choice_gradient_end">#2B6347</color>
     <color name="asset_choice_level_limit">#80FFFFFF</color>
+
+    <color name="collection_plant_image">#99000000</color>
 
 </resources>
