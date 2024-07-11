@@ -55,8 +55,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         binding.btnLoginGoogle.setOnClickListener {
             requestGoogleLogin()
         }
-        binding.btnLoginTempGoNext.setOnClickListener {
-            moveToRegisterNickName()
+        binding.btnLoginKakao.setOnClickListener {
+
         }
         checkExistUser()
     }

@@ -14,6 +14,6 @@ class HiltApplication : Application() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         Logger.addLogAdapter(AndroidLogAdapter())
 
-        //KakaoSdk.init(this, "415202250d8317a60386e870558727f3")
+        KakaoSdk.init(this, "415202250d8317a60386e870558727f3")
     }
 }
