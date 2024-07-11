@@ -5,6 +5,7 @@ import com.greener.data.model.plant_register.PlantRegisterDataDTO
 import com.greener.data.model.response.ResponseFormDTO
 import com.greener.data.model.response.ResponseListFormDTO
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -16,13 +17,13 @@ interface PlantRegisterService {
     @Multipart
     @POST("greenrooms")
     suspend fun registerGreenRoom(
-        @Part plantRegisterRequest: MultipartBody.Part,
-        @Part plantImage: MultipartBody.Part,
+        @Part("request") plantImage: RequestBody,
+        @Part("imgFile") plantRegisterRequest: MultipartBody.Part?,
     ): ResponseFormDTO<PlantRegisterDataDTO>
 
     @GET("plants")
     suspend fun getPlantInformation(
-        @Query("sort") sort: String?,
+        @Query("sort") sort: String,
         @Query("offset") offset: Int?,
     ): ResponseListFormDTO<PlantInformationDTO>
 
@@ -31,6 +32,7 @@ interface PlantRegisterService {
         @Path("plantId") plantId: Long,
     ): ResponseFormDTO<String>
 
+    // todo collection 으로 옮기기
     @GET("greenrooms/duplicate?name=가롱이")
     suspend fun isDuplicateGreenRoomNickname(
         @Query("name") nickname: String,

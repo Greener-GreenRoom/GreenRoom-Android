@@ -1,5 +1,6 @@
 package com.greener.data.model.plant_register
 
+import com.greener.domain.model.plant_register.LevelUpData
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -9,4 +10,8 @@ data class LevelUpDTO(
     @Json(name = "isLevelUpdated") val isLevelUpdated: Boolean,
     @Json(name = "increasingPoint") val increasingPoint: Int,
     @Json(name = "increasingCause") val increasingCause: String?,
-)
+) {
+    fun toDomain(): LevelUpData = LevelUpData(
+        level, isLevelUpdated, increasingPoint, increasingCause
+    )
+}

@@ -1,5 +1,6 @@
 package com.greener.data.model.plant_register
 
+import com.greener.domain.model.plant_register.PlantInformationData
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -11,4 +12,9 @@ data class PlantInformationDTO(
     @Json(name = "plantPictureUrl") val plantPictureUrl: String,
     @Json(name = "plantExplanation") val plantExplanation: String,
     @Json(name = "plantCategory") val plantCategory: String,
-)
+) {
+    fun toDomain(): PlantInformationData =
+        PlantInformationData(
+            plantId, distributionName, plantAlias, plantPictureUrl, plantExplanation, plantCategory
+        )
+}

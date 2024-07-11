@@ -9,6 +9,7 @@ import com.greener.domain.model.asset.AssetType
 import com.greener.domain.model.asset.PlantShape
 import com.greener.domain.model.asset.PlantShapeInfo
 import com.greener.domain.model.asset.PlantShapeType
+import com.greener.domain.model.plant_register.PlantRegisterRequestData
 import com.greener.domain.usecase.asset.GetAssetDetailTypeListUseCase
 import com.greener.domain.usecase.asset.GetPlantShapeListUseCase
 import com.greener.domain.usecase.plant_register.RegisterGreenRoomUseCase
@@ -141,17 +142,20 @@ class RegistrationPlantShapeViewModel @AssistedInject constructor(
     fun completePlantRegistration() {
         viewModelScope.launch {
             val plantShape = choicePlantShape.value
-            val newInfo = PlantRegistrationInfo(
-                plantRegistrationInfo.plantId,
-                plantRegistrationInfo.nickname,
-                plantRegistrationInfo.lastWatering,
-                plantRegistrationInfo.waterDuration,
-                plantShape?.plantShape?.nameString ?: PlantShape.Main_Character.nameString,
-                plantRegistrationInfo.plantImage,
+            val plantRegisterRequestData = PlantRegisterRequestData(
+                plantId = plantRegistrationInfo.plantId,
+                name = plantRegistrationInfo.nickname!!,
+                lastWatering = plantRegistrationInfo.lastWatering!!,
+                wateringDuration = plantRegistrationInfo.waterDuration!!,
+                shape = plantShape!!.plantShape.nameString
             )
 
-            // todo api 연결
-            _event.emit(Event.MoveToComplete(newInfo))
+            val result = registerGreenRoomUseCase(plantRegisterRequestData, plantRegistrationInfo.plantImage)
+            if (result.isSuccess) {
+                // todo 다음 화면
+            } else {
+                // todo api 연결
+            }
         }
     }
 

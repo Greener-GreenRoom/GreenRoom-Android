@@ -21,6 +21,8 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.InputStream
 import javax.inject.Inject
 
 class ImageRepositoryImpl @Inject constructor(
@@ -33,9 +35,9 @@ class ImageRepositoryImpl @Inject constructor(
         }
     }
 
-    private val getTakePicturePreview = (context as AppCompatActivity).registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
+    private val getTakePicturePreview = (context as AppCompatActivity).registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
         CoroutineScope(Dispatchers.Default).launch {
-            it?.let { it1 -> bitmapToUri(it1).toString() }?.let { it2 -> imageEvent.emit(it2) }
+            bitmap?.let { it1 -> bitmapToUri(it1).toString() }?.let { it2 -> imageEvent.emit(it2) }
         }
     }
 
