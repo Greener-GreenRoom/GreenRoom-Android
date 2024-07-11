@@ -8,7 +8,7 @@ import com.squareup.moshi.JsonClass
 data class PlantRegisterDataDTO(
     @Json(name = "greenroomId") val greenroomId: Long,
     @Json(name = "levelUp") val levelUpDTO: LevelUpDTO,
-){
+) {
     fun toDomain(): PlantRegisterResponseData =
         PlantRegisterResponseData(greenroomId, levelUpDTO.toDomain())
 }

@@ -28,5 +28,4 @@ object ResponseToApiState {
         } catch (e: Exception) {
             ApiState.Exception(e)
         }
-
 }

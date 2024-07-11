@@ -12,6 +12,9 @@ data class LevelUpDTO(
     @Json(name = "increasingCause") val increasingCause: String?,
 ) {
     fun toDomain(): LevelUpData = LevelUpData(
-        level, isLevelUpdated, increasingPoint, increasingCause
+        level,
+        isLevelUpdated,
+        increasingPoint,
+        increasingCause,
     )
 }

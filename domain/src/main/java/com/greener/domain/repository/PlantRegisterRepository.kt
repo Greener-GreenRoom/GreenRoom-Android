@@ -1,6 +1,5 @@
 package com.greener.domain.repository
 
-import com.greener.domain.model.Sort
 import com.greener.domain.model.plant_register.PlantInformationData
 import com.greener.domain.model.plant_register.PlantRegisterRequestData
 import com.greener.domain.model.plant_register.PlantRegisterResponseData

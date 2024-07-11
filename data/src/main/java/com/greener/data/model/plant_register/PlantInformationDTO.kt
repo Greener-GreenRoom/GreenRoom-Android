@@ -15,6 +15,11 @@ data class PlantInformationDTO(
 ) {
     fun toDomain(): PlantInformationData =
         PlantInformationData(
-            plantId, distributionName, plantAlias, plantPictureUrl, plantExplanation, plantCategory
+            plantId,
+            distributionName,
+            plantAlias,
+            plantPictureUrl,
+            plantExplanation,
+            plantCategory,
         )
 }

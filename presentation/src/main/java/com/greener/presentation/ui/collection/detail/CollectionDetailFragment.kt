@@ -1,4 +1,3 @@
 package com.greener.presentation.ui.collection.detail
 
-class CollectionDetailFragment {
-}
+class CollectionDetailFragment

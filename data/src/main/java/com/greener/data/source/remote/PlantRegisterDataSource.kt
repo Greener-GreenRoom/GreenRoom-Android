@@ -2,7 +2,6 @@ package com.greener.data.source.remote
 
 import com.greener.data.model.plant_register.PlantInformationDTO
 import com.greener.data.model.plant_register.PlantRegisterDataDTO
-import com.greener.data.model.plant_register.PlantRegisterRequestDTO
 import com.greener.data.model.response.ResponseFormDTO
 import com.greener.data.model.response.ResponseListFormDTO
 import com.greener.data.service.PlantRegisterService

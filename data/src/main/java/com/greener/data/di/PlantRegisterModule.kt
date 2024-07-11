@@ -25,7 +25,7 @@ object PlantRegisterModule {
     fun providePlantRegisterRepository(
         dataSource: PlantRegisterDataSource,
         moshi: Moshi,
-        context: Context
+        context: Context,
     ): PlantRegisterRepository =
         PlantRegisterRepositoryImpl(dataSource, moshi, context)
 }

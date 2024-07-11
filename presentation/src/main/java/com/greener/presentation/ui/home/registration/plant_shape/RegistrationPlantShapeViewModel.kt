@@ -147,7 +147,7 @@ class RegistrationPlantShapeViewModel @AssistedInject constructor(
                 name = plantRegistrationInfo.nickname!!,
                 lastWatering = plantRegistrationInfo.lastWatering!!,
                 wateringDuration = plantRegistrationInfo.waterDuration!!,
-                shape = plantShape!!.plantShape.nameString
+                shape = plantShape!!.plantShape.nameString,
             )
 
             val result = registerGreenRoomUseCase(plantRegisterRequestData, plantRegistrationInfo.plantImage)

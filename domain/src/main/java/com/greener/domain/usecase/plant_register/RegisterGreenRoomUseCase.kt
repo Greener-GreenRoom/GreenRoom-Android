@@ -1,6 +1,5 @@
 package com.greener.domain.usecase.plant_register
 
-import com.greener.domain.model.plant_register.PlantInformationData
 import com.greener.domain.model.plant_register.PlantRegisterRequestData
 import com.greener.domain.model.plant_register.PlantRegisterResponseData
 import com.greener.domain.repository.PlantRegisterRepository
@@ -11,7 +10,7 @@ class RegisterGreenRoomUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(
         plantRegisterRequestData: PlantRegisterRequestData,
-        image: String?
+        image: String?,
     ): Result<PlantRegisterResponseData> =
         repository.registerGreenRoom(plantRegisterRequestData, image)
 }
