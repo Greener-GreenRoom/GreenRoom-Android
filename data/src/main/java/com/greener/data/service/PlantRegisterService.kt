@@ -18,7 +18,7 @@ interface PlantRegisterService {
     @POST("greenrooms")
     suspend fun registerGreenRoom(
         @Part("request") plantImage: RequestBody,
-        @Part("imgFile") plantRegisterRequest: MultipartBody.Part?,
+        @Part plantRegisterRequest: MultipartBody.Part?,
     ): ResponseFormDTO<PlantRegisterDataDTO>
 
     @GET("plants")

@@ -40,7 +40,6 @@ class RegistrationCompleteViewModel @AssistedInject constructor(
 
     fun moveToHome() {
         viewModelScope.launch {
-            Log.d("jomi", "moveTohome viewmodel")
             _event.emit(Event.MoveToHome)
         }
     }

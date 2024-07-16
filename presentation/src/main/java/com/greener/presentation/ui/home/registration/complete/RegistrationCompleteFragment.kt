@@ -88,7 +88,6 @@ class RegistrationCompleteFragment : BaseFragment<FragmentPlantRegistrationCompl
             RegistrationCompleteViewModel.Event.MoveToHome -> {
                 val action = RegistrationCompleteFragmentDirections.actionRegistrationCompleteFragmentToHomeFragment()
                 findNavController().navigate(action)
-                Log.d("jomi", "moveToHome")
             }
         }
     }
