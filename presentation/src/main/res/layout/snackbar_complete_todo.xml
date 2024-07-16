@@ -30,7 +30,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/seed_point"
+                android:src="@drawable/img_seed_point"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

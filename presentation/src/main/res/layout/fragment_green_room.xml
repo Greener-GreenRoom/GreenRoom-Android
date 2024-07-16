@@ -46,24 +46,24 @@
         <ImageView
             android:id="@+id/iv_green_room_window"
             setWindowImg="@{greenRoom.greenRoomItems.get(`background_window`)}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="116dp"
+            android:layout_height="177dp"
             app:layout_constraintBottom_toBottomOf="@+id/view_green_room_top_area"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/view_green_room_top_area"
             app:layout_constraintVertical_bias="@dimen/green_room_window_vertical_bias"
-            tools:src="@drawable/img_window_1" />
+            tools:src="@drawable/asset_window_watering_can" />
 
         <ImageView
             android:id="@+id/iv_green_room_shelf"
             setShelfImg="@{greenRoom.greenRoomItems.get(`background_shelf`)}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="139dp"
+            android:layout_height="151dp"
             app:layout_constraintBottom_toBottomOf="@id/view_green_room_top_area"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/view_green_room_top_area"
             app:layout_constraintVertical_bias="@dimen/green_room_shelf_vertical_bias"
-            tools:src="@drawable/img_shelf_2" />
+            tools:src="@drawable/asset_shelf_fishbowl" />
 
         <ImageView
             android:id="@+id/iv_green_room_plant_type"
@@ -76,7 +76,7 @@
             app:layout_constraintHorizontal_bias="@dimen/green_room_plant_horizontal_bias"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintWidth_percent="@dimen/green_room_plant_width_percent"
-            tools:src="@drawable/img_plant_1_default_shadow" />
+            tools:src="@drawable/asset_plant_main_character" />
 
         <ImageView
             android:id="@+id/iv_green_room_plant_face"
@@ -91,7 +91,7 @@
             app:layout_constraintTop_toTopOf="@id/iv_green_room_plant_type"
             app:layout_constraintVertical_bias="@dimen/plant_face_vertical_bias"
             app:layout_constraintWidth_percent="@dimen/green_room_plant_face_width_percent"
-            tools:src="@drawable/img_face_default" />
+            tools:src="@drawable/asset_face_default" />
 
         <ImageView
             android:id="@+id/iv_green_room_plant_glasses"

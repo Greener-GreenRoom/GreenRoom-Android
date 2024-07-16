@@ -46,6 +46,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.id.userWithdrawFinalFragment,
         R.id.editPushFragment,
         R.id.decorationFragment,
+        R.id.communityRegisterCompleteFragment,
+        R.id.communityRegisterPlantFragment,
+
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +62,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     }
 
     private fun setUpBottomNavigation() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view_main) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container_view_main) as NavHostFragment
         navController = navHostFragment.navController
         binding.bottomNavigationViewMain.setupWithNavController(navController)
         navController.addOnDestinationChangedListener(destinationChangedListener)
