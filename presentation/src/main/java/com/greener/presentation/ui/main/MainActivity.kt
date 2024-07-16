@@ -37,7 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.id.registrationSearchFragment,
         R.id.registrationNicknameImageFragment,
         R.id.registrationWaterFragment,
-        R.id.registrationCharacterFragment,
+        R.id.registrationPlantShapeFragment,
         R.id.registrationCompleteFragment,
         R.id.myPageMainFragment,
         R.id.myPageLevelFragment,
@@ -48,6 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         R.id.decorationFragment,
         R.id.communityRegisterCompleteFragment,
         R.id.communityRegisterPlantFragment,
+
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

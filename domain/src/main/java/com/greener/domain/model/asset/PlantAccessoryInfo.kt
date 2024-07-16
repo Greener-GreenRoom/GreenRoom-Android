@@ -6,5 +6,5 @@ data class PlantAccessoryInfo(
     val plantAccessory: PlantAccessory,
     val limitLevel: Int,
     val drawableID: Int,
-    val isChecked: Boolean = false
+    val isChecked: Boolean = false,
 )

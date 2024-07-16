@@ -5,7 +5,6 @@ import com.greener.domain.model.mypage.MyPageInfo
 import com.greener.domain.model.sign.UserAccountInfo
 
 interface MyPageRepository {
-
     suspend fun getMyPageInfo(): Result<MyPageInfo>
 
     suspend fun getMyLevelInfo(): Result<MyLevelInfo>

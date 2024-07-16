@@ -62,6 +62,8 @@
     <dimen name="asset_view_left_padding">22dp</dimen>
     <dimen name="asset_view_bottom_padding">22dp</dimen>
 
+    <dimen name="plant_infomation_bottom_padding">12dp</dimen>
+
 
 
 

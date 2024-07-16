@@ -1,12 +1,9 @@
 package com.greener.presentation.ui.home.decoration.main.adapter
 
 import android.annotation.SuppressLint
-import android.opengl.Visibility
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -25,12 +22,11 @@ import com.greener.presentation.model.decoration.AssetViewItem
 import com.greener.presentation.model.decoration.AssetViewObject
 import jp.wasabeef.glide.transformations.BlurTransformation
 
-
 class DecorationAssetViewAdapter(
     private val onClickPlantShape: (PlantShapeInfo, PlantShapeType) -> Unit,
     private val onClickPlantAccessory: (PlantAccessoryInfo, PlantAccessoryType) -> Unit,
     private val onClickBackgroundAccessory: (BackgroundAccessoryInfo, BackgroundAccessoryType) -> Unit,
-    var myLevel: Int
+    var myLevel: Int,
 ) : ListAdapter<AssetViewItem, RecyclerView.ViewHolder>(diffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -38,32 +34,34 @@ class DecorationAssetViewAdapter(
                 ItemAssetDetailItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
-                    false
-                )
+                    false,
+                ),
             )
 
             PLANT_ACCESSORY_VIEW_HOLDER -> PlantAccessoryViewHolder(
                 ItemAssetDetailItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
-                    false
-                )
+                    false,
+                ),
             )
 
             BACKGROUND_ACCESSORY_VIEW_HOLDER -> BackgroundAccessoryViewHolder(
                 ItemAssetDetailItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
-                    false
-                )
+                    false,
+                ),
             )
 
             else -> BackgroundAccessoryViewHolder(
                 ItemAssetDetailItemBinding.inflate(
                     LayoutInflater.from(
-                        parent.context
-                    ), parent, false
-                )
+                        parent.context,
+                    ),
+                    parent,
+                    false,
+                ),
             )
         }
     }
@@ -95,7 +93,7 @@ class DecorationAssetViewAdapter(
 
     @SuppressLint("notifyDataSetChanged")
     inner class PlantShapeViewHolder(
-        private val binding: ItemAssetDetailItemBinding
+        private val binding: ItemAssetDetailItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: AssetViewItem) {
@@ -119,7 +117,7 @@ class DecorationAssetViewAdapter(
 
     @SuppressLint("notifyDataSetChanged")
     inner class PlantAccessoryViewHolder(
-        private val binding: ItemAssetDetailItemBinding
+        private val binding: ItemAssetDetailItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AssetViewItem) {
             val viewObject = item.viewObject as AssetViewObject.PlantAccessoriesObject
@@ -135,7 +133,7 @@ class DecorationAssetViewAdapter(
                     binding.ivItemAssetLock.visibility = View.VISIBLE
                     binding.tvItemAssetDetail.text = binding.root.context.getString(
                         R.string.decoration_level_limit,
-                        viewObject.infoList.limitLevel
+                        viewObject.infoList.limitLevel,
                     )
                     Glide.with(binding.root)
                         .asDrawable()
@@ -169,7 +167,7 @@ class DecorationAssetViewAdapter(
 
     @SuppressLint("notifyDataSetChanged")
     inner class BackgroundAccessoryViewHolder(
-        private val binding: ItemAssetDetailItemBinding
+        private val binding: ItemAssetDetailItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AssetViewItem) {
             val viewObject = item.viewObject as AssetViewObject.BackgroundAccessoriesObject
@@ -185,7 +183,7 @@ class DecorationAssetViewAdapter(
                     binding.ivItemAssetLock.visibility = View.VISIBLE
                     binding.tvItemAssetDetail.text = binding.root.context.getString(
                         R.string.decoration_level_limit,
-                        viewObject.infoList.limitLevel
+                        viewObject.infoList.limitLevel,
                     )
                     Glide.with(binding.root)
                         .asDrawable()
@@ -225,7 +223,7 @@ class DecorationAssetViewAdapter(
 
             override fun areContentsTheSame(
                 oldItem: AssetViewItem,
-                newItem: AssetViewItem
+                newItem: AssetViewItem,
             ): Boolean {
                 return oldItem == newItem
             }

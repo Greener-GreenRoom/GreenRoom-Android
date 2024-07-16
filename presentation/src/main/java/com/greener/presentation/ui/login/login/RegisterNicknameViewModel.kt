@@ -45,7 +45,7 @@ class RegisterNicknameViewModel @Inject constructor(
     }
 
     fun signUp() {
-        val signInfo = UserAccountInfo(_nickname.value, _email.value,_photoUrl.value, _provider.value, )
+        val signInfo = UserAccountInfo(_nickname.value, _email.value, _photoUrl.value, _provider.value)
         viewModelScope.launch {
             _uiState.update { UiState.Loading }
             val responseResult = signUpUseCase(signInfo)

@@ -1,6 +1,5 @@
 package com.greener.presentation.ui.home.decoration.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.greener.domain.model.asset.AssetDetailTypeInfo
@@ -17,9 +16,7 @@ import com.greener.domain.usecase.asset.GetPlantAccessoryListUseCase
 import com.greener.domain.usecase.asset.GetPlantShapeListUseCase
 import com.greener.presentation.R
 import com.greener.presentation.model.decoration.AllAssetViewItem
-import com.greener.presentation.model.decoration.AllAssetViewObject
 import com.greener.presentation.model.decoration.AssetViewItem
-import com.greener.presentation.model.decoration.AssetViewObject
 import com.greener.presentation.model.decoration.DecorationTabState
 import com.greener.presentation.model.decoration.PlantDecorationDetailInfo
 import com.greener.presentation.ui.home.decoration.main.DecorationMappingObject.toAllBackgroundAccessoryAssetViewItem
@@ -28,8 +25,6 @@ import com.greener.presentation.ui.home.decoration.main.DecorationMappingObject.
 import com.greener.presentation.ui.home.decoration.main.DecorationMappingObject.toBackfroundAccessoryViewItem
 import com.greener.presentation.ui.home.decoration.main.DecorationMappingObject.toPlantAccessoryViewItem
 import com.greener.presentation.ui.home.decoration.main.DecorationMappingObject.toPlantShapeAsserViewItem
-import com.greener.presentation.util.MutableEventFlow
-import com.greener.presentation.util.asEventFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,7 +36,7 @@ class DecorationViewModel @Inject constructor(
     private val getPlantShapeListUseCase: GetPlantShapeListUseCase,
     private val getPlantAccessoryListUseCase: GetPlantAccessoryListUseCase,
     private val getBackgroundAccessoryListUseCase: GetBackgroundAccessoryListUseCase,
-    private val getAssetDetailTypeListUseCase: GetAssetDetailTypeListUseCase
+    private val getAssetDetailTypeListUseCase: GetAssetDetailTypeListUseCase,
 ) : ViewModel() {
 
     private val _assetDetailTypes = MutableStateFlow<List<AssetDetailTypeInfo>>(emptyList())
@@ -54,7 +49,7 @@ class DecorationViewModel @Inject constructor(
     val choiceViewAssets: StateFlow<List<AssetViewItem>> get() = _choiceViewAssets
 
     private val _myLevel = MutableStateFlow(10)
-    val myLevel : StateFlow<Int> get() = _myLevel
+    val myLevel: StateFlow<Int> get() = _myLevel
 
     private val _plantDecorationInfo = MutableStateFlow(PlantDecorationDetailInfo())
     val plantDecorationInfo: StateFlow<PlantDecorationDetailInfo> get() = _plantDecorationInfo
@@ -83,8 +78,8 @@ class DecorationViewModel @Inject constructor(
                     hairAccessory = plantAccessory1,
                     glasses = plantAccessory2,
                     backgroundWindow = backgroundAccessory1,
-                    backgroundShelf = backgroundAccessory2
-                )
+                    backgroundShelf = backgroundAccessory2,
+                ),
             )
             onChangeAssetType(AssetType.PLANT_SHAPE)
         }
@@ -120,8 +115,8 @@ class DecorationViewModel @Inject constructor(
                     assetType = assetType,
                     type = ALL,
                     typeCode = R.string.all,
-                    isChecked = true
-                )
+                    isChecked = true,
+                ),
             )
 
             when (assetType) {
@@ -166,9 +161,13 @@ class DecorationViewModel @Inject constructor(
                 AssetType.PLANT_SHAPE -> {
                     val plantShapeList = getPlantShapeListUseCase()
                     val isAll = assetDetailTypeList.find { it.id == targetType }?.type == ALL
-                    val plantType = if (isAll) null else plantShapeList.find {
-                        it.plantShapeType == PlantShapeType.valueOf(targetDetailType?.type ?: "")
-                    }?.plantShapeType
+                    val plantType = if (isAll) {
+                        null
+                    } else {
+                        plantShapeList.find {
+                            it.plantShapeType == PlantShapeType.valueOf(targetDetailType?.type ?: "")
+                        }?.plantShapeType
+                    }
                     plantDecorationInfo.shape?.let { plantShapeInfo ->
                         updatePlantShapeAsset(plantType, plantShapeInfo, isAll)
                     }
@@ -177,9 +176,13 @@ class DecorationViewModel @Inject constructor(
                 AssetType.PLANT_ACCESSORY -> {
                     val plantAccessoryList = getPlantAccessoryListUseCase()
                     val isALl = assetDetailTypeList.find { it.id == targetType }?.type == ALL
-                    val accessoryType = if (isALl) null else plantAccessoryList.find {
-                        it.itemType == PlantAccessoryType.valueOf(targetDetailType?.type ?: "")
-                    }?.itemType
+                    val accessoryType = if (isALl) {
+                        null
+                    } else {
+                        plantAccessoryList.find {
+                            it.itemType == PlantAccessoryType.valueOf(targetDetailType?.type ?: "")
+                        }?.itemType
+                    }
                     val targetIdCode = targetType.toString().first()
                     if (targetIdCode == EYE_ID) {
                         plantDecorationInfo.glasses?.let {
@@ -195,9 +198,13 @@ class DecorationViewModel @Inject constructor(
                 AssetType.BACKGROUND_ACCESSORY -> {
                     val backgroundAccessoryList = getBackgroundAccessoryListUseCase()
                     val isAll = assetDetailTypeList.find { it.id == targetType }?.type == ALL
-                    val accessoryType = if (isAll) null else backgroundAccessoryList.find {
-                        it.itemType == BackgroundAccessoryType.valueOf(targetDetailType?.type ?: "")
-                    }?.itemType
+                    val accessoryType = if (isAll) {
+                        null
+                    } else {
+                        backgroundAccessoryList.find {
+                            it.itemType == BackgroundAccessoryType.valueOf(targetDetailType?.type ?: "")
+                        }?.itemType
+                    }
                     val targetIdCode = targetType.toString().first()
                     if (targetIdCode == WINDOW_ID) {
                         plantDecorationInfo.backgroundWindow?.let {
@@ -216,7 +223,7 @@ class DecorationViewModel @Inject constructor(
     fun updatePlantShapeAsset(
         plantType: PlantShapeType? = null,
         targetPlantShape: PlantShapeInfo,
-        isAll: Boolean
+        isAll: Boolean,
     ) {
         viewModelScope.launch {
             val plantShapeList = getPlantShapeListUseCase()
@@ -227,8 +234,9 @@ class DecorationViewModel @Inject constructor(
                     glasses = plantInfo.glasses,
                     hairAccessory = plantInfo.hairAccessory,
                     backgroundShelf = plantInfo.backgroundShelf,
-                    backgroundWindow = plantInfo.backgroundWindow
-                ))
+                    backgroundWindow = plantInfo.backgroundWindow,
+                ),
+            )
 
             _tabState.emit(DecorationTabState.PLANT_DECORATION)
             modifyDecorationInfo()
@@ -238,7 +246,7 @@ class DecorationViewModel @Inject constructor(
 
                 getAssetDetailTypeListUseCase(AssetType.PLANT_SHAPE).forEach { type ->
                     itemAllList.add(
-                        type.toAllPlantShapeAssetViewItem(targetPlantShape, plantShapeList)
+                        type.toAllPlantShapeAssetViewItem(targetPlantShape, plantShapeList),
                     )
                 }
                 _choiceAllViewAssets.emit(itemAllList)
@@ -248,8 +256,8 @@ class DecorationViewModel @Inject constructor(
                 val plantShapeByType = plantShapeList.filter { it.plantShapeType == plantType }
 
                 plantShapeByType.forEach { info ->
-                        itemList.add(info.toPlantShapeAsserViewItem(targetPlantShape))
-                    }
+                    itemList.add(info.toPlantShapeAsserViewItem(targetPlantShape))
+                }
                 _choiceViewAssets.emit(itemList)
                 _choiceAllViewAssets.emit(emptyList())
             }
@@ -259,7 +267,7 @@ class DecorationViewModel @Inject constructor(
     fun updatePlantAccessoryAsset(
         accessoryType: PlantAccessoryType? = null,
         targetPlantAccessory: PlantAccessoryInfo,
-        isAll: Boolean
+        isAll: Boolean,
     ) {
         viewModelScope.launch {
             if (accessoryType == PlantAccessoryType.FACE) return@launch
@@ -282,8 +290,9 @@ class DecorationViewModel @Inject constructor(
                     glasses = glasses,
                     hairAccessory = hairAccessory,
                     backgroundShelf = plantDecorationInfo.backgroundShelf,
-                    backgroundWindow = plantDecorationInfo.backgroundWindow
-                ))
+                    backgroundWindow = plantDecorationInfo.backgroundWindow,
+                ),
+            )
             modifyDecorationInfo()
 
             val plantAccessoryList = getPlantAccessoryListUseCase()
@@ -294,7 +303,7 @@ class DecorationViewModel @Inject constructor(
                         return@forEach
                     }
                     itemAllList.add(
-                        type.toAllPlantAccessoryAssetViewItem(hairAccessory!!, glasses!!, plantAccessoryList)
+                        type.toAllPlantAccessoryAssetViewItem(hairAccessory!!, glasses!!, plantAccessoryList),
                     )
                 }
                 _choiceAllViewAssets.emit(itemAllList)
@@ -315,7 +324,7 @@ class DecorationViewModel @Inject constructor(
     fun updateBackgroundAccessoryAsset(
         accessoryType: BackgroundAccessoryType? = null,
         targetPlantAccessory: BackgroundAccessoryInfo,
-        isAll: Boolean
+        isAll: Boolean,
     ) {
         viewModelScope.launch {
             val plantDecorationInfo = plantDecorationInfo.value
@@ -333,8 +342,9 @@ class DecorationViewModel @Inject constructor(
                     glasses = plantDecorationInfo.glasses,
                     hairAccessory = plantDecorationInfo.hairAccessory,
                     backgroundShelf = shelfAccessory,
-                    backgroundWindow = windowAccessory
-                ))
+                    backgroundWindow = windowAccessory,
+                ),
+            )
 
             _tabState.emit(DecorationTabState.BACKGROUND_DECORATION)
             modifyDecorationInfo()
@@ -345,7 +355,7 @@ class DecorationViewModel @Inject constructor(
                 val itemAllList = emptyList<AllAssetViewItem>().toMutableList()
                 getAssetDetailTypeListUseCase(AssetType.BACKGROUND_ACCESSORY).forEach { type ->
                     itemAllList.add(
-                        type.toAllBackgroundAccessoryAssetViewItem(shelfAccessory!!, windowAccessory!!, backgroundAccessoryList)
+                        type.toAllBackgroundAccessoryAssetViewItem(shelfAccessory!!, windowAccessory!!, backgroundAccessoryList),
                     )
                 }
                 _choiceAllViewAssets.emit(itemAllList)
@@ -380,7 +390,7 @@ class DecorationViewModel @Inject constructor(
 
     data class DecorationInfo(
         val decorationDetailInfo: PlantDecorationDetailInfo?,
-        val decorationState: DecorationTabState?
+        val decorationState: DecorationTabState?,
     )
 
     companion object {

@@ -1,7 +1,6 @@
 package com.greener.presentation.ui.home.decoration.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,22 +28,21 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
 ) {
     private val viewModel: DecorationViewModel by viewModels()
 
-    private val decorationAssetDetailTypeAdapter = DecorationAssetDetailTypeAdapter{ type, target ->
+    private val decorationAssetDetailTypeAdapter = DecorationAssetDetailTypeAdapter { type, target ->
         viewModel.changeAssetDetailType(type, target)
     }
     private val decorationAllViewAdapter = DecorationAssetAllViewAdapter(
-        { info, _ -> viewModel.updatePlantShapeAsset( targetPlantShape = info, isAll = true) },
-        { info, type -> viewModel.updatePlantAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = true )},
-        { info, type -> viewModel.updateBackgroundAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = true )},
-        0
+        { info, _ -> viewModel.updatePlantShapeAsset(targetPlantShape = info, isAll = true) },
+        { info, type -> viewModel.updatePlantAccessoryAsset(accessoryType = type, targetPlantAccessory = info, isAll = true) },
+        { info, type -> viewModel.updateBackgroundAccessoryAsset(accessoryType = type, targetPlantAccessory = info, isAll = true) },
+        0,
     )
     private val decorationViewAdapter = DecorationAssetViewAdapter(
         { info, type -> viewModel.updatePlantShapeAsset(plantType = type, targetPlantShape = info, isAll = false) },
-        { info, type -> viewModel.updatePlantAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = false)},
-        { info, type -> viewModel.updateBackgroundAccessoryAsset( accessoryType = type, targetPlantAccessory = info, isAll = false )},
-        0
+        { info, type -> viewModel.updatePlantAccessoryAsset(accessoryType = type, targetPlantAccessory = info, isAll = false) },
+        { info, type -> viewModel.updateBackgroundAccessoryAsset(accessoryType = type, targetPlantAccessory = info, isAll = false) },
+        0,
     )
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,7 +77,7 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
 
         repeatOnStarted(viewLifecycleOwner) {
             viewModel.totalDecorationInfo.collectLatest { info ->
-                if(info.decorationState == DecorationTabState.PLANT_DECORATION) {
+                if (info.decorationState == DecorationTabState.PLANT_DECORATION) {
                     updatePreview(DecorationPlantPreviewFragment(info.decorationDetailInfo!!))
                 } else if (info.decorationState == DecorationTabState.BACKGROUND_DECORATION) {
                     updatePreview(DecorationBackgroundPreviewFragment(info.decorationDetailInfo!!))
@@ -119,7 +117,7 @@ class DecorationFragment : BaseFragment<FragmentDecorationBinding>(
 
     private fun initTabLayout() {
         val tabLayout = binding.tblDecorationAssetType
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
                     AssetType.PLANT_SHAPE.ordinal -> {

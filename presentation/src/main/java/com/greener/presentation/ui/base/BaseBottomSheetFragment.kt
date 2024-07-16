@@ -29,13 +29,9 @@ abstract class BaseBottomSheetFragment<VB : ViewDataBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListener()
-        initCollector()
     }
 
     protected open fun initListener() {
-    }
-
-    protected open fun initCollector() {
     }
 
     override fun onDestroyView() {

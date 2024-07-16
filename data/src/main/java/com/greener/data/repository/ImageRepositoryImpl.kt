@@ -33,9 +33,9 @@ class ImageRepositoryImpl @Inject constructor(
         }
     }
 
-    private val getTakePicturePreview = (context as AppCompatActivity).registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
+    private val getTakePicturePreview = (context as AppCompatActivity).registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
         CoroutineScope(Dispatchers.Default).launch {
-            it?.let { it1 -> bitmapToUri(it1).toString() }?.let { it2 -> imageEvent.emit(it2) }
+            bitmap?.let { it1 -> bitmapToUri(it1).toString() }?.let { it2 -> imageEvent.emit(it2) }
         }
     }
 

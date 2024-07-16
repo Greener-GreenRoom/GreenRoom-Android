@@ -69,8 +69,8 @@ dependencies {
     implementation("com.orhanobut:logger:2.2.0")
 
     implementation("com.github.bumptech.glide:glide:4.15.1")
-    implementation ("jp.wasabeef:glide-transformations:4.3.0")
-    implementation ("jp.co.cyberagent.android:gpuimage:2.1.0")
+    implementation("jp.wasabeef:glide-transformations:4.3.0")
+    implementation("jp.co.cyberagent.android:gpuimage:2.1.0")
 
     implementation("com.google.android.flexbox:flexbox:3.0.0")
 
@@ -78,12 +78,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    //Google Oauth
+    // Google Oauth
     implementation("com.google.android.gms:play-services-auth:21.0.0")
 
-    //Indicator
+    // Indicator
     implementation("com.tbuonomo:dotsindicator:5.0")
 
     // Splash
-    implementation ("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

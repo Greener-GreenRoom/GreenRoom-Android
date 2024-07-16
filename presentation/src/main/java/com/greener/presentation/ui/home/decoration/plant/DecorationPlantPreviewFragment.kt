@@ -9,7 +9,7 @@ import com.greener.presentation.model.decoration.PlantDecorationDetailInfo
 import com.greener.presentation.ui.base.BaseFragment
 
 class DecorationPlantPreviewFragment(
-    private var plantDecorationInfo: PlantDecorationDetailInfo
+    private var plantDecorationInfo: PlantDecorationDetailInfo,
 ) : BaseFragment<ViewGreenRoomPlantPreviewBinding>(
     ViewGreenRoomPlantPreviewBinding::inflate,
 ) {
@@ -30,7 +30,6 @@ class DecorationPlantPreviewFragment(
             Glide.with(binding.root)
                 .load(info.glasses?.drawableID)
                 .into(binding.ivPreviewPlantAccessoryEye)
-
         }
 
         if (info.hairAccessory?.drawableID != 0) {
@@ -38,6 +37,5 @@ class DecorationPlantPreviewFragment(
                 .load(info.hairAccessory?.drawableID)
                 .into(binding.ivPreviewPlantAccessoryHead)
         }
-
     }
 }

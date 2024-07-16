@@ -1,4 +1,4 @@
-package com.greener.presentation.ui.home.registraion
+package com.greener.presentation.ui.home.registration
 
 import android.content.Context
 import com.greener.presentation.R

@@ -5,7 +5,8 @@
     <data>
         <variable
             name="viewModel"
-            type="com.greener.presentation.ui.home.registraion.nickname_image.RegistrationNicknameImageViewModel" />
+            type="com.greener.presentation.ui.home.registration.nickname_image.RegistrationNicknameImageViewModel" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,29 +65,35 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_plant_registration_nickname_image_plant_nickname"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/body2"
             android:textColor="@color/gray700"
             android:text="@string/plant_registration_plant_nickname"
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="@id/gl_plant_registration_nickname_image_start"
-            app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_nickname_image_end"
             app:layout_constraintTop_toBottomOf="@+id/tv_plant_registration_nickname_image_title"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_plant_registration_nickname_image_plant_nickname_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textAppearance="@style/caption2"
+            android:textColor="@color/red100"
+            app:layout_constraintTop_toTopOf="@id/tv_plant_registration_nickname_image_plant_nickname"
+            app:layout_constraintBottom_toBottomOf="@id/tv_plant_registration_nickname_image_plant_nickname"
+            app:layout_constraintStart_toEndOf="@id/tv_plant_registration_nickname_image_plant_nickname"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tl_plant_registration_nickname_image"
+            style="@style/TextInputLayoutStyleNormal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/gray300"
             android:layout_marginTop="8dp"
-            android:hint="@string/plant_registration_nickname_warning"
-            app:hintTextAppearance="@style/body4"
-            app:hintTextColor="@color/gray500"
             app:boxBackgroundColor="@color/gray000"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="1dp"
-            app:boxStrokeColor="@color/gray500"
+            app:hintEnabled="false"
+
             app:boxCornerRadiusTopStart="4dp"
             app:boxCornerRadiusTopEnd="4dp"
             app:boxCornerRadiusBottomStart="4dp"
@@ -105,6 +112,7 @@
                 android:textAppearance="@style/body4"
                 android:textColor="@color/gray700"
                 android:text="@={viewModel.inputNickname}"
+                android:hint="@string/plant_registration_nickname_warning"
                 android:maxLength="10"
                 android:inputType="text"
                 android:imeOptions="actionDone" />
@@ -135,30 +143,50 @@
             app:layout_constraintEnd_toEndOf="@id/gl_plant_registration_nickname_image_end"
             app:layout_constraintTop_toBottomOf="@+id/tv_plant_registration_nickname_image_registration_picture"/>
 
-        <ImageButton
-            android:id="@+id/btn_plant_plant_registration_nickname_image_eraser"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_erase"
-            android:elevation="1dp"
-            android:background="@drawable/ic_erase"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="@+id/btn_plant_registration_nickname_image_plant"
-            app:layout_constraintEnd_toEndOf="@+id/btn_plant_registration_nickname_image_plant"
-            app:tint="@color/gray500" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_plant_registration_nickname_image_eraser"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/body4"
+            android:textColor="@color/gray000"
+            android:text="@string/util_delete"
+            android:backgroundTint="@color/gray300"
+            android:visibility="@{viewModel.plantImage.blank ? View.GONE : View.VISIBLE}"
+            android:onClickListener="@{() -> viewModel.deleteImage()}"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            app:cornerRadius="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/btn_plant_registration_nickname_image_plant"
+            app:layout_constraintStart_toStartOf="@id/btn_plant_registration_nickname_image_plant"
+            app:layout_constraintEnd_toEndOf="@id/btn_plant_registration_nickname_image_plant" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_plant_registration_nickname_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_all_8"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:onClickListener="@{() -> viewModel.showGetImageBottomSheet()}"
+            app:layout_constraintStart_toStartOf="@id/btn_plant_registration_nickname_image_plant"
+            app:layout_constraintTop_toTopOf="@id/btn_plant_registration_nickname_image_plant" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_plant_registration_nickname_image_plant"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="16dp"
-            app:backgroundTint="@color/gray000"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:maxLines="1"
             android:textAppearance="@style/caption2"
             android:textColor="@color/gray300"
             android:text="@string/plant_registration_count_picture_num"
+            android:visibility="@{viewModel.plantImage.blank ? View.VISIBLE : View.INVISIBLE}"
+            android:elevation="4dp"
+            android:onClickListener="@{() -> viewModel.showGetImageBottomSheet()}"
+            app:backgroundTint="@color/gray000"
             app:cornerRadius="8dp"
             app:strokeWidth="1dp"
             app:strokeColor="@color/gray100"

@@ -1,8 +1,9 @@
 package com.greener.data.di
 
 import com.greener.data.interceptor.AuthInterceptor
-import com.greener.data.service.MyPageService
 import com.greener.data.service.HomeGreenRoomService
+import com.greener.data.service.MyPageService
+import com.greener.data.service.PlantRegisterService
 import com.greener.data.service.SignService
 import com.greener.data.source.local.AuthDataSource
 import com.squareup.moshi.Moshi
@@ -62,6 +63,11 @@ object NetworkModule {
     fun provideHomeGreenRoomService(retrofit: Retrofit): HomeGreenRoomService {
         return retrofit.create(HomeGreenRoomService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun providePlantRegisterService(retrofit: Retrofit): PlantRegisterService =
+        retrofit.create(PlantRegisterService::class.java)
 
     @Singleton
     @Provides
