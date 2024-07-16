@@ -152,15 +152,18 @@ class RegistrationPlantShapeViewModel @AssistedInject constructor(
 
             val result = registerGreenRoomUseCase(plantRegisterRequestData, plantRegistrationInfo.plantImage)
             if (result.isSuccess) {
-                _event.emit(Event.MoveToComplete(
-                    PlantRegistrationInfo(
-                        plantRegistrationInfo.plantId,
-                        plantRegistrationInfo.nickname,
-                        plantRegistrationInfo.lastWatering,
-                        plantRegistrationInfo.waterDuration,
-                        plantShape.plantShape.nameString,
-                        plantRegistrationInfo.plantImage
-                )))
+                _event.emit(
+                    Event.MoveToComplete(
+                        PlantRegistrationInfo(
+                            plantRegistrationInfo.plantId,
+                            plantRegistrationInfo.nickname,
+                            plantRegistrationInfo.lastWatering,
+                            plantRegistrationInfo.waterDuration,
+                            plantShape.plantShape.nameString,
+                            plantRegistrationInfo.plantImage,
+                        ),
+                    ),
+                )
             } else {
                 // todo 에러처리
             }
