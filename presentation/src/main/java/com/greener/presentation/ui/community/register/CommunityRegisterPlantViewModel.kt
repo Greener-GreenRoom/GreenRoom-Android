@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-@HiltViewModel
 class CommunityRegisterPlantViewModel : ViewModel() {
 
     private val _plantImage = MutableStateFlow<String?>(BLANK)

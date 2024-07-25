@@ -1,5 +1,6 @@
 package com.greener.data.interceptor
 
+import android.util.Log
 import com.greener.data.source.local.AuthDataSource
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking

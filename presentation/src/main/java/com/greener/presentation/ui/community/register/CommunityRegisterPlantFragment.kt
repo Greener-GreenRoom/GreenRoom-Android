@@ -12,9 +12,11 @@ import com.greener.presentation.R
 import com.greener.presentation.databinding.FragmentCommunityRegisterPlantBinding
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.util.ImageModalBottomSheet
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class CommunityRegisterPlantFragment : BaseFragment<FragmentCommunityRegisterPlantBinding>(
     FragmentCommunityRegisterPlantBinding::inflate
 ) {

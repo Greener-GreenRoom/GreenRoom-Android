@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tutorial_graph"
+    app:startDestination="@id/tutorialStartFragment">
+
+    <fragment
+        android:id="@+id/tutorialStartFragment"
+        android:name="com.greener.presentation.ui.tutorial.TutorialStartFragment"
+        android:label="TutorialStartFragment" >
+        <action
+            android:id="@+id/action_tutorialStartFragment_to_tutorialFragment"
+            app:destination="@id/tutorialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tutorialFragment"
+        android:name="com.greener.presentation.ui.tutorial.TutorialFragment"
+        android:label="TutorialFragment" />
+</navigation>

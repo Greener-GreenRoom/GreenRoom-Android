@@ -13,6 +13,7 @@ import com.greener.presentation.databinding.FragmentLoginRegisterNicknameBinding
 import com.greener.presentation.model.UiState
 import com.greener.presentation.ui.base.BaseFragment
 import com.greener.presentation.ui.main.MainActivity
+import com.greener.presentation.ui.tutorial.TutorialActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -49,7 +50,7 @@ class LoginRegisterNicknameFragment : BaseFragment<FragmentLoginRegisterNickname
             viewModel.uiState.collect {
                 when (it) {
                     is UiState.Success -> {
-                        moveToMain()
+                        moveToTutorial()
                     }
 
                     is UiState.Fail -> {
@@ -90,8 +91,8 @@ class LoginRegisterNicknameFragment : BaseFragment<FragmentLoginRegisterNickname
         }
     }
 
-    private fun moveToMain() {
-        val intent = Intent(requireContext(), MainActivity::class.java)
+    private fun moveToTutorial() {
+        val intent = Intent(requireContext(), TutorialActivity::class.java)
         startActivity(intent)
         activity?.finish()
     }
