@@ -1,8 +1,15 @@
 package com.greener.presentation.ui.tutorial
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.view.animation.AnimationUtils
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.greener.domain.model.ActionTodo
@@ -21,6 +28,8 @@ class TutorialFragment : BaseFragment<FragmentTutorialBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.actionTodo = ActionTodo.WATERING
+        val fadeIn = AnimationUtils.loadAnimation(requireActivity(), R.anim.fade_in)
+        binding.tvTutorialScript.startAnimation(fadeIn)
     }
 
     override fun initListener() {
@@ -59,7 +68,7 @@ class TutorialFragment : BaseFragment<FragmentTutorialBinding>(
     }
 
     private fun setStep2() {
-        binding.tvTutorialScript.setText(R.string.tutorial_script2)
+        fadeOutInTextView(getString(R.string.tutorial_script2))
         binding.ivTutorialGreeny.setImageResource(R.drawable.img_greeny_sad)
         binding.includeTutorialBalloon.root.visibility = View.VISIBLE
     }
@@ -67,10 +76,9 @@ class TutorialFragment : BaseFragment<FragmentTutorialBinding>(
     private fun setStep3() {
         binding.btnTutorial.isEnabled = false
         binding.viewTutorialWallpaper.visibility = View.VISIBLE
-        binding.tvTutorialScript.setText(R.string.tutorial_script3)
+        fadeOutInTextView(getString(R.string.tutorial_script3))
         binding.includeTutorialBalloon.root.setOnClickListener {
             showActionDialog(ActionTodo.WATERING)
-
         }
     }
 
@@ -80,16 +88,28 @@ class TutorialFragment : BaseFragment<FragmentTutorialBinding>(
         binding.includeTutorialBalloon.root.visibility = View.INVISIBLE
         binding.ivTutorialPlantFace.setImageResource(R.drawable.asset_face_happy)
         binding.ivTutorialGreeny.setImageResource(R.drawable.img_greeny_happy)
-        binding.tvTutorialScript.setText(R.string.tutorial_script4)
+        val spannableString = getSpannableString(
+            STEP4_GREEN_TEXT_START,
+            STEP4_GREEN_TEXT_END,
+            getString(R.string.tutorial_script4)
+        )
+        fadeOutInTextView(spannableString)
         binding.includeTutorialToast.root.visibility = View.VISIBLE
-        // 씨앗 3개 초록색으로
+
+
     }
 
     private fun setStep5() {
         binding.ivTutorialGreeny.setImageResource(R.drawable.img_greeny_wink)
-        binding.tvTutorialScript.setText(R.string.tutorial_script5)
+        val spannableString = getSpannableString(
+            STEP5_GREEN_TEXT_START,
+            STEP5_GREEN_TEXT_END,
+            getString(R.string.tutorial_script5)
+        )
+        fadeOutInTextView(spannableString)
         binding.btnTutorial.setText(R.string.tutorial_go_start)
         binding.includeTutorialToast.root.visibility = View.INVISIBLE
+
     }
 
     private fun moveToMainActivity() {
@@ -106,5 +126,70 @@ class TutorialFragment : BaseFragment<FragmentTutorialBinding>(
             }
         })
         dialog.show()
+    }
+
+    private fun getSpannableString(start: Int, end: Int, text: String): SpannableString {
+
+        val spannableString = SpannableString(text)
+
+        val color = ContextCompat.getColor(requireActivity(), R.color.green300)
+        spannableString.setSpan(
+            ForegroundColorSpan(color),
+            start,
+            end,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        return spannableString
+    }
+
+    private fun fadeOutInTextView(newText: String) {
+        // Fade out animation
+        val fadeOut = ObjectAnimator.ofFloat(binding.tvTutorialScript, "alpha", 1f, 0f)
+        fadeOut.duration = 300 // duration in milliseconds
+
+        // Fade in animation
+        val fadeIn = ObjectAnimator.ofFloat(binding.tvTutorialScript, "alpha", 0f, 1f)
+        fadeIn.duration = 300 // duration in milliseconds
+
+        // Update text between fade out and fade in
+        fadeOut.addListener(object : android.animation.AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                binding.tvTutorialScript.text = newText
+            }
+        })
+
+        // Combine fade out and fade in
+        val animatorSet = AnimatorSet()
+        animatorSet.playSequentially(fadeOut, fadeIn)
+        animatorSet.start()
+    }
+
+    private fun fadeOutInTextView(newText: SpannableString) {
+        // Fade out animation
+        val fadeOut = ObjectAnimator.ofFloat(binding.tvTutorialScript, "alpha", 1f, 0f)
+        fadeOut.duration = 400 // duration in milliseconds
+
+        // Fade in animation
+        val fadeIn = ObjectAnimator.ofFloat(binding.tvTutorialScript, "alpha", 0f, 1f)
+        fadeIn.duration = 400 // duration in milliseconds
+
+        // Update text between fade out and fade in
+        fadeOut.addListener(object : android.animation.AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                binding.tvTutorialScript.text = newText
+            }
+        })
+
+        // Combine fade out and fade in
+        val animatorSet = AnimatorSet()
+        animatorSet.playSequentially(fadeOut, fadeIn)
+        animatorSet.start()
+    }
+    companion object {
+        const val STEP4_GREEN_TEXT_START = 13
+        const val STEP4_GREEN_TEXT_END = 18
+        const val STEP5_GREEN_TEXT_START = 5
+        const val STEP5_GREEN_TEXT_END = 15
     }
 }

@@ -10,7 +10,9 @@
         android:label="TutorialStartFragment" >
         <action
             android:id="@+id/action_tutorialStartFragment_to_tutorialFragment"
-            app:destination="@id/tutorialFragment" />
+            app:destination="@id/tutorialFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/tutorialFragment"
